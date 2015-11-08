@@ -140,7 +140,7 @@ playGame.prototype = {
         // Llamamos a la conexión del cliente
         eurecaClientSetup();
         
-        sleep(3000)
+//        sleep(3000)
         planets = []
         charactersList = {};
         

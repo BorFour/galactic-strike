@@ -87,7 +87,7 @@ Character.prototype.update = function() {
             console.log("Updating character " + this.character.id)
 			
             // NO FUNCIONA
-			eurecaServer.handleKeys(this.input);
+//			eurecaServer.handleKeys(this.input);
 			
 		}
 	}

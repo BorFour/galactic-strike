@@ -19,7 +19,9 @@ node server.js
 ### ¿Cómo me bajo un proyecto? ###
 * Open Bash/Terminal console (tercero desde la derecha)
 * cd /mi/ruta/local/
-* git clone https://BorFour@bitbucket.org/Borjardo/galactic-strike.git
+* git clone https://{tu_usuario}@bitbucket.org/Borjardo/galactic-strike.git <- Importante que sea tu usuario
+* Introduce tu contraseña
+* ¡Tachán!
 
 
 ### What is this repository for? ###

@@ -20,6 +20,8 @@ Juego plataformero 2D de peleas en el espacio on-line hecho en JavaScript
 Express, engine.io, eureca.io, ...
 * Database configuration
 * How to run tests
+// TODO
+De momento no hay tests
 * Deployment instructions
 node server.js
 

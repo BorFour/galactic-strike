@@ -1,0 +1,2 @@
+Dependencias: express, engine.io, eureca.io
+Habría que ponerlo con un package.json o algo

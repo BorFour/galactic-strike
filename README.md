@@ -6,6 +6,7 @@ Cómo ejecutarlo: después de desplegar el servidor, abrir un explorador y poner
 node server.js
 
 # ¿Cómo carajos se usa el Git? (Para tontos) desde Brackets con Git #
+
 ### ¿Cómo subir al repositorio los cambios que has hecho? ###
 * Checkbox a la izquierda de [Commit]
 * Git commit... pon un mensaje DESCRIPTIVO de lo que has hecho
@@ -14,6 +15,11 @@ node server.js
 * -> Default push
 * Ahora pones tu usuario y contraseña de BitBucket y le das a OK
 * ¡Tachán!
+
+### ¿Cómo me bajo un proyecto? ###
+* cd /mi/ruta/local/
+* git clone https://BorFour@bitbucket.org/Borjardo/galactic-strike.git
+
 
 ### What is this repository for? ###
 

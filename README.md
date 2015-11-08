@@ -9,7 +9,7 @@ node server.js
 ### ¿Cómo subir al repositorio los cambios que has hecho? ###
 * Checkbox a la izquierda de [Commit]
 * Git commit... pon un mensaje DESCRIPTIVO de lo que has hecho
-* Click en "Push to Remote" (cuarto desde la izquierda)
+* Click en "Push to Remote" (cuarto desde la derecha)
 * -> Push to current tracking branch
 * -> Default push
 * Ahora pones tu usuario y contraseña de BitBucket y le das a OK

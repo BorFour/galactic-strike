@@ -5,6 +5,16 @@ This README would normally document whatever steps are necessary to get your app
 Cómo ejecutarlo: después de desplegar el servidor, abrir un explorador y poner el siguiente enlace:
 node server.js
 
+# ¿Cómo carajos se usa el Git? (Para tontos) desde Brackets con Git #
+### ¿Cómo subir al repositorio los cambios que has hecho? ###
+* Checkbox a la izquierda de [Commit]
+* Git commit... pon un mensaje DESCRIPTIVO de lo que has hecho
+* Click en "Push to Remote" (cuarto desde la izquierda)
+* -> Push to current tracking branch
+* -> Default push
+* Ahora pones tu usuario y contraseña de BitBucket y le das a OK
+* ¡Tachán!
+
 ### What is this repository for? ###
 
 * Quick summary

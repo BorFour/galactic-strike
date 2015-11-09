@@ -14,6 +14,7 @@ app.use(express.static(__dirname + '/public'));
 // usernames which are currently connected to the chat
 var usernames = {};
 var numUsers = 0;
+var currId = 0;
 
 io.on('connection', function (socket) {
   var addedUser = false;
@@ -30,9 +31,10 @@ io.on('connection', function (socket) {
 
     // Cuando un cliente emite 'updatePlayer', se redirige en broadcast al resto de clientes
     // , function(data) { ... ???
-  socket.on('updatePlayer', function () {
+  socket.on('updatePlayer', function (data) {
     socket.broadcast.emit('updatePlayer', {
-      username: socket.username
+      username: socket.username,
+      data: data
     });
   });
 
@@ -42,13 +44,15 @@ io.on('connection', function (socket) {
 
   socket.on('add user', function (username) {
     // we store the username in the socket session for this client
+    socket.id = currId;
+    ++currId;
     socket.username = username;
     // add the client's username to the global list
     usernames[username] = username;
     ++numUsers;
     addedUser = true;
     socket.emit('login', {
-      numUsers: numUsers
+      id: socket.id
     });
     // echo globally (all clients) that a person has connected
     socket.broadcast.emit('user joined', {

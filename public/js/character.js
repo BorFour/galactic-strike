@@ -82,12 +82,11 @@ Character.prototype.update = function() {
 			this.input.x = this.character.x;
 			this.input.y = this.character.y;
 			this.input.angle = this.character.angle;
-			this.input.rot = this.character.angle;
+//			this.input.rot = this.character.angle;
 
             console.log("Updating character " + this.character.id)
 
-            // NO FUNCIONA
-//			eurecaServer.handleKeys(this.input);
+            socket.emit('updatePlayer', this.input);
 
 		}
 	}

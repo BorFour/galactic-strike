@@ -272,6 +272,7 @@ playGame.prototype = {
 	},
 	update: function(){
 
+//        myCharacter.update();
         movePlayer();
         game.spacePhysics.update();
         orb.rotation += 0.05;
@@ -399,12 +400,18 @@ function clientSetup(){
         console.log(message, {
           prepend: true
         });
+        myId = data.id;
+        console.log("Your client ID is: " + myId);
 //        addParticipantsMessage(data);
     });
 
   // Whenever the server emits 'new message', update the chat body
-    socket.on('new message', function (data) {
-        addChatMessage(data);
+    socket.on('updatePlayer', function (input) {
+        if(input.username == myId){
+            myCharacter.character.x = input.data.x
+            myCharacter.character.y = input.data.y
+            myCharacter.character.angle = input.data.angle
+        }
     });
 
   // Whenever the server emits 'user joined', log it in the chat body

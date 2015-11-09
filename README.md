@@ -19,7 +19,7 @@ localhost:3000
 ### ¿Cómo me bajo un proyecto? ###
 * Open Bash/Terminal console (tercero desde la derecha)
 * cd /mi/ruta/local/
-* git clone https://{tu_usuario}@bitbucket.org/Borjardo/galactic-strike.git <- Importante que sea tu usuario
+* git clone https://{tu_usuario}@bitbucket.org/Borjardo/galactic-strike-socket-io.git <- Importante que sea tu usuario
 * Introduce tu contraseña
 * ¡Tachán!
 

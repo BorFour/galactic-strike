@@ -2,8 +2,8 @@
 
 This README would normally document whatever steps are necessary to get your application up and running.
 
-Cómo ejecutarlo: después de desplegar el servidor, abrir un explorador y poner el siguiente enlace:
-node server.js
+Cómo ejecutarlo: después de desplegar (Deployment instructions) el servidor, abrir un explorador y poner el siguiente enlace:
+localhost:3000
 
 # ¿Cómo carajos se usa el Git? (Para tontos) desde Brackets con Git #
 
@@ -42,7 +42,7 @@ Express, engine.io, eureca.io, ...
 // TODO
 De momento no hay tests
 * Deployment instructions
-node server.js
+node index.js
 
 ### Contribution guidelines ###
 

@@ -14,6 +14,8 @@ app.use(express.static(__dirname + '/public'));
 // usernames which are currently connected to the chat
 var usernames = {};
 var numUsers = 0;
+
+var clients = {};
 var currId = 0;
 
 io.on('connection', function (socket) {
@@ -33,7 +35,7 @@ io.on('connection', function (socket) {
     // , function(data) { ... ???
   socket.on('updatePlayer', function (data) {
     socket.broadcast.emit('updatePlayer', {
-      username: socket.username,
+      id: socket.id,
       data: data
     });
   });
@@ -42,13 +44,14 @@ io.on('connection', function (socket) {
   // Cuando se añade un usuario, el servidor le debería asignar
   // una ID única
 
-  socket.on('add user', function (username) {
+  socket.on('add user', function (data) {
     // we store the username in the socket session for this client
     socket.id = currId;
     ++currId;
-    socket.username = username;
+    clients[socket.id] = socket.id;
+//    socket.username = username;
     // add the client's username to the global list
-    usernames[username] = username;
+//    usernames[username] = username;
     ++numUsers;
     addedUser = true;
     socket.emit('login', {
@@ -56,9 +59,9 @@ io.on('connection', function (socket) {
     });
     // echo globally (all clients) that a person has connected
     socket.broadcast.emit('user joined', {
-      username: socket.username,
-      numUsers: numUsers
+      id: socket.id,
     });
+    console.log("@Socket.io server | \'add user\'")
   });
 
 
@@ -73,14 +76,14 @@ io.on('connection', function (socket) {
   socket.on('disconnect', function () {
     // remove the username from global usernames list
     if (addedUser) {
-      delete usernames[socket.username];
+      delete usernames[socket.id];
       --numUsers;
 
       // echo globally that this client has left
       socket.broadcast.emit('user left', {
-        username: socket.username,
-        numUsers: numUsers
+        id: socket.id
       });
+    console.log("@Socket.io server | \'disconnect\'")
     }
   });
 });

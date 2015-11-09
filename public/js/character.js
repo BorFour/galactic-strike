@@ -1,5 +1,5 @@
 
-Character = function (index, x, y, game, player) {
+Character = function (x, y, game, player) {
 	this.cursor = {
 		left:false,
 		right:false,
@@ -46,7 +46,7 @@ Character = function (index, x, y, game, player) {
     this.character.scale.setTo(0.65,0.65);
     //this.turret.anchor.set(0.3, 0.5);
 
-    this.character.id = index;
+//    this.character.id = index;
     game.physics.box2d.enable(this.character);
     //game.physics.enable(this.tank, Phaser.Physics.ARCADE);
     this.character.body.immovable = false;

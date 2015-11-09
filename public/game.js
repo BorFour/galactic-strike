@@ -177,9 +177,9 @@ playGame.prototype = {
 
 
 //        myCharacter = new Character (myId, game.world.randomX, game.world.randomY, game, player)
-        myCharacter = new Character (myId, 300, 300, game, player)
+        myCharacter = new Character (300, 300, game, -1)
         console.log("He creado a mi personaje")
-        charactersList[myId] = myCharacter
+//        charactersList[myId] = myCharacter
 
         sprite = myCharacter.character
 
@@ -266,13 +266,19 @@ playGame.prototype = {
 
         clientSetup();
 
-        socket.emit('add user', 'Eduardooo');
+        var data = {
+            x: myCharacter.character.x,
+            y: myCharacter.character.y,
+            angle: myCharacter.character.angle
+        }
+
+        socket.emit('add user', data);
 
 
 	},
 	update: function(){
 
-//        myCharacter.update();
+        myCharacter.update();
         movePlayer();
         game.spacePhysics.update();
         orb.rotation += 0.05;
@@ -400,29 +406,39 @@ function clientSetup(){
         console.log(message, {
           prepend: true
         });
-        myId = data.id;
-        console.log("Your client ID is: " + myId);
+        myCharacter.id = data.id;
+        console.log("Your client ID is: " + myCharacter.id);
 //        addParticipantsMessage(data);
     });
 
-  // Whenever the server emits 'new message', update the chat body
+  // Whenever the server emits 'updatePlayer', update the chat body
     socket.on('updatePlayer', function (input) {
-        if(input.username == myId){
+        if(myCharacter.id == input.id){
+            console.log("Updating my character");
             myCharacter.character.x = input.data.x
             myCharacter.character.y = input.data.y
             myCharacter.character.angle = input.data.angle
+        }
+        else{
+            charactersList[input.id].x = input.data.x
+            charactersList[input.id].y = input.data.y
+            charactersList[input.id].angle = input.data.angle
         }
     });
 
   // Whenever the server emits 'user joined', log it in the chat body
     socket.on('user joined', function (data) {
-        console.log(data.username + ' joined');
+        console.log("Client " + data.id + ' joined');
+        charactersList[data.id] = new Character(data.x, data.y, game, data.id);
 //        addParticipantsMessage(data);
     });
 
   // Whenever the server emits 'user left', log it in the chat body
     socket.on('user left', function (data) {
         console.log(data.username + ' left');
+        var c = charactersList[data.id];
+        c.kill()
+        delete charactersList[data.id];
 //        addParticipantsMessage(data);
 //        removeChatTyping(data);
     });

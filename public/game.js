@@ -409,6 +409,8 @@ function clientSetup(){
                 charactersList[input.id].sprite.body.x = input.data.x
                 charactersList[input.id].sprite.body.y = input.data.y
                 charactersList[input.id].sprite.body.angle = input.data.angle
+                charactersList[input.id].sprite.body.velocity.x = input.data.velocityX
+                charactersList[input.id].sprite.body.velocity.y = input.data.velocityY
             }
             else{
                 charactersList[input.id] = new Character(input.data.x, input.data.y, game, input.id);

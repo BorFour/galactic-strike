@@ -77,7 +77,9 @@ Character.prototype.update = function() {
         var data = {
                 x : this.sprite.x,
                 y : this.sprite.y,
-                angle : this.sprite.angle
+                angle : this.sprite.angle,
+                velocityX : this.sprite.body.velocity.x,
+                velocityY : this.sprite.body.velocity.y
         }
 //      console.log("Updating character " + this.character.id)
         socket.emit('updatePlayer', data);

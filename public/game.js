@@ -410,6 +410,9 @@ function clientSetup(){
                 charactersList[input.id].sprite.body.y = input.data.y
                 charactersList[input.id].sprite.body.angle = input.data.angle
             }
+            else{
+                charactersList[input.id] = new Character(input.data.x, input.data.y, game, input.id);
+            }
         }
     });
 

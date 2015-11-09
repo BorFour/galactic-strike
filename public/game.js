@@ -431,8 +431,9 @@ function clientSetup(){
   // Whenever the server emits 'user joined', log it in the chat body
     socket.on('user joined', function (data) {
         console.log("Client " + data.id + ' joined in (' + data.x + ',' + data.y + ')') ;
-        charactersList[data.id] = new Character(data.x, data.y, game, data.id);
-
+        if (data.id != myCharacter.id){
+            charactersList[data.id] = new Character(data.x, data.y, game, data.id);
+        }
         console.log("Clients: " + charactersList)
 //        addParticipantsMessage(data);
     });

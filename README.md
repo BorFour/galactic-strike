@@ -23,6 +23,8 @@ localhost:3000
 * Introduce tu contraseña
 * ¡Tachán!
 
+### Links interesantes ###
+* https://help.github.com/articles/changing-a-remote-s-url/
 
 ### What is this repository for? ###
 

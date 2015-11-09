@@ -137,23 +137,23 @@ playGame.prototype = {
 		// gravity force
 		// graphic asset
 
-        var planet = new Astro(680, 700, 400, 250, "planet");
-        var bigPlanet = new Astro(1070, 850, 400, 250, "bigplanet");
+        var planet = new Star(680, 700, 400, 250, "planet", game);
+        var bigPlanet = new Star(1070, 850, 400, 250, "bigplanet", game);
 
         if(randomPlanets){
 //(Edu) No se si hay que hacer spacePhysics.addPlanet para añadirlo al grupo de esa clase o simplemente con el planets.push de aqui valdría
             for (var i = 0; i < 5; i++){
-                planets.push(new Astro(game.world.randomX, game.world.randomY, 400, 250, "planet"))
+                planets.push(new Star(game.world.randomX, game.world.randomY, 400, 250, "planet", game))
             }
 
             for (var i = 0; i < 3; i++){
-                planets.push(new Astro(game.world.randomX, game.world.randomY, 400, 250, "bigplanet"))
+                planets.push(new Star(game.world.randomX, game.world.randomY, 400, 250, "bigplanet", game))
             }
         }
 		else{
 //(Edu) No se si hay que hacer spacePhysics.addPlanet para añadirlo al grupo de esa clase o simplemente con el planets.push de aqui valdría
-            planets.push(game.spacePhysics.addPlanet(planet))
-            planets.push(game.spacePhysics.addPlanet(bigPlanet))
+            planets.push(planet)
+            planets.push(bigPlanet)
         }
 
         console.log("Planets: " + planets)
@@ -294,14 +294,14 @@ function updateEureca(){
     {
 		if (!charactersList[i]) continue;
 		//var curBullets = charactersList[i].bullets;
-		var curChar = charactersList[i].character;
+		var curChar = charactersList[i].sprite;
 		for (var j in charactersList)
 		{
 			if (!charactersList[j]) continue;
 			if (j!=i)
 			{
 
-				var targetChar = charactersList[j].character;
+				var targetChar = charactersList[j].sprite;
 
 				//game.physics.arcade.overlap(curBullets, targetChar, bulletHitPlayer, null, this);
 
@@ -394,18 +394,22 @@ function clientSetup(){
 
   // Whenever the server emits 'updatePlayer', update the chat body
     socket.on('updatePlayer', function (input) {
-        if(myCharacter.id === input.id){
+        if(myId == input.id){
             return; // ¿Cómo hacemos esto?
 //            console.log("Updating my character");
-            myCharacter.character.x = input.data.x
-            myCharacter.character.y = input.data.y
-            myCharacter.character.angle = input.data.angle
+            myCharacter.sprite.x = input.data.x
+            myCharacter.sprite.y = input.data.y
+            myCharacter.sprite.angle = input.data.angle
         }
         else{
 //            console.log("Updating character " + input.id)
-            charactersList[input.id].x = input.data.x
-            charactersList[input.id].y = input.data.y
-            charactersList[input.id].angle = input.data.angle
+//            console.log(charactersList[input.id])
+            if(charactersList[input.id]){
+                console.log("Updating character " + input.id)
+                charactersList[input.id].sprite.body.x = input.data.x
+                charactersList[input.id].sprite.body.y = input.data.y
+                charactersList[input.id].sprite.body.angle = input.data.angle
+            }
         }
     });
 
@@ -420,20 +424,18 @@ function clientSetup(){
             myCharacter = charactersList[data.id]
             console.log("He creado a mi personaje")
 
-            sprite = myCharacter.character
-            game.spacePhysics.addDynamic(sprite);
+            sprite = myCharacter.sprite
+//            game.spacePhysics.addDynamic(sprite);
             game.camera.follow(sprite);
 
             for (var i = 0; i < planets.length; i++){
-                console.log("loooop")
-                sprite.body.setBodyContactCallback(planets[i],  touchPlanetCallback, this);
+                sprite.body.setBodyContactCallback(planets[i].sprite,  touchPlanetCallback, this);
             }
-
         }
 
         console.log("Clients: ")
-        for (var i = 0; i < charactersList.length; i++){
-            console.log(charactersList[i])
+        for (var c in charactersList){
+            console.log(charactersList[c])
         }
 //        addParticipantsMessage(data);
     });
@@ -442,7 +444,7 @@ function clientSetup(){
     socket.on('user left', function (data) {
         console.log(data.username + ' left');
         var c = charactersList[data.id];
-        c.kill()
+//        c.kill()
         delete charactersList[data.id];
 //        addParticipantsMessage(data);
 //        removeChatTyping(data);

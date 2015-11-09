@@ -15,7 +15,7 @@ Character = function (x, y, game, player) {
 	}
 
     this.player = player;
-    this.character = game.add.sprite(x, y, 'player');
+    this.sprite = game.add.sprite(x, y, 'player');
 
     this.game = game;
     this.health = 100;
@@ -37,21 +37,21 @@ Character = function (x, y, game, player) {
 
     //this.shadow = game.add.sprite(x, y, 'enemy', 'shadow');
 
-    this.character.animations.add('left', [0, 1, 2, 3], 10, true);
-    this.character.animations.add('right', [5, 6, 7, 8], 10, true);
+    this.sprite.animations.add('left', [0, 1, 2, 3], 10, true);
+    this.sprite.animations.add('right', [5, 6, 7, 8], 10, true);
 
-    game.spacePhysics.addDynamic(this.character);
+    game.spacePhysics.addDynamic(this.sprite);
 
     //this.shadow.anchor.set(0.5);
-    this.character.anchor.set(0.5);
-    this.character.scale.setTo(0.65,0.65);
+    this.sprite.anchor.set(0.5);
+    this.sprite.scale.setTo(0.65,0.65);
     //this.turret.anchor.set(0.3, 0.5);
 
 //    this.character.id = index;
-    game.physics.box2d.enable(this.character);
+    game.physics.box2d.enable(this.sprite);
     //game.physics.enable(this.tank, Phaser.Physics.ARCADE);
-    this.character.body.immovable = false;
-    this.character.body.collideWorldBounds = true;
+    this.sprite.body.immovable = false;
+    this.sprite.body.collideWorldBounds = true;
 
 
     //this.tank.angle = 0;
@@ -75,9 +75,9 @@ Character.prototype.update = function() {
 	if (inputChanged)
 	{
         var data = {
-                x : this.character.x,
-                y : this.character.y,
-                angle : this.character.angle
+                x : this.sprite.x,
+                y : this.sprite.y,
+                angle : this.sprite.angle
         }
 //      console.log("Updating character " + this.character.id)
         socket.emit('updatePlayer', data);
@@ -89,11 +89,11 @@ Character.prototype.update = function() {
 
     if (this.cursor.left)
     {
-        this.character.angle -= 1;
+        this.sprite.angle -= 1;
     }
     else if (this.cursor.right)
     {
-        this.character.angle += 1;
+        this.sprite.angle += 1;
     }
     if (this.cursor.up)
     {
@@ -150,7 +150,7 @@ Character.prototype.fire = function(target) {
 
 Character.prototype.kill = function() {
 	this.alive = false;
-	this.character.kill();
+	this.sprite.kill();
 	//this.turret.kill();
 	//this.shadow.kill();
 }

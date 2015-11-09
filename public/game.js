@@ -447,7 +447,7 @@ function clientSetup(){
     socket.on('user left', function (data) {
         console.log(data.username + ' left');
         var c = charactersList[data.id];
-//        c.kill()
+        c.kill();
         delete charactersList[data.id];
 //        addParticipantsMessage(data);
 //        removeChatTyping(data);

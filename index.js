@@ -49,7 +49,7 @@ io.on('connection', function (socket) {
     // we store the username in the socket session for this client
     socket.id = currId;
     ++currId;
-    clients[socket.id] = socket.id;
+    clients[socket.id] = socket;
 //    socket.username = username;
     // add the client's username to the global list
 //    usernames[username] = username;

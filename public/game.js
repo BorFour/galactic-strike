@@ -414,6 +414,7 @@ function clientSetup(){
   // Whenever the server emits 'updatePlayer', update the chat body
     socket.on('updatePlayer', function (input) {
         if(myCharacter.id == input.id){
+            return; // ¿Cómo hacemos esto?
             console.log("Updating my character");
             myCharacter.character.x = input.data.x
             myCharacter.character.y = input.data.y

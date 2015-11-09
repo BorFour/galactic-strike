@@ -273,7 +273,7 @@ playGame.prototype = {
             // lista con la propia clave 'c'
             for (var c in charactersList){
                 game.debug.text(charactersList[c], 640, i*32);
-            ++i;
+                ++i;
             }
 
 

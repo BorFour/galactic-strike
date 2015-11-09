@@ -71,25 +71,17 @@ Character.prototype.update = function() {
 	);
 
     inputChanged = true;
-    inputChanged = true;
 	if (inputChanged)
 	{
-		//Handle input change here
-		//send new values to the server
-		if (this.character.id == myId)
-		{
-			// send latest valid state to the server
-			this.input.x = this.character.x;
-			this.input.y = this.character.y;
-			this.input.angle = this.character.angle;
-//			this.input.rot = this.character.angle;
-
-            console.log("Updating character " + this.character.id)
-
-            socket.emit('updatePlayer', this.input);
-
-		}
+        var data = {
+                x : this.character.x,
+                y : this.character.y,
+                angle : this.character.angle
+        }
+//      console.log("Updating character " + this.character.id)
+        socket.emit('updatePlayer', data);
 	}
+
 
 	//cursor value is now updated by eurecaClient.exports.updateState method
 
@@ -139,7 +131,7 @@ Character.prototype.update = function() {
 
     //this.turret.x = this.tank.x;
     //this.turret.y = this.tank.y;
-};
+}
 
 // De momento no la usamos
 Character.prototype.fire = function(target) {

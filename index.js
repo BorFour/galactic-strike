@@ -34,10 +34,11 @@ io.on('connection', function (socket) {
     // Cuando un cliente emite 'updatePlayer', se redirige en broadcast al resto de clientes
     // , function(data) { ... ???
   socket.on('updatePlayer', function (data) {
-    socket.broadcast.emit('updatePlayer', {
-      id: socket.id,
-      data: data
-    });
+      socket.broadcast.emit('updatePlayer', {
+        id: socket.id,
+        data: data
+      });
+      //console.log("@Socket.io server | \'updatePlayer\'")
   });
 
   // when the client emits 'add user', this listens and executes
@@ -60,6 +61,9 @@ io.on('connection', function (socket) {
     // echo globally (all clients) that a person has connected
     socket.broadcast.emit('user joined', {
       id: socket.id,
+      x: data.x,
+      y: data.y,
+      angle: data.angle
     });
     console.log("@Socket.io server | \'add user\'")
   });
@@ -76,7 +80,7 @@ io.on('connection', function (socket) {
   socket.on('disconnect', function () {
     // remove the username from global usernames list
     if (addedUser) {
-      delete usernames[socket.id];
+      delete clients[socket.id];
       --numUsers;
 
       // echo globally that this client has left

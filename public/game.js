@@ -420,6 +420,7 @@ function clientSetup(){
             myCharacter.character.angle = input.data.angle
         }
         else{
+            console.log("Updating character " + input.id)
             charactersList[input.id].x = input.data.x
             charactersList[input.id].y = input.data.y
             charactersList[input.id].angle = input.data.angle
@@ -428,8 +429,10 @@ function clientSetup(){
 
   // Whenever the server emits 'user joined', log it in the chat body
     socket.on('user joined', function (data) {
-        console.log("Client " + data.id + ' joined');
+        console.log("Client " + data.id + ' joined in (' + data.x + ',' + data.y + ')') ;
         charactersList[data.id] = new Character(data.x, data.y, game, data.id);
+
+        console.log("Clients: " + charactersList)
 //        addParticipantsMessage(data);
     });
 

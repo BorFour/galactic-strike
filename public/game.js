@@ -137,19 +137,23 @@ playGame.prototype = {
 		// gravity force
 		// graphic asset
 
-        if(randomPlanets){
+        var planet = new Astro(680, 700, 400, 250, "planet");
+        var bigPlanet = new Astro(1070, 850, 400, 250, "bigplanet");
 
+        if(randomPlanets){
+//(Edu) No se si hay que hacer spacePhysics.addPlanet para añadirlo al grupo de esa clase o simplemente con el planets.push de aqui valdría
             for (var i = 0; i < 5; i++){
-                planets.push(game.spacePhysics.addPlanet(game.world.randomX, game.world.randomY, 400, 250, "planet"))
+                planets.push(new Astro(game.world.randomX, game.world.randomY, 400, 250, "planet"))
             }
 
             for (var i = 0; i < 3; i++){
-                planets.push(game.spacePhysics.addPlanet(game.world.randomX, game.world.randomY, 400, 250, "bigplanet"))
+                planets.push(new Astro(game.world.randomX, game.world.randomY, 400, 250, "bigplanet"))
             }
         }
 		else{
-            planets.push(game.spacePhysics.addPlanet(680, 700, 400, 250, "planet"))
-            planets.push(game.spacePhysics.addPlanet(1070, 850, 400, 250, "bigplanet"))
+//(Edu) No se si hay que hacer spacePhysics.addPlanet para añadirlo al grupo de esa clase o simplemente con el planets.push de aqui valdría
+            planets.push(game.spacePhysics.addPlanet(planet))
+            planets.push(game.spacePhysics.addPlanet(bigPlanet))
         }
 
         console.log("Planets: " + planets)

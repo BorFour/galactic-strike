@@ -177,37 +177,7 @@ playGame.prototype = {
 
 
 //        myCharacter = new Character (myId, game.world.randomX, game.world.randomY, game, player)
-        myCharacter = new Character (300, 300, game, -1)
-        console.log("He creado a mi personaje")
-//        charactersList[myId] = myCharacter
 
-        sprite = myCharacter.character
-
-        /*
-        sprite = game.add.sprite(game.world.randomX, game.world.randomY,'player');
-        sprite.anchor.setTo(0.5, 0.5);
-        //DUDE es demasiado grande
-        sprite.scale.setTo(0.65,0.65);
-        //game.physics.arcade.enable(this.player);
-        game.physics.box2d.enable(sprite);
-          */
-        //añadimos rebote
-        /*
-        sprite.body.bounce.y = 0.2;
-        sprite.body.gravity.y = 500;
-        */
-
-        //DUDE
-        // Our two animations, walking left and right.
-          /*
-        sprite.animations.add('left', [0, 1, 2, 3], 10, true);
-        sprite.animations.add('right', [5, 6, 7, 8], 10, true);
-
-        */
-
-
-        game.spacePhysics.addDynamic(sprite);
-        game.camera.follow(sprite);
 
         //game.physics.overlap(sprite, planetGroup, setGrounded, null, this);
 
@@ -253,11 +223,6 @@ playGame.prototype = {
 
         // Actualizar el planeta en el que está el personaje
 
-        for (var i = 0; i < planets.length; i++){
-            console.log("loooop")
-            sprite.body.setBodyContactCallback(planets[i], touchPlanetCallback, this);
-        }
-
         // Crea la conexión con el servidor
         socket = io();
         if(socket){
@@ -267,9 +232,9 @@ playGame.prototype = {
         clientSetup();
 
         var data = {
-            x: myCharacter.character.x,
-            y: myCharacter.character.y,
-            angle: myCharacter.character.angle
+            x: game.world.randomX,
+            y: game.world.randomY,
+            angle: 0
         }
 
         socket.emit('add user', data);
@@ -278,7 +243,7 @@ playGame.prototype = {
 	},
 	update: function(){
 
-        myCharacter.update();
+        if(myCharacter) myCharacter.update();
         movePlayer();
         game.spacePhysics.update();
         orb.rotation += 0.05;
@@ -295,7 +260,18 @@ playGame.prototype = {
 
          }
 
-            game.debug.text(myCharacter, 640, 32);
+
+
+            var i = 1;
+            // Cuando recorres así una tabla asociativa, en
+            // var c se almacena el valor de las CLAVES
+            // Para acceder a los valores, hay que indexar la
+            // lista con la propia clave 'c'
+            for (var c in charactersList){
+                game.debug.text(charactersList[c], 640, i*32);
+            ++i;
+            }
+
 
     }
 }
@@ -338,6 +314,7 @@ function updateEureca(){
 
 function movePlayer(){
 
+        if(!sprite) return;
       //sprite.body.setZeroVelocity();
 
       //  if(sprite.body.wasTouching.down){
@@ -406,22 +383,22 @@ function clientSetup(){
         console.log(message, {
           prepend: true
         });
-        myCharacter.id = data.id;
-        console.log("Your client ID is: " + myCharacter.id);
+        myId = data.id;
+        console.log("Your client ID is: " + myId);
 //        addParticipantsMessage(data);
     });
 
   // Whenever the server emits 'updatePlayer', update the chat body
     socket.on('updatePlayer', function (input) {
-        if(myCharacter.id == input.id){
+        if(myCharacter.id === input.id){
             return; // ¿Cómo hacemos esto?
-            console.log("Updating my character");
+//            console.log("Updating my character");
             myCharacter.character.x = input.data.x
             myCharacter.character.y = input.data.y
             myCharacter.character.angle = input.data.angle
         }
         else{
-            console.log("Updating character " + input.id)
+//            console.log("Updating character " + input.id)
             charactersList[input.id].x = input.data.x
             charactersList[input.id].y = input.data.y
             charactersList[input.id].angle = input.data.angle
@@ -431,10 +408,29 @@ function clientSetup(){
   // Whenever the server emits 'user joined', log it in the chat body
     socket.on('user joined', function (data) {
         console.log("Client " + data.id + ' joined in (' + data.x + ',' + data.y + ')') ;
-        if (data.id != myCharacter.id){
+
             charactersList[data.id] = new Character(data.x, data.y, game, data.id);
+
+        if(data.id === myId){
+
+            myCharacter = charactersList[data.id]
+            console.log("He creado a mi personaje")
+
+            sprite = myCharacter.character
+            game.spacePhysics.addDynamic(sprite);
+            game.camera.follow(sprite);
+
+            for (var i = 0; i < planets.length; i++){
+                console.log("loooop")
+                sprite.body.setBodyContactCallback(planets[i],  touchPlanetCallback, this);
+            }
+
         }
-        console.log("Clients: " + charactersList)
+
+        console.log("Clients: ")
+        for (var i = 0; i < charactersList.length; i++){
+            console.log(charactersList[i])
+        }
 //        addParticipantsMessage(data);
     });
 

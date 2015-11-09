@@ -14,10 +14,12 @@ Character = function (x, y, game, player) {
 		fire:false
 	}
 
+    this.player = player;
+    this.character = game.add.sprite(x, y, 'player');
 
     this.game = game;
-    this.health = 30;
-    this.player = player;
+    this.health = 100;
+
     /* this.bullets = game.add.group();
     this.bullets.enableBody = true;
     this.bullets.physicsBodyType = Phaser.Physics.ARCADE;
@@ -27,7 +29,6 @@ Character = function (x, y, game, player) {
     this.bullets.setAll('outOfBoundsKill', true);
     this.bullets.setAll('checkWorldBounds', true);	 */
 
-
 	this.currentSpeed =0;
     this.fireRate = 100;
     this.nextFire = 0;
@@ -35,7 +36,7 @@ Character = function (x, y, game, player) {
     this.jumpCooldown = 350;
 
     //this.shadow = game.add.sprite(x, y, 'enemy', 'shadow');
-    this.character = game.add.sprite(x, y, 'player');
+
     this.character.animations.add('left', [0, 1, 2, 3], 10, true);
     this.character.animations.add('right', [5, 6, 7, 8], 10, true);
 
@@ -155,5 +156,5 @@ Character.prototype.kill = function() {
 }
 
 Character.prototype.toString = function () {
-    return "Player id: " + this.character.id + "\n HP : " + this.health;
+    return "Player id: " + this.player + " HP : " + this.health;
 }

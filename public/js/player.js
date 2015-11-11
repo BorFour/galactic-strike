@@ -3,6 +3,7 @@ Player = function (nickname ) {
 
     this.nickname = nickname;
     this.team = null;
+    this.isReady = false;
 
 };
 

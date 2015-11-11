@@ -35,3 +35,12 @@ Room.prototype.dropTeam = function(){
     this.teams.pop();
 
 }
+
+Room.prototype.playersReady = function(){
+
+    return this.players.reduce(function(prevValue, currValue, index, array){
+        return prevValue && currValue.isReady;
+    }, true);
+}
+
+

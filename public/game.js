@@ -558,8 +558,6 @@ function setGrounded(player, planets){
 
 }
 
-
-
 function checkPosition(){
 	if((crateGroup.getChildAt(0).x === x && crateGroup.getChildAt(0).y === y) || (numCollision > 2)){
 		alert('GAMEOVER');

@@ -247,8 +247,8 @@ playGame.prototype = {
 	},
 	update: function(){
 
-        if(myCharacter) myCharacter.update();
         movePlayer();
+        if(myCharacter) myCharacter.update();
         game.spacePhysics.update();
         orb.rotation += 0.05;
 

@@ -14,11 +14,27 @@ Character = function (x, y, game, player) {
 		fire:false
 	}
 
-    this.player = player;
-    this.sprite = game.add.sprite(x, y, 'player');
+    var PTM = 50;
+    var driveJoints = [];
 
+	var frequency = 150;
+	var damping = 15;
+	var motorTorque = 2;
+	var rideHeight = 0.25;
+
+    this.player = player;
     this.game = game;
     this.health = 100;
+    this.sprite = game.add.sprite(x, y, 'player');
+    game.physics.box2d.enable(this.sprite);
+
+    this.sprite.body.setCircle(0.2*PTM);//.setRectangle(20,18,0,0,0);
+
+	this.sprite.wheelBody = new Phaser.Physics.Box2D.Body(game, null, x, y);
+	this.sprite.wheelBody.setCircle(0.2*PTM);
+
+    this.driveJoint = game.physics.box2d.wheelJoint(this.sprite.body, this.sprite.wheelBody, 0,rideHeight*PTM, 0,0, 0,1, frequency, damping, 0, motorTorque, true);
+
 
     /* this.bullets = game.add.group();
     this.bullets.enableBody = true;
@@ -42,15 +58,19 @@ Character = function (x, y, game, player) {
 
     game.spacePhysics.addDynamic(this.sprite);
 
-    //this.shadow.anchor.set(0.5);
-    this.sprite.anchor.set(0.5);
+    //this.shadow.anchor.set(0.5);ç
     this.sprite.scale.setTo(0.65,0.65);
+//    this.sprite.anchor.setTo(this.wheelBody.x,this.wheelBody.y + this.wheelBody.radius);
+
+
+
     //this.turret.anchor.set(0.3, 0.5);
 
 //    this.character.id = index;
-    game.physics.box2d.enable(this.sprite);
+//    game.physics.box2d.enable(this.sprite);
     //game.physics.enable(this.tank, Phaser.Physics.ARCADE);
     this.sprite.body.immovable = false;
+    this.sprite.body.static = false;
     this.sprite.body.collideWorldBounds = true;
 
 

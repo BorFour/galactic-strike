@@ -67,19 +67,19 @@ SpacePhysics.prototype.update = function (){
 		for(var i=0;i<this.dynamicGroup.total;i++){
 			var c = this.dynamicGroup.getChildAt(i);
 			// Para cada planeta (generador de gravedad)
-            if (c.body.immovable) continue;
+            if (c.body.static) continue;
 			for(var j=0;j<this.planetGroup.total;j++){
 				var p = this.planetGroup.getChildAt(j);
 				// Distance entre dos puntos
-				var distance = Phaser.Math.distance(c.x,c.y,p.x,p.y);
+				var distance = Phaser.Math.distance(c.wheelBody.x,c.wheelBody.y,p.x,p.y);
 				// Si la distancia es menor que el radio de acción del planeta
-				x = c.x;
-				y = c.y;
+				x = c.wheelBody.x;
+				y = c.wheelBody.y;
 				if(distance<p.width/2+p.gravityRadius/2){
 					// calculating angle between the planet and the crate
-					var angle = Phaser.Math.angleBetween(c.x,c.y,p.x,p.y);
+					var angle = Phaser.Math.angleBetween(c.wheelBody.x,c.wheelBody.y,p.x,p.y);
 					// add gravity force to the crate in the direction of planet center
-					c.body.applyForce(p.gravityForce*Math.cos(angle)*this.forceReducer,p.gravityForce*Math.sin(angle)*this.forceReducer);
+					c.wheelBody.applyForce(p.gravityForce*Math.cos(angle)*this.forceReducer,p.gravityForce*Math.sin(angle)*this.forceReducer);
                 }
             }
         }

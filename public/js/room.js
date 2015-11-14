@@ -16,7 +16,7 @@ Room = function (name, host, maxUsers, ip, port) {
 
 Room.prototype.addPlayer = function(player) {
 
-    this.team = team;
+//    this.team = team; ¿?
     this.players.push(player);
 
 }
@@ -32,7 +32,9 @@ Room.prototype.addTeam = function (){
 
 Room.prototype.dropTeam = function(){
 
-    this.teams.pop();
+    if(this.teams.length > 0){
+        this.teams.pop();
+    }
 
 }
 

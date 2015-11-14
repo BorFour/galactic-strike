@@ -75,6 +75,8 @@ playGame.prototype = {
         game.load.spritesheet("player", "assets/dude.png", 32, 48);
 		game.load.image("planet", "assets/planet1.png");
 		game.load.image("bigplanet", "assets/planet2.png");
+
+        game.load.audio('jump', ['assets/jump.ogg', 'assets/jump.mp3']);
 	},
   	create: function(){
 
@@ -95,6 +97,7 @@ playGame.prototype = {
 
 		gravityGraphics = game.add.graphics(0, 0);
         gravityGraphics.lineStyle(2,0xffffff,0.5);
+
 
 
         //  Phaser will automatically pause if the browser tab the game is in loses focus. You can disable that here:
@@ -264,9 +267,6 @@ playGame.prototype = {
             //  game.debug.box2dWorld();
 
          }
-
-
-
             var i = 1;
             // Cuando recorres así una tabla asociativa, en
             // var c se almacena el valor de las CLAVES
@@ -281,194 +281,6 @@ playGame.prototype = {
     }
 }
 
-function updateEureca(){
-
-    myCharacter.input.left = leftKey.isDown;
-	myCharacter.input.right = rightKey.isDown;
-	myCharacter.input.up = upKey.isDown;
-    myCharacter.input.down = downKey.isDown;
-	myCharacter.input.fire = game.input.activePointer.isDown;
-	myCharacter.input.tx = game.input.x+ game.camera.x;
-	myCharacter.input.ty = game.input.y+ game.camera.y;
-
-     for (var i in charactersList)
-    {
-		if (!charactersList[i]) continue;
-		//var curBullets = charactersList[i].bullets;
-		var curChar = charactersList[i].sprite;
-		for (var j in charactersList)
-		{
-			if (!charactersList[j]) continue;
-			if (j!=i)
-			{
-
-				var targetChar = charactersList[j].sprite;
-
-				//game.physics.arcade.overlap(curBullets, targetChar, bulletHitPlayer, null, this);
-
-			}
-			if (charactersList[j].alive)
-			{
-				charactersList[j].update();
-			}
-		}
-    }
-
-
-}
-
-function movePlayer(){
-
-        if(!sprite) return;
-      //sprite.body.setZeroVelocity();
-
-      //  if(sprite.body.wasTouching.down){
-      //      }
-
-        //if (cursors.left.isDown)
-        if (leftKey.isDown)
-        {
-            sprite.body.velocity.x -= 5.101;
-            sprite.animations.play('left');
-        }
-        //else if (cursors.right.isDown)
-        else if (rightKey.isDown)
-        {
-            sprite.body.velocity.x += 5.101;
-            sprite.animations.play('right');
-        }
-
-        else {
-            sprite.animations.stop();
-        }
-
-        //if (cursors.up.isDown)
-        if (upKey.isDown)
-        {
-            sprite.body.velocity.y -= 5.101;
-        }
-        //else if (cursors.down.isDown)
-        else if (downKey.isDown)
-        {
-            sprite.body.velocity.y += 5.101;
-        }
-
-        if (rotateLKey.isDown)
-        {
-            sprite.body.angularVelocity -= 0.15;
-        }
-        //else if (cursors.down.isDown)
-        else if (rotateRKey.isDown)
-        {
-            sprite.body.angularVelocity += 0.15;
-        }
-
-        // NO FUNCIONA
-        // Parece que el navegador no le da permisos suficientes
-        // a Phaser
-
-        /*
-        if (fullscreenKey.isDown)
-        {
-            gofull()
-        }
-        */
-
-}
-
-function clientSetup(){
-
-  // Socket events
-
-  // Whenever the server emits 'login', log the login message
-    socket.on('login', function (data) {
-        connected = true;
-        // Display the welcome message
-        var message = "Welcome to Socket.IO Chat – ";
-        console.log(message, {
-          prepend: true
-        });
-        myId = data.id;
-        console.log("Your client ID is: " + myId);
-//        addParticipantsMessage(data);
-    });
-
-  // Whenever the server emits 'updatePlayer', update the chat body
-    socket.on('updatePlayer', function (input) {
-        if(myId == input.id){
-            return; // ¿Cómo hacemos esto?
-//            console.log("Updating my character");
-            myCharacter.sprite.x = input.data.x
-            myCharacter.sprite.y = input.data.y
-            myCharacter.sprite.angle = input.data.angle
-        }
-        else{
-//            console.log("Updating character " + input.id)
-//            console.log(charactersList[input.id])
-            if(charactersList[input.id]){
-                console.log("Updating character " + input.id)
-                charactersList[input.id].sprite.body.x = input.data.x
-                charactersList[input.id].sprite.body.y = input.data.y
-                charactersList[input.id].sprite.body.angle = input.data.angle
-                charactersList[input.id].sprite.body.velocity.x = input.data.velocityX
-                charactersList[input.id].sprite.body.velocity.y = input.data.velocityY
-            }
-            else{
-                charactersList[input.id] = new Character(input.data.x, input.data.y, game, input.id);
-            }
-        }
-    });
-
-  // Whenever the server emits 'user joined', log it in the chat body
-    socket.on('user joined', function (data) {
-        console.log("Client " + data.id + ' joined in (' + data.x + ',' + data.y + ')') ;
-
-            charactersList[data.id] = new Character(data.x, data.y, game, data.id);
-
-        if(data.id === myId){
-
-            myCharacter = charactersList[data.id]
-            console.log("He creado a mi personaje")
-
-            sprite = myCharacter.sprite
-//            game.spacePhysics.addDynamic(sprite);
-            game.camera.follow(sprite);
-
-            for (var i = 0; i < planets.length; i++){
-                sprite.body.setBodyContactCallback(planets[i].sprite,  touchPlanetCallback, this);
-            }
-        }
-
-        console.log("Clients: ")
-        for (var c in charactersList){
-            console.log(charactersList[c])
-        }
-//        addParticipantsMessage(data);
-    });
-
-  // Whenever the server emits 'user left', log it in the chat body
-    socket.on('user left', function (data) {
-        console.log(data.username + ' left');
-        var c = charactersList[data.id];
-        c.kill();
-        delete charactersList[data.id];
-//        addParticipantsMessage(data);
-//        removeChatTyping(data);
-    });
-
-  // Whenever the server emits 'typing', show the typing message
-    socket.on('typing', function (data) {
-        addChatTyping(data);
-    });
-
-  // Whenever the server emits 'stop typing', kill the typing message
-socket.on('stop typing', function (data) {
-    removeChatTyping(data);
-});
-
-
-
-}
 
 function jumpCharacter(){
         if(planetTouched != null && jumpCooldown){
@@ -478,6 +290,7 @@ function jumpCharacter(){
             sprite.body.applyForce(-Math.cos(angle)*jumpForce,-Math.sin(angle)*jumpForce);
             if(debug) console.log("jump from (" + planetTouched.x + "," + planetTouched.y + ")")
             planetTouched = null
+//            myCharacter.jumpSound.play();
             game.time.events.add(560, refreshJumpCooldown, this)
         }
 }
@@ -498,93 +311,11 @@ function touchPlanetCallback(body1, body2, fixture1, fixture2, begin) {
 
         // NO FUNCIONA
         //game.time.events.add(30, rotateTo, this)
-
     }
 }
 
-function rotateTo(){
-
-    if (!planetTouched) return;
-
-    var angle = Phaser.Math.angleBetween(sprite.x,sprite.y,planetTouched.x,planetTouched.y);
-
-    console.log("Ángulo = " + angle + " ángulo sprite = " + toRad(sprite.angle))
-
-    if (Math.abs(angle - toRad(sprite.angle) < -0.8)) {
-        if(debug) console.log("Ángulo corregido")
-        sprite.body.immovable = true;
-        sprite.body.static = true;
-        sprite.body.moves = false;
-        sprite.body.velocity = 0;
-        //game.physics.removeBody(sprite.body);
-        //sprite.angularVelocity = 0;
-        //sprite.body.velocity.x = 0;
-        //sprite.body.velocity.y = 0;
-        return;
-    }
-    if(angle < 0){
-        sprite.angle += 5;
-        if(debug) console.log("Girando a la izquierda")
-    }
-    else{
-        if(debug) console.log("Girando a la derecha")
-        sprite.angle -= 5;
-    }
-
-    game.time.events.add(30, rotateTo,this)
-
-}
 
 function toRad(value){
     return (value * Math.PI) / 180
 }
 
-function gofull() {
-
-    if (game.scale.isFullScreen)
-    {
-        game.scale.stopFullScreen();
-    }
-    else
-    {
-        game.scale.startFullScreen(false);
-    }
-
-}
-
-function isGrounded(body){
-    var vs = 25
-    return (Math.abs(body.velocity.x) < vs) && (Math.abs(body.velocity.y) < vs)
-}
-
-function setGrounded(player, planets){
-
-    grounded = true;
-
-}
-
-function checkPosition(){
-	if((crateGroup.getChildAt(0).x === x && crateGroup.getChildAt(0).y === y) || (numCollision > 2)){
-		alert('GAMEOVER');
-	} else if(gameover > 10){
-		alert('LEVEL COMPLETED')
-	} else {
-		gameover = gameover + 1;
-		x = crate.x;
-		y = crate.y;
-	}
-}
-
-function collisionCallback(body1, body2, fixture1, fixture2, begin) {
-	if (!begin)
-    {
-        return;
-    }
-	 body1.velocity.y = body1.velocity.y * 0.5;
-	 body1.velocity.x = body1.velocity.x * 0.5;
-	 numCollision = numCollision + 1;
-	 //wait(2000);
-	 //body1.destroy();
-	 //fixture1.destroy();
-
-}

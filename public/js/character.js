@@ -25,6 +25,7 @@ Character = function (x, y, game, player) {
     this.player = player;
     this.game = game;
     this.health = 100;
+    this.planetTouched = null;
     this.sprite = game.add.sprite(x, y, 'player');
     game.physics.box2d.enable(this.sprite);
 

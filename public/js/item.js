@@ -12,3 +12,7 @@ function Item (game,x,y) {
 //    Item.prototype.update = function () {
 
 // }
+
+Item.prototype.use = function (){
+
+}

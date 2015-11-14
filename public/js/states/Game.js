@@ -1,8 +1,8 @@
-RENAME_ME.Game = function(game) {
+GALACTIC_STRIKE.Game = function(game) {
 
 };
 
-RENAME_ME.Game.prototype = {
+GALACTIC_STRIKE.Game.prototype = {
 	create: function() {
 
 	},

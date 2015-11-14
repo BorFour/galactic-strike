@@ -1,35 +1,24 @@
-Controller = function (nickname) {
 
-    this.nickname = nickname;
-    this.team = null;
-    this.isReady = false;
-    this.character = null;
-    this.controller = new Controller ();
+Controller.KEYBOARD = {
+    'left' : game.input.keyboard.addKey(Phaser.Keyboard.A),
+    'right' : game.input.keyboard.addKey(Phaser.Keyboard.D),
+    'up' : game.input.keyboard.addKey(Phaser.Keyboard.W),
+    'down' : game.input.keyboard.addKey(Phaser.Keyboard.S),
+    'rotateL' : game.input.keyboard.addKey(Phaser.Keyboard.Q),
+    'rorateR' : game.input.keyboard.addKey(Phaser.Keyboard.E)
+}
+
+Controller = function (cconf) {
+
+    this.leftKey = cconf['left'];
+    this.rightKey = cconf['right'];
+    this.upKey = cconf['up'];
+    this.downKey = cconf['down'];
+    this.rotateLKey = cconf['rotateL'];
+    this.rotateRKey = cconf['rorateR'];
+//    this.fullscreenKey = game.input.keyboard.addKey(Phaser.Keyboard.F);
 
 };
-
-
-Controller.prototype.joinTeam = function(team) {
-
-    team.addPlayer(this);
-    this.team = team;
-
-}
-
-
-Controller.prototype.leaveTeam = function (){
-
-    this.team.removePlayer(Player);
-    this.team = null;
-
-}
-
-// Función que se ejectuará cuando se presione la tecla 'left'
-// del controlador del usuario
-
-Controller.prototype.setLeftFunction (fn){
-    this.controller.keyLeft.onDown.add(fn, this);
-}
 
 
 function movePlayer(){

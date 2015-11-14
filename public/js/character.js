@@ -14,6 +14,13 @@ Character = function (x, y, game, player) {
 		fire:false
 	}
 
+    this.player = player;
+    this.game = game;
+
+    this.health = 100;
+    this.items = [];
+
+
     var PTM = 50;
     var driveJoints = [];
 
@@ -22,9 +29,7 @@ Character = function (x, y, game, player) {
 	var motorTorque = 2;
 	var rideHeight = 0.25;
 
-    this.player = player;
-    this.game = game;
-    this.health = 100;
+
     this.planetTouched = null;
     this.sprite = game.add.sprite(x, y, 'player');
     game.physics.box2d.enable(this.sprite);

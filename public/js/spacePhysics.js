@@ -70,7 +70,7 @@ SpacePhysics.prototype.update = function (){
             if (c.body.static) continue;
 			for(var j=0;j<this.planetGroup.total;j++){
 				var p = this.planetGroup.getChildAt(j);
-				// Distance entre dos puntos
+				// Distancia entre dos puntos
 				var distance = Phaser.Math.distance(c.wheelBody.x,c.wheelBody.y,p.x,p.y);
 				// Si la distancia es menor que el radio de acción del planeta
 				x = c.wheelBody.x;

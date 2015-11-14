@@ -1,10 +1,10 @@
-var RENAME_ME = {};
+var GALACTIC_STRIKE = {};
 
-RENAME_ME.Boot = function (game) {
+GALACTIC_STRIKE.Boot = function (game) {
 
 };
 
-RENAME_ME.Boot.prototype = {
+GALACTIC_STRIKE.Boot.prototype = {
 
     init: function () {
         this.input.maxPointers = 1;

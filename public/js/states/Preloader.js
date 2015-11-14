@@ -1,8 +1,8 @@
-RENAME_ME.Preloader = function(game) {
+GALACTIC_STRIKE.Preloader = function(game) {
     this.ready = false;
 };
 
-RENAME_ME.Preloader.prototype = {
+GALACTIC_STRIKE.Preloader.prototype = {
 
     preload: function() {
 

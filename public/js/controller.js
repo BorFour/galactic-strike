@@ -10,12 +10,17 @@ Controller.KEYBOARD = {
 
 Controller = function (cconf) {
 
-    this.leftKey = cconf['left'];
-    this.rightKey = cconf['right'];
-    this.upKey = cconf['up'];
-    this.downKey = cconf['down'];
-    this.rotateLKey = cconf['rotateL'];
-    this.rotateRKey = cconf['rorateR'];
+    // Alternativa chula
+    this.keys = []
+    for (c in cconf){
+        this.keys[c] = cconf[c];
+    }
+//    this.leftKey = cconf['left'];
+//    this.rightKey = cconf['right'];
+//    this.upKey = cconf['up'];
+//    this.downKey = cconf['down'];
+//    this.rotateLKey = cconf['rotateL'];
+//    this.rotateRKey = cconf['rorateR'];
 //    this.fullscreenKey = game.input.keyboard.addKey(Phaser.Keyboard.F);
 
 };

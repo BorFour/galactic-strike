@@ -261,7 +261,7 @@ playGame.prototype = {
              game.debug.text("Move with : [W A S D]"  + "\t",32, 688);
              game.debug.text("Rotate with: [Q E]" ,32, 720);
              game.debug.text("Jump with : [Spacebar]" ,32, 752);
-             game.debug.box2dWorld();
+            //  game.debug.box2dWorld();
 
          }
 

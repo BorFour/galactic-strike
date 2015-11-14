@@ -29,6 +29,6 @@ Team.prototype.removePlayer = function (player){
     this.players = this.players.filter(function (el) {
                         return el === player;
                        });
-    this.team = null;
+    player.team = null;
 
 }

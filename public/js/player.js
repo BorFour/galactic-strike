@@ -5,8 +5,8 @@ Player = function (nickname) {
     this.team = null;
     this.isReady = false;
     this.character = null;
-    this.controller = new Controller ();
-
+    this.controller = new Controller (Controller.KEYBOARD);
+    this.keyFns = [] // Probablemente prescindible
 };
 
 
@@ -30,10 +30,10 @@ Player.prototype.leaveTeam = function (){
 // Almacenamos la función en 'this' también por si queremos cambiar
 // de controlador
 
-Player.prototype.setLeftFunction (fn){
+Player.prototype.setKeyFunction(key, fn){
 
-    this.leftFn = fn;
-    this.controller.keyLeft.onDown.add(fn, this);
+    this.keyFns[key] = fn;
+    this.controller.keys[key].onDown.add(fn, this);
 
 }
 

@@ -48,9 +48,9 @@ function Character (x, y, game, player, asset) {
 	this.wheelBody = new Phaser.Physics.Box2D.Body(game, null, x, y);
 	this.wheelBody.setRectangle(45,12,0,0,0);
     this.wheelBody.friction = 0.001;
-    this.wheelBody.mass = 0.68;
+    this.wheelBody.mass = 0.63;
 
-    this.driveJoint = game.physics.box2d.wheelJoint(this.body, this.wheelBody, 0,rideHeight*PTM, 0,0, 0,1, frequency, damping, 0, motorTorque, true);
+    this.driveJoint = game.physics.box2d.weldJoint(this.body, this.wheelBody, 0,rideHeight*PTM, 0,0, 0,1, frequency, damping);
 
 
     /* this.bullets = game.add.group();
@@ -81,7 +81,7 @@ function Character (x, y, game, player, asset) {
 
     //this.shadow.anchor.set(0.5);ç
     this.scale.setTo(0.65,0.65);
-//    this.anchor.setTo(this.wheelBody.x,this.wheelBody.y + this.wheelBody.radius);
+//    this.anchor.setTo(0.5, 0.90);
 
 
 

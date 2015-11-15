@@ -16,13 +16,13 @@ function Character (x, y, game, player, asset) {
 
     Element.call(this, game, x, y, asset);
     game.add.existing(this);
-    game.spacePhysics.addDynamic(this);
-    game.physics.box2d.enable(this);
-    this.body.dynamic = true;
-
 
     this.player = player;
     this.game = game;
+
+    this.game.spacePhysics.addDynamic(this);
+    this.game.physics.box2d.enable(this);
+    this.body.dynamic = true;
 
     this.health = 100;
     this.items = [];
@@ -40,8 +40,8 @@ function Character (x, y, game, player, asset) {
     this.planetTouched = null;
 //    this = game.add.sprite(x, y, 'player');
 
-    this.body.setRectangle(12,25,0,0,0); //.setCircle(0.2*PTM);
-
+    this.body.setRectangle(12,33,0,0,0); //.setCircle(0.2*PTM);
+    this.body.mass = 0.28;
 /*
 
 	this.wheelBody = new Phaser.Physics.Box2D.Body(game, null, x, y);

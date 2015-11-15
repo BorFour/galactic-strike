@@ -54,7 +54,6 @@ function clientSetup(){
             myCharacter.jumpSound = game.add.audio('jump');
             console.log("He creado a mi personaje")
 
-            myCharacter
 //            game.spacePhysics.addDynamic(sprite);
             game.camera.follow(myCharacter);
 

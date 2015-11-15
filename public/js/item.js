@@ -3,6 +3,7 @@
 function Item (game,x,y, asset) {
     Element.call(this,game,x,y, asset);
     game.add.existing(this);
+    game.spacePhysics.addDynamic(this);
 }
 //Inheritance
     Item.prototype = Object.create(Element.prototype);

@@ -1,5 +1,5 @@
 
-Controller.KEYBOARD = {
+var KEYBOARD = {
     'left' : game.input.keyboard.addKey(Phaser.Keyboard.A),
     'right' : game.input.keyboard.addKey(Phaser.Keyboard.D),
     'up' : game.input.keyboard.addKey(Phaser.Keyboard.W),

@@ -1,7 +1,7 @@
 
 
-function Item (game,x,y) {
-    Element.call(this,game,x,y);
+function Item (game,x,y, asset) {
+    Element.call(this,game,x,y, asset);
     game.add.existing(this);
 }
 //Inheritance

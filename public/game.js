@@ -71,8 +71,10 @@ var playGame = function(game){};
 playGame.prototype = {
 	preload: function(){
         game.load.image("spaceBackground", "assets/spaceBackground.jpg");
+		game.load.image("pokeball", "assets/pokeball.png");
 		game.load.image("moon", "assets/moon1.png");
         game.load.spritesheet("player", "assets/walking.png", 45, 61);
+        game.load.spritesheet("deathstar", "assets/deathstar.gif", 64, 64);
 		game.load.image("planet", "assets/planet1.png");
 		game.load.image("bigplanet", "assets/planet2.png");
 
@@ -165,6 +167,12 @@ playGame.prototype = {
         orb = game.add.sprite(600, 450, 'moon');
         orb.anchor.setTo(0.5);
         orb.pivot.x = 100;
+
+        var elementoPrueba = new Element(game, game.world.randomX, game.world.randomY, 'deathstar');
+        game.physics.box2d.enable(elementoPrueba);
+
+        var objetoPrueba = new Item(game, game.world.randomX, game.world.randomY, 'pokeball');
+        game.physics.box2d.enable(objetoPrueba);
 
 		// waiting for player input
 

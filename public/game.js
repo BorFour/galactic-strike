@@ -66,20 +66,26 @@ window.onload = function() {
      myPlayer = new Player('Eduardo');
 }
 
+
 var playGame = function(game){};
+
+
 
 playGame.prototype = {
 	preload: function(){
         game.load.image("spaceBackground", "assets/spaceBackground.jpg");
 		game.load.image("pokeball", "assets/pokeball.png");
+		game.load.image("potion", "assets/potion.gif");
 		game.load.image("moon", "assets/moon1.png");
         game.load.spritesheet("player", "assets/ironman_45_75.png", 45, 75);
         //game.load.spritesheet("player_jump", "assets/jump_fly_land.png", 52, 75);
         game.load.spritesheet("deathstar", "assets/deathstar.gif", 64, 64);
 		game.load.image("planet", "assets/planet1.png");
 		game.load.image("bigplanet", "assets/planet2.png");
-
         game.load.audio('jump', ['assets/jump.ogg', 'assets/jump.mp3']);
+
+
+
 	},
   	create: function(){
 
@@ -172,7 +178,11 @@ playGame.prototype = {
         var elementoPrueba = new Element(game, game.world.randomX, game.world.randomY, 'deathstar');
         game.physics.box2d.enable(elementoPrueba);
 
-        var objetoPrueba = new Item(game, game.world.randomX, game.world.randomY, 'pokeball');
+
+        // Mira cómo instancio a la poción
+        // la variable 'items' se encuentra en 'items.json', donde estarán definidos todos los objetos del juego
+
+        var objetoPrueba = new Item(game, game.world.randomX, game.world.randomY, items['potion']);
         game.physics.box2d.enable(objetoPrueba);
 
 		// waiting for player input
@@ -309,11 +319,12 @@ function refreshJumpCooldown(){
 }
 
 function touchPlanetCallback(body1, body2, fixture1, fixture2, begin) {
-    if(!planetTouched){
+    if(!body1.sprite.planetTouched){
         planetTouched = body2
+        body1.sprite.planetTouched = body2;
         if(debug) {
             console.log("planet touched gravity force: " + body2.x)
-            console.log(typeof body1)
+            console.log(body1)
         }
         myCharacter.body.static = true;
         myCharacter.body.dynamic = false;

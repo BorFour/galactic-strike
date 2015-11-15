@@ -1,0 +1,13 @@
+var items =
+{
+    'potion' : {
+        'asset' : 'potion',
+        'use' : function (){
+            owner.hp += 30;
+        }
+    },
+    'pokeball' : {
+        'asset' : 'pokeball',
+        'use' : null
+    }
+}

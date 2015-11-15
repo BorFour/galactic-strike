@@ -42,13 +42,16 @@ function Character (x, y, game, player, asset) {
 
     this.body.setRectangle(12,33,0,0,0); //.setCircle(0.2*PTM);
     this.body.mass = 0.28;
-/*
+//    this.body.friction = 0.001;
+
 
 	this.wheelBody = new Phaser.Physics.Box2D.Body(game, null, x, y);
-	this.wheelBody.setCircle(0.2*PTM);
+	this.wheelBody.setRectangle(45,12,0,0,0);
+    this.wheelBody.friction = 0.001;
+    this.wheelBody.mass = 0.68;
 
     this.driveJoint = game.physics.box2d.wheelJoint(this.body, this.wheelBody, 0,rideHeight*PTM, 0,0, 0,1, frequency, damping, 0, motorTorque, true);
-*/
+
 
     /* this.bullets = game.add.group();
     this.bullets.enableBody = true;

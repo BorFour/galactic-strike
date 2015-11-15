@@ -319,7 +319,7 @@ function refreshJumpCooldown(){
 }
 
 function touchPlanetCallback(body1, body2, fixture1, fixture2, begin) {
-    if(!body1.sprite.planetTouched){
+    if(!planetTouched){
         planetTouched = body2
         body1.sprite.planetTouched = body2;
         if(debug) {

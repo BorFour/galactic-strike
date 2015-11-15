@@ -49,6 +49,7 @@ function movePlayer(){
 
         else {
             sprite.animations.stop();
+            sprite.animations.play('stop');
         }
 
         //if (cursors.up.isDown)

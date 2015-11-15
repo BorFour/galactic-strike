@@ -72,7 +72,7 @@ playGame.prototype = {
 	preload: function(){
         game.load.image("spaceBackground", "assets/spaceBackground.jpg");
 		game.load.image("moon", "assets/moon1.png");
-        game.load.spritesheet("player", "assets/dude.png", 32, 48);
+        game.load.spritesheet("player", "assets/walking.png", 45, 61);
 		game.load.image("planet", "assets/planet1.png");
 		game.load.image("bigplanet", "assets/planet2.png");
 

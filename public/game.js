@@ -53,7 +53,7 @@ var socket;
 
 
 var inputChanged = true;
-var player;
+var myPlayer;
 var myId = 0;
 var myCharacter;
 var charactersList;
@@ -63,6 +63,7 @@ window.onload = function() {
 	 game = new Phaser.Game(1200, 800, Phaser.AUTO, "");
      game.state.add("PlayGame",playGame);
      game.state.start("PlayGame");
+     myPlayer = new Player('Eduardo');
 }
 
 var playGame = function(game){};

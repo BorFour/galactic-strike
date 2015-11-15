@@ -1,5 +1,6 @@
 
-function clientSetup(){
+
+function clientSetup(player){
 
   // Socket events
 

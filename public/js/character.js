@@ -118,6 +118,32 @@ Character.prototype.update = function() {
 
 }
 
+Character.prototype.jump = function (){
+    if(this.planetTouched != null && this.jumpCooldown){
+        this.jumpCooldown = false;
+        var angle = Phaser.Math.angleBetween(this.x,this.y,this.planetTouched.x,this.planetTouched.y);
+        // add gravity force to the crate in the direction of planet center
+        myCharacter.body.applyForce(-Math.cos(angle)*jumpForce,-Math.sin(angle)*jumpForce);
+        if(debug) console.log("jump from (" + this.planetTouched.x + "," + this.planetTouched.y + ")")
+        this.planetTouched = null
+//            myCharacter.jumpSound.play();
+        game.time.events.add(560, refreshJumpCooldown, this)
+    }
+}
+
+function jumpCharacter(){
+        if(planetTouched != null && jumpCooldown){
+            jumpCooldown = false;
+            var angle = Phaser.Math.angleBetween(myCharacter.x,myCharacter.y,planetTouched.x,planetTouched.y);
+            // add gravity force to the crate in the direction of planet center
+            myCharacter.body.applyForce(-Math.cos(angle)*jumpForce,-Math.sin(angle)*jumpForce);
+            if(debug) console.log("jump from (" + planetTouched.x + "," + planetTouched.y + ")")
+            planetTouched = null
+//            myCharacter.jumpSound.play();
+            game.time.events.add(560, refreshJumpCooldown, this)
+        }
+}
+
 Character.prototype.kill = function() {
 	this.alive = false;
 	this.kill();

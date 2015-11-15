@@ -85,7 +85,19 @@ SpacePhysics.prototype.update = function (){
         }
 }
 
-
+//SpacePhysics.prototype.
+function jumpCharacter(){
+        if(planetTouched != null && jumpCooldown){
+            jumpCooldown = false;
+            var angle = Phaser.Math.angleBetween(myCharacter.x,myCharacter.y,planetTouched.x,planetTouched.y);
+            // add gravity force to the crate in the direction of planet center
+            myCharacter.body.applyForce(-Math.cos(angle)*jumpForce,-Math.sin(angle)*jumpForce);
+            if(debug) console.log("jump from (" + planetTouched.x + "," + planetTouched.y + ")")
+            planetTouched = null
+//            myCharacter.jumpSound.play();
+            game.time.events.add(560, refreshJumpCooldown, this)
+        }
+}
 
 
 

@@ -70,6 +70,9 @@ function Character (x, y, game, player, asset) {
     this.animations.add('left', [0, 1, 2], 10, true);
     this.animations.add('right', [4, 5, 6], 10, true);
     this.animations.add('stop', [3], 10, true);
+    this.animations.add('jump', [7, 8], 10, true);
+    this.animations.add('fly', [9], 10, true);
+    this.animations.add('land', [10, 11], 10, true);
 
 
 

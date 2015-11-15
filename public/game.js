@@ -72,7 +72,8 @@ playGame.prototype = {
         game.load.image("spaceBackground", "assets/spaceBackground.jpg");
 		game.load.image("pokeball", "assets/pokeball.png");
 		game.load.image("moon", "assets/moon1.png");
-        game.load.spritesheet("player", "assets/walking.png", 45, 61);
+        game.load.spritesheet("player", "assets/ironman_45_75.png", 45, 75);
+        //game.load.spritesheet("player_jump", "assets/jump_fly_land.png", 52, 75);
         game.load.spritesheet("deathstar", "assets/deathstar.gif", 64, 64);
 		game.load.image("planet", "assets/planet1.png");
 		game.load.image("bigplanet", "assets/planet2.png");

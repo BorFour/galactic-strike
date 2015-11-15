@@ -46,9 +46,9 @@ function movePlayer(){
         {
             myCharacter.body.velocity.x += 5.101;
             myCharacter.animations.play('right');
-        }
-
-        else {
+        /*} else if(spaceKey.isDown){
+            myCharacter.animations.play('jump');*/
+        } else {
             myCharacter.animations.stop();
             myCharacter.animations.play('stop');
         }
@@ -57,6 +57,8 @@ function movePlayer(){
         if (upKey.isDown)
         {
             myCharacter.body.velocity.y -= 5.101;
+            myCharacter.animations.play('fly');
+
         }
         //else if (cursors.down.isDown)
         else if (downKey.isDown)

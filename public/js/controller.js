@@ -1,4 +1,5 @@
 
+/*
 var KEYBOARD = {
     'left' : game.input.keyboard.addKey(Phaser.Keyboard.A),
     'right' : game.input.keyboard.addKey(Phaser.Keyboard.D),
@@ -7,7 +8,7 @@ var KEYBOARD = {
     'rotateL' : game.input.keyboard.addKey(Phaser.Keyboard.Q),
     'rorateR' : game.input.keyboard.addKey(Phaser.Keyboard.E)
 }
-
+*/
 Controller = function (cconf) {
 
     // Alternativa chula
@@ -28,49 +29,49 @@ Controller = function (cconf) {
 
 function movePlayer(){
 
-        if(!sprite) return;
-      //sprite.body.setZeroVelocity();
+        if(!myCharacter) return;
+      //myCharacter.body.setZeroVelocity();
 
-      //  if(sprite.body.wasTouching.down){
+      //  if(myCharacter.body.wasTouching.down){
       //      }
 
         //if (cursors.left.isDown)
         if (leftKey.isDown)
         {
-            sprite.body.velocity.x -= 5.101;
-            sprite.animations.play('left');
+            myCharacter.body.velocity.x -= 5.101;
+            myCharacter.animations.play('left');
         }
         //else if (cursors.right.isDown)
         else if (rightKey.isDown)
         {
-            sprite.body.velocity.x += 5.101;
-            sprite.animations.play('right');
+            myCharacter.body.velocity.x += 5.101;
+            myCharacter.animations.play('right');
         }
 
         else {
-            sprite.animations.stop();
-            sprite.animations.play('stop');
+            myCharacter.animations.stop();
+            myCharacter.animations.play('stop');
         }
 
         //if (cursors.up.isDown)
         if (upKey.isDown)
         {
-            sprite.body.velocity.y -= 5.101;
+            myCharacter.body.velocity.y -= 5.101;
         }
         //else if (cursors.down.isDown)
         else if (downKey.isDown)
         {
-            sprite.body.velocity.y += 5.101;
+            myCharacter.body.velocity.y += 5.101;
         }
 
         if (rotateLKey.isDown)
         {
-            sprite.body.angularVelocity -= 0.15;
+            myCharacter.body.angularVelocity -= 0.15;
         }
         //else if (cursors.down.isDown)
         else if (rotateRKey.isDown)
         {
-            sprite.body.angularVelocity += 0.15;
+            myCharacter.body.angularVelocity += 0.15;
         }
 
         // NO FUNCIONA

@@ -44,7 +44,6 @@ var forceReducer = 0.015;
 // graphic object where to draw planet gravity area
 
 var gravityGraphics;
-var sprite;
 
 ////////////////////
 // CLIENT CONNECTION
@@ -82,7 +81,7 @@ playGame.prototype = {
 	},
   	create: function(){
 
-  		// adding groupswddddddddd
+  		// adding groups
 
         // Llamamos a la conexión del cliente
 
@@ -293,9 +292,9 @@ playGame.prototype = {
 function jumpCharacter(){
         if(planetTouched != null && jumpCooldown){
             jumpCooldown = false;
-            var angle = Phaser.Math.angleBetween(sprite.x,sprite.y,planetTouched.x,planetTouched.y);
+            var angle = Phaser.Math.angleBetween(myCharacter.x,myCharacter.y,planetTouched.x,planetTouched.y);
             // add gravity force to the crate in the direction of planet center
-            sprite.body.applyForce(-Math.cos(angle)*jumpForce,-Math.sin(angle)*jumpForce);
+            myCharacter.body.applyForce(-Math.cos(angle)*jumpForce,-Math.sin(angle)*jumpForce);
             if(debug) console.log("jump from (" + planetTouched.x + "," + planetTouched.y + ")")
             planetTouched = null
 //            myCharacter.jumpSound.play();
@@ -314,8 +313,8 @@ function touchPlanetCallback(body1, body2, fixture1, fixture2, begin) {
             console.log("planet touched gravity force: " + body2.x)
             console.log(typeof body1)
         }
-        myCharacter.sprite.body.static = true;
-        myCharacter.sprite.body.dynamic = false;
+        myCharacter.body.static = true;
+        myCharacter.body.dynamic = false;
 
         // NO FUNCIONA
         //game.time.events.add(30, rotateTo, this)

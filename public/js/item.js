@@ -5,7 +5,7 @@ function Item (game,x,y, asset) {
     game.add.existing(this);
 }
 //Inheritance
-    Item.prototype = Object.create(Phaser.Sprite.prototype);
+    Item.prototype = Object.create(Element.prototype);
     Item.prototype.constructor = Element;
 
 // ¿Hereda el método 'update' de 'Element'?

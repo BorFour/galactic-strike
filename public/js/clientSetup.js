@@ -21,9 +21,9 @@ function clientSetup(){
         if(myId == input.id){
             return; // ¿Cómo hacemos esto?
 //            console.log("Updating my character");
-            myCharacter.sprite.x = input.data.x
-            myCharacter.sprite.y = input.data.y
-            myCharacter.sprite.angle = input.data.angle
+            myCharacter.x = input.data.x
+            myCharacter.y = input.data.y
+            myCharacter.angle = input.data.angle
         }
         else{
 //            console.log("Updating character " + input.id)
@@ -46,7 +46,7 @@ function clientSetup(){
     socket.on('user joined', function (data) {
         console.log("Client " + data.id + ' joined in (' + data.x + ',' + data.y + ')') ;
 
-            charactersList[data.id] = new Character(data.x, data.y, game, data.id);
+        charactersList[data.id] = new Character(data.x, data.y, game, data.id, 'player');
 
         if(data.id === myId){
 
@@ -54,12 +54,12 @@ function clientSetup(){
             myCharacter.jumpSound = game.add.audio('jump');
             console.log("He creado a mi personaje")
 
-            sprite = myCharacter.sprite
+            myCharacter
 //            game.spacePhysics.addDynamic(sprite);
-            game.camera.follow(sprite);
+            game.camera.follow(myCharacter);
 
             for (var i = 0; i < planets.length; i++){
-                sprite.body.setBodyContactCallback(planets[i].sprite,  touchPlanetCallback, this);
+                myCharacter.body.setBodyContactCallback(planets[i], touchPlanetCallback, this);
             }
         }
 

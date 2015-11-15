@@ -1,23 +1,29 @@
-Star = function (posX, posY, gravityRadius, gravityForce, asset, game) {
-		this.sprite = game.add.sprite(posX, posY, asset);
-        this.sprite.anchor.setTo(0.5, 0.5)
-        this.sprite.gravityRadius = gravityRadius;
-        this.sprite.gravityForce = gravityForce;
+function Star (x, y, gravityRadius, gravityForce, asset, game) {
+
+        Element.call(this, game, x, y, asset);
+        game.add.existing(this);
+
+//      this.sprite = game.add.sprite(x, y, asset);
+        this.anchor.setTo(0.5, 0.5)
+        this.gravityRadius = gravityRadius;
+        this.gravityForce = gravityForce;
         this.game = game;
 //        this.planetGroup.add(planet);
-        game.spacePhysics.addPlanet(this.sprite);
-        this.game.physics.box2d.enable(this.sprite);
-        this.sprite.body.static = true;
+        game.spacePhysics.addPlanet(this);
+        this.game.physics.box2d.enable(this);
+        this.body.static = true;
 
         // look how I create a circular body
-        this.sprite.body.setCircle(this.sprite.width / 2);
-        gravityGraphics.drawCircle(this.sprite.x, this.sprite.y,       this.sprite.width+this.sprite.gravityRadius);
+        this.body.setCircle(this.width / 2);
+        gravityGraphics.drawCircle(this.x, this.y, this.width+this.gravityRadius);
         console.log("@Star: " + "planet created -> \n" + this);
-
-
 }
+
+// Herencia
+Star.prototype = Object.create(Element.prototype);
+Star.prototype.constructor = Element;
 
 
 Star.prototype.toString = function(){
-    return "Star " + this.sprite.key + " (" + this.sprite.x + "," + this.sprite.y + ")";
+    return "Star " + this.key + " (" + this.x + "," + this.y + ")";
 }

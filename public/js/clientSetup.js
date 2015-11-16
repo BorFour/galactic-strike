@@ -56,6 +56,8 @@ function clientSetup(player){
             console.log("He creado a mi personaje")
 
 //            game.spacePhysics.addDynamic(sprite);
+
+            // ESTO PROBABLEMENTE NO DEBA IR AQUÍ
             game.camera.follow(myCharacter);
             var spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
             spaceKey.onDown.add(function(){myCharacter.jump()}, this);

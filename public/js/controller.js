@@ -26,7 +26,7 @@ Controller = function (cconf) {
 
 };
 
-var moveForce = 0.315;
+var moveForce = 0.515;
 function movePlayer(){
 
         if(!myCharacter) return;
@@ -35,18 +35,20 @@ function movePlayer(){
       //  if(myCharacter.body.wasTouching.down){
       //      }
 
-        if(!planetTouched){
+        if(!myCharacter.planetTouched){
 
             //if (cursors.left.isDown)
             if (leftKey.isDown)
             {
-                myCharacter.body.velocity.x -= 5.101;
+                myCharacter.body.rotateLeft(100);
+//                myCharacter.body.velocity.x -= 5.101;
                 myCharacter.animations.play('left');
             }
             //else if (cursors.right.isDown)
             else if (rightKey.isDown)
             {
-                myCharacter.body.velocity.x += 5.101;
+                myCharacter.body.rotateRight(100);
+//                myCharacter.body.velocity.x += 5.101;
                 myCharacter.animations.play('right');
             /*} else if(spaceKey.isDown){
                 myCharacter.animations.play('jump');*/
@@ -58,14 +60,18 @@ function movePlayer(){
             //if (cursors.up.isDown)
             if (upKey.isDown)
             {
-                myCharacter.body.velocity.y -= 5.101;
+                console.log(myCharacter.body.angle)
+//                myCharacter.body.applyForce(moveForce*Math.cos(myCharacter.body.angle), -moveForce*Math.cos(myCharacter.body.angle));
+//                myCharacter.body.velocity.y -= 5.101;
+                myCharacter.body.thrust(200);
                 myCharacter.animations.play('fly');
 
             }
             //else if (cursors.down.isDown)
             else if (downKey.isDown)
             {
-                myCharacter.body.velocity.y += 5.101;
+                myCharacter.body.reverse(200);
+//                myCharacter.body.velocity.y += 5.101;
             }
 
             if (rotateLKey.isDown)

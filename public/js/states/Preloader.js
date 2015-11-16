@@ -1,5 +1,4 @@
-
-GALACTIC_STRIKE.Preloader = function (game) {
+GALACTIC_STRIKE.Preloader = function(game) {
     this.ready = false;
 };
 
@@ -14,9 +13,8 @@ var zz = [];
 
 GALACTIC_STRIKE.Preloader.prototype = {
 
-
 preload: function () {
-    game.load.image('star', '../../assets/potion.gif');
+    game.load.image('star', '../../assets/estrella.png');
 },
 create: function () {
 
@@ -69,8 +67,7 @@ update: function () {
     }
 
 },
-startGame: function() {
-    this.state.start('MainMenu');
-}
-
+    startGame: function() {
+        this.state.start('MainMenu');
+    }
 };

@@ -11,15 +11,12 @@ GALACTIC_STRIKE.Lobby.prototype = {
 	create: function() {
         this.room = new Room (); // ¿?
 	},
-
 	update: function() {
 
 	},
-
 	quitGame: function(pointer) {
 		this.state.start('MainMenu');
 	},
-
 	render: function() {
 
 	}

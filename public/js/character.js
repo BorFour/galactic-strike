@@ -40,17 +40,18 @@ function Character (x, y, game, player, asset) {
     this.planetTouched = null;
 //    this = game.add.sprite(x, y, 'player');
 
-    this.body.setRectangle(12,33,0,0,0); //.setCircle(0.2*PTM);
+    this.body.setCircle(20,0,0,0); //.setCircle(0.2*PTM);
     this.body.mass = 0.28;
 //    this.body.friction = 0.001;
 
-
+/*
 	this.wheelBody = new Phaser.Physics.Box2D.Body(game, null, x, y);
 	this.wheelBody.setRectangle(45,12,0,0,0);
     this.wheelBody.friction = 0.001;
     this.wheelBody.mass = 0.63;
 
     this.driveJoint = game.physics.box2d.weldJoint(this.body, this.wheelBody, 0,rideHeight*PTM, 0,0, 0,1, frequency, damping);
+*/
 
 
     /* this.bullets = game.add.group();

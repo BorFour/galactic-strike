@@ -78,21 +78,29 @@ function movePlayer(){
                 myCharacter.body.angularVelocity += 0.15;
             }
         }
-        else {
+        else if(jumpCooldown) {
+
             if(leftKey.isDown){
 					// add gravity force to the crate in the direction of planet center
-                var angle = Phaser.Math.angleBetween(myCharacter.x,myCharacter.y,planetTouched.x,planetTouched.y);
+                var angle = Phaser.Math.angleBetween(myCharacter.body.x,myCharacter.body.y,planetTouched.x,planetTouched.y);
                 myCharacter.body.velocity.x = -moveForce*Math.sin(angle);
                 myCharacter.body.velocity.y = moveForce*Math.cos(angle);
                 myCharacter.animations.play('left');
+                myCharacter.angle = angle;
             }
             else if (rightKey.isDown){
                 				// add gravity force to the crate in the direction of planet center
-                var angle = Phaser.Math.angleBetween(myCharacter.x,myCharacter.y,planetTouched.x,planetTouched.y);
+                var angle = Phaser.Math.angleBetween(myCharacter.body.x,myCharacter.body.y,planetTouched.x,planetTouched.y);
                 myCharacter.body.velocity.x = moveForce*Math.sin(angle);
                 myCharacter.body.velocity.y = -moveForce*Math.cos(angle);
                 myCharacter.animations.play('right');
+                myCharacter.angle = angle;
 
+            }
+            else{
+//                myCharacter.body.velocity.x = 0;
+//                myCharacter.body.velocity.y = 0;
+                myCharacter.animations.stop();
             }
         }
 

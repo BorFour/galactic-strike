@@ -77,6 +77,7 @@ playGame.prototype = {
 		game.load.image("pokeball", "assets/pokeball.png");
 		game.load.image("potion", "assets/potion.gif");
 		game.load.image("moon", "assets/moon1.png");
+		game.load.image("bullet", "assets/blue-bullet.gif");
         game.load.spritesheet("player", "assets/ironman_45_75.png", 45, 75);
         //game.load.spritesheet("player_jump", "assets/jump_fly_land.png", 52, 75);
         game.load.spritesheet("deathstar", "assets/deathstar.gif", 64, 64);
@@ -209,9 +210,9 @@ playGame.prototype = {
 
         cursors = game.input.keyboard.createCursorKeys();
 
-        var spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-        spaceKey.onDown.add(jumpCharacter, this);
-        game.input.keyboard.removeKeyCapture(Phaser.Keyboard.SPACEBAR);
+//        var spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+//        spaceKey.onDown.add(jumpCharacter, this);
+//        game.input.keyboard.removeKeyCapture(Phaser.Keyboard.SPACEBAR);
 
 
         ///////////
@@ -279,11 +280,11 @@ playGame.prototype = {
 
          if(gameDebug) {
              game.debug.text("Jump cooldown: " + game.time.events.duration, 32, 32);
-             game.debug.text("Planet touched: " + planetTouched, 32, 64);
+             if(myCharacter) game.debug.text("Planet touched: " + myCharacter.planetTouched, 32, 64);
              game.debug.text("Move with : [W A S D]"  + "\t",32, 688);
              game.debug.text("Rotate with: [Q E]" ,32, 720);
              game.debug.text("Jump with : [Spacebar]" ,32, 752);
-//             game.debug.box2dWorld();
+             game.debug.box2dWorld();
 
          }
             var i = 1;
@@ -314,12 +315,12 @@ function jumpCharacter(){
         }
 }
 
-function refreshJumpCooldown(){
-    jumpCooldown = true;
-}
+//function refreshJumpCooldown(){
+//    jumpCooldown = true;
+//}
 
 function touchPlanetCallback(body1, body2, fixture1, fixture2, begin) {
-    if(!planetTouched){
+//    if(!planetTouched){
         planetTouched = body2
         body1.sprite.planetTouched = body2;
         if(debug) {
@@ -331,7 +332,7 @@ function touchPlanetCallback(body1, body2, fixture1, fixture2, begin) {
 
         // NO FUNCIONA
         //game.time.events.add(30, rotateTo, this)
-    }
+//    }
 }
 
 

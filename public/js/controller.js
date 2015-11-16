@@ -26,7 +26,7 @@ Controller = function (cconf) {
 
 };
 
-var moveForce = 150;
+var moveForce = 0.315;
 function movePlayer(){
 
         if(!myCharacter) return;
@@ -83,16 +83,19 @@ function movePlayer(){
             if(leftKey.isDown){
 					// add gravity force to the crate in the direction of planet center
                 var angle = Phaser.Math.angleBetween(myCharacter.body.x,myCharacter.body.y,planetTouched.x,planetTouched.y);
-                myCharacter.body.velocity.x = -moveForce*Math.sin(angle);
-                myCharacter.body.velocity.y = moveForce*Math.cos(angle);
+
+//                myCharacter.body.velocity.x = -moveForce*Math.sin(angle);
+//                myCharacter.body.velocity.y = moveForce*Math.cos(angle);
+                myCharacter.body.applyForce(-moveForce*Math.sin(angle), moveForce*Math.cos(angle));
                 myCharacter.animations.play('left');
                 myCharacter.angle = angle;
             }
             else if (rightKey.isDown){
                 				// add gravity force to the crate in the direction of planet center
                 var angle = Phaser.Math.angleBetween(myCharacter.body.x,myCharacter.body.y,planetTouched.x,planetTouched.y);
-                myCharacter.body.velocity.x = moveForce*Math.sin(angle);
-                myCharacter.body.velocity.y = -moveForce*Math.cos(angle);
+//                myCharacter.body.velocity.x = moveForce*Math.sin(angle);
+//                myCharacter.body.velocity.y = -moveForce*Math.cos(angle);
+                myCharacter.body.applyForce(moveForce*Math.sin(angle), -moveForce*Math.cos(angle));
                 myCharacter.animations.play('right');
                 myCharacter.angle = angle;
 

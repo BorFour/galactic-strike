@@ -4,10 +4,22 @@ var items =
         'asset' : 'potion',
         'use' : function (){
             owner.hp += 30;
-        }
+        },
+        'collision' : null
     },
     'pokeball' : {
         'asset' : 'pokeball',
         'use' : null
+    },
+    'bullet' : {
+        'asset' : 'bullet',
+        'use' : null,
+        'body' : function (sprite){
+            sprite.body.setCircle(2, 0, 0, 0); // (?)
+        },
+        'collision' : function(body1, body2, fixture1, fixture2, begin){
+            body2.sprite.hp -= 10;
+            body1.sprite.destroy();
+        }
     }
 }

@@ -24,8 +24,12 @@ function Character (x, y, game, player, asset) {
     this.game.physics.box2d.enable(this);
     this.body.dynamic = true;
 
+    this.jumpForce = 150;
+    this.jumpCooldown = true;
+    this.fireCooldown = true;
     this.health = 100;
     this.items = [];
+    this.bullets = [];
 
 
     var PTM = 50;
@@ -67,7 +71,8 @@ function Character (x, y, game, player, asset) {
     this.fireRate = 100;
     this.nextFire = 0;
     this.alive = true;
-    this.jumpCooldown = 350;
+    this.jumpCooldownTime = 350;
+    this.fireCooldownTime = 100;
 
     //this.shadow = game.add.sprite(x, y, 'enemy', 'shadow');
 
@@ -127,13 +132,32 @@ Character.prototype.jump = function (){
         this.jumpCooldown = false;
         var angle = Phaser.Math.angleBetween(this.x,this.y,this.planetTouched.x,this.planetTouched.y);
         // add gravity force to the crate in the direction of planet center
-        myCharacter.body.applyForce(-Math.cos(angle)*jumpForce,-Math.sin(angle)*jumpForce);
+        this.body.applyForce(-Math.cos(angle)*this.jumpForce,-Math.sin(angle)*this.jumpForce);
         if(debug) console.log("jump from (" + this.planetTouched.x + "," + this.planetTouched.y + ")")
         this.planetTouched = null
 //            myCharacter.jumpSound.play();
-        game.time.events.add(560, refreshJumpCooldown, this)
+        game.time.events.add(560, function(){this.jumpCooldown = true}, this)
     }
 }
+
+Character.prototype.fire = function (){
+    if(this.fireCooldown){
+        this.fireCooldown = false;
+
+        var bullet = new Item(game, this.x, this.y, items['bullet']);
+        console.log(bullet)
+        bullet.owner = this;
+        this.bullets.push(bullet);
+        var fn = bullet.collide;
+        for (c in charactersList){
+            bullet.body.setBodyContactCallback(charactersList[c], fn, this);
+        }
+        bullet.body.velocity.x = (Math.random() < 0.5) ? 500 : -500;
+        game.time.events.add(this.fireCooldownTime, function(){this.fireCooldown = true}, this)
+
+    }
+}
+
 
 Character.prototype.kill = function() {
 	this.alive = false;

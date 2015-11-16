@@ -30,7 +30,7 @@ Player.prototype.leaveTeam = function (){
 // Almacenamos la función en 'this' también por si queremos cambiar
 // de controlador
 
-Player.prototype.setKeyFunction(key, fn){
+Player.prototype.setKeyFunction = function(key, fn){
 
     this.keyFns[key] = fn;
     this.controller.keys[key].onDown.add(fn, this);

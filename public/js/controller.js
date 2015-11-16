@@ -26,7 +26,7 @@ Controller = function (cconf) {
 
 };
 
-
+var moveForce = 150;
 function movePlayer(){
 
         if(!myCharacter) return;
@@ -35,45 +35,65 @@ function movePlayer(){
       //  if(myCharacter.body.wasTouching.down){
       //      }
 
-        //if (cursors.left.isDown)
-        if (leftKey.isDown)
-        {
-            myCharacter.body.velocity.x -= 5.101;
-            myCharacter.animations.play('left');
-        }
-        //else if (cursors.right.isDown)
-        else if (rightKey.isDown)
-        {
-            myCharacter.body.velocity.x += 5.101;
-            myCharacter.animations.play('right');
-        /*} else if(spaceKey.isDown){
-            myCharacter.animations.play('jump');*/
-        } else {
-            myCharacter.animations.stop();
-            myCharacter.animations.play('stop');
-        }
+        if(!planetTouched){
 
-        //if (cursors.up.isDown)
-        if (upKey.isDown)
-        {
-            myCharacter.body.velocity.y -= 5.101;
-            myCharacter.animations.play('fly');
+            //if (cursors.left.isDown)
+            if (leftKey.isDown)
+            {
+                myCharacter.body.velocity.x -= 5.101;
+                myCharacter.animations.play('left');
+            }
+            //else if (cursors.right.isDown)
+            else if (rightKey.isDown)
+            {
+                myCharacter.body.velocity.x += 5.101;
+                myCharacter.animations.play('right');
+            /*} else if(spaceKey.isDown){
+                myCharacter.animations.play('jump');*/
+            } else {
+                myCharacter.animations.stop();
+                myCharacter.animations.play('stop');
+            }
 
-        }
-        //else if (cursors.down.isDown)
-        else if (downKey.isDown)
-        {
-            myCharacter.body.velocity.y += 5.101;
-        }
+            //if (cursors.up.isDown)
+            if (upKey.isDown)
+            {
+                myCharacter.body.velocity.y -= 5.101;
+                myCharacter.animations.play('fly');
 
-        if (rotateLKey.isDown)
-        {
-            myCharacter.body.angularVelocity -= 0.15;
+            }
+            //else if (cursors.down.isDown)
+            else if (downKey.isDown)
+            {
+                myCharacter.body.velocity.y += 5.101;
+            }
+
+            if (rotateLKey.isDown)
+            {
+                myCharacter.body.angularVelocity -= 0.15;
+            }
+            //else if (cursors.down.isDown)
+            else if (rotateRKey.isDown)
+            {
+                myCharacter.body.angularVelocity += 0.15;
+            }
         }
-        //else if (cursors.down.isDown)
-        else if (rotateRKey.isDown)
-        {
-            myCharacter.body.angularVelocity += 0.15;
+        else {
+            if(leftKey.isDown){
+					// add gravity force to the crate in the direction of planet center
+                var angle = Phaser.Math.angleBetween(myCharacter.x,myCharacter.y,planetTouched.x,planetTouched.y);
+                myCharacter.body.velocity.x = -moveForce*Math.sin(angle);
+                myCharacter.body.velocity.y = moveForce*Math.cos(angle);
+                myCharacter.animations.play('left');
+            }
+            else if (rightKey.isDown){
+                				// add gravity force to the crate in the direction of planet center
+                var angle = Phaser.Math.angleBetween(myCharacter.x,myCharacter.y,planetTouched.x,planetTouched.y);
+                myCharacter.body.velocity.x = moveForce*Math.sin(angle);
+                myCharacter.body.velocity.y = -moveForce*Math.cos(angle);
+                myCharacter.animations.play('right');
+
+            }
         }
 
         // NO FUNCIONA

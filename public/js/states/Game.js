@@ -1,4 +1,3 @@
-
 //	100% of the browser window - see Boot.js for additional configuration
 var SAFE_ZONE_WIDTH = 960;// * window.devicePixelRatio;
 var SAFE_ZONE_HEIGHT = 640;// * window.devicePixelRatio;

@@ -1,14 +1,7 @@
-GALACTIC_STRIKE.Preloader = function(game) {
+
+GALACTIC_STRIKE.Preloader = function (game) {
     this.ready = false;
 };
-
-GALACTIC_STRIKE.Preloader.prototype = {
-
-function preload() {
-
-    game.load.image('star', 'assets/estrella.jpg');
-
-}
 
 var distance = 300;
 var speed = 4;
@@ -19,7 +12,13 @@ var xx = [];
 var yy = [];
 var zz = [];
 
-function create() {
+GALACTIC_STRIKE.Preloader.prototype = {
+
+
+preload: function () {
+    game.load.image('star', '../../assets/potion.gif');
+},
+create: function () {
 
     if (game.renderType === Phaser.WEBGL)
     {
@@ -47,9 +46,8 @@ function create() {
         // When the 'upKey' is pressed, it will call the 'start' function once
         upKey.onDown.addOnce(this.startGame, this);
 
-}
-
-function update() {
+},
+update: function () {
 
     for (var i = 0; i < max; i++)
     {
@@ -71,9 +69,8 @@ function update() {
     }
 
 },
-
-    startGame: function() {
-        this.state.start('MainMenu');
-    }
+startGame: function() {
+    this.state.start('MainMenu');
+}
 
 };

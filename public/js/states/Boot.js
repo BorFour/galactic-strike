@@ -29,13 +29,10 @@ GALACTIC_STRIKE.Boot.prototype = {
             this.scale.updateLayout(true);
         }
     },
-
     preload: function () {
-        this.load.image('appsbude', 'images/appsbude-logo.jpg');
-    },
-
+        //this.load.image('appsbude', 'images/appsbude-logo.jpg');
+},
     create: function () {
         this.state.start('Preloader');
     }
-
 };

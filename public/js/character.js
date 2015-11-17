@@ -147,6 +147,8 @@ Character.prototype.fire = function (){
         bullet.owner = this;
         this.bullets.push(bullet);
         var fn = bullet.collide;
+        bullet.body.mass = 0.001;
+        bullet.body.bullet = true;
         for (c in charactersList){
             bullet.body.setBodyContactCallback(charactersList[c], fn, this);
         }

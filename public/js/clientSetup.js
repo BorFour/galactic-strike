@@ -62,6 +62,7 @@ function clientSetup(player){
             var spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
             spaceKey.onDown.add(function(){myCharacter.jump()}, this);
             game.input.keyboard.removeKeyCapture(Phaser.Keyboard.SPACEBAR);
+
             var fireKey = game.input.keyboard.addKey(Phaser.Keyboard.ONE);
             fireKey.onDown.add(function(){myCharacter.fire()}, this);
             game.input.keyboard.removeKeyCapture(Phaser.Keyboard.ONE);

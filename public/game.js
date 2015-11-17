@@ -60,7 +60,7 @@ var charactersList;
 
 
 window.onload = function() {
-	 game = new Phaser.Game(1200, 800, Phaser.AUTO, "");
+	 game = new Phaser.Game(1000, 800, Phaser.AUTO, "");
      game.state.add("PlayGame",playGame);
      game.state.start("PlayGame");
      myPlayer = new Player('Eduardo');
@@ -82,7 +82,8 @@ playGame.prototype = {
         //game.load.spritesheet("player_jump", "assets/jump_fly_land.png", 52, 75);
         game.load.spritesheet("deathstar", "assets/deathstar.gif", 64, 64);
 		game.load.image("planet", "assets/planet1.png");
-		game.load.image("bigplanet", "assets/planet2.png");
+		game.load.image("bigplanet", "assets/bigplanet.png");
+		game.load.image("giantplanet", "assets/giantplanet.png");
         game.load.audio('jump', ['assets/jump.ogg', 'assets/jump.mp3']);
 
 
@@ -116,7 +117,7 @@ playGame.prototype = {
 		// stage setup
 
 		game.stage.backgroundColor = "#122112";
-        game.world.setBounds(0, 0, 1400, 1400);
+        game.world.setBounds(0, 0, 2400, 2400);
 
         /*
         starfield = game.add.sprite(0, 0, 'spaceBackground');
@@ -150,8 +151,9 @@ playGame.prototype = {
 		// gravity force
 		// graphic asset
 
-        var planet = new Star(680, 700, 400, 250, "planet", game);
-        var bigPlanet = new Star(1070, 850, 400, 250, "bigplanet", game);
+//        var planet = new Star(680, 700, 400, 250, "planet", game);
+//        var bigPlanet = new Star(1070, 850, 400, 250, "bigplanet", game);
+        var giantPlanet = new Star(800, 900, 900, 250, "giantplanet", game);
 
         if(randomPlanets){
 //(Edu) No se si hay que hacer spacePhysics.addPlanet para añadirlo al grupo de esa clase o simplemente con el planets.push de aqui valdría
@@ -165,8 +167,9 @@ playGame.prototype = {
         }
 		else{
 //(Edu) No se si hay que hacer spacePhysics.addPlanet para añadirlo al grupo de esa clase o simplemente con el planets.push de aqui valdría
-            planets.push(planet)
-            planets.push(bigPlanet)
+//            planets.push(planet)
+//            planets.push(bigPlanet)
+              planets.push(giantPlanet)
         }
 
         console.log("Planets: " + planets)

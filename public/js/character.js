@@ -137,18 +137,6 @@ Character.prototype.update = function() {
 
 }
 
-Character.prototype.jump = function (){
-    if(this.planetTouched != null && this.jumpCooldown){
-        this.jumpCooldown = false;
-        var angle = Phaser.Math.angleBetween(this.x,this.y,this.planetTouched.x,this.planetTouched.y);
-        // add gravity force to the crate in the direction of planet center
-        this.body.applyForce(-Math.cos(angle)*this.jumpForce,-Math.sin(angle)*this.jumpForce);
-        if(debug) console.log("jump from (" + this.planetTouched.x + "," + this.planetTouched.y + ")")
-        this.planetTouched = null
-//            myCharacter.jumpSound.play();
-        game.time.events.add(560, function(){this.jumpCooldown = true}, this)
-    }
-}
 
 Character.prototype.fire = function (){
     if(this.fireCooldown){
@@ -162,8 +150,16 @@ Character.prototype.fire = function (){
         for (c in charactersList){
             bullet.body.setBodyContactCallback(charactersList[c], fn, this);
         }
-        bullet.body.velocity.x = (Math.random() < 0.5) ? 500 : -500;
+        if(this.planetTouched){
+            bullet.body.angle = this.angle + Math.PI*this.orientation;
+            bullet.body.thrust(155400);
+        }
+        else{
+            bullet.body.angle = this.angle;
+            bullet.body.thrust(155400);
+        }
         game.time.events.add(this.fireCooldownTime, function(){this.fireCooldown = true}, this)
+        game.time.events.add(1000, function(){bullet.destroy()}, this)
 
     }
 }
@@ -232,6 +228,22 @@ Character.prototype.moveSpace = function(direction){
 
 }
 
+/**
+ * Jumps from the planet the character is grounded to
+ */
+
+Character.prototype.jump = function (){
+    if(this.planetTouched != null && this.jumpCooldown){
+        this.jumpCooldown = false;
+        var angle = Phaser.Math.angleBetween(this.x,this.y,this.planetTouched.x,this.planetTouched.y);
+        // add gravity force to the crate in the direction of planet center
+        this.body.applyForce(-Math.cos(angle)*this.jumpForce,-Math.sin(angle)*this.jumpForce);
+        if(debug) console.log("jump from (" + this.planetTouched.x + "," + this.planetTouched.y + ")")
+        this.planetTouched = null
+//            myCharacter.jumpSound.play();
+        game.time.events.add(560, function(){this.jumpCooldown = true}, this)
+    }
+}
 
 
 Character.prototype.kill = function() {

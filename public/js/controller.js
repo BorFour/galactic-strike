@@ -61,7 +61,7 @@ function movePlayer(){
             //if (cursors.up.isDown)
             if (upKey.isDown)
             {
-                console.log(myCharacter.body.angle)
+//                console.log(myCharacter.body.angle)
 //                myCharacter.body.applyForce(moveForce*Math.cos(myCharacter.body.angle), -moveForce*Math.cos(myCharacter.body.angle));
 //                myCharacter.body.velocity.y -= 5.101;
                 myCharacter.body.thrust(200);

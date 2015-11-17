@@ -188,6 +188,7 @@ playGame.prototype = {
 
         var objetoPrueba = new Item(game, game.world.randomX, game.world.randomY, items['potion']);
         game.physics.box2d.enable(objetoPrueba);
+        game.spacePhysics.addDynamic(objetoPrueba);
 
 		// waiting for player input
 

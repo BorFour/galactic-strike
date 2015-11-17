@@ -3,7 +3,7 @@ GALACTIC_STRIKE.Preloader = function(game) {
 };
 
 var distance = 300;
-var speed = 4;
+var speed = 2;
 var stars;
 
 var max = 200;
@@ -14,13 +14,17 @@ var zz = [];
 GALACTIC_STRIKE.Preloader.prototype = {
 
 preload: function () {
+    game.load.image('starBackground', '../../assets/starBackground.jpg')
     game.load.image('star', '../../assets/estrella.png');
 },
 create: function () {
+    starfield = game.add.sprite(0, 0, 'starBackground');
+    starfield.height = game.world.height;
+    starfield.width = game.world.width;
 
     if (game.renderType === Phaser.WEBGL)
     {
-        max = 2000;
+        max = 200;
     }
 
     var sprites = game.add.spriteBatch();

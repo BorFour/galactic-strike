@@ -287,7 +287,7 @@ playGame.prototype = {
              game.debug.text("Move with : [W A S D]"  + "\t",32, 688);
              game.debug.text("Rotate with: [Q E]" ,32, 720);
              game.debug.text("Jump with : [Spacebar]" ,32, 752);
-             game.debug.box2dWorld();
+//             game.debug.box2dWorld();
 
          }
             var i = 1;
@@ -326,12 +326,13 @@ function touchPlanetCallback(body1, body2, fixture1, fixture2, begin) {
 //    if(!planetTouched){
         planetTouched = body2
         body1.sprite.planetTouched = body2;
+//        body1.fixedRotation = true;
         if(debug) {
             console.log("planet touched gravity force: " + body2.x)
             console.log(body1)
         }
-        myCharacter.body.static = true;
-        myCharacter.body.dynamic = false;
+//        myCharacter.body.static = true;
+//        myCharacter.body.dynamic = false;
 
         // NO FUNCIONA
         //game.time.events.add(30, rotateTo, this)

@@ -24,9 +24,17 @@ function Character (x, y, game, player, asset) {
     this.game.physics.box2d.enable(this);
     this.body.dynamic = true;
 
-    this.jumpForce = 150;
+    // States
+    this.RIGHT = 1;
+    this.LEFT = -1;
+    this.orientation = 1;
+
+    // Cooldowns
     this.jumpCooldown = true;
     this.fireCooldown = true;
+
+
+    this.jumpForce = 150;
     this.health = 100;
     this.items = [];
     this.bullets = [];
@@ -34,6 +42,7 @@ function Character (x, y, game, player, asset) {
 
     var PTM = 50;
     var driveJoints = [];
+
 
 	var frequency = 150;
 	var damping = 15;
@@ -46,6 +55,7 @@ function Character (x, y, game, player, asset) {
 
     this.body.setCircle(20,0,0,0); //.setCircle(0.2*PTM);
     this.body.mass = 0.28;
+    this.body.angularDamping = 0.25; // ESTO CONTROLA LA ROTACIÓN JIJIJI :)
 //    this.body.friction = 0.001;
 
 /*
@@ -157,6 +167,71 @@ Character.prototype.fire = function (){
 
     }
 }
+
+/**
+ * Moves the character when it's grounded
+ * @param {String} direction : Indicates the direction to move the character
+ */
+
+Character.prototype.moveGrounded = function(direction){
+
+    var moveForce1 = 250;
+
+    switch(direction){
+        case 'left':
+            // add gravity force to the crate in the direction of planet center
+            var angle = Phaser.Math.angleBetween(this.body.x,this.body.y,planetTouched.x,planetTouched.y);
+
+            this.body.velocity.x = -moveForce*Math.sin(angle)*moveForce1;
+            this.body.velocity.y = moveForce*Math.cos(angle)*moveForce1;
+            // this.body.applyForce(-moveForce*Math.sin(angle), moveForce*Math.cos(angle));
+            this.animations.play('left');
+            this.angle = angle;
+            this.orientation = this.LEFT;
+            break;
+        case 'right':
+            // add gravity force to the crate in the direction of planet center
+            var angle = Phaser.Math.angleBetween(this.body.x,this.body.y,planetTouched.x,planetTouched.y);
+            this.body.velocity.x = moveForce*Math.sin(angle)*moveForce1;
+            this.body.velocity.y = -moveForce*Math.cos(angle)*moveForce1;
+            // this.body.applyForce(moveForce*Math.sin(angle), -moveForce*Math.cos(angle));
+            this.animations.play('right');
+            this.angle = angle;
+            this.orientation = this.RIGHT;
+            break;
+        case 'still':
+            //  this.body.velocity.x = 0;
+            //  this.body.velocity.y = 0;
+            if(this.jumpCooldown){
+                this.body.velocity.x = 0;
+                this.body.velocity.y = 0;
+            }
+            this.animations.stop();
+            this.animations.play('stop');
+            break;
+        default:
+            break;
+    }
+}
+
+/**
+ * Moves the character when it is within the orbit of a planet but not grounded
+ * @param {[[Type]]} direction [[Description]]
+ */
+
+Character.prototype.moveInOrbit = function(direction){
+
+}
+
+/**
+ * Moves the character when it isn't within the orbit of any planet
+ * @param {[[Type]]} direction [[Description]]
+ */
+
+Character.prototype.moveSpace = function(direction){
+
+}
+
 
 
 Character.prototype.kill = function() {

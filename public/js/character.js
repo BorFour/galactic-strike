@@ -46,6 +46,7 @@ function Character (x, y, game, player, asset) {
 
     this.body.setCircle(20,0,0,0); //.setCircle(0.2*PTM);
     this.body.mass = 0.28;
+    this.body.angularDamping = 0.25; // ESTO CONTROLA LA ROTACIÓN JIJIJI :)
 //    this.body.friction = 0.001;
 
 /*

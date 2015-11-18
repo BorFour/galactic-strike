@@ -66,6 +66,7 @@ SpacePhysics.prototype.update = function (){
         // Para cada elemento dinámico
 		for(var i=0;i<this.dynamicGroup.total;i++){
 			var c = this.dynamicGroup.getChildAt(i);
+            var atmosphere = []; // Planetas en cuya atmósfera se encuentra c
 			// Para cada planeta (generador de gravedad)
             if (c.body.static) continue;
 			for(var j=0;j<this.planetGroup.total;j++){
@@ -79,9 +80,12 @@ SpacePhysics.prototype.update = function (){
 					// calculating angle between the planet and the crate
 					var angle = Phaser.Math.angleBetween(c.x,c.y,p.x,p.y);
 					// add gravity force to the crate in the direction of planet center
-					c.body.applyForce(p.gravityForce*Math.cos(angle)*this.forceReducer,p.gravityForce*Math.sin(angle)*this.forceReducer);
+                    c.body.applyForce(p.gravityForce*Math.cos(angle)*this.forceReducer,
+                              p.gravityForce*Math.sin(angle)*this.forceReducer);
+                    atmosphere.push(p);
                 }
             }
+            c.atmosphere = atmosphere;
         }
 }
 

@@ -85,7 +85,7 @@ function movePlayer(){
                 myCharacter.body.angularVelocity += 0.15;
             }
         }
-        else if(myCharacter.jumpCooldown) {
+        else if(myCharacter.isGrounded()) {
 
             if(leftKey.isDown){
                 myCharacter.moveGrounded('left');

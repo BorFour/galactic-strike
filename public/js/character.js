@@ -51,11 +51,14 @@ function Character (x, y, game, player, asset) {
 
 
     this.planetTouched = null;
+    this.atmosphere = [];
+    this.grounded = false;
 //    this = game.add.sprite(x, y, 'player');
 
     this.body.setCircle(20,0,0,0); //.setCircle(0.2*PTM);
     this.body.mass = 0.28;
     this.body.angularDamping = 0.25; // ESTO CONTROLA LA ROTACIÓN JIJIJI :)
+    this.body.linearDamping =0.4// 0.94;
 //    this.body.friction = 0.001;
 
 /*
@@ -153,7 +156,7 @@ Character.prototype.fire = function (){
             bullet.body.setBodyContactCallback(charactersList[c], fn, this);
         }
         if(this.planetTouched){
-            bullet.body.angle = this.angle + Math.PI*this.orientation;
+            bullet.body.angle = this.angle + 90*this.orientation; // Este ángulo va en grados
             bullet.body.thrust(155400);
         }
         else{
@@ -254,6 +257,40 @@ Character.prototype.kill = function() {
 	//this.turret.kill();
 	//this.shadow.kill();
 }
+
+Character.prototype.setGrounded = function (){
+    if(this.groundedTimer){
+        game.time.events.remove(this.groundedTimer);
+        this.groundedTimer = null;
+    }
+
+    this.grounded = true;
+    this.groundedTimer = game.time.events.add(50,function() {this.grounded = false;}, this);
+
+}
+
+// PREDICATES
+
+/**
+ * Predicate: is the character within any atmosphere?
+ * @returns {Boolean} False if the list of atmospheres is empty, True IOC
+ */
+
+Character.prototype.inAtmosphere = function (){
+    return this.atmosphere.length > 0;
+}
+
+/**
+ * Predicate: is the character touching any planet?
+ * @returns {Boolean} True if it is currently touching a planet, False if not
+ */
+
+Character.prototype.isGrounded = function () {
+    return this.grounded;
+}
+
+
+
 
 Character.prototype.toString = function () {
     return "Player id: " + this.player + " HP : " + this.health;

@@ -38,7 +38,7 @@ function clientSetup(player){
                 charactersList[input.id].body.velocity.y = input.data.velocityY
             }
             else{
-                charactersList[input.id] = new Character(input.data.x, input.data.y, game, input.id);
+                charactersList[input.id] = new Character(input.data.x, input.data.y, game, input.id, 'player');
             }
         }
     });

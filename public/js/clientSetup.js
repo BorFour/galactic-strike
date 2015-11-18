@@ -1,4 +1,5 @@
 
+var networkDebug = true;
 
 function clientSetup(player){
 
@@ -9,7 +10,7 @@ function clientSetup(player){
         connected = true;
         // Display the welcome message
         var message = "Welcome to Socket.IO Chat – ";
-        console.log(message, {
+        if(networkDebug) console.log(message, {
           prepend: true
         });
         myId = data.id;

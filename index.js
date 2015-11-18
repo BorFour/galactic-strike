@@ -106,7 +106,8 @@ io.on('connection', function (socket) {
 //  });
 //});
 
+var puerto = 3000;
 
-http.listen(3000, function(){
-  console.log('listening on *:3000');
+http.listen(puerto, function(){
+  console.log('listening on *:' + puerto);
 });

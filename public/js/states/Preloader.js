@@ -15,7 +15,7 @@ GALACTIC_STRIKE.Preloader.prototype = {
 
 preload: function () {
     game.load.image('starBackground', '../../assets/starBackground.jpg')
-    game.load.image('star', '../../assets/estrella.png');
+    game.load.image('star', '../../assets/estrella_kek.jpg');
 },
 create: function () {
     starfield = game.add.sprite(0, 0, 'starBackground');

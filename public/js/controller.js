@@ -87,7 +87,10 @@ function movePlayer(){
         }
         else if(myCharacter.isGrounded()) {
 
-            if(leftKey.isDown){
+            if(spaceKey.isDown){
+                myCharacter.jump();
+            }
+            else if(leftKey.isDown){
                 myCharacter.moveGrounded('left');
             }
             else if (rightKey.isDown){

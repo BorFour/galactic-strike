@@ -30,6 +30,7 @@ var downKey;
 var rotateLKey;
 var rotateRKey;
 var fullscreenKey;
+var spaceKey;
 
 var grounded = false;
 var debug = true;     // Para el debug que se muestra por la consola
@@ -58,9 +59,14 @@ var myId = 0;
 var myCharacter;
 var charactersList;
 
+var DEFINITION = {
+    width: 1200,
+    height : 800
+}
+
 
 window.onload = function() {
-	 game = new Phaser.Game(800, 600, Phaser.AUTO, "");
+	 game = new Phaser.Game(DEFINITION.width, DEFINITION.height, Phaser.AUTO, "");
      game.state.add("PlayGame",playGame);
      game.state.start("PlayGame");
      myPlayer = new Player('Eduardo');
@@ -232,6 +238,7 @@ playGame.prototype = {
             rotateLKey = game.input.keyboard.addKey(Phaser.Keyboard.Q);
             rotateRKey = game.input.keyboard.addKey(Phaser.Keyboard.E);
             fullscreenKey = game.input.keyboard.addKey(Phaser.Keyboard.F);
+            spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
         }
         ///////////
         // GAMEPAD

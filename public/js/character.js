@@ -16,7 +16,7 @@ function Character (x, y, game, player, asset) {
 
     Element.call(this, game, x, y, asset);
     game.add.existing(this);
-    this.anchor.setTo(0.65,0.65);
+    this.anchor.setTo(0.5,1);
 
     this.player = player;
     this.game = game;
@@ -56,7 +56,9 @@ function Character (x, y, game, player, asset) {
     this.grounded = false;
 //    this = game.add.sprite(x, y, 'player');
 
-    this.body.setRectangle(40,30,0,10,0); //.setCircle(0.2*PTM);
+    var truckVertices = [-10, -10, 10,-10, 20,10,-20, 10];
+
+    this.body.setPolygon(truckVertices); //.setRectangle(40,30,0,10,0); //.setCircle(0.2*PTM);
     this.body.mass = 1;
     this.body.angularDamping = 0.25; // ESTO CONTROLA LA ROTACIÓN JIJIJI :)
     this.body.linearDamping =0.4// 0.94;
@@ -71,7 +73,7 @@ function Character (x, y, game, player, asset) {
 	this.wheelBodies[0].setCircle(0.2*PTM);
 	this.wheelBodies[1].setCircle(0.2*PTM);
 	this.motorEnabled = false;
-    this.motorSpeed = 10;
+    this.motorSpeed = 30;
 
 	var frequency = 3.5;
 	var damping = 0.5;
@@ -80,8 +82,8 @@ function Character (x, y, game, player, asset) {
 
 	// Make wheel joints
 	// bodyA, bodyB, ax, ay, bx, by, axisX, axisY, frequency, damping, motorSpeed, motorTorque, motorEnabled
-	this.driveJoints[0] = game.physics.box2d.wheelJoint(this.body, this.wheelBodies[0], -0.52*PTM,rideHeight*PTM, 0,0, 0,1, frequency, damping, 0, motorTorque, true ); // rear
-	this.driveJoints[1] = game.physics.box2d.wheelJoint(this.body, this.wheelBodies[1],  0.52*PTM,rideHeight*PTM, 0,0, 0,1, frequency, damping, 0, motorTorque, true ); // front
+	this.driveJoints[0] = game.physics.box2d.wheelJoint(this.body, this.wheelBodies[0], -0.62*PTM,rideHeight*PTM, 0,0, 0,1, frequency, damping, 0, motorTorque, true ); // rear
+	this.driveJoints[1] = game.physics.box2d.wheelJoint(this.body, this.wheelBodies[1],  0.62*PTM,rideHeight*PTM, 0,0, 0,1, frequency, damping, 0, motorTorque, true ); // front
 
 
     this.wheelBodies[0].sprite = this;

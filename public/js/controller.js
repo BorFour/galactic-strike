@@ -37,7 +37,7 @@ function movePlayer(){
       //  if(myCharacter.body.wasTouching.down){
       //      }
 
-        if(!myCharacter.planetTouched){
+        if(!myCharacter.inAtmosphere()){
 
             //if (cursors.left.isDown)
             if (leftKey.isDown)

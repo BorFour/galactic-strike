@@ -88,6 +88,9 @@ function Character (x, y, game, player, asset) {
 
     this.wheelBodies[0].sprite = this;
     this.wheelBodies[1].sprite = this;
+    this.wheelBodies[0].friction = 0.8;
+    this.wheelBodies[1].friction = 0.8;
+
 
 
 

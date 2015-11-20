@@ -98,11 +98,11 @@ function movePlayer(){
             }
             else if(leftKey.isDown){
 //                myCharacter.moveGrounded('left');
-                myCharacter.motorSpeed = -20;
+                myCharacter.motorSpeed = -30;
             }
             else if (rightKey.isDown){
 //                myCharacter.moveGrounded('right');
-                myCharacter.motorSpeed = 20;
+                myCharacter.motorSpeed = 30;
             }
             else{
 //                myCharacter.moveGrounded('still');

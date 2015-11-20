@@ -28,6 +28,7 @@ Controller = function (cconf) {
 
 var moveForce = 0.515;
 
+
 function movePlayer(){
 
         if(!myCharacter) return;
@@ -87,17 +88,30 @@ function movePlayer(){
         }
         else if(myCharacter.isGrounded()) {
 
+            myCharacter.motorEnabled = true;
+
             if(spaceKey.isDown){
                 myCharacter.jump();
             }
+            else if (downKey.isDown){
+                 myCharacter.motorSpeed = 0;
+            }
             else if(leftKey.isDown){
-                myCharacter.moveGrounded('left');
+//                myCharacter.moveGrounded('left');
+                myCharacter.motorSpeed = -20;
             }
             else if (rightKey.isDown){
-                myCharacter.moveGrounded('right');
+//                myCharacter.moveGrounded('right');
+                myCharacter.motorSpeed = 20;
             }
             else{
-                myCharacter.moveGrounded('still');
+//                myCharacter.moveGrounded('still');
+                myCharacter.motorEnabled = false;
+            }
+
+            for (var i = 0; i < 2; i++) {
+                myCharacter.driveJoints[i].EnableMotor(myCharacter.motorEnabled);
+                myCharacter.driveJoints[i].SetMotorSpeed(myCharacter.motorSpeed);
             }
         }
 

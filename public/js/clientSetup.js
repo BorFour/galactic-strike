@@ -68,6 +68,8 @@ function clientSetup(player){
             for (var i = 0; i < planets.length; i++){
 //                myCharacter.body.setBodyContactCallback(planets[i], touchPlanetCallback, this);
                 myCharacter.body.setBodyPresolveCallback(planets[i], touchPlanetCallback, this);
+                myCharacter.wheelBodies[0].setBodyPresolveCallback(planets[i], touchPlanetCallback, this);
+                myCharacter.wheelBodies[1].setBodyPresolveCallback(planets[i], touchPlanetCallback, this);
             }
         }
 

@@ -16,6 +16,7 @@ function Character (x, y, game, player, asset) {
 
     Element.call(this, game, x, y, asset);
     game.add.existing(this);
+    this.anchor.setTo(0.65,0.65);
 
     this.player = player;
     this.game = game;
@@ -34,7 +35,7 @@ function Character (x, y, game, player, asset) {
     this.fireCooldown = true;
 
 
-    this.jumpForce = 150;
+    this.jumpForce = 350;
     this.health = 100;
     this.items = [];
     this.bullets = [];
@@ -44,9 +45,9 @@ function Character (x, y, game, player, asset) {
     var driveJoints = [];
 
 
-	var frequency = 150;
-	var damping = 15;
-	var motorTorque = 2;
+	var frequency = 12;
+	var damping = 100;
+	var motorTorque = 1;
 	var rideHeight = 0.25;
 
 
@@ -55,20 +56,37 @@ function Character (x, y, game, player, asset) {
     this.grounded = false;
 //    this = game.add.sprite(x, y, 'player');
 
-    this.body.setCircle(20,0,0,0); //.setCircle(0.2*PTM);
-    this.body.mass = 0.28;
+    this.body.setRectangle(40,30,0,10,0); //.setCircle(0.2*PTM);
+    this.body.mass = 1;
     this.body.angularDamping = 0.25; // ESTO CONTROLA LA ROTACIÓN JIJIJI :)
     this.body.linearDamping =0.4// 0.94;
 //    this.body.friction = 0.001;
 
-/*
-	this.wheelBody = new Phaser.Physics.Box2D.Body(game, null, x, y);
-	this.wheelBody.setRectangle(45,12,0,0,0);
-    this.wheelBody.friction = 0.001;
-    this.wheelBody.mass = 0.63;
 
-    this.driveJoint = game.physics.box2d.weldJoint(this.body, this.wheelBody, 0,rideHeight*PTM, 0,0, 0,1, frequency, damping);
-*/
+
+    this.driveJoints = [];
+    this.wheelBodies = [];
+	this.wheelBodies[0] = new Phaser.Physics.Box2D.Body(this.game, null, this.x + -0.22*PTM, this.y + 0.6*-PTM);
+	this.wheelBodies[1] = new Phaser.Physics.Box2D.Body(this.game, null, this.x + 0.22*PTM, this.y + 0.6*-PTM);
+	this.wheelBodies[0].setCircle(0.2*PTM);
+	this.wheelBodies[1].setCircle(0.2*PTM);
+	this.motorEnabled = false;
+    this.motorSpeed = 10;
+
+	var frequency = 3.5;
+	var damping = 0.5;
+	var motorTorque = 2;
+	var rideHeight = 0.5;
+
+	// Make wheel joints
+	// bodyA, bodyB, ax, ay, bx, by, axisX, axisY, frequency, damping, motorSpeed, motorTorque, motorEnabled
+	this.driveJoints[0] = game.physics.box2d.wheelJoint(this.body, this.wheelBodies[0], -0.52*PTM,rideHeight*PTM, 0,0, 0,1, frequency, damping, 0, motorTorque, true ); // rear
+	this.driveJoints[1] = game.physics.box2d.wheelJoint(this.body, this.wheelBodies[1],  0.52*PTM,rideHeight*PTM, 0,0, 0,1, frequency, damping, 0, motorTorque, true ); // front
+
+
+    this.wheelBodies[0].sprite = this;
+    this.wheelBodies[1].sprite = this;
+
 
 
     /* this.bullets = game.add.group();
@@ -99,7 +117,7 @@ function Character (x, y, game, player, asset) {
 
 
     //this.shadow.anchor.set(0.5);ç
-    this.scale.setTo(0.65,0.65);
+
 //    this.anchor.setTo(0.5, 0.90);
 
 

@@ -61,9 +61,9 @@ function clientSetup(player){
             // ESTO PROBABLEMENTE NO DEBA IR AQUÍ
             game.camera.follow(myCharacter);
 
-            var fireKey = game.input.keyboard.addKey(Phaser.Keyboard.ONE);
+            var fireKey = game.input.keyboard.addKey(Phaser.Keyboard.NUMPAD_0);
             fireKey.onDown.add(function(){myCharacter.fire()}, this);
-            game.input.keyboard.removeKeyCapture(Phaser.Keyboard.ONE);
+            game.input.keyboard.removeKeyCapture(Phaser.Keyboard.NUMPAD_0);
 
             for (var i = 0; i < planets.length; i++){
 //                myCharacter.body.setBodyContactCallback(planets[i], touchPlanetCallback, this);

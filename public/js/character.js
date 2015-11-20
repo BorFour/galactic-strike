@@ -60,7 +60,7 @@ function Character (x, y, game, player, asset) {
 
     this.body.setPolygon(truckVertices); //.setRectangle(40,30,0,10,0); //.setCircle(0.2*PTM);
     this.body.mass = 1;
-    this.body.angularDamping = 0.25; // ESTO CONTROLA LA ROTACIÓN JIJIJI :)
+    this.body.angularDamping = 0.15; // ESTO CONTROLA LA ROTACIÓN JIJIJI :)
     this.body.linearDamping =0.4// 0.94;
 //    this.body.friction = 0.001;
 

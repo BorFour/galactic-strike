@@ -31,15 +31,63 @@ var moveForce = 0.515;
 
 function movePlayer(){
 
-        if(!myCharacter) return;
-      //myCharacter.body.setZeroVelocity();
+    if(!myCharacter) return;
+  //myCharacter.body.setZeroVelocity();
 
-      //  if(myCharacter.body.wasTouching.down){
-      //      }
+  //  if(myCharacter.body.wasTouching.down){
+  //      }
 
-        if(!myCharacter.inAtmosphere()){
+    if(myCharacter.isGrounded()) {
 
-            //if (cursors.left.isDown)
+        myCharacter.motorEnabled = true;
+
+        if(spaceKey.isDown){
+            myCharacter.jump();
+        }
+        else if (downKey.isDown){
+             myCharacter.motorSpeed = 0;
+        }
+        else if(leftKey.isDown){
+//                myCharacter.moveGrounded('left');
+            myCharacter.motorSpeed = -30;
+        }
+        else if (rightKey.isDown){
+//                myCharacter.moveGrounded('right');
+            myCharacter.motorSpeed = 30;
+        }
+        else{
+//                myCharacter.moveGrounded('still');
+            myCharacter.motorEnabled = false;
+        }
+
+        for (var i = 0; i < 2; i++) {
+            myCharacter.driveJoints[i].EnableMotor(myCharacter.motorEnabled);
+            myCharacter.driveJoints[i].SetMotorSpeed(myCharacter.motorSpeed);
+        }
+    } else if(myCharacter.inAtmosphere()){
+            if (leftKey.isDown)
+            {
+                myCharacter.body.rotateLeft(150);
+//                myCharacter.body.velocity.x -= 5.101;
+                myCharacter.animations.play('left');
+            }
+            //else if (cursors.right.isDown)
+            else if (rightKey.isDown)
+            {
+                myCharacter.body.rotateRight(150);
+//                myCharacter.body.velocity.x += 5.101;
+                myCharacter.animations.play('right');
+            /*} else if(spaceKey.isDown){
+                myCharacter.animations.play('jump');*/
+            }
+            if(spaceKey.isDown){
+                myCharacter.body.thrust(700);
+                myCharacter.animations.play('fly');
+            }
+
+        }
+        else {
+               //if (cursors.left.isDown)
             if (leftKey.isDown)
             {
                 myCharacter.body.rotateLeft(100);
@@ -84,34 +132,6 @@ function movePlayer(){
             else if (rotateRKey.isDown)
             {
                 myCharacter.body.angularVelocity += 0.15;
-            }
-        }
-        else if(myCharacter.isGrounded()) {
-
-            myCharacter.motorEnabled = true;
-
-            if(spaceKey.isDown){
-                myCharacter.jump();
-            }
-            else if (downKey.isDown){
-                 myCharacter.motorSpeed = 0;
-            }
-            else if(leftKey.isDown){
-//                myCharacter.moveGrounded('left');
-                myCharacter.motorSpeed = -30;
-            }
-            else if (rightKey.isDown){
-//                myCharacter.moveGrounded('right');
-                myCharacter.motorSpeed = 30;
-            }
-            else{
-//                myCharacter.moveGrounded('still');
-                myCharacter.motorEnabled = false;
-            }
-
-            for (var i = 0; i < 2; i++) {
-                myCharacter.driveJoints[i].EnableMotor(myCharacter.motorEnabled);
-                myCharacter.driveJoints[i].SetMotorSpeed(myCharacter.motorSpeed);
             }
         }
 

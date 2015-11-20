@@ -80,7 +80,7 @@ function movePlayer(){
             /*} else if(spaceKey.isDown){
                 myCharacter.animations.play('jump');*/
             }
-            if(spaceKey.isDown){
+            if(spaceKey.isDown && myCharacter.jumpCooldown){
                 myCharacter.body.thrust(700);
                 myCharacter.animations.play('fly');
             }

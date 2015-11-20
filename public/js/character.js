@@ -35,7 +35,7 @@ function Character (x, y, game, player, asset) {
     this.fireCooldown = true;
 
 
-    this.jumpForce = 350;
+    this.jumpForce = 550;
     this.health = 100;
     this.items = [];
     this.bullets = [];

@@ -45,19 +45,20 @@ function movePlayer(){
             myCharacter.jump();
         }
         else if (downKey.isDown){
-             myCharacter.motorSpeed = 0;
+            myCharacter.moveGrounded('down');
+//             myCharacter.motorSpeed = 0;
         }
         else if(leftKey.isDown){
-//                myCharacter.moveGrounded('left');
-            myCharacter.motorSpeed = -30;
+            myCharacter.moveGrounded('left');
+//            myCharacter.motorSpeed = -30;
         }
         else if (rightKey.isDown){
-//                myCharacter.moveGrounded('right');
-            myCharacter.motorSpeed = 30;
+            myCharacter.moveGrounded('right');
+//            myCharacter.motorSpeed = 30;
         }
         else{
-//                myCharacter.moveGrounded('still');
-            myCharacter.motorEnabled = false;
+            myCharacter.moveGrounded('still');
+//            myCharacter.motorEnabled = false;
         }
 
         for (var i = 0; i < 2; i++) {

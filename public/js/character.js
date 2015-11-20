@@ -82,8 +82,8 @@ function Character (x, y, game, player, asset) {
 
 	// Make wheel joints
 	// bodyA, bodyB, ax, ay, bx, by, axisX, axisY, frequency, damping, motorSpeed, motorTorque, motorEnabled
-	this.driveJoints[0] = game.physics.box2d.wheelJoint(this.body, this.wheelBodies[0], -0.62*PTM,rideHeight*PTM, 0,0, 0,1, frequency, damping, 0, motorTorque, true ); // rear
-	this.driveJoints[1] = game.physics.box2d.wheelJoint(this.body, this.wheelBodies[1],  0.62*PTM,rideHeight*PTM, 0,0, 0,1, frequency, damping, 0, motorTorque, true ); // front
+	this.driveJoints[0] = game.physics.box2d.wheelJoint(this.body, this.wheelBodies[0], -0.65*PTM,rideHeight*PTM, 0,0, 0,1, frequency, damping, 0, motorTorque, true ); // rear
+	this.driveJoints[1] = game.physics.box2d.wheelJoint(this.body, this.wheelBodies[1],  0.65*PTM,rideHeight*PTM, 0,0, 0,1, frequency, damping, 0, motorTorque, true ); // front
 
 
     this.wheelBodies[0].sprite = this;
@@ -203,6 +203,7 @@ Character.prototype.moveGrounded = function(direction){
 
     switch(direction){
         case 'left':
+            /*
             // add gravity force to the crate in the direction of planet center
             var angle = Phaser.Math.angleBetween(this.body.x,this.body.y,planetTouched.x,planetTouched.y);
 
@@ -211,29 +212,47 @@ Character.prototype.moveGrounded = function(direction){
             // this.body.applyForce(-moveForce*Math.sin(angle), moveForce*Math.cos(angle));
             this.animations.play('left');
             this.angle = angle;
+            */
+            this.animations.play('left');
+            this.motorSpeed = -30;
             this.orientation = this.LEFT;
             break;
         case 'right':
-            // add gravity force to the crate in the direction of planet center
+            /*// add gravity force to the crate in the direction of planet center
             var angle = Phaser.Math.angleBetween(this.body.x,this.body.y,planetTouched.x,planetTouched.y);
             this.body.velocity.x = moveForce*Math.sin(angle)*moveForce1;
             this.body.velocity.y = -moveForce*Math.cos(angle)*moveForce1;
             // this.body.applyForce(moveForce*Math.sin(angle), -moveForce*Math.cos(angle));
+            */
             this.animations.play('right');
-            this.angle = angle;
+            this.motorSpeed = 30;
             this.orientation = this.RIGHT;
             break;
-        case 'still':
+         case 'down':
+            /*
             //  this.body.velocity.x = 0;
             //  this.body.velocity.y = 0;
             if(this.jumpCooldown){
                 this.body.velocity.x = 0;
                 this.body.velocity.y = 0;
             }
+            */
+            this.motorSpeed = 0;
             this.animations.stop();
             this.animations.play('stop');
             break;
-        default:
+        case 'still':
+            /*
+            //  this.body.velocity.x = 0;
+            //  this.body.velocity.y = 0;
+            if(this.jumpCooldown){
+                this.body.velocity.x = 0;
+                this.body.velocity.y = 0;
+            }
+            */
+            this.motorEnabled = false;
+            this.animations.stop();
+//            this.animations.play('stop');
             break;
     }
 }

@@ -42,8 +42,7 @@ io.on('connection', function (socket) {
 
     socket.on('firePlayer', function (data){
         socket.broadcast.emit('firePlayer', {
-            id: socket.id,
-            data: data
+            id: data.id
         });
     });
 

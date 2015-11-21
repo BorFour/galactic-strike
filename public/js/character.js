@@ -169,7 +169,7 @@ Character.prototype.fire = function (){
     if(this.fireCooldown){
         this.fireCooldown = false;
 
-        socket.emit('firePlayer', null);
+        socket.emit('firePlayer', {id:myId});
         var bullet = new Item(game, this.x, this.y, items['bullet']);
         console.log(bullet)
         bullet.owner = this;
@@ -301,8 +301,6 @@ Character.prototype.die = function() {
     this.wheelBodies[1].destroy();
     this.body.destroy();
 	this.kill();
-	//this.turret.kill();
-	//this.shadow.kill();
 }
 
 Character.prototype.setGrounded = function (){

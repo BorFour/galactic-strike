@@ -185,16 +185,16 @@ playGame.prototype = {
         orb.anchor.setTo(0.5);
         orb.pivot.x = 100;
 
-        var elementoPrueba = new Element(game, game.world.randomX, game.world.randomY, 'deathstar');
-        game.physics.box2d.enable(elementoPrueba);
+//        var elementoPrueba = new Element(game, game.world.randomX, game.world.randomY, 'deathstar');
+//        game.physics.box2d.enable(elementoPrueba);
 
 
         // Mira cómo instancio a la poción
         // la variable 'items' se encuentra en 'items.json', donde estarán definidos todos los objetos del juego
 
-        var objetoPrueba = new Item(game, game.world.randomX, game.world.randomY, items['potion']);
-        game.physics.box2d.enable(objetoPrueba);
-        game.spacePhysics.addDynamic(objetoPrueba);
+//        var objetoPrueba = new Item(game, game.world.randomX, game.world.randomY, items['potion']);
+//        game.physics.box2d.enable(objetoPrueba);
+//        game.spacePhysics.addDynamic(objetoPrueba);
 
 		// waiting for player input
 

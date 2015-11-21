@@ -47,7 +47,7 @@ function clientSetup(player){
     socket.on('user joined', function (data) {
         console.log("Client " + data.id + ' joined in (' + data.x + ',' + data.y + ')') ;
 
-        charactersList[data.id] = new Character(data.x, data.y, game, data.id, 'player');
+        if(!charactersList[data.id]) charactersList[data.id] = new Character(data.x, data.y, game, data.id, 'player');
 
         if(data.id === myId){
 
@@ -81,8 +81,7 @@ function clientSetup(player){
 
     socket.on('user left', function (data) {
         console.log('User ' + data.id + ' left');
-        var c = charactersList[data.id];
-        c.die();
+        charactersList[data.id].die();
         delete charactersList[data.id];
 
     });

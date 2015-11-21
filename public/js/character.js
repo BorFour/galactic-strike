@@ -156,7 +156,8 @@ Character.prototype.update = function() {
             y : this.y,
             angle : this.angle,
             velocityX : this.body.velocity.x,
-            velocityY : this.body.velocity.y
+            velocityY : this.body.velocity.y,
+            orientation: this.orientation
     }
 
     socket.emit('updatePlayer', data);
@@ -168,6 +169,7 @@ Character.prototype.fire = function (){
     if(this.fireCooldown){
         this.fireCooldown = false;
 
+        socket.emit('firePlayer', null);
         var bullet = new Item(game, this.x, this.y, items['bullet']);
         console.log(bullet)
         bullet.owner = this;
@@ -293,8 +295,11 @@ Character.prototype.jump = function (){
 }
 
 
-Character.prototype.kill = function() {
+Character.prototype.die = function() {
 	this.alive = false;
+    this.wheelBodies[0].destroy();
+    this.wheelBodies[1].destroy();
+    this.body.destroy();
 	this.kill();
 	//this.turret.kill();
 	//this.shadow.kill();

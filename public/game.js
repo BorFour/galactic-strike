@@ -277,12 +277,15 @@ playGame.prototype = {
 
         socket.emit('add user', data);
 
+        game.time.events.loop(50, function(){
+                             if(myCharacter) myCharacter.update();
+        }, this);
+
 
 	},
 	update: function(){
 
         movePlayer();
-        if(myCharacter) myCharacter.update();
         game.spacePhysics.update();
         orb.rotation += 0.05;
 
@@ -294,7 +297,7 @@ playGame.prototype = {
              if(myCharacter) game.debug.text("Planet touched: " + myCharacter.planetTouched, 32, 64);
              if(myCharacter) game.debug.text("In atmosphere: " + myCharacter.inAtmosphere(), 32, 96);
              if(myCharacter) game.debug.text("Grounded: " + myCharacter.isGrounded(), 32, 128);
-             if(myCharacter) game.debug.text('Anchor X: ' + myCharacter.anchor.x.toFixed(1) + ' Y: ' + myCharacter.anchor.y.toFixed(1), 32, 160);
+             if(myCharacter) game.debug.text('My ID: ' + myId, 32, 160);
              game.debug.text("Move with : [W A S D]"  + "\t",32, 688);
              game.debug.text("Rotate with: [Q E]" ,32, 720);
              game.debug.text("Jump with : [Spacebar]" ,32, 752);

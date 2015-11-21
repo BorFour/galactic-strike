@@ -22,24 +22,30 @@ io.on('connection', function (socket) {
   var addedUser = false;
 
   // Cuando el cliente emite
-  socket.on('new message', function (data) {
+    socket.on('new message', function (data) {
     // we tell the client to execute 'new message'
     socket.broadcast.emit('new message', {
       username: socket.username,
       message: data
     });
-  });
+    });
 
 
     // Cuando un cliente emite 'updatePlayer', se redirige en broadcast al resto de clientes
     // , function(data) { ... ???
-  socket.on('updatePlayer', function (data) {
+    socket.on('updatePlayer', function (data) {
       socket.broadcast.emit('updatePlayer', {
         id: socket.id,
         data: data
       });
-      //console.log("@Socket.io server | \'updatePlayer\'")
-  });
+    });
+
+    socket.on('firePlayer', function (data){
+        socket.broadcast.emit('firePlayer', {
+            id: socket.id,
+            data: data
+        });
+    });
 
   // when the client emits 'add user', this listens and executes
   // Cuando se añade un usuario, el servidor le debería asignar

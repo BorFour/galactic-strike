@@ -10,7 +10,7 @@ function clientSetup(player){
     });
 
     socket.on('updatePlayer', function (input) {
-        if(myId == input.id){
+        if(myId === input.id){
             return;
 
             myCharacter.x = input.data.x
@@ -26,11 +26,22 @@ function clientSetup(player){
                 charactersList[input.id].body.angle = input.data.angle
                 charactersList[input.id].body.velocity.x = input.data.velocityX
                 charactersList[input.id].body.velocity.y = input.data.velocityY
+                charactersList[input.id].orientation = input.data.orientation
             }
             else{
                 charactersList[input.id] = new Character(input.data.x, input.data.y, game, input.id, 'player');
             }
         }
+    });
+
+    socket.on('firePlayer', function (data){
+        if(myId === data.id) return;
+        if(charactersList[data.id]){
+            console.log('Personaje disparó: ')
+            console.log(charactersList[data.id])
+            charactersList[data.id].fire();
+        }
+
     });
 
     socket.on('user joined', function (data) {
@@ -69,7 +80,7 @@ function clientSetup(player){
     });
 
     socket.on('user left', function (data) {
-        console.log(data.username + ' left');
+        console.log('User ' + data.id + ' left');
         var c = charactersList[data.id];
         c.die();
         delete charactersList[data.id];

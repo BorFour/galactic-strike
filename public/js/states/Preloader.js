@@ -15,9 +15,12 @@ GALACTIC_STRIKE.Preloader.prototype = {
 
 preload: function () {
     game.load.image('starBackground', '../../assets/starBackground.jpg')
-    game.load.image('star', '../../assets/estrella_kek.jpg');
+    game.load.image('star', '../../assets/estrella.png');
 },
 create: function () {
+    /////////////////////
+    // FONDO DE ESTRELLAS
+    /////////////////////
     starfield = game.add.sprite(0, 0, 'starBackground');
     starfield.height = game.world.height;
     starfield.width = game.world.width;
@@ -44,9 +47,24 @@ create: function () {
 
         stars.push(star);
     }
-         var upKey = game.input.keyboard.addKey(Phaser.Keyboard.UP);
+    /////////////////////
+    // TWEEN GALACTIC STRIKE + MENU OPTIONS
+    /////////////////////
+    var nameLabel = game.add.text(game.world.centerX, -50, 'GALACTIC STRIKE!',{ font: '70px Geo   ', fill: '#ffffff' });
+        nameLabel.anchor.setTo(0.5, 0.5);
+
+    game.add.tween(nameLabel).to({y: 80}, 1000).easing(Phaser.Easing.Bounce.Out).start();
+    //game.add.tween(nameLabel).to({angle: -5}, 500).to({angle: 5}, 300).loop().start();
+
+     // Explain how to start the game
+        var startLabel = game.add.text(game.world.centerX, game.world.height-80,
+                                       'press SPACEBAR to START',{ font: '25px Arial', fill: '#ffffff' });
+
+         var spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
         // When the 'upKey' is pressed, it will call the 'start' function once
-        upKey.onDown.addOnce(this.startGame, this);
+        spaceKey.onDown.addOnce(this.startGame, this);
+
+
 
 },
 update: function () {

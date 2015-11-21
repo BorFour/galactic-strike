@@ -178,7 +178,7 @@ Character.prototype.fire = function (){
         for (c in charactersList){
             bullet.body.setBodyContactCallback(charactersList[c], fn, this);
         }
-        if(this.planetTouched){
+        if(this.inAtmosphere()){
             bullet.body.angle = this.angle + 90*this.orientation; // Este ángulo va en grados
             bullet.body.thrust(155400);
         }

@@ -3,22 +3,33 @@ var networkDebug = true;
 
 function clientSetup(player){
 
+  // Socket events
+
+  // Whenever the server emits 'login', log the login message
     socket.on('login', function (data) {
         connected = true;
+        // Display the welcome message
+        var message = "Welcome to Socket.IO Chat – ";
+        if(networkDebug) console.log(message, {
+          prepend: true
+        });
         myId = data.id;
         console.log("Your client ID is: " + myId);
+//        addParticipantsMessage(data);
     });
 
+  // Whenever the server emits 'updatePlayer', update the chat body
     socket.on('updatePlayer', function (input) {
         if(myId == input.id){
-            return;
-
+            return; // ¿Cómo hacemos esto?
+//            console.log("Updating my character");
             myCharacter.x = input.data.x
             myCharacter.y = input.data.y
             myCharacter.angle = input.data.angle
         }
         else{
-
+//            console.log("Updating character " + input.id)
+//            console.log(charactersList[input.id])
             if(charactersList[input.id]){
                 console.log("Updating character " + input.id)
                 charactersList[input.id].body.x = input.data.x
@@ -33,6 +44,7 @@ function clientSetup(player){
         }
     });
 
+  // Whenever the server emits 'user joined', log it in the chat body
     socket.on('user joined', function (data) {
         console.log("Client " + data.id + ' joined in (' + data.x + ',' + data.y + ')') ;
 
@@ -65,16 +77,28 @@ function clientSetup(player){
         for (var c in charactersList){
             console.log(charactersList[c])
         }
-
+//        addParticipantsMessage(data);
     });
 
+  // Whenever the server emits 'user left', log it in the chat body
     socket.on('user left', function (data) {
         console.log(data.username + ' left');
         var c = charactersList[data.id];
-        c.die();
+        c.kill();
         delete charactersList[data.id];
-
+//        addParticipantsMessage(data);
+//        removeChatTyping(data);
     });
+
+  // Whenever the server emits 'typing', show the typing message
+    socket.on('typing', function (data) {
+        addChatTyping(data);
+    });
+
+  // Whenever the server emits 'stop typing', kill the typing message
+socket.on('stop typing', function (data) {
+    removeChatTyping(data);
+});
 
 }
 

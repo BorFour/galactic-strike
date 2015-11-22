@@ -67,30 +67,30 @@ var DEFINITION = {
 
 window.onload = function() {
 	 game = new Phaser.Game(DEFINITION.width, DEFINITION.height, Phaser.AUTO, "");
-     game.state.add("PlayGame",playGame);
-     game.state.start("PlayGame");
+//     game.state.add("PlayGame",playGame);
+//     game.state.start("PlayGame");
      myPlayer = new Player('Eduardo');
 }
 
 
-var playGame = function(game){};
+GALACTIC_STRIKE.PlayGame = function(game){};
 
 
 
-playGame.prototype = {
+GALACTIC_STRIKE.PlayGame.prototype = {
 	preload: function(){
-        game.load.image("spaceBackground", "assets/spaceBackground.jpg");
-		game.load.image("pokeball", "assets/pokeball.png");
-		game.load.image("potion", "assets/potion.gif");
-		game.load.image("moon", "assets/moon1.png");
-		game.load.image("bullet", "assets/blue-bullet.gif");
-        game.load.spritesheet("player", "assets/ironman_45_75.png", 45, 75);
+        game.load.image("spaceBackground", "../assets/spaceBackground.jpg");
+		game.load.image("pokeball", "../assets/pokeball.png");
+		game.load.image("potion", "../assets/potion.gif");
+		game.load.image("moon", "../assets/moon1.png");
+		game.load.image("bullet", "../assets/blue-bullet.gif");
+        game.load.spritesheet("player", "../assets/ironman_45_75.png", 45, 75);
         //game.load.spritesheet("player_jump", "assets/jump_fly_land.png", 52, 75);
-        game.load.spritesheet("deathstar", "assets/deathstar.gif", 64, 64);
-		game.load.image("planet", "assets/planet1.png");
-		game.load.image("bigplanet", "assets/bigplanet.png");
-		game.load.image("giantplanet", "assets/giantplanet.png");
-        game.load.audio('jump', ['assets/jump.ogg', 'assets/jump.mp3']);
+        game.load.spritesheet("deathstar", "../assets/deathstar.gif", 64, 64);
+		game.load.image("planet", "../assets/planet1.png");
+		game.load.image("bigplanet", "../assets/bigplanet.png");
+		game.load.image("giantplanet", "../assets/giantplanet.png");
+        game.load.audio('jump', ['../assets/jump.ogg', '../assets/jump.mp3']);
 
 
 

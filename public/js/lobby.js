@@ -9,9 +9,9 @@ GALACTIC_STRIKE.Lobby = function() {
 
 GALACTIC_STRIKE.Lobby.prototype = {
     preload: function () {
-        game.load.image('starBackground', '../../assets/starBackground.jpg');
-        game.load.image('buttonEnter', '../../assets/buttons/enterRoom.png');
-        game.load.image('buttonCreate', '../../assets/buttons/createRoom.png');
+        game.load.image('starBackground', '../assets/starBackground.jpg');
+        game.load.image('buttonEnter', '../assets/buttons/enterRoom.png');
+        game.load.image('buttonCreate', '../assets/buttons/createRoom.png');
         var buttonBegin;
         var buttonDisband;
     },
@@ -31,11 +31,11 @@ GALACTIC_STRIKE.Lobby.prototype = {
 
 	},
 	beginMatch: function(pointer) {
-		this.state.start('Play');
+		this.state.start('PlayGame');
 	},
     disbandRoom: function(pointer) {
         // El host decide eliminar la sala
-		this.state.start('MainMenu');
+		this.state.start('Play');
 	},
 	render: function() {
 

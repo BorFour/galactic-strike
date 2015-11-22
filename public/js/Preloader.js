@@ -14,8 +14,9 @@ var zz = [];
 GALACTIC_STRIKE.Preloader.prototype = {
 
 preload: function () {
-    game.load.image('starBackground', '../../assets/starBackground.jpg')
-    game.load.image('star', '../../assets/estrella.png');
+    console.log("Preload preloader")
+    game.load.image('starBackground', '../assets/starBackground.jpg')
+    game.load.image('star', '../assets/estrella.png');
 },
 create: function () {
     /////////////////////

@@ -11,15 +11,15 @@ GALACTIC_STRIKE.MainMenu.prototype = {
         var buttonCreate;
     },
     create: function () {
-       buttonEnter = game.add.button(game.world.centerX - 95, 400, 'buttonEnter', joinRoom, this, 0, 0, 0, 0);
+       buttonEnter = game.add.button(game.world.centerX - 95, 400, 'buttonEnter', this.joinRoom, this, 0, 0, 0, 0);
        buttonCreate = game.add.button(game.world.centerX + 95, 400, 'buttonCreate')//, createRoom, 2, 1, 0);
    // buttonCreate.onInputUp.add(up, this);
   //  buttonEnter.onInputUp.add(up, this);
     },
     createRoom: function() {
-        this.state.start('Game');
+        this.state.start('Play');
     },
     joinRoom: function() {
-        this.state.start('Game');
+        this.state.start('Play');
     }
 };

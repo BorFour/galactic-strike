@@ -7,6 +7,6 @@ var game = new Phaser.Game(SAFE_ZONE_WIDTH, SAFE_ZONE_HEIGHT, Phaser.AUTO, '');
 game.state.add('Boot', GALACTIC_STRIKE.Boot);
 game.state.add('Preloader', GALACTIC_STRIKE.Preloader);
 game.state.add('MainMenu', GALACTIC_STRIKE.MainMenu);
-game.state.add('Play', GALACTIC_STRIKE.Game);
+game.state.add('Play', GALACTIC_STRIKE.Play);
 //	Now start the Boot state.
 game.state.start('Boot');

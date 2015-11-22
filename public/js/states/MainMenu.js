@@ -17,9 +17,9 @@ GALACTIC_STRIKE.MainMenu.prototype = {
   //  buttonEnter.onInputUp.add(up, this);
     },
     createRoom: function() {
-        this.state.start('Play');
+        this.state.start('Lobby');
     },
     joinRoom: function() {
-        this.state.start('Play');
+        this.state.start('Lobby');
     }
 };

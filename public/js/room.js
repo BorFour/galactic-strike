@@ -22,10 +22,11 @@ Room.prototype.addPlayer = function(player) {
 }
 
 
-Room.prototype.addTeam = function (){
+Room.prototype.addTeam = function (name){
 
     if(this.teams.length < Team.MAXTEAMS){
-        this.teams.push(new Team ("", this.teams.length+1));
+        if(!name) name = "Team " + (this.teams.length+1);
+        this.teams.push(new Team (name, this.teams.length+1));
     }
 
 }

@@ -66,7 +66,7 @@ var DEFINITION = {
 
 
 window.onload = function() {
-	 game = new Phaser.Game(DEFINITION.width, DEFINITION.height, Phaser.AUTO, "");
+//	 game = new Phaser.Game(DEFINITION.width, DEFINITION.height, Phaser.AUTO, "");
 //     game.state.add("PlayGame",playGame);
 //     game.state.start("PlayGame");
      myPlayer = new Player('Eduardo');

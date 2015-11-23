@@ -1,31 +1,34 @@
 
 var networkDebug = true;
 
-function clientSetup(player){
+function clientSetup(){
 
-    socket.on('IDPlayers', function (data) {
+    socket.on('IDPlayers', function (input) {
 
-        myId = data.id;
+        myId = input.id;
         console.log('@Client received | IDPlayers');
-
-        for (var p in data.players){
-            charactersList[p.id] = new Character(data.x, data.y, game, data.id, 'player');
+        charactersList = [];
+        for (var p in input.players){
+            if(input.players[p]) {
+                charactersList[p] = new Character(input.players[p].x, input.players[p].y, game, p, 'player');
+            }
         }
-
         myCharacter = charactersList[myId];
+        myCharacterSetup();
 
     });
 
-    socket.on('updatePlayer', function (input) {
+    socket.on('update', function (input) {
 
-        console.log('@Client received | updatePlayers');
+        if(input.id === myId) return;
+//        console.log('@Client received | updatePlayers');
 
         if(charactersList[input.id]){
-            charactersList[input.id].x = input.x;
-            charactersList[input.id].y = input.y;
-            charactersList[input.id].angle = input.angle;
-            charactersList[input.id].velocityX = input.body.velocity.x;
-            charactersList[input.id].velocityY = input.body.velocity.y;
+            charactersList[input.id].body.x = input.x;
+            charactersList[input.id].body.y = input.y;
+            charactersList[input.id].body.angle = input.angle;
+            charactersList[input.id].body.velocity.x = input.velocityX;
+            charactersList[input.id].body.velocity.y = input.velocityY;
             charactersList[input.id].orientation = input.orientation;
         }
 
@@ -33,26 +36,50 @@ function clientSetup(player){
 
     socket.on('userJoined', function (input) {
 
+        if(input.id === myId) return;
         console.log('@Client received | userJoined');
 
-        charactersList[input.id] = input.player;
+
+        charactersList[input.id] = new Character(input.x, input.y, game, input.id, 'player');
+
+        var logMsg = "";
+        for (var c in charactersList){
+            logMsg += charactersList[c] + " ";
+        }
+        console.log("Clients: " + logMsg);
 
     });
 
-    socket.on('userLeft', function (data) {
+    socket.on('userLeft', function (input) {
 
         console.log('@Client received | userLeft');
 
         delete charactersList[input.id];
-        charactersList[input.id] = null;
 
     });
 
 }
 
-function characterSetup(ch){
+function myCharacterSetup(){
 
-    // TODO
 
+            myCharacter.jumpSound = game.add.audio('jump');
+
+//            game.spacePhysics.addDynamic(sprite);
+
+            // ESTO PROBABLEMENTE NO DEBA IR AQUÍ
+            game.camera.follow(myCharacter);
+
+            var fireKey = game.input.keyboard.addKey(Phaser.Keyboard.NUMPAD_0);
+            fireKey.onDown.add(function(){myCharacter.fire()}, this);
+            game.input.keyboard.removeKeyCapture(Phaser.Keyboard.NUMPAD_0);
+
+            for (var i = 0; i < planets.length; i++){
+//                myCharacter.body.setBodyContactCallback(planets[i], touchPlanetCallback, this);
+                myCharacter.body.setBodyPresolveCallback(planets[i], touchPlanetCallback, this);
+                myCharacter.wheelBodies[0].setBodyPresolveCallback(planets[i], touchPlanetCallback, this);
+                myCharacter.wheelBodies[1].setBodyPresolveCallback(planets[i], touchPlanetCallback, this);
+
+            }
 }
 

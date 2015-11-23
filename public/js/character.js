@@ -148,7 +148,7 @@ Character.prototype = Object.create(Element.prototype);
 Character.prototype.constructor = Element;
 
 
-Character.prototype.update = function() {
+Character.prototype.updateOnline = function() {
 
 
     var data = {
@@ -161,7 +161,7 @@ Character.prototype.update = function() {
     }
 
     socket.emit('update', data);
-    console.log('@Client sent | update');
+//    console.log('@Client sent | update');
 
 }
 
@@ -170,7 +170,7 @@ Character.prototype.fire = function (){
     if(this.fireCooldown){
         this.fireCooldown = false;
 
-        socket.emit('firePlayer', {id:myId});
+//        socket.emit('firePlayer', {id:myId});
         var bullet = new Item(game, this.x, this.y, items['bullet']);
         console.log(bullet)
         bullet.owner = this;

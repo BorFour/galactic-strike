@@ -72,11 +72,11 @@ function clientSetup(player){
                 myCharacter.wheelBodies[1].setBodyPresolveCallback(planets[i], touchPlanetCallback, this);
             }
         }
-
-        console.log("Clients: ")
+        var logMsg = ""
         for (var c in charactersList){
-            console.log(charactersList[c])
+            logMsg += charactersList[c] + " "
         }
+        console.log("Clients: " + )
 //        addParticipantsMessage(data);
     });
 

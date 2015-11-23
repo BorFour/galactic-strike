@@ -15,54 +15,54 @@ app.use(express.static(__dirname + '/public'));
 
 var currId = 0;
 var players = [];
+var nPlayers = 0;
 
 io.on('connection', function (socket) {
 
     socket.on('login', function (input) {
 
-        var output = {};
-        console.log('@Server received | login');
+        var output = {
+            id : currId,
+            players : players
+        };
+        console.log('@Server received\t| login');
+        socket.join('General');
 
         players[currId] = input;
-        output.id = currId;
         socket.id = currId;
         currId++;
-        output.players = players;
+        nPlayers++;
 
-        socket.emit('IDPlayer', output);
-        console.log('@Server sent | IDPlayer');
+
+        socket.emit('IDPlayers', output);
+        console.log('@Server sent    \t| IDPlayer');
         socket.broadcast.emit('userJoined', output);
-        console.log('@Server sent | userJoined');
-        console.log('@Server log | nPlayers = ' + players.length);
+        console.log('@Server sent    \t| userJoined');
+        console.log('@Server log     \t| nPlayers = ' + nPlayers);
 
     });
 
     socket.on('update', function (input) {
 
-        console.log('@Server received | update');
-
-        players[input.id] = input.player;
-        socket.broadcast.emit('updatePlayer', input);
-        console.log('@Server sent | updatePLayer');
+        var output = input;
+//        console.log('@Server received | update');
+        players[socket.id] = input;
+        output.id = socket.id;
+        socket.broadcast.emit('update', input);
+//        console.log('@Server sent | update');
 
     });
 
     socket.on('disconnect', function () {
 
         var output = {};
-        console.log('@Server received | disconnect');
-        console.log('@Server log | user ' + socket.id + ' left')
+        console.log('@Server received\t| disconnect');
+        console.log('@Server log     \t| user ' + socket.id + ' left')
         output.id = socket.id;
         socket.broadcast.emit('userLeft', output);
-//        delete players[socket.id];
-        var playersAux = []
-        for (var i in players){
-            if(i !== socket.id){
-                playersAux[i] = players[i];
-            }
-        }
-        players = playersAux;
-        console.log('@Server sent | userLeft');
+        delete players[socket.id];
+        nPlayers--;
+        console.log('@Server sent    \t| userLeft');
 
     });
 

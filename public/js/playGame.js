@@ -265,11 +265,13 @@ GALACTIC_STRIKE.PlayGame.prototype = {
 
         // Crea la conexión con el servidor
         socket = io();
+        console.log(io)
+        console.log(socket)
         if(socket){
             console.log("@Socket.io | Cliente conectado");
         }
 
-//        clientSetup();
+        clientSetup();
 
         var data = {
             x: game.world.randomX,
@@ -283,15 +285,14 @@ GALACTIC_STRIKE.PlayGame.prototype = {
         socket.emit('login', data);
         console.log('@Client sent | login');
 
-        game.time.events.loop(50, function(){
-                             if(myCharacter) myCharacter.update();
-        }, this);
+//        game.time.events.loop(GALACTIC_STRIKE.updateOnlineRate, function(){if(myCharacter) myCharacter.updateOnline();}, this);
 
 
 	},
 	update: function(){
 
         movePlayer();
+        if(myCharacter) myCharacter.updateOnline();
         game.spacePhysics.update();
         orb.rotation += 0.05;
 

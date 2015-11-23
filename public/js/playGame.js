@@ -84,7 +84,9 @@ GALACTIC_STRIKE.PlayGame.prototype = {
 		game.load.image("potion", "../assets/potion.gif");
 		game.load.image("moon", "../assets/moon1.png");
 		game.load.image("bullet", "../assets/blue-bullet.gif");
-        game.load.spritesheet("player", "../assets/ironman_45_75.png", 45, 75);
+        //game.load.spritesheet("player", "../assets/ironman_45_75.png", 45, 75);
+        game.load.spritesheet("player", "../assets/robotnik.png", 26, 23, 2); //rueda: 26_23  | robotnik: 49_43
+
         //game.load.spritesheet("player_jump", "assets/jump_fly_land.png", 52, 75);
         game.load.spritesheet("deathstar", "../assets/deathstar.gif", 64, 64);
 		game.load.image("planet", "../assets/planet1.png");

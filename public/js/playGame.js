@@ -269,15 +269,19 @@ GALACTIC_STRIKE.PlayGame.prototype = {
             console.log("@Socket.io | Cliente conectado");
         }
 
-        clientSetup();
+//        clientSetup();
 
         var data = {
             x: game.world.randomX,
             y: game.world.randomY,
-            angle: 0
+            angle: 0,
+            velocityX : 0,
+            velocityY : 0,
+            orientation: 0
         }
 
-        socket.emit('add user', data);
+        socket.emit('login', data);
+        console.log('@Client sent | login');
 
         game.time.events.loop(50, function(){
                              if(myCharacter) myCharacter.update();

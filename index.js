@@ -12,107 +12,66 @@ app.use(express.static(__dirname + '/public'));
 // 'connection' y 'disconnect' palabras reservadas?
 
 // usernames which are currently connected to the chat
-var usernames = {};
-var numUsers = 0;
 
-var clients = {};
 var currId = 0;
+var players = [];
 
 io.on('connection', function (socket) {
-  var addedUser = false;
 
-  // Cuando el cliente emite
-    socket.on('new message', function (data) {
-    // we tell the client to execute 'new message'
-    socket.broadcast.emit('new message', {
-      username: socket.username,
-      message: data
-    });
-    });
+    socket.on('login', function (input) {
 
+        var output = {};
+        console.log('@Server received | login');
 
-    // Cuando un cliente emite 'updatePlayer', se redirige en broadcast al resto de clientes
-    // , function(data) { ... ???
-    socket.on('updatePlayer', function (data) {
-      socket.broadcast.emit('updatePlayer', {
-        id: socket.id,
-        data: data
-      });
-    });
+        players[currId] = input;
+        output.id = currId;
+        socket.id = currId;
+        currId++;
+        output.players = players;
 
-    socket.on('firePlayer', function (data){
-        socket.broadcast.emit('firePlayer', {
-            id: data.id
-        });
+        socket.emit('IDPlayer', output);
+        console.log('@Server sent | IDPlayer');
+        socket.broadcast.emit('userJoined', output);
+        console.log('@Server sent | userJoined');
+        console.log('@Server log | nPlayers = ' + players.length);
+
     });
 
-  // when the client emits 'add user', this listens and executes
-  // Cuando se añade un usuario, el servidor le debería asignar
-  // una ID única
+    socket.on('update', function (input) {
 
-  socket.on('add user', function (data) {
-    // we store the username in the socket session for this client
-    socket.id = currId;
-    ++currId;
-    clients[socket.id] = socket;
-//    socket.username = username;
-    // add the client's username to the global list
-//    usernames[username] = username;
-    ++numUsers;
-    addedUser = true;
-    socket.emit('login', {
-      id: socket.id
+        console.log('@Server received | update');
+
+        players[input.id] = input.player;
+        socket.broadcast.emit('updatePlayer', input);
+        console.log('@Server sent | updatePLayer');
+
     });
-    // echo globally (all clients) that a person has connected
-    socket.broadcast.emit('user joined', {
-      id: socket.id,
-      x: data.x,
-      y: data.y,
-      angle: data.angle
+
+    socket.on('disconnect', function () {
+
+        var output = {};
+        console.log('@Server received | disconnect');
+        console.log('@Server log | user ' + socket.id + ' left')
+        output.id = socket.id;
+        socket.broadcast.emit('userLeft', output);
+//        delete players[socket.id];
+        var playersAux = []
+        for (var i in players){
+            if(i !== socket.id){
+                playersAux[i] = players[i];
+            }
+        }
+        players = playersAux;
+        console.log('@Server sent | userLeft');
+
     });
-    console.log("@Socket.io server | \'add user\'")
-  });
 
-
-  // when the client emits 'stop typing', we broadcast it to others
-  socket.on('stop typing', function () {
-    socket.broadcast.emit('stop typing', {
-      username: socket.username
-    });
-  });
-
-  // when the user disconnects.. perform this
-  socket.on('disconnect', function () {
-    // remove the username from global usernames list
-    if (addedUser) {
-      delete clients[socket.id];
-      --numUsers;
-
-      // echo globally that this client has left
-      socket.broadcast.emit('user left', {
-        id: socket.id
-      });
-    console.log("@Socket.io server | \'disconnect\'")
-    }
-  });
 });
 
 
-//io.on('connection', function(socket){
-//  console.log('a user connected');
-//  socket.on('disconnect', function(){
-//    console.log('user disconnected');
-//  });
-//});
-
-//io.on('connection', function(socket){
-//  socket.on('chat message', function(msg){
-//    console.log('message: ' + msg);
-//  });
-//});
-
 var puerto = 3000;
+var ip = 'localhost';
 
 http.listen(puerto, function(){
-  console.log('listening on *:' + puerto);
+  console.log('listening on ' + ip + ':' + puerto);
 });

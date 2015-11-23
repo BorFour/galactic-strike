@@ -160,7 +160,8 @@ Character.prototype.update = function() {
             orientation: this.orientation
     }
 
-    socket.emit('updatePlayer', data);
+    socket.emit('update', data);
+    console.log('@Client sent | update');
 
 }
 

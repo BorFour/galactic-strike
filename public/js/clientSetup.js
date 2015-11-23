@@ -53,7 +53,7 @@ function clientSetup(){
     socket.on('userLeft', function (input) {
 
         console.log('@Client received | userLeft');
-
+        charactersList[input.id].die();
         delete charactersList[input.id];
 
     });

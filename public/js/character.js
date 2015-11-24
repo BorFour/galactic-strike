@@ -67,11 +67,21 @@ function Character (x, y, game, player, asset) {
 
 
     this.driveJoints = [];
-    this.wheelBodies = [];
-	this.wheelBodies[0] = new Phaser.Physics.Box2D.Body(this.game, null, this.x + -0.22*PTM, this.y + 0.6*-PTM);
-	this.wheelBodies[1] = new Phaser.Physics.Box2D.Body(this.game, null, this.x + 0.22*PTM, this.y + 0.6*-PTM);
-	this.wheelBodies[0].setCircle(0.2*PTM);
-	this.wheelBodies[1].setCircle(0.2*PTM);
+    this.wheels = [];
+
+    this.wheels[0] = new Phaser.Sprite (game, this.x + -0.22*PTM,  this.y + 0.6*-PTM, 'ruedaL');
+    this.wheels[0].anchor.set(0.5);
+    game.add.existing(this.wheels[0]);
+    this.wheels[1] = new Phaser.Sprite (game, this.x + 0.22*PTM,  this.y + 0.6*-PTM, 'ruedaR');
+    this.wheels[1].anchor.set(0.5);
+    game.add.existing(this.wheels[1]);
+
+	this.wheels[0].body = new Phaser.Physics.Box2D.Body(this.game, null, this.x + -0.22*PTM, this.y + 0.6*-PTM);
+	this.wheels[0].body.sprite = this.wheels[0];
+	this.wheels[1].body = new Phaser.Physics.Box2D.Body(this.game, null, this.x + 0.22*PTM, this.y + 0.6*-PTM);
+	this.wheels[1].body.sprite = this.wheels[1];
+	this.wheels[0].body.setCircle(0.2*PTM);
+	this.wheels[1].body.setCircle(0.2*PTM);
 	this.motorEnabled = false;
     this.motorSpeed = 30;
 
@@ -82,16 +92,16 @@ function Character (x, y, game, player, asset) {
 
 	// Make wheel joints
 	// bodyA, bodyB, ax, ay, bx, by, axisX, axisY, frequency, damping, motorSpeed, motorTorque, motorEnabled
-	this.driveJoints[0] = game.physics.box2d.wheelJoint(this.body, this.wheelBodies[0], -0.65*PTM,rideHeight*PTM, 0,0, 0,1, frequency, damping, 0, motorTorque, true ); // rear
-	this.driveJoints[1] = game.physics.box2d.wheelJoint(this.body, this.wheelBodies[1],  0.65*PTM,rideHeight*PTM, 0,0, 0,1, frequency, damping, 0, motorTorque, true ); // front
+	this.driveJoints[0] = game.physics.box2d.wheelJoint(this.body, this.wheels[0].body, -0.65*PTM,rideHeight*PTM, 0,0, 0,1, frequency, damping, 0, motorTorque, true ); // rear
+	this.driveJoints[1] = game.physics.box2d.wheelJoint(this.body, this.wheels[1].body,  0.65*PTM,rideHeight*PTM, 0,0, 0,1, frequency, damping, 0, motorTorque, true ); // front
 
 
-    this.wheelBodies[0].sprite = this;
-    this.wheelBodies[1].sprite = this;
-    this.wheelBodies[0].friction = 0.8;
-    this.wheelBodies[1].friction = 0.8;
+    this.wheels[0].body.mainSprite = this;
+    this.wheels[1].body.mainSprite = this;
+    this.wheels[0].body.friction = 0.8;
+    this.wheels[1].body.friction = 0.8;
 
-
+    this.body.mainSprite = this;
 
 
     /* this.bullets = game.add.group();
@@ -298,8 +308,8 @@ Character.prototype.jump = function (){
 
 Character.prototype.die = function() {
 	this.alive = false;
-    this.wheelBodies[0].destroy();
-    this.wheelBodies[1].destroy();
+    this.wheels[0].destroy();
+    this.wheels[1].destroy();
     this.body.destroy();
 	this.kill();
 }

@@ -77,8 +77,8 @@ function myCharacterSetup(){
             for (var i = 0; i < planets.length; i++){
 //                myCharacter.body.setBodyContactCallback(planets[i], touchPlanetCallback, this);
                 myCharacter.body.setBodyPresolveCallback(planets[i], touchPlanetCallback, this);
-                myCharacter.wheelBodies[0].setBodyPresolveCallback(planets[i], touchPlanetCallback, this);
-                myCharacter.wheelBodies[1].setBodyPresolveCallback(planets[i], touchPlanetCallback, this);
+                myCharacter.wheels[0].body.setBodyPresolveCallback(planets[i], touchPlanetCallback, this);
+                myCharacter.wheels[1].body.setBodyPresolveCallback(planets[i], touchPlanetCallback, this);
 
             }
 }

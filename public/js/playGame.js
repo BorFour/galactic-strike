@@ -85,13 +85,17 @@ GALACTIC_STRIKE.PlayGame.prototype = {
 		game.load.image("moon", "../assets/moon1.png");
 		game.load.image("bullet", "../assets/blue-bullet.gif");
         //game.load.spritesheet("player", "../assets/ironman_45_75.png", 45, 75);
-        game.load.spritesheet("player", "../assets/robotnik.png", 26, 23, 2); //rueda: 26_23  | robotnik: 49_43
+        game.load.image("player", "../assets/spritesIndividuales/robotnik/slice04_04.png"); //rueda: 26_23  | robotnik: 49_43
 
         //game.load.spritesheet("player_jump", "assets/jump_fly_land.png", 52, 75);
         game.load.spritesheet("deathstar", "../assets/deathstar.gif", 64, 64);
 		game.load.image("planet", "../assets/planet1.png");
 		game.load.image("bigplanet", "../assets/bigplanet.png");
 		game.load.image("giantplanet", "../assets/giantplanet.png");
+		game.load.image("ruedaL", "../assets/spritesIndividuales/robotnik/slice01_01.png");
+		game.load.image("ruedaR", "../assets/spritesIndividuales/robotnik/slice03_03.png");
+
+
         game.load.audio('jump', ['../assets/jump.ogg', '../assets/jump.mp3']);
 
 
@@ -308,7 +312,7 @@ GALACTIC_STRIKE.PlayGame.prototype = {
              game.debug.text("Move with : [W A S D]"  + "\t",32, 688);
              game.debug.text("Rotate with: [Q E]" ,32, 720);
              game.debug.text("Jump with : [Spacebar]" ,32, 752);
-             game.debug.box2dWorld();
+//             game.debug.box2dWorld();
 
          }
             var i = 1;
@@ -346,8 +350,8 @@ function jumpCharacter(){
 function touchPlanetCallback(body1, body2, fixture1, fixture2, begin) {
 //    if(!planetTouched){
         planetTouched = body2
-        body1.sprite.planetTouched = body2;
-        body1.sprite.setGrounded();
+        body1.mainSprite.planetTouched = body2;
+        body1.mainSprite.setGrounded();
 //        body1.fixedRotation = true;
         if(debug) {
 //            console.log("planet touched gravity force: " + body2.x)

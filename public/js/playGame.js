@@ -313,6 +313,7 @@ GALACTIC_STRIKE.PlayGame.prototype = {
              game.debug.text("Rotate with: [Q E]" ,32, 720);
              game.debug.text("Jump with : [Spacebar]" ,32, 752);
 //             game.debug.box2dWorld();
+             game.debug.cameraInfo(game.camera, 300, 32);
 
          }
             var i = 1;

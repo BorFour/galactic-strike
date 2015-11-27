@@ -11,6 +11,16 @@ var xx = [];
 var yy = [];
 var zz = [];
 
+function loadSongs(){
+    GALACTIC_STRIKE.songs = [];
+    GALACTIC_STRIKE.songs.push(game.add.audio('guiles', 1, true));
+    GALACTIC_STRIKE.songs.push(game.add.audio('checker', 1, true));
+    GALACTIC_STRIKE.songs.push(game.add.audio('muteCity', 1, true));
+    GALACTIC_STRIKE.songs.push(game.add.audio('dreamLand', 1, true));
+//    GALACTIC_STRIKE.songs.push(game.add.audio('dedede'));
+    GALACTIC_STRIKE.songs[Math.floor(Math.random()*GALACTIC_STRIKE.songs.length)].play();
+}
+
 GALACTIC_STRIKE.Preloader.prototype = {
 
 preload: function () {
@@ -23,19 +33,16 @@ preload: function () {
      * http://downloads.khinsider.com/game-soundtracks/album/super-smash-bros.-melee-original-sound-version
      */
     game.load.audio('muteCity', '../assets/sound/mute_city.mp3');
+    game.load.audio('dreamLand', '../assets/sound/dream_land.mp3');
 //    game.load.audio('dedede', '../assets/sound/king_dedede.mp3');
 
 },
 create: function () {
 
     GALACTIC_STRIKE.player = new Player("Default");
-    GALACTIC_STRIKE.songs = [];
-    GALACTIC_STRIKE.songs.push(game.add.audio('guiles'));
-    GALACTIC_STRIKE.songs.push(game.add.audio('checker'));
-    GALACTIC_STRIKE.songs.push(game.add.audio('muteCity'));
-//    GALACTIC_STRIKE.songs.push(game.add.audio('dedede'));
-    GALACTIC_STRIKE.songs[Math.floor(Math.random()*GALACTIC_STRIKE.songs.length)].play();
 
+    // Loads and plays some songs
+    loadSongs();
 
 
 

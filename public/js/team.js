@@ -17,7 +17,7 @@ Team = function (name, color) {
 
 Team.prototype.addPlayer = function(player) {
 
-    player.team = team;
+    player.team = this;
     this.players.push(player);
 
 }
@@ -25,7 +25,6 @@ Team.prototype.addPlayer = function(player) {
 
 Team.prototype.removePlayer = function (player){
 
-    this.players.remove(player);
     // Warning!
     this.players = this.players.filter(function (el) {
                         return el === player;

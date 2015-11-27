@@ -73,6 +73,9 @@ function myCharacterSetup(){
             var fireKey = game.input.keyboard.addKey(Phaser.Keyboard.NUMPAD_0);
             fireKey.onDown.add(function(){myCharacter.fire()}, this);
             game.input.keyboard.removeKeyCapture(Phaser.Keyboard.NUMPAD_0);
+            var attackKey = game.input.keyboard.addKey(Phaser.Keyboard.NUMPAD_3);
+            attackKey.onDown.add(function(){myCharacter.attack()}, this);
+            game.input.keyboard.removeKeyCapture(Phaser.Keyboard.NUMPAD_3);
 
             for (var i = 0; i < planets.length; i++){
 //                myCharacter.body.setBodyContactCallback(planets[i], touchPlanetCallback, this);

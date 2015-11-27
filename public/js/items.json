@@ -21,5 +21,9 @@ var items =
             body2.sprite.hp -= 10;
             body1.sprite.destroy();
         }
-    }
+    },
+    'cucumber' : {
+        'asset' : 'cucumber',
+        'use' : null
+    },
 }

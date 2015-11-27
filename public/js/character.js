@@ -206,6 +206,44 @@ Character.prototype.fire = function (){
     }
 }
 
+Character.prototype.attack = function (){
+    if(this.fireCooldown){
+        this.fireCooldown = false;
+
+//        socket.emit('firePlayer', {id:myId});
+        var cucumber = new Item(game, this.x - Math.sin(this.angle)* 100, this.y - Math.cos(this.angle)*100, items['cucumber']);
+        console.log(cucumber)
+        cucumber.owner = this;
+//        this.bullets.push(bullet);
+//        var fn = cucumber.collide;
+        cucumber.body.mass = 0.1;
+//        cucumber.body.bullet = true;
+//        for (c in charactersList){
+//            cucumber.body.setBodyContactCallback(charactersList[c], fn, this);
+//        }
+
+	// bodyA, bodyB, axisX, axisY, ax, ay, bx, by, motorSpeed, motorForce, motorEnabled, lowerLimit, upperLimit, limitEnabled
+	game.physics.box2d.prismaticJoint(this, cucumber, 1, 1, 0, 0, 0, 0, 0, 0, true, -100, 200, true);
+
+        if(this.inAtmosphere()){
+            cucumber.body.angle = this.angle + 90*this.orientation; // Este ángulo va en grados
+            cucumber.body.angularVelocity = 20;
+            cucumber.body.reverse(10000);
+        }
+        else{
+            cucumber.body.angle = this.angle + 90*this.orientation; // Este ángulo va en grados
+            cucumber.body.angularVelocity = 20;
+            cucumber.body.reverse(10000);
+        }
+        game.time.events.add(this.fireCooldownTime, function(){this.fireCooldown = true}, this)
+        game.time.events.add(1000, function(){cucumber.destroy()}, this)
+
+    }
+}
+
+
+
+
 /**
  * Moves the character when it's grounded
  * @param {String} direction : Indicates the direction to move the character

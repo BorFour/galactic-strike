@@ -21,7 +21,7 @@ GALACTIC_STRIKE.Lobby.prototype = {
 
         GALACTIC_STRIKE.room = new Room("Default", GALACTIC_STRIKE.player, 8, "localhost", 3000);
         GALACTIC_STRIKE.room.addTeam("Red Team");
-        GALACTIC_STRIKE.room.addTeam("Blue team");
+        GALACTIC_STRIKE.room.addTeam("Blue Team");
 
         console.log(GALACTIC_STRIKE.room);
 

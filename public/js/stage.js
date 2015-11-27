@@ -20,7 +20,7 @@ Stage.prototype.preload = function(player) {
 }
 
 
-Room.prototype.create = function (){
+Stage.prototype.create = function (){
 
     // Aquí carga todos sprites
 

@@ -12,6 +12,7 @@ Player = function (nickname) {
 
 Player.prototype.joinTeam = function(team) {
 
+    this.leaveTeam();
     team.addPlayer(this);
     this.team = team;
 
@@ -20,7 +21,9 @@ Player.prototype.joinTeam = function(team) {
 
 Player.prototype.leaveTeam = function (){
 
-    this.team.removePlayer(Player);
+    if (this.team){
+        this.team.removePlayer(Player);
+    }
     this.team = null;
 
 }

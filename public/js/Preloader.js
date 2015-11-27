@@ -17,11 +17,29 @@ preload: function () {
     console.log("Preload preloader")
     game.load.image('starBackground', '../assets/starBackground.jpg')
     game.load.image('star', '../assets/estrella.png');
+    game.load.audio('guiles', '../assets/sound/guiles_theme.mp3');
+    game.load.audio('checker', '../assets/sound/checker_knights.mp3');
+//    game.load.audio('dedede', '../assets/sound/king_dedede.mp3');
+    GALACTIC_STRIKE.player = new Player("Default");
 },
 create: function () {
+
+
+    GALACTIC_STRIKE.songs = [];
+    GALACTIC_STRIKE.songs.push(game.add.audio('guiles'));
+    GALACTIC_STRIKE.songs.push(game.add.audio('checker'));
+//    GALACTIC_STRIKE.songs.push(game.add.audio('dedede'));
+    GALACTIC_STRIKE.songs[Math.floor(Math.random()*GALACTIC_STRIKE.songs.length)].play();
+
+
+
+
     /////////////////////
     // FONDO DE ESTRELLAS
     /////////////////////
+
+
+
     starfield = game.add.sprite(0, 0, 'starBackground');
     starfield.height = game.world.height;
     starfield.width = game.world.width;

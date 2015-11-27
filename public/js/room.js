@@ -16,7 +16,6 @@ Room = function (name, host, maxUsers, ip, port) {
 
 Room.prototype.addPlayer = function(player) {
 
-//    this.team = team; ¿?
     this.players.push(player);
 
 }
@@ -24,8 +23,12 @@ Room.prototype.addPlayer = function(player) {
 
 Room.prototype.addTeam = function (name){
 
-    if(this.teams.length < Team.MAXTEAMS){
-        if(!name) name = "Team " + (this.teams.length+1);
+    console.log(this.teams.length)
+    if(this.teams.length < 4){
+        if(!name){
+          name = "Team " + (this.teams.length+1);
+        }
+        console.log("Miau");
         this.teams.push(new Team (name, this.teams.length+1));
     }
 

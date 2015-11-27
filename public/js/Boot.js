@@ -1,5 +1,3 @@
-var GALACTIC_STRIKE = {};
-
 GALACTIC_STRIKE.Boot = function (game) {
 
 };

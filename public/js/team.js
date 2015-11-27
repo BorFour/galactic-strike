@@ -1,9 +1,10 @@
 
-Team.RED = 1
-Team.BLUE = 2
-Team.YELLOW = 3
-Team.GREEN = 4
-Team.MAXTEAMS = Team.GREEN
+var Team = {};
+Team.RED = 1;
+Team.BLUE = 2;
+Team.YELLOW = 3;
+Team.GREEN = 4;
+Team.MAXTEAMS =4
 
 Team = function (name, color) {
 
@@ -16,7 +17,7 @@ Team = function (name, color) {
 
 Team.prototype.addPlayer = function(player) {
 
-    this.team = team;
+    player.team = team;
     this.players.push(player);
 
 }

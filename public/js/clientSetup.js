@@ -5,7 +5,7 @@ function clientSetup(){
 
     socket.on('IDPlayers', function (input) {
 
-        myId = input.id;
+        GALACTIC_STRIKE.player.id = input.id;
         console.log('@Client received | IDPlayers');
         charactersList = [];
         for (var p in input.players){
@@ -14,14 +14,14 @@ function clientSetup(){
             }
         }
 //        myCharacter =
-        GALACTIC_STRIKE.player.character = charactersList[myId];
+        GALACTIC_STRIKE.player.character = charactersList[GALACTIC_STRIKE.player.id];
         myCharacterSetup(GALACTIC_STRIKE.player.character);
 
     });
 
     socket.on('update', function (input) {
 
-        if(input.id === myId) return;
+        if(input.id === GALACTIC_STRIKE.player.id) return;
 //        console.log('@Client received | updatePlayers');
 
         if(charactersList[input.id]){
@@ -37,7 +37,7 @@ function clientSetup(){
 
     socket.on('userJoined', function (input) {
 
-        if(input.id === myId) return;
+        if(input.id === GALACTIC_STRIKE.player.id) return;
         console.log('@Client received | userJoined');
 
 

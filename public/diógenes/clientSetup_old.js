@@ -13,14 +13,14 @@ function clientSetup(player){
         if(networkDebug) console.log(message, {
           prepend: true
         });
-        myId = data.id;
-        console.log("Your client ID is: " + myId);
+        GALACTIC_STRIKE.player.id = data.id;
+        console.log("Your client ID is: " + GALACTIC_STRIKE.player.id);
 //        addParticipantsMessage(data);
     });
 
   // Whenever the server emits 'updatePlayer', update the chat body
     socket.on('updatePlayer', function (input) {
-        if(myId == input.id){
+        if(GALACTIC_STRIKE.player.id === input.id){
             return; // ¿Cómo hacemos esto?
 //            console.log("Updating my character");
             myCharacter.x = input.data.x
@@ -50,7 +50,7 @@ function clientSetup(player){
 
         charactersList[data.id] = new Character(data.x, data.y, game, data.id, 'player');
 
-        if(data.id === myId){
+        if(data.id === GALACTIC_STRIKE.player.id){
 
             myCharacter = charactersList[data.id]
             myCharacter.jumpSound = game.add.audio('jump');

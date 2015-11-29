@@ -180,7 +180,7 @@ Character.prototype.fire = function (){
     if(this.fireCooldown){
         this.fireCooldown = false;
 
-//        socket.emit('firePlayer', {id:myId});
+//        socket.emit('firePlayer', {id:GALACTIC_STRIKE.player.id});
         var bullet = new Item(game, this.x, this.y, items['bullet']);
         console.log(bullet)
         bullet.owner = this;
@@ -209,7 +209,7 @@ Character.prototype.attack = function (){
     if(this.fireCooldown){
         this.fireCooldown = false;
 
-//        socket.emit('firePlayer', {id:myId});
+//        socket.emit('attackPlayer', {id:GALACTIC_STRIKE.player.id});
         var cucumber = new Item(game, this.x - Math.sin(this.angle)* 100, this.y - Math.cos(this.angle)*100, items['cucumber']);
         console.log(cucumber)
         cucumber.owner = this;

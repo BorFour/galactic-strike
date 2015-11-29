@@ -31,21 +31,12 @@ var socket;
 
 
 var inputChanged = true;
-var myId = 0;
 var charactersList;
 
 var DEFINITION = {
     width: 1200,
     height : 800
 }
-
-
-window.onload = function() {
-//	 game = new Phaser.Game(DEFINITION.width, DEFINITION.height, Phaser.AUTO, "");
-//     game.state.add("PlayGame",playGame);
-//     game.state.start("PlayGame");
-}
-
 
 GALACTIC_STRIKE.PlayGame = function(game){};
 
@@ -76,25 +67,14 @@ GALACTIC_STRIKE.PlayGame.prototype = {
 	},
   	create: function(){
 
-  		// adding groups
 
-        // Llamamos a la conexión del cliente
-
-
-//        sleep(3000)
         planets = []
         charactersList = {};
-
-
-  		//crateGroup = game.add.group();
-  		//planetGroup = game.add.group();
 
 		// adding graphic objects
 
 		gravityGraphics = game.add.graphics(0, 0);
         gravityGraphics.lineStyle(2,0xffffff,0.5);
-
-
 
         //  Phaser will automatically pause if the browser tab the game is in loses focus. You can disable that here:
         this.stage.disableVisibilityChange = true;
@@ -124,38 +104,17 @@ GALACTIC_STRIKE.PlayGame.prototype = {
         // Inicializamos el motor de físicas
         game.spacePhysics = new SpacePhysics(game)
         game.spacePhysics.debug = true;
-
-
 		//game.physics.box2d.friction = 5000;
-
-
-		// adding a couple of planets. Arguments are:
-		// x position
-		// y position
-		// gravity radius
-		// gravity force
-		// graphic asset
 
 //        var planet = new Star(680, 700, 400, 250, "planet", game);
 //        var bigPlanet = new Star(1070, 850, 400, 250, "bigplanet", game);
         var giantPlanet = new Star(800, 900, 600, 750, "giantplanet", game);
 
-        if(randomPlanets){
-//(Edu) No se si hay que hacer spacePhysics.addPlanet para añadirlo al grupo de esa clase o simplemente con el planets.push de aqui valdría
-            for (var i = 0; i < 5; i++){
-                planets.push(new Star(game.world.randomX, game.world.randomY, 400, 250, "planet", game))
-            }
-
-            for (var i = 0; i < 3; i++){
-                planets.push(new Star(game.world.randomX, game.world.randomY, 400, 250, "bigplanet", game))
-            }
-        }
-		else{
 //(Edu) No se si hay que hacer spacePhysics.addPlanet para añadirlo al grupo de esa clase o simplemente con el planets.push de aqui valdría
 //            planets.push(planet)
 //            planets.push(bigPlanet)
-              planets.push(giantPlanet)
-        }
+        planets.push(giantPlanet)
+
 
         console.log("Planets: " + planets)
 
@@ -175,70 +134,6 @@ GALACTIC_STRIKE.PlayGame.prototype = {
 //        game.physics.box2d.enable(objetoPrueba);
 //        game.spacePhysics.addDynamic(objetoPrueba);
 
-		// waiting for player input
-
-		//game.input.onDown.add(addCrate, this);
-
-        // Añadimos al "jugador" al mundo
-
-        /*
-        sprite = game.add.sprite(game.world.randomX, game.world.randomY, "crate");
-        sprite.anchor.setTo(0.5, 0.5)
-        game.physics.box2d.enable(sprite);
-        */
-
-        //////////////////
-        //NUEVO PERSONAJE
-        //
-
-
-//        myCharacter = new Character (myId, game.world.randomX, game.world.randomY, game, player)
-
-
-        //game.physics.overlap(sprite, planetGroup, setGrounded, null, this);
-
-        cursors = game.input.keyboard.createCursorKeys();
-
-//        var spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-//        spaceKey.onDown.add(jumpCharacter, this);
-//        game.input.keyboard.removeKeyCapture(Phaser.Keyboard.SPACEBAR);
-
-
-        ///////////
-        // TECLADO
-        //
-
-        if (!useGamepad){
-
-            leftKey = game.input.keyboard.addKey(Phaser.Keyboard.A);
-            rightKey = game.input.keyboard.addKey(Phaser.Keyboard.D);
-            upKey = game.input.keyboard.addKey(Phaser.Keyboard.W);
-            downKey = game.input.keyboard.addKey(Phaser.Keyboard.S);
-            rotateLKey = game.input.keyboard.addKey(Phaser.Keyboard.Q);
-            rotateRKey = game.input.keyboard.addKey(Phaser.Keyboard.E);
-            fullscreenKey = game.input.keyboard.addKey(Phaser.Keyboard.F);
-            spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-        }
-        ///////////
-        // GAMEPAD
-        //
-
-        // No funciona todavía!
-        else {
-            game.input.gamepad.start();
-            var pad = game.input.gamepad.pad1;
-            console.log(pad)
-            leftKey = pad.getButton(Phaser.Gamepad.XBOX360_DPAD_LEFT);
-            rightKey = pad.getButton(Phaser.Gamepad.XBOX360_DPAD_RIGHT);
-            upKey = pad.getButton(Phaser.Gamepad.XBOX360_DPAD_UP);
-            downKey = pad.getButton(Phaser.Gamepad.XBOX360_DPAD_DOWN);
-            rotateLKey = pad.getButton(Phaser.Gamepad.XBOX360_LEFT_TRIGGER)
-            rotateRKey = pad.getButton(Phaser.Gamepad.XBOX360_RIGHT_TRIGGER)
-        }
-
-
-
-        // Actualizar el planeta en el que está el personaje
 
         // Crea la conexión con el servidor
         socket = io();
@@ -268,7 +163,6 @@ GALACTIC_STRIKE.PlayGame.prototype = {
 	},
 	update: function(){
 
-//        movePlayer();
         GALACTIC_STRIKE.player.movePlayer();
         if(GALACTIC_STRIKE.player.character) GALACTIC_STRIKE.player.character.updateOnline();
         game.spacePhysics.update();
@@ -285,7 +179,7 @@ GALACTIC_STRIKE.PlayGame.prototype = {
                 game.debug.text("Planet touched: " + GALACTIC_STRIKE.player.character.planetTouched, 32, 64);
                 game.debug.text("In atmosphere: " + GALACTIC_STRIKE.player.character.inAtmosphere(), 32, 96);
                 game.debug.text("Grounded: " + GALACTIC_STRIKE.player.character.isGrounded(), 32, 128);
-                game.debug.text('My ID: ' + myId, 32, 160);
+                game.debug.text('My ID: ' + GALACTIC_STRIKE.player.id, 32, 160);
              }
              game.debug.text("Move with : [W A S D]"  + "\t",32, 688);
              game.debug.text("Rotate with: [Q E]" ,32, 720);

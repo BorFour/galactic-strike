@@ -176,7 +176,6 @@ Character.prototype.updateOnline = function() {
 
 }
 
-
 Character.prototype.fire = function (){
     if(this.fireCooldown){
         this.fireCooldown = false;
@@ -226,12 +225,12 @@ Character.prototype.attack = function (){
 	game.physics.box2d.prismaticJoint(this, cucumber, 1, 1, 0, 0, 0, 0, 0, 0, true, -100, 200, true);
 
         if(this.inAtmosphere()){
-            cucumber.body.angle = this.angle + 90*this.orientation; // Este ángulo va en grados
+            cucumber.body.angle = this.angle - 90*this.orientation; // Este ángulo va en grados
             cucumber.body.angularVelocity = 20;
             cucumber.body.reverse(10000);
         }
         else{
-            cucumber.body.angle = this.angle + 90*this.orientation; // Este ángulo va en grados
+            cucumber.body.angle = this.angle - 90*this.orientation; // Este ángulo va en grados
             cucumber.body.angularVelocity = 20;
             cucumber.body.reverse(10000);
         }
@@ -241,89 +240,106 @@ Character.prototype.attack = function (){
     }
 }
 
-
-
-
 /**
  * Moves the character when it's grounded
- * @param {String} direction : Indicates the direction to move the character
+ * @param {string} direction : Indicates the direction in which the character moves
  */
 
 Character.prototype.moveGrounded = function(direction){
 
     var moveForce1 = 250;
+    this.motorEnabled = true;
 
     switch(direction){
         case 'left':
-            /*
-            // add gravity force to the crate in the direction of planet center
-            var angle = Phaser.Math.angleBetween(this.body.x,this.body.y,planetTouched.x,planetTouched.y);
-
-            this.body.velocity.x = -moveForce*Math.sin(angle)*moveForce1;
-            this.body.velocity.y = moveForce*Math.cos(angle)*moveForce1;
-            // this.body.applyForce(-moveForce*Math.sin(angle), moveForce*Math.cos(angle));
-            this.animations.play('left');
-            this.angle = angle;
-            */
             this.animations.play('left');
             this.motorSpeed = -30;
             this.orientation = this.LEFT;
             break;
         case 'right':
-            /*// add gravity force to the crate in the direction of planet center
-            var angle = Phaser.Math.angleBetween(this.body.x,this.body.y,planetTouched.x,planetTouched.y);
-            this.body.velocity.x = moveForce*Math.sin(angle)*moveForce1;
-            this.body.velocity.y = -moveForce*Math.cos(angle)*moveForce1;
-            // this.body.applyForce(moveForce*Math.sin(angle), -moveForce*Math.cos(angle));
-            */
             this.animations.play('right');
             this.motorSpeed = 30;
             this.orientation = this.RIGHT;
             break;
          case 'down':
-            /*
-            //  this.body.velocity.x = 0;
-            //  this.body.velocity.y = 0;
-            if(this.jumpCooldown){
-                this.body.velocity.x = 0;
-                this.body.velocity.y = 0;
-            }
-            */
             this.motorSpeed = 0;
             this.animations.stop();
             this.animations.play('stop');
             break;
         case 'still':
-            /*
-            //  this.body.velocity.x = 0;
-            //  this.body.velocity.y = 0;
-            if(this.jumpCooldown){
-                this.body.velocity.x = 0;
-                this.body.velocity.y = 0;
-            }
-            */
             this.motorEnabled = false;
             this.animations.stop();
 //            this.animations.play('stop');
             break;
     }
+
+        for (var i = 0; i < 2; i++) {
+            this.driveJoints[i].EnableMotor(this.motorEnabled);
+            this.driveJoints[i].SetMotorSpeed(this.motorSpeed);
+        }
 }
 
 /**
  * Moves the character when it is within the orbit of a planet but not grounded
- * @param {[[Type]]} direction [[Description]]
+ * @param {string} direction Indicates the direction in which the character moves
  */
 
 Character.prototype.moveInOrbit = function(direction){
+
+    switch(direction){
+        case 'left':
+            this.animations.play('left');
+            this.body.rotateLeft(150);
+            this.orientation = this.LEFT;
+            break;
+        case 'right':
+            this.animations.play('right');
+            this.body.rotateRight(150);
+            this.orientation = this.RIGHT;
+            break;
+         case 'jetpack':
+            this.body.thrust(700);
+            this.animations.play('fly');
+            break;
+    }
 
 }
 
 /**
  * Moves the character when it isn't within the orbit of any planet
- * @param {[[Type]]} direction [[Description]]
+ * @param {string} direction Indicates the direction in which the character moves
  */
 
 Character.prototype.moveSpace = function(direction){
+
+    switch(direction){
+        case 'left':
+            this.body.rotateLeft(100);
+            this.animations.play('left');
+            break;
+        case 'right':
+            this.body.rotateRight(100);
+            this.animations.play('right');
+            break;
+         case 'up':
+            this.body.thrust(200);
+            this.animations.play('fly');
+            break;
+         case 'down':
+            this.body.reverse(200);
+            this.animations.play('fly');
+            break;
+         case 'rotateL':
+            this.body.angularVelocity -= 0.15;
+            break;
+         case 'rotateR':
+            this.body.angularVelocity += 0.15;
+            break;
+        case 'still':
+            this.animations.stop();
+            this.animations.play('stop');
+            break;
+    }
 
 }
 
@@ -339,7 +355,7 @@ Character.prototype.jump = function (){
         this.body.applyForce(-Math.cos(angle)*this.jumpForce,-Math.sin(angle)*this.jumpForce);
         if(debug) console.log("jump from (" + this.planetTouched.x + "," + this.planetTouched.y + ")")
         this.planetTouched = null
-//            myCharacter.jumpSound.play();
+//      this.jumpSound.play();
         game.time.events.add(560, function(){this.jumpCooldown = true}, this)
     }
 }

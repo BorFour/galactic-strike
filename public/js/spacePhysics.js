@@ -2,7 +2,6 @@
 
 /**
  *
- * @
  * @file spacePhysics.js
  * @date 07/11/2015
  */
@@ -47,15 +46,9 @@ SpacePhysics.prototype.addPlanet = function (planet) {
         return planet;
 }
 
-SpacePhysics.prototype.isGrounded = function isGrounded(body){
-    var vs = 25
-    return (Math.abs(body.velocity.x) < vs) && (Math.abs(body.velocity.y) < vs)
-}
-
-
 /**
- * @
- * Añade un objeto al grupo de elementos dinámicos del motor
+ * Adds an object to the space physics engine's dynamic group
+ * @param {Element} sprite element with a body
  */
 
 SpacePhysics.prototype.addDynamic = function (sprite){
@@ -88,21 +81,6 @@ SpacePhysics.prototype.update = function (){
             c.atmosphere = atmosphere;
         }
 }
-
-//SpacePhysics.prototype.
-function jumpCharacter(){
-        if(planetTouched != null && jumpCooldown){
-            jumpCooldown = false;
-            var angle = Phaser.Math.angleBetween(myCharacter.x,myCharacter.y,planetTouched.x,planetTouched.y);
-            // add gravity force to the crate in the direction of planet center
-            myCharacter.body.applyForce(-Math.cos(angle)*jumpForce,-Math.sin(angle)*jumpForce);
-            if(debug) console.log("jump from (" + planetTouched.x + "," + planetTouched.y + ")")
-            planetTouched = null
-//            myCharacter.jumpSound.play();
-            game.time.events.add(560, refreshJumpCooldown, this)
-        }
-}
-
 
 
 

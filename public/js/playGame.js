@@ -1,10 +1,5 @@
 var game;
 
-// groups containing crates and planets
-
-////////////
-// Gráficos
-
 var starfield;
 
 var crateGroup;
@@ -12,32 +7,14 @@ var planets;
 var planetTouched;
 var orb;
 
-//flag for gameover and limit of crates
-var gameover = 0;
-var numCrates = 0;
-var numCollision = 0;
-var x = -1;
-var y = -1;
-
 var jumpForce = 150;
 
-var teclado;
 
-var leftKey;
-var rightKey;
-var upKey;
-var downKey;
-var rotateLKey;
-var rotateRKey;
-var fullscreenKey;
-var spaceKey;
-
-var grounded = false;
 var debug = true;     // Para el debug que se muestra por la consola
 var gameDebug = true; // Para el debug que se muestra por pantalla
 var useGamepad = false; // true para usar el gamepad, false para usar el teclado (WASD)
 var randomPlanets = false;
-var jumpCooldown = true;
+
 // a force reducer to let the simulation run smoothly
 
 var forceReducer = 0.015;
@@ -54,9 +31,7 @@ var socket;
 
 
 var inputChanged = true;
-var myPlayer;
 var myId = 0;
-var myCharacter;
 var charactersList;
 
 var DEFINITION = {
@@ -69,13 +44,10 @@ window.onload = function() {
 //	 game = new Phaser.Game(DEFINITION.width, DEFINITION.height, Phaser.AUTO, "");
 //     game.state.add("PlayGame",playGame);
 //     game.state.start("PlayGame");
-     myPlayer = new Player('Eduardo');
 }
 
 
 GALACTIC_STRIKE.PlayGame = function(game){};
-
-
 
 GALACTIC_STRIKE.PlayGame.prototype = {
 	preload: function(){
@@ -296,20 +268,25 @@ GALACTIC_STRIKE.PlayGame.prototype = {
 	},
 	update: function(){
 
-        movePlayer();
-        if(myCharacter) myCharacter.updateOnline();
+//        movePlayer();
+        GALACTIC_STRIKE.player.movePlayer();
+        if(GALACTIC_STRIKE.player.character) GALACTIC_STRIKE.player.character.updateOnline();
         game.spacePhysics.update();
         orb.rotation += 0.05;
 
 	},
     render: function(){
 
-         if(gameDebug) {
+         if(gameDebug)
+         {
              game.debug.text("Jump cooldown: " + game.time.events.duration, 32, 32);
-             if(myCharacter) game.debug.text("Planet touched: " + myCharacter.planetTouched, 32, 64);
-             if(myCharacter) game.debug.text("In atmosphere: " + myCharacter.inAtmosphere(), 32, 96);
-             if(myCharacter) game.debug.text("Grounded: " + myCharacter.isGrounded(), 32, 128);
-             if(myCharacter) game.debug.text('My ID: ' + myId, 32, 160);
+             if(GALACTIC_STRIKE.player.character)
+             {
+                game.debug.text("Planet touched: " + GALACTIC_STRIKE.player.character.planetTouched, 32, 64);
+                game.debug.text("In atmosphere: " + GALACTIC_STRIKE.player.character.inAtmosphere(), 32, 96);
+                game.debug.text("Grounded: " + GALACTIC_STRIKE.player.character.isGrounded(), 32, 128);
+                game.debug.text('My ID: ' + myId, 32, 160);
+             }
              game.debug.text("Move with : [W A S D]"  + "\t",32, 688);
              game.debug.text("Rotate with: [Q E]" ,32, 720);
              game.debug.text("Jump with : [Spacebar]" ,32, 752);
@@ -331,26 +308,8 @@ GALACTIC_STRIKE.PlayGame.prototype = {
     }
 }
 
-
-function jumpCharacter(){
-        if(planetTouched != null && jumpCooldown){
-            jumpCooldown = false;
-            var angle = Phaser.Math.angleBetween(myCharacter.x,myCharacter.y,planetTouched.x,planetTouched.y);
-            // add gravity force to the crate in the direction of planet center
-            myCharacter.body.applyForce(-Math.cos(angle)*jumpForce,-Math.sin(angle)*jumpForce);
-            if(debug) console.log("jump from (" + planetTouched.x + "," + planetTouched.y + ")")
-            planetTouched = null
-//            myCharacter.jumpSound.play();
-            game.time.events.add(560, refreshJumpCooldown, this)
-        }
-}
-
-//function refreshJumpCooldown(){
-//    jumpCooldown = true;
-//}
-
 function touchPlanetCallback(body1, body2, fixture1, fixture2, begin) {
-//    if(!planetTouched){
+
         planetTouched = body2
         body1.mainSprite.planetTouched = body2;
         body1.mainSprite.setGrounded();
@@ -359,14 +318,7 @@ function touchPlanetCallback(body1, body2, fixture1, fixture2, begin) {
 //            console.log("planet touched gravity force: " + body2.x)
 //            console.log(body1)
         }
-//        myCharacter.body.static = true;
-//        myCharacter.body.dynamic = false;
-
-        // NO FUNCIONA
-        //game.time.events.add(30, rotateTo, this)
-//    }
 }
-
 
 function toRad(value){
     return (value * Math.PI) / 180

@@ -13,8 +13,9 @@ function clientSetup(){
                 charactersList[p] = new Character(input.players[p].x, input.players[p].y, game, p, 'player');
             }
         }
-        myCharacter = charactersList[myId];
-        myCharacterSetup();
+//        myCharacter =
+        GALACTIC_STRIKE.player.character = charactersList[myId];
+        myCharacterSetup(GALACTIC_STRIKE.player.character);
 
     });
 
@@ -60,28 +61,28 @@ function clientSetup(){
 
 }
 
-function myCharacterSetup(){
+function myCharacterSetup(character){
 
 
-            myCharacter.jumpSound = game.add.audio('jump');
+            character.jumpSound = game.add.audio('jump');
 
 //            game.spacePhysics.addDynamic(sprite);
 
             // ESTO PROBABLEMENTE NO DEBA IR AQUÍ
-            game.camera.follow(myCharacter);
+            game.camera.follow(character);
 
             var fireKey = game.input.keyboard.addKey(Phaser.Keyboard.NUMPAD_0);
-            fireKey.onDown.add(function(){myCharacter.fire()}, this);
+            fireKey.onDown.add(function(){character.fire()}, this);
             game.input.keyboard.removeKeyCapture(Phaser.Keyboard.NUMPAD_0);
             var attackKey = game.input.keyboard.addKey(Phaser.Keyboard.NUMPAD_3);
-            attackKey.onDown.add(function(){myCharacter.attack()}, this);
+            attackKey.onDown.add(function(){character.attack()}, this);
             game.input.keyboard.removeKeyCapture(Phaser.Keyboard.NUMPAD_3);
 
             for (var i = 0; i < planets.length; i++){
 //                myCharacter.body.setBodyContactCallback(planets[i], touchPlanetCallback, this);
-                myCharacter.body.setBodyPresolveCallback(planets[i], touchPlanetCallback, this);
-                myCharacter.wheels[0].body.setBodyPresolveCallback(planets[i], touchPlanetCallback, this);
-                myCharacter.wheels[1].body.setBodyPresolveCallback(planets[i], touchPlanetCallback, this);
+                character.body.setBodyPresolveCallback(planets[i], touchPlanetCallback, this);
+                character.wheels[0].body.setBodyPresolveCallback(planets[i], touchPlanetCallback, this);
+                character.wheels[1].body.setBodyPresolveCallback(planets[i], touchPlanetCallback, this);
 
             }
 }

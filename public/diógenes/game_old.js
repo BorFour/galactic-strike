@@ -55,7 +55,6 @@ var socket;
 
 var inputChanged = true;
 var player;
-var myId = 0;
 var myCharacter;
 var charactersList;
 

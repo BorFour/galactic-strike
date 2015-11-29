@@ -182,6 +182,7 @@ Character.prototype.fire = function (){
 
 //        socket.emit('firePlayer', {id:GALACTIC_STRIKE.player.id});
         var bullet = new Item(game, this.x, this.y, items['bullet']);
+        bullet.body.setCollisionCategory(GALACTIC_STRIKE.COLLISION_CATEGORY.BULLET);
         console.log(bullet)
         bullet.owner = this;
         this.bullets.push(bullet);
@@ -360,6 +361,9 @@ Character.prototype.jump = function (){
     }
 }
 
+/**
+ * This method is called when a character is killed or his owner disconnects
+ */
 
 Character.prototype.die = function() {
 	this.alive = false;

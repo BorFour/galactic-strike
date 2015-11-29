@@ -2,9 +2,12 @@ var game;
 
 var starfield;
 
-var crateGroup;
+
+
 var planets;
-var planetTouched;
+
+var planetCollisionGroup;
+
 var orb;
 
 var jumpForce = 150;
@@ -81,6 +84,7 @@ GALACTIC_STRIKE.PlayGame.prototype = {
 
 
         planets = []
+        planetCollisionGroup =  game.physics.box2d.createCollisionGroup();
         charactersList = {};
 
 		// adding graphic objects

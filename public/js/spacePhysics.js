@@ -41,6 +41,11 @@ SpacePhysics.prototype.consoleLog = function() {
     console.log("@Physics: " + dynamicGroup);
 };
 
+/**
+ * Adds an object to the space physics engine's planet group (bodies with a gravitational field)
+ * @param {Element} sprite element with a body
+ */
+
 SpacePhysics.prototype.addPlanet = function (planet) {
         this.planetGroup.add(planet);
         return planet;
@@ -54,6 +59,10 @@ SpacePhysics.prototype.addPlanet = function (planet) {
 SpacePhysics.prototype.addDynamic = function (sprite){
     this.dynamicGroup.add(sprite)
 }
+
+/**
+ * This function is called in the game loop. It applies the gravitational field of each planet to each dynamic element
+ */
 
 SpacePhysics.prototype.update = function (){
         // Para cada elemento dinámico

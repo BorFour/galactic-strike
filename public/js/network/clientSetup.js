@@ -85,5 +85,7 @@ function myCharacterSetup(character){
                 character.wheels[1].body.setBodyPresolveCallback(planets[i], touchPlanetCallback, this);
 
             }
+
+            character.body.setColissionCategory(GALACTIC_STRIKE.COLLISION_CATEGORY.PLAYER);
 }
 

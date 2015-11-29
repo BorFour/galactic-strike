@@ -20,6 +20,9 @@ function loadSongs(){
     GALACTIC_STRIKE.songs.push(game.add.audio('witch', 1, true));
 //    GALACTIC_STRIKE.songs.push(game.add.audio('dedede'));
     GALACTIC_STRIKE.songs[Math.floor(Math.random()*GALACTIC_STRIKE.songs.length)].play();
+
+    // De momento va así para que podamos probar sin que la música dé por culo
+    game.sound.mute = true;
 }
 
 GALACTIC_STRIKE.Preloader.prototype = {

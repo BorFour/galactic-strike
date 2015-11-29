@@ -12,7 +12,7 @@ var items =
         'use' : null
     },
     'bullet' : {
-        'asset' : 'bullet',
+        'asset' : 'laser_bullet',
         'use' : null,
         'body' : function (sprite){
             sprite.body.setCircle(2, 0, 0, 0); // (?)

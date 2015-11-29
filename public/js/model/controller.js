@@ -14,7 +14,10 @@ Controller = function (input) {
             this.rotateLKey = game.input.keyboard.addKey(Phaser.Keyboard.Q);
             this.rotateRKey = game.input.keyboard.addKey(Phaser.Keyboard.E);
             this.jumpKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-        this.gamepad = false;
+            this.gamepad = false;
+    }
+    else{
+        this.gamepad = game.input.gamepad.pad1;
     }
 
 };

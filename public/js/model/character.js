@@ -32,6 +32,7 @@ function Character (x, y, game, player, asset) {
 
     // Cooldowns
     this.jumpCooldown = true;
+    this.attackCooldown = true;
     this.fireCooldown = true;
 
 
@@ -58,9 +59,9 @@ function Character (x, y, game, player, asset) {
 
     var truckVertices = [-10, -10, 10,-10, 20,10,-20, 10];
 
-    this.body.setPolygon(truckVertices); //.setRectangle(40,30,0,10,0); //.setCircle(0.2*PTM);
+    this.body.setPolygon(truckVertices);
     this.body.mass = 1;
-    this.body.angularDamping = 0.15; // ESTO CONTROLA LA ROTACIÓN JIJIJI :)
+    this.body.angularDamping = 0.15;
     this.body.linearDamping =0.4// 0.94;
 //    this.body.friction = 0.001;
 
@@ -118,6 +119,7 @@ function Character (x, y, game, player, asset) {
     this.nextFire = 0;
     this.alive = true;
     this.jumpCooldownTime = 350;
+    this.attackCooldownTime = 500;
     this.fireCooldownTime = 100;
 
     //this.shadow = game.add.sprite(x, y, 'enemy', 'shadow');
@@ -158,6 +160,9 @@ function Character (x, y, game, player, asset) {
 Character.prototype = Object.create(Element.prototype);
 Character.prototype.constructor = Element;
 
+/**
+ * Sends data about this character to the other players in the room
+ */
 
 Character.prototype.updateOnline = function() {
 
@@ -207,11 +212,11 @@ Character.prototype.fire = function (){
 }
 
 Character.prototype.attack = function (){
-    if(this.fireCooldown){
-        this.fireCooldown = false;
+    if(this.attackCooldown){
+        this.attackCooldown = false;
 
 //        socket.emit('attackPlayer', {id:GALACTIC_STRIKE.player.id});
-        var cucumber = new Item(game, this.x - Math.sin(this.angle)* 100, this.y - Math.cos(this.angle)*100, items['cucumber']);
+        var cucumber = new Item(game, this.x + Math.cos(this.angle)* 100, this.y - Math.sin(this.angle)*100, items['cucumber']);
         console.log(cucumber)
         cucumber.owner = this;
 //        this.bullets.push(bullet);
@@ -223,20 +228,13 @@ Character.prototype.attack = function (){
 //        }
 
 	// bodyA, bodyB, axisX, axisY, ax, ay, bx, by, motorSpeed, motorForce, motorEnabled, lowerLimit, upperLimit, limitEnabled
-	game.physics.box2d.prismaticJoint(this, cucumber, 1, 1, 0, 0, 0, 0, 0, 0, true, -100, 200, true);
+	   game.physics.box2d.prismaticJoint(this.body, cucumber, 1, 1, 0, 0, 0, 0, 0, 0, true, -100, 200, true);
 
-        if(this.inAtmosphere()){
-            cucumber.body.angle = this.angle - 90*this.orientation; // Este ángulo va en grados
-            cucumber.body.angularVelocity = 20;
-            cucumber.body.reverse(10000);
-        }
-        else{
-            cucumber.body.angle = this.angle - 90*this.orientation; // Este ángulo va en grados
-            cucumber.body.angularVelocity = 20;
-            cucumber.body.reverse(10000);
-        }
-        game.time.events.add(this.fireCooldownTime, function(){this.fireCooldown = true}, this)
-        game.time.events.add(1000, function(){cucumber.destroy()}, this)
+        cucumber.body.angle = this.angle - 90*this.orientation; // Este ángulo va en grados
+//        cucumber.body.angularVelocity = 20;
+        cucumber.body.thrust(1000);
+
+        game.time.events.add(this.attackCooldownTime, function(){cucumber.destroy(); this.attackCooldown = true;}, this)
 
     }
 }

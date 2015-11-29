@@ -84,7 +84,7 @@ GALACTIC_STRIKE.PlayGame.prototype = {
 
 
         planets = []
-        planetCollisionGroup =  game.physics.box2d.createCollisionGroup();
+//        planetCollisionGroup =  game.physics.box2d.createCollisionGroup();
         charactersList = {};
 
 		// adding graphic objects

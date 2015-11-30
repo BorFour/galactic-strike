@@ -16,7 +16,7 @@ function Character (x, y, game, player, asset) {
 
     Element.call(this, game, x, y, asset);
     game.add.existing(this);
-    this.anchor.setTo(0.5,1);
+//    this.anchor.set(0.5);
 
     this.player = player;
     this.game = game;
@@ -216,25 +216,26 @@ Character.prototype.attack = function (){
         this.attackCooldown = false;
 
 //        socket.emit('attackPlayer', {id:GALACTIC_STRIKE.player.id});
-        var cucumber = new Item(game, this.x + Math.cos(this.angle)* 100, this.y - Math.sin(this.angle)*100, items['cucumber']);
-        console.log(cucumber)
-        cucumber.owner = this;
+        this.cucumber = new Item(game, this.body.x + Math.sin(this.body.rotation)* 80, this.body.y - Math.cos(this.body.rotation)*80, items['spikeball']);
+        console.log(this.cucumber)
+        this.cucumber.owner = this;
 //        this.bullets.push(bullet);
 //        var fn = cucumber.collide;
-        cucumber.body.mass = 0.1;
+//        cucumber.body.mass = 0.1;
 //        cucumber.body.bullet = true;
 //        for (c in charactersList){
 //            cucumber.body.setBodyContactCallback(charactersList[c], fn, this);
 //        }
 
-	// bodyA, bodyB, axisX, axisY, ax, ay, bx, by, motorSpeed, motorForce, motorEnabled, lowerLimit, upperLimit, limitEnabled
-	   game.physics.box2d.prismaticJoint(this.body, cucumber, 1, 1, 0, 0, 0, 0, 0, 0, true, -100, 200, true);
+//        game.physics.box2d.motorJoint(spriteA, spriteB, 800, 500, 0.25, -100, 200, 45);
 
-        cucumber.body.angle = this.angle - 90*this.orientation; // Este ángulo va en grados
+        game.physics.box2d.motorJoint(this, this.cucumber, 80, 50, 0.25, 80, 0, 4.5);
+
+//        cucumber.body.rotation = this.body.rotation; // Este ángulo va en grados
 //        cucumber.body.angularVelocity = 20;
-        cucumber.body.thrust(1000);
+        this.cucumber.body.thrust(1000);
 
-        game.time.events.add(this.attackCooldownTime, function(){cucumber.destroy(); this.attackCooldown = true;}, this)
+        game.time.events.add(this.attackCooldownTime, function(){this.cucumber.destroy(); this.attackCooldown = true;}, this)
 
     }
 }

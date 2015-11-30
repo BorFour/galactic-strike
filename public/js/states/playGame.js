@@ -58,6 +58,7 @@ load_assets = function (){
 		game.load.image("bullet", "../assets/blue-bullet.gif");
 		game.load.image("laser_bullet", "../assets/laser_bullet.jpg");
 		game.load.image("cucumber", "../assets/cucumber.png");
+		game.load.image("spikeball", "../assets/spikeball.gif");
         //game.load.spritesheet("player", "../assets/ironman_45_75.png", 45, 75);
         game.load.image("player", "../assets/spritesIndividuales/robotnik/slice04_04.png"); //rueda: 26_23  | robotnik: 49_43
 
@@ -196,6 +197,10 @@ GALACTIC_STRIKE.PlayGame.prototype = {
                 game.debug.text("In atmosphere: " + GALACTIC_STRIKE.player.character.inAtmosphere(), 32, 96);
                 game.debug.text("Grounded: " + GALACTIC_STRIKE.player.character.isGrounded(), 32, 128);
                 game.debug.text('My ID: ' + GALACTIC_STRIKE.player.id, 32, 160);
+                game.debug.spriteCoords(GALACTIC_STRIKE.player.character, 32, 192,'rgba(0,255,255,1)');
+                game.debug.bodyInfo(GALACTIC_STRIKE.player.character, 32, 300,'rgba(0,255,255,1)');
+//                game.debug.text('Body angle: ' + GALACTIC_STRIKE.player.character.body.angle, 32, 192);
+//                game.debug.text('Anchor: ' + GALACTIC_STRIKE.player.character.x + ',' + GALACTIC_STRIKE.player.character.y, 32, 224);
              }
              game.debug.text("Move with : [W A S D]"  + "\t",32, 688);
              game.debug.text("Rotate with: [Q E]" ,32, 720);

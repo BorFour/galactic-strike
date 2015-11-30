@@ -26,4 +26,8 @@ var items =
         'asset' : 'cucumber',
         'use' : null
     },
+    'spikeball' : {
+        'asset' : 'spikeball',
+        'use' : null
+    }
 }

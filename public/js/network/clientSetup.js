@@ -1,7 +1,12 @@
 
 var networkDebug = true;
 
+/**
+ * Set up for the events that can be received from the server
+ */
+
 function clientSetup(){
+
 
     socket.on('IDPlayers', function (input) {
 
@@ -13,7 +18,6 @@ function clientSetup(){
                 charactersList[p] = new Character(input.players[p].x, input.players[p].y, game, p, 'player');
             }
         }
-//        myCharacter =
         GALACTIC_STRIKE.player.character = charactersList[GALACTIC_STRIKE.player.id];
         myCharacterSetup(GALACTIC_STRIKE.player.character);
 

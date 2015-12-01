@@ -225,13 +225,20 @@ GALACTIC_STRIKE.PlayGame.prototype = {
 
 function touchPlanetCallback(body1, body2, fixture1, fixture2, begin) {
 
-        planetTouched = body2
         body1.mainSprite.planetTouched = body2;
         body1.mainSprite.setGrounded();
 //        body1.fixedRotation = true;
         if(debug) {
 //            console.log("planet touched gravity force: " + body2.x)
 //            console.log(body1)
+        }
+}
+
+function touchSpikeballEnemy(body1, body2, fixture1, fixture2, begin) {
+
+        if(body1.sprite.owner !== body2.sprite)
+        {
+            body2.mainSprite.hp -= 35;
         }
 }
 

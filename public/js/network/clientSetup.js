@@ -81,6 +81,9 @@ function myCharacterSetup(character){
             var attackKey = game.input.keyboard.addKey(Phaser.Keyboard.NUMPAD_3);
             attackKey.onDown.add(function(){character.attack()}, this);
             game.input.keyboard.removeKeyCapture(Phaser.Keyboard.NUMPAD_3);
+            var attack2Key = game.input.keyboard.addKey(Phaser.Keyboard.NUMPAD_1);
+            attack2Key.onDown.add(function(){character.attack2()}, this);
+            game.input.keyboard.removeKeyCapture(Phaser.Keyboard.NUMPAD_1);
 
             for (var i = 0; i < planets.length; i++){
 //                myCharacter.body.setBodyContactCallback(planets[i], touchPlanetCallback, this);

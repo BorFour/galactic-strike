@@ -93,13 +93,18 @@ create: function () {
     //game.add.tween(nameLabel).to({angle: -5}, 500).to({angle: 5}, 300).loop().start();
 
      // Explain how to start the game
-        var startLabel = game.add.text(game.world.centerX, game.world.height-80,
-                                       'press SPACEBAR to START',{ font: '25px Arial', fill: '#ffffff' });
+        var startLabel = game.add.text(game.world.centerX - 300, game.world.height-80,
+                                       'press SPACEBAR or touch/click anywhere to START',{ font: '25px Arial', fill: '#ffffff' });
 
          var spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
         // When the 'upKey' is pressed, it will call the 'start' function once
-        spaceKey.onDown.addOnce(this.startGame, this);
+         spaceKey.onDown.addOnce(this.startGame, this);
+         var spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+        // When the 'upKey' is pressed, it will call the 'start' function once
+         spaceKey.onDown.addOnce(this.startGame, this);
 
+         game.input.onTap.add(this.startGame, this);
+         game.input.addPointer();
 
 
 },
@@ -123,7 +128,11 @@ update: function () {
         stars[i].rotation += 0.1;
 
     }
+    if (game.input.pointer1.active) this.startGame();
 
+},
+render : function () {
+     game.debug.pointer(game.input.pointer1);
 },
     startGame: function() {
         this.state.start('MainMenu');

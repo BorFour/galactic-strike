@@ -55,6 +55,28 @@ function clientSetup(){
 
     });
 
+    socket.on('attack', function (input) {
+
+        if(input.id === GALACTIC_STRIKE.player.id) return;
+        console.log('@Client received | attack');
+
+        if(charactersList[input.id]){
+            charactersList[input.id].attack();
+        }
+
+    });
+
+    socket.on('attack2', function (input) {
+
+        if(input.id === GALACTIC_STRIKE.player.id) return;
+        console.log('@Client received | attack2');
+
+        if(charactersList[input.id]){
+            charactersList[input.id].attack2();
+        }
+
+    });
+
     socket.on('userLeft', function (input) {
 
         console.log('@Client received | userLeft');
@@ -79,10 +101,16 @@ function myCharacterSetup(character){
             fireKey.onDown.add(function(){character.fire()}, this);
             game.input.keyboard.removeKeyCapture(Phaser.Keyboard.NUMPAD_0);
             var attackKey = game.input.keyboard.addKey(Phaser.Keyboard.NUMPAD_3);
-            attackKey.onDown.add(function(){character.attack()}, this);
+            attackKey.onDown.add(function(){
+                var output = {id:GALACTIC_STRIKE.player.id};
+                socket.emit('attack', output);
+                character.attack()}, this);
             game.input.keyboard.removeKeyCapture(Phaser.Keyboard.NUMPAD_3);
             var attack2Key = game.input.keyboard.addKey(Phaser.Keyboard.NUMPAD_1);
-            attack2Key.onDown.add(function(){character.attack2()}, this);
+            attack2Key.onDown.add(function(){
+                var output = {id:GALACTIC_STRIKE.player.id};
+                socket.emit('attack2', output);
+                character.attack2()}, this);
             game.input.keyboard.removeKeyCapture(Phaser.Keyboard.NUMPAD_1);
 
             for (var i = 0; i < planets.length; i++){
@@ -93,6 +121,6 @@ function myCharacterSetup(character){
 
             }
 
-            character.body.setColissionCategory(GALACTIC_STRIKE.COLLISION_CATEGORY.PLAYER);
+//            character.body.setColissionCategory(GALACTIC_STRIKE.COLLISION_CATEGORY.PLAYER);
 }
 

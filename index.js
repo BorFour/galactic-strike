@@ -53,6 +53,24 @@ io.on('connection', function (socket) {
 
     });
 
+    socket.on('attack', function (input) {
+
+        var output = {};
+        output.id = input.id;
+        socket.broadcast.emit('attack', output);
+//        console.log('@Server sent | update');
+
+    });
+
+    socket.on('attack2', function (input) {
+
+        var output = {};
+        output.id = input.id;
+        socket.broadcast.emit('attack2', output);
+//        console.log('@Server sent | update');
+
+    });
+
     socket.on('disconnect', function () {
 
         var output = {};

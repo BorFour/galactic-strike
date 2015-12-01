@@ -189,7 +189,7 @@ Character.prototype.fire = function (){
 //        socket.emit('firePlayer', {id:GALACTIC_STRIKE.player.id});
         var bullet = new Item(game, this.x, this.y, items['bullet']);
         bullet.body.setCollisionCategory(GALACTIC_STRIKE.COLLISION_CATEGORY.BULLET);
-        console.log(bullet)
+//        console.log(bullet)
         bullet.owner = this;
         this.bullets.push(bullet);
         var fn = bullet.collide;
@@ -215,10 +215,8 @@ Character.prototype.fire = function (){
 Character.prototype.attack = function (){
     if(this.attackCooldown){
         this.attackCooldown = false;
-
-//        socket.emit('attackPlayer', {id:GALACTIC_STRIKE.player.id});
         this.cucumber = new Item(game, this.body.x + Math.sin(this.body.rotation)* 80, this.body.y - Math.cos(this.body.rotation)*80, items['spikeball']);
-        console.log(this.cucumber)
+//        console.log(this.cucumber)
         this.cucumber.owner = this;
 //        this.bullets.push(bullet);
 //        var fn = cucumber.collide;
@@ -245,10 +243,8 @@ Character.prototype.attack = function (){
 Character.prototype.attack2 = function (){
     if(this.attackCooldown){
         this.attackCooldown = false;
-
-//        socket.emit('attackPlayer', {id:GALACTIC_STRIKE.player.id});
         this.cucumber2 = new Item(game, this.body.x + Math.cos(this.body.rotation)* 80, this.body.y + Math.sin(this.body.rotation)*80, items['spikeball']);
-        console.log(this.cucumber2)
+//        console.log(this.cucumber2)
         this.cucumber2.owner = this;
 //        this.bullets.push(bullet);
 //        var fn = cucumber.collide;

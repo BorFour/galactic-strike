@@ -8,5 +8,7 @@ var GALACTIC_STRIKE = {
         PLANET : 1,
         ENEMY : 2,
         BULLET : 3
-    }
+    },
+    zoomed : false,
+
 };

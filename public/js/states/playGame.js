@@ -197,14 +197,18 @@ GALACTIC_STRIKE.PlayGame.prototype = {
                 game.debug.text("In atmosphere: " + GALACTIC_STRIKE.player.character.inAtmosphere(), 32, 96);
                 game.debug.text("Grounded: " + GALACTIC_STRIKE.player.character.isGrounded(), 32, 128);
                 game.debug.text('My ID: ' + GALACTIC_STRIKE.player.id, 32, 160);
-                game.debug.spriteCoords(GALACTIC_STRIKE.player.character, 32, 192,'rgba(0,255,255,1)');
-                game.debug.bodyInfo(GALACTIC_STRIKE.player.character, 32, 300,'rgba(0,255,255,1)');
+                game.debug.text('Zoom (toggle with \'Z\') :'  + GALACTIC_STRIKE.zoomed, 32, 192);
+                game.debug.text('Mute (toggle with \'M\') :'  + game.sound.mute, 32, 224);
+                game.debug.text("Move with : [W A S D]"  + "\t",32, 256);
+                game.debug.text("Rotate with: [Q E]" ,32, 288);
+                game.debug.text("Jump with : [Spacebar]" ,32, 320);
+                game.debug.text("Attack with NUMPAD!!" ,32, 352);
+//                game.debug.spriteCoords(GALACTIC_STRIKE.player.character, 32, 256,'rgba(0,255,255,1)');
+//                game.debug.bodyInfo(GALACTIC_STRIKE.player.character, 32, 308,'rgba(0,255,255,1)');
 //                game.debug.text('Body angle: ' + GALACTIC_STRIKE.player.character.body.angle, 32, 192);
 //                game.debug.text('Anchor: ' + GALACTIC_STRIKE.player.character.x + ',' + GALACTIC_STRIKE.player.character.y, 32, 224);
              }
-             game.debug.text("Move with : [W A S D]"  + "\t",32, 688);
-             game.debug.text("Rotate with: [Q E]" ,32, 720);
-             game.debug.text("Jump with : [Spacebar]" ,32, 752);
+
 //             game.debug.box2dWorld();
              game.debug.cameraInfo(game.camera, 300, 32);
 

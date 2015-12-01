@@ -95,7 +95,7 @@ function myCharacterSetup(character){
 //            game.spacePhysics.addDynamic(sprite);
 
             // ESTO PROBABLEMENTE NO DEBA IR AQUÍ
-            game.camera.follow(character);
+            game.camera.follow(character, Phaser.Camera.FOLLOW_TOPDOWN_TIGHT);
 
             var fireKey = game.input.keyboard.addKey(Phaser.Keyboard.NUMPAD_0);
             fireKey.onDown.add(function(){character.fire()}, this);
@@ -112,6 +112,33 @@ function myCharacterSetup(character){
                 socket.emit('attack2', output);
                 character.attack2()}, this);
             game.input.keyboard.removeKeyCapture(Phaser.Keyboard.NUMPAD_1);
+            var zoomKey = game.input.keyboard.addKey(Phaser.Keyboard.Z);
+            zoomKey.onDown.add(function(){
+                if (!GALACTIC_STRIKE.zoomed){
+                    game.camera.follow(null);
+                    game.add.tween(game.world.scale).to( {x: 0.5, y:0.5}, 350, Phaser.Easing.Quadratic.InOut, true);
+                    GALACTIC_STRIKE.zoomed = true;
+                    game.camera.follow(GALACTIC_STRIKE.player.character, Phaser.Camera.FOLLOW_TOPDOWN_TIGHT);
+
+                }
+                else{
+                    game.camera.follow(null);
+                    game.add.tween(game.world.scale).to( {x: 1, y:1}, 350, Phaser.Easing.Quadratic.InOut, true);
+                    GALACTIC_STRIKE.zoomed = false;
+                    game.camera.follow(GALACTIC_STRIKE.player.character,  Phaser.Camera.FOLLOW_TOPDOWN_TIGHT);
+                }
+            }, this);
+            game.input.keyboard.removeKeyCapture(Phaser.Keyboard.Z);
+            var muteKey = game.input.keyboard.addKey(Phaser.Keyboard.M);
+            muteKey.onDown.add(function(){
+                if (!game.sound.mute){
+                    game.sound.mute = true;
+                }
+                else{
+                    game.sound.mute = false;
+                }
+            }, this);
+            game.input.keyboard.removeKeyCapture(Phaser.Keyboard.M);
 
             for (var i = 0; i < planets.length; i++){
 //                myCharacter.body.setBodyContactCallback(planets[i], touchPlanetCallback, this);

@@ -233,8 +233,8 @@ Character.prototype.attack = function (){
 //        }
 
 //        game.physics.box2d.motorJoint(spriteA, spriteB, 800, 500, 0.25, -100, 200, 45);
-        this.cucumber.damage = 100;
-        game.physics.box2d.motorJoint(this, this.cucumber, 80, 50, 0.25, 80, 50, 4.5);
+        this.cucumber.damage = 80;
+        game.physics.box2d.motorJoint(this, this.cucumber, 80 , 50, 0.25, this.orientation*80, 50, 4.5);
 
 //        cucumber.body.rotation = this.body.rotation; // Este ángulo va en grados
 //        cucumber.body.angularVelocity = 20;
@@ -254,7 +254,7 @@ Character.prototype.attack2 = function (){
     if(this.attackCooldown){
         this.attackSound.play();
         this.attackCooldown = false;
-        this.cucumber2 = new Item(game, this.body.x + Math.cos(this.body.rotation)* 80, this.body.y + Math.sin(this.body.rotation)*80, items['spikeball']);
+        this.cucumber2 = new Item(game, this.x + Math.cos(this.body.rotation)* 80*this.orientation, this.y + Math.sin(this.body.rotation)*80*this.orientation, items['spikeball']);
 //        console.log(this.cucumber2)
         this.cucumber2.owner = this;
 //        this.bullets.push(bullet);
@@ -267,8 +267,8 @@ Character.prototype.attack2 = function (){
 
 //        game.physics.box2d.motorJoint(spriteA, spriteB, 800, 500, 0.25, -100, 200, 45);
         this.cucumber2.damage = 35;
-        game.physics.box2d.motorJoint(this, this.cucumber2, 80, 50, 0.25, 120, 0, 4.5);
-
+//        game.physics.box2d.motorJoint(this, this.cucumber2, 80*this.orientation, 0, 0.25, 120, 0, 4.5);
+        game.physics.box2d.motorJoint(this, this.cucumber2, 80 , 50, 0.25, this.orientation*120, 0, 4.5);
 //        cucumber.body.rotation = this.body.rotation; // Este ángulo va en grados
 //        cucumber.body.angularVelocity = 20;
         this.cucumber2.body.thrust(1000);

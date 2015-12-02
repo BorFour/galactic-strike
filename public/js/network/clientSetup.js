@@ -117,21 +117,21 @@ function myCharacterSetup(character){
 
 
 
-            var attackKey = game.input.keyboard.addKey(Phaser.Keyboard.NUMPAD_3);
+            var attackKey = game.input.keyboard.addKey(Phaser.Keyboard.UP);
             attackKey.onDown.add(function(){
                 var output = {id:GALACTIC_STRIKE.player.id};
                 socket.emit('attack', output);
                 character.attack()}, this);
-            game.input.keyboard.removeKeyCapture(Phaser.Keyboard.NUMPAD_3);
+            game.input.keyboard.removeKeyCapture(Phaser.Keyboard.UP);
 
 
 
-            var attack2Key = game.input.keyboard.addKey(Phaser.Keyboard.NUMPAD_1);
+            var attack2Key = game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
             attack2Key.onDown.add(function(){
                 var output = {id:GALACTIC_STRIKE.player.id};
                 socket.emit('attack2', output);
                 character.attack2()}, this);
-            game.input.keyboard.removeKeyCapture(Phaser.Keyboard.NUMPAD_1);
+            game.input.keyboard.removeKeyCapture(Phaser.Keyboard.DOWN);
 
 
 

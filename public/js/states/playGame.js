@@ -203,7 +203,7 @@ GALACTIC_STRIKE.PlayGame.prototype = {
                 game.debug.text("Move with : [W A S D]"  + "\t",32, 256);
                 game.debug.text("Rotate with: [Q E]" ,32, 288);
                 game.debug.text("Jump with : [Spacebar]" ,32, 320);
-                game.debug.text("Attack with NUMPAD!!" ,32, 352);
+                game.debug.text("Attack with Arrow keys!!" ,32, 352);
 //                game.debug.spriteCoords(GALACTIC_STRIKE.player.character, 32, 256,'rgba(0,255,255,1)');
 //                game.debug.bodyInfo(GALACTIC_STRIKE.player.character, 32, 308,'rgba(0,255,255,1)');
 //                game.debug.text('Body angle: ' + GALACTIC_STRIKE.player.character.body.angle, 32, 192);

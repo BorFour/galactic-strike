@@ -22,7 +22,7 @@ function loadSongs(){
     GALACTIC_STRIKE.songs[Math.floor(Math.random()*GALACTIC_STRIKE.songs.length)].play();
 
     // De momento va así para que podamos probar sin que la música dé por culo
-    game.sound.mute = true;
+    game.sound.mute = false;
 }
 
 GALACTIC_STRIKE.Preloader.prototype = {

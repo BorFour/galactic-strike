@@ -222,6 +222,7 @@ GALACTIC_STRIKE.PlayGame.prototype = {
                 game.debug.text(charactersList[c], 640, i*32);
                 ++i;
             }
+            game.debug.text("Events : " + game.time.events.length, 640, i*32);
 
 
     }
@@ -240,9 +241,31 @@ function touchPlanetCallback(body1, body2, fixture1, fixture2, begin) {
 
 function touchSpikeballEnemy(body1, body2, fixture1, fixture2, begin) {
 
-        if(body1.sprite.owner !== body2.sprite)
+        if(body1.sprite &&
+           body2.sprite &&
+           body1.sprite.owner !== body2.sprite &&
+           !body2.sprite.hitImmune &&
+           body2.sprite.health > 0)
         {
-            body2.mainSprite.hp -= 35;
+
+            var output = {  id : GALACTIC_STRIKE.player.id,
+                            target : body2.mainSprite.id };
+            body2.mainSprite.health -= 100;
+            output.health = body2.mainSprite.health
+            if(body2.mainSprite.health <= 0)
+            {
+                body2.sprite.die();
+                delete body2.sprite;
+                output.die = true;
+            } else
+            {
+                output.die = false;
+                body2.mainSprite.hitImmune = true;
+                game.time.events.add(body2.mainSprite.hitImmuneTime, function(){body2.mainSprite.hitImmune = false;}, this)
+            }
+
+            console.log("Hit")
+            socket.emit('hit', output);
         }
 }
 

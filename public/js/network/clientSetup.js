@@ -66,6 +66,20 @@ function clientSetup(){
 
     });
 
+
+    socket.on('hit', function (input) {
+
+        if(input.target === GALACTIC_STRIKE.player.id) return;
+
+        console.log('@Client received | hit');
+
+        if(charactersList[input.target]){
+            charactersList[input.target].health = input.health;
+            if(input.die) charactersList[input.target].die();
+        }
+
+    });
+
     socket.on('attack2', function (input) {
 
         if(input.id === GALACTIC_STRIKE.player.id) return;
@@ -100,18 +114,27 @@ function myCharacterSetup(character){
             var fireKey = game.input.keyboard.addKey(Phaser.Keyboard.NUMPAD_0);
             fireKey.onDown.add(function(){character.fire()}, this);
             game.input.keyboard.removeKeyCapture(Phaser.Keyboard.NUMPAD_0);
+
+
+
             var attackKey = game.input.keyboard.addKey(Phaser.Keyboard.NUMPAD_3);
             attackKey.onDown.add(function(){
                 var output = {id:GALACTIC_STRIKE.player.id};
                 socket.emit('attack', output);
                 character.attack()}, this);
             game.input.keyboard.removeKeyCapture(Phaser.Keyboard.NUMPAD_3);
+
+
+
             var attack2Key = game.input.keyboard.addKey(Phaser.Keyboard.NUMPAD_1);
             attack2Key.onDown.add(function(){
                 var output = {id:GALACTIC_STRIKE.player.id};
                 socket.emit('attack2', output);
                 character.attack2()}, this);
             game.input.keyboard.removeKeyCapture(Phaser.Keyboard.NUMPAD_1);
+
+
+
             var zoomKey = game.input.keyboard.addKey(Phaser.Keyboard.Z);
             zoomKey.onDown.add(function(){
                 if (!GALACTIC_STRIKE.zoomed){
@@ -129,6 +152,9 @@ function myCharacterSetup(character){
                 }
             }, this);
             game.input.keyboard.removeKeyCapture(Phaser.Keyboard.Z);
+
+
+
             var muteKey = game.input.keyboard.addKey(Phaser.Keyboard.M);
             muteKey.onDown.add(function(){
                 if (!game.sound.mute){
@@ -139,6 +165,15 @@ function myCharacterSetup(character){
                 }
             }, this);
             game.input.keyboard.removeKeyCapture(Phaser.Keyboard.M);
+
+
+            var respawnKey = game.input.keyboard.addKey(Phaser.Keyboard.R);
+            respawnKey.onDown.add(function(){
+                console.log("DIE")
+                GALACTIC_STRIKE.player.character.die();
+            }, this);
+            game.input.keyboard.removeKeyCapture(Phaser.Keyboard.R);
+
 
             for (var i = 0; i < planets.length; i++){
 //                myCharacter.body.setBodyContactCallback(planets[i], touchPlanetCallback, this);

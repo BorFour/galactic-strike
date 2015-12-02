@@ -34,6 +34,7 @@ function Character (x, y, game, player, asset) {
     this.jumpCooldown = true;
     this.attackCooldown = true;
     this.fireCooldown = true;
+    this.hitImmune = false;
 
 
     this.jumpForce = 550;
@@ -122,6 +123,7 @@ function Character (x, y, game, player, asset) {
     this.attackCooldownTime = 500;
     this.attack2CooldownTime = 200;
     this.fireCooldownTime = 100;
+    this.hitImmuneTime = 330; //After being attacked, the character cannot be hurted for this time
 
     //this.shadow = game.add.sprite(x, y, 'enemy', 'shadow');
 
@@ -233,6 +235,10 @@ Character.prototype.attack = function (){
 //        cucumber.body.rotation = this.body.rotation; // Este ángulo va en grados
 //        cucumber.body.angularVelocity = 20;
         this.cucumber.body.thrust(1000);
+
+        for(var c in charactersList){
+            this.cucumber.body.setBodyContactCallback(charactersList[c], touchSpikeballEnemy, this);
+        }
 
         game.time.events.add(this.attackCooldownTime, function(){this.cucumber.destroy(); this.attackCooldown = true;}, this)
 
@@ -434,5 +440,5 @@ Character.prototype.isGrounded = function () {
 
 
 Character.prototype.toString = function () {
-    return "Player id: " + this.player + " HP : " + this.health;
+    return "Player id: " + this.player + " HP : " + (this.health > 0 ? this.health : 'dead');
 }

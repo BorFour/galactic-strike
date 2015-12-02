@@ -71,6 +71,14 @@ io.on('connection', function (socket) {
 
     });
 
+    socket.on('hit', function (input) {
+
+        var output = {};
+        output.id = input.id;
+        socket.broadcast.emit('hit', output);
+
+    });
+
     socket.on('disconnect', function () {
 
         var output = {};

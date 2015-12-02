@@ -1,8 +1,12 @@
 
 /**
- * Jumps from the planet the character is grounded to
+ * This file is an extension of character.js
  */
 
+
+/**
+ * Jumps from the planet the character is grounded to
+ */
 Character.prototype.jump = function (){
     if(this.planetTouched != null && this.jumpCooldown){
         this.jumpCooldown = false;

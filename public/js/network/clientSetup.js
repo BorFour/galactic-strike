@@ -171,6 +171,9 @@ function myCharacterSetup(character){
             respawnKey.onDown.add(function(){
                 console.log("DIE")
                 GALACTIC_STRIKE.player.character.die();
+                charactersList[GALACTIC_STRIKE.player.id] = new Character(game.world.randomX, game.world.randomY, game, GALACTIC_STRIKE.player.id, 'player');
+                GALACTIC_STRIKE.player.character = charactersList[GALACTIC_STRIKE.player.id];
+                myCharacterSetup(GALACTIC_STRIKE.player.character);
             }, this);
             game.input.keyboard.removeKeyCapture(Phaser.Keyboard.R);
 

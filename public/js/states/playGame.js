@@ -71,6 +71,7 @@ load_assets = function (){
 		game.load.image("ruedaR", "../assets/spritesIndividuales/robotnik/slice03_03.png");
 
         game.load.audio('jump', ['../assets/jump.ogg', '../assets/jump.mp3']);
+        game.load.audio('pingas', '../assets/sound/pingas.mp3');
 
 }
 
@@ -250,7 +251,7 @@ function touchSpikeballEnemy(body1, body2, fixture1, fixture2, begin) {
 
             var output = {  id : GALACTIC_STRIKE.player.id,
                             target : body2.mainSprite.id };
-            body2.mainSprite.health -= 100;
+            body2.mainSprite.health -= body1.sprite.damage;
             output.health = body2.mainSprite.health
             if(body2.mainSprite.health <= 0)
             {

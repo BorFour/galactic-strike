@@ -39,6 +39,9 @@ preload: function () {
     game.load.audio('muteCity', '../assets/sound/mute_city.mp3');
     game.load.audio('dreamLand', '../assets/sound/dream_land.mp3');
     game.load.audio('witch', '../assets/sound/witch_doctor.mp3');
+    game.load.audio('jump', ['../assets/jump.ogg', '../assets/jump.mp3']);
+    game.load.audio('pingas', '../assets/sound/pingas.mp3');
+
 //    game.load.audio('dedede', '../assets/sound/king_dedede.mp3');
 
 },

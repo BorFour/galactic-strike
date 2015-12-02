@@ -11,8 +11,8 @@ function SpacePhysics(game){
 
     // groups containing crates and planets
 
-    this.dynamicGroup = game.add.group();
-    this.planetGroup = game.add.group();
+    this.dynamicGroup = [];
+    this.planetGroup = [];
     this.planet;
 
     //flag for gameover and limit of crates
@@ -47,7 +47,7 @@ SpacePhysics.prototype.consoleLog = function() {
  */
 
 SpacePhysics.prototype.addPlanet = function (planet) {
-        this.planetGroup.add(planet);
+        this.planetGroup.push(planet);
         return planet;
 }
 
@@ -57,7 +57,7 @@ SpacePhysics.prototype.addPlanet = function (planet) {
  */
 
 SpacePhysics.prototype.addDynamic = function (sprite){
-    this.dynamicGroup.add(sprite)
+    this.dynamicGroup.push(sprite)
 }
 
 /**
@@ -66,13 +66,13 @@ SpacePhysics.prototype.addDynamic = function (sprite){
 
 SpacePhysics.prototype.update = function (){
         // Para cada elemento dinámico
-		for(var i=0;i<this.dynamicGroup.total;i++){
-			var c = this.dynamicGroup.getChildAt(i);
+		for(var i=0;i<this.dynamicGroup.length;i++){
+			var c = this.dynamicGroup[i];
             var atmosphere = []; // Planetas en cuya atmósfera se encuentra c
 			// Para cada planeta (generador de gravedad)
             if (c.body.static) continue;
-			for(var j=0;j<this.planetGroup.total;j++){
-				var p = this.planetGroup.getChildAt(j);
+			for(var j=0;j<this.planetGroup.length;j++){
+				var p = this.planetGroup[j];
 				// Distancia entre dos puntos
 				var distance = Phaser.Math.distance(c.x,c.y,p.x,p.y);
 				// Si la distancia es menor que el radio de acción del planeta

@@ -10,6 +10,7 @@ Room = function (name, host, maxUsers, ip, port) {
     this.port = port;
     this.players = [].push(host);
     this.teams = [];
+    this.current_gamemode = 0;
 
 };
 

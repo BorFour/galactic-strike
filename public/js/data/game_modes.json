@@ -1,0 +1,81 @@
+var gameModes =
+{
+    'deathmatch' : {
+        'name' : 'deathmatch',
+        'init' : function () {
+
+             this.scores = []
+             for (var t in this.teams)
+             {
+                this.scores[t] = 0;
+             }
+
+        },
+        'startRound' : function () {
+
+            this.stage.load();
+            for (var i = 0; i < this.room.teams.length; i++)
+            {
+                for (var j = 0; j < this.room.teams[i].players.length; j++)
+                {
+                    this.room.teams[i].players[j].spawn();
+                }
+            }
+
+        },
+        'winner' : function (){
+
+            var maxScore = Number.MIN_VALUE;
+            var maxTeams = null;
+            for (var t in this.teams){
+                if(this.scores[t] === maxScore){
+                    maxTeams.push(this.teams[t]);
+                }
+                else if (this.scores[t] > maxScore){
+                    maxScore = this.scores[t];
+                    maxTeams = [].push(this.teams[t]);
+                }
+            }
+
+            return maxTeams;
+
+        },
+        'isOverGame' : function (){
+
+            return this.scores.some(function(element, index, array){
+                return element >= this.winScore;
+            });
+
+        },
+        'winScore' : 5,
+        'showWinner' : function (winners) {
+
+        var nameLabel = game.add.text(game.world.centerX, -50, (winners.length > 1 ? 'DRAW!!' : winners[0] + ' wins!'),{ font: '70px Geo   ', fill: '#ffffff' });
+        nameLabel.anchor.setTo(0.5, 0.5);
+
+        game.add.tween(nameLabel).to({y: 180}, 1000).easing(Phaser.Easing.Bounce.Out).start();
+
+
+        },
+        'update' : function (){
+
+            if(this.isOverRound())
+            {
+                this.scores[this.winnerRound()] += 1;
+                if(this.isOverGame())
+                {
+                    this.showWinner(this.winner());
+                    return true;
+                }
+                else
+                {
+                    this.startRound();
+                }
+            }
+
+            return false;
+
+        }
+    }
+
+}

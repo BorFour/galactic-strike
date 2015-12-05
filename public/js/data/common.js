@@ -10,5 +10,6 @@ var GALACTIC_STRIKE = {
         BULLET : 3
     },
     zoomed : false,
+    AVAILABLE_GAMEMODES : ['deathmatch'],
 
 };

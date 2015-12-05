@@ -29,6 +29,7 @@ GALACTIC_STRIKE.Boot.prototype = {
     },
     preload: function () {
         //this.load.image('appsbude', 'images/appsbude-logo.jpg');
+         game.load.image('progressBar', '../assets/progressBar.png');
 },
     create: function () {
         this.state.start('Preloader');

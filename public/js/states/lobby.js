@@ -21,8 +21,10 @@ GALACTIC_STRIKE.Lobby.prototype = {
 
 
         var style = { font: "bold 32px Arial", fill: "#fff", boundsAlignH: "center", boundsAlignV: "middle" };
-        bmpText = game.add.text(game.world.centerX - 125, game.world.centerY, "Esto es el lobby", style);
+        bmpText = game.add.text(game.world.centerX, game.world.centerY, "Esto es el lobby", style);
+        bmpText.anchor.set(0.5);
 
+        GALACTIC_STRIKE.room.addPlayer(GALACTIC_STRIKE.player.id, GALACTIC_STRIKE.player);
 
         if(GALACTIC_STRIKE.player.id === GALACTIC_STRIKE.room.host.id)
         {
@@ -33,17 +35,58 @@ GALACTIC_STRIKE.Lobby.prototype = {
 
 
 
-        buttonRed = game.add.button(game.world.centerX - 440, game.world.centerY - 300, 'redTeam', function(){GALACTIC_STRIKE.player.joinTeam(GALACTIC_STRIKE.room.teams[0])}, this, 0, 0, 0, 0);
+        buttonRed = game.add.button(game.world.centerX - 440, game.world.centerY - 300, 'redTeam', function(){
+            delete GALACTIC_STRIKE.room.unasigned[GALACTIC_STRIKE.player.id];
+            GALACTIC_STRIKE.player.joinTeam(GALACTIC_STRIKE.room.teams[0]);
+            bmpText.text = GALACTIC_STRIKE.room.teams[0].name;
+        }, this, 0, 0, 0, 0);
         buttonRed.scale.set(0.3);
 
-        buttonBlue = game.add.button(game.world.centerX + 200, game.world.centerY - 300, 'blueTeam', function(){GALACTIC_STRIKE.player.joinTeam(GALACTIC_STRIKE.room.teams[1])}, this, 0,  0, 0, 0);
+        buttonBlue = game.add.button(game.world.centerX + 200, game.world.centerY - 300, 'blueTeam',function(){
+            delete GALACTIC_STRIKE.room.unasigned[GALACTIC_STRIKE.player.id];
+            GALACTIC_STRIKE.player.joinTeam(GALACTIC_STRIKE.room.teams[1]);
+            bmpText.text = GALACTIC_STRIKE.room.teams[1].name;
+        }, this, 0,  0, 0, 0);
         buttonBlue.scale.set(0.3);
+
+        GALACTIC_STRIKE.room.textRed = [];
+        GALACTIC_STRIKE.room.textBlue = [];
+        GALACTIC_STRIKE.room.textUnasigned = [];
+
+        for (var i = 0; i < 4; i++){
+            GALACTIC_STRIKE.room.textRed[i] = game.add.text(game.world.centerX - 350, game.world.centerY + i * 50, "Slot", style);
+            GALACTIC_STRIKE.room.textRed[i].anchor.set(0.5);
+
+        }
+
+        for (var i = 0; i < 4; i++){
+            GALACTIC_STRIKE.room.textBlue[i] = game.add.text(game.world.centerX + 300, game.world.centerY + i * 50, "Slot", style);
+            GALACTIC_STRIKE.room.textBlue[i].anchor.set(0.5);
+        }
+
+
+        for (var i = 0; i < 4; i++){
+            GALACTIC_STRIKE.room.textUnasigned[i] = game.add.text(game.world.centerX, game.world.centerY - 250 + i * 50, "Slot", style);
+            GALACTIC_STRIKE.room.textUnasigned[i].anchor.set(0.5);
+        }
 
 	},
 	update: function() {
-        if(GALACTIC_STRIKE.player.team){
-            bmpText.text = GALACTIC_STRIKE.player.team.name
+
+        for (var i = 0; i < 4; i++){
+            GALACTIC_STRIKE.room.textRed[i].text = (GALACTIC_STRIKE.room.teams[0].players[i] ? GALACTIC_STRIKE.room.teams[0].players[i].nickname : "[     ]");
         }
+
+        for (var i = 0; i < 4; i++){
+            GALACTIC_STRIKE.room.textBlue[i].text = (GALACTIC_STRIKE.room.teams[1].players[i] ? GALACTIC_STRIKE.room.teams[1].players[i].nickname : "[     ]");
+        }
+
+        for (var i = 0; i < 4; i++){
+            var u = Object.keys(GALACTIC_STRIKE.room.unasigned)[i];
+            GALACTIC_STRIKE.room.textUnasigned[i].text = (GALACTIC_STRIKE.room.unasigned[u] ? GALACTIC_STRIKE.room.unasigned[u].nickname : "[     ]");
+        }
+
+
 	},
 	beginMatch: function(pointer) {
         socket.emit('beginMatch', {id : GALACTIC_STRIKE.player.id });

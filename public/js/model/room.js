@@ -9,7 +9,7 @@ Room = function (name, host, maxUsers) {
     this.players = {};
     this.players[host.id] = host;
     this.teams = [];
-    this.unasigned = []
+    this.unasigned = {};
     this.current_gamemode = 0;
 
 };
@@ -18,7 +18,7 @@ Room = function (name, host, maxUsers) {
 Room.prototype.addPlayer = function(id, player) {
 
     this.players[id] = player;
-    this.unasigned.push(player);
+    this.unasigned[id] = player;
     player.id = id;
     return player;
 

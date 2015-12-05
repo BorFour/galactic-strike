@@ -105,6 +105,7 @@ io.on('connection', function (socket) {
 
         var output = {};
         output.id = input.id;
+        output.name = input.name;
 
         console.log('@Server received\t| joinRoom');
 

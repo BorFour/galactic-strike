@@ -60,7 +60,7 @@ load_assets = function (){
 		game.load.image("cucumber", "../assets/cucumber.png");
 		game.load.image("spikeball", "../assets/spikeball.gif");
         //game.load.spritesheet("player", "../assets/ironman_45_75.png", 45, 75);
-        game.load.image("player", "../assets/spritesIndividuales/robotnik/slice04_04.png"); //rueda: 26_23  | robotnik: 49_43
+        game.load.spritesheet("player", "../assets/spritesIndividuales/robotnik/robotnik_blue.png", 49, 59); //rueda: 26_23  | robotnik: 49_43
 
         //game.load.spritesheet("player_jump", "assets/jump_fly_land.png", 52, 75);
         game.load.spritesheet("deathstar", "../assets/deathstar.gif", 64, 64);

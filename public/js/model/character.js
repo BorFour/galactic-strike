@@ -30,10 +30,6 @@ function Character (x, y, game, player, asset) {
     this.LEFT = -1;
     this.orientation = 1;
 
-    //Display player name
-    var text = game.add.text(-40, 40, "defaultName", {font: "16px Arial", fill: "#ffffff"});
-    this.addChild(text);
-
     // Cooldowns
     this.jumpCooldown = true;
     this.attackCooldown = true;
@@ -134,15 +130,18 @@ function Character (x, y, game, player, asset) {
 
     //this.shadow = game.add.sprite(x, y, 'enemy', 'shadow');
 
+
+    this.animations.add('left', [0], 10, true);
+    this.animations.add('right', [1], 10, true);
+    this.animations.add('jump', [2], 10, true);
+    //this.animations.add('fly', [3], 10, true);
+
     /*
-    this.animations.add('left', [0, 1, 2], 10, true);
-    this.animations.add('right', [4, 5, 6], 10, true);
-    this.animations.add('stop', [3], 10, true);
-    this.animations.add('jump', [7, 8], 10, true);
+       this.animations.add('stop', [3], 10, true);
     this.animations.add('fly', [9], 10, true);
     this.animations.add('land', [10, 11], 10, true);
-    */
 
+*/
 
     //this.shadow.anchor.set(0.5);ç
 
@@ -215,11 +214,12 @@ Character.prototype.moveGrounded = function(direction){
          case 'down':
             this.motorSpeed = 0;
             this.animations.stop();
-            this.animations.play('stop');
+            this.animations.play('left');
             break;
         case 'still':
             this.motorEnabled = false;
             this.animations.stop();
+            this.animations.play('left');
 //            this.animations.play('stop');
             break;
     }
@@ -250,7 +250,10 @@ Character.prototype.moveInOrbit = function(direction){
             break;
          case 'jetpack':
             this.body.thrust(700);
-            this.animations.play('fly');
+            this.animations.play('jump');
+            break;
+         default:
+            this.animations.play('left');
             break;
     }
 
@@ -274,11 +277,11 @@ Character.prototype.moveSpace = function(direction){
             break;
          case 'up':
             this.body.thrust(200);
-            this.animations.play('fly');
+            this.animations.play('jump');
             break;
          case 'down':
             this.body.reverse(200);
-            this.animations.play('fly');
+            this.animations.play('jump');
             break;
          case 'rotateL':
             this.body.angularVelocity -= 0.15;
@@ -288,7 +291,7 @@ Character.prototype.moveSpace = function(direction){
             break;
         case 'still':
             this.animations.stop();
-            this.animations.play('stop');
+            this.animations.play('left');
             break;
     }
 

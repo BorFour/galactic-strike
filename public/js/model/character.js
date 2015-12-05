@@ -30,6 +30,10 @@ function Character (x, y, game, player, asset) {
     this.LEFT = -1;
     this.orientation = 1;
 
+    //Display player name
+    var text = game.add.text(-40, 40, "defaultName", {font: "16px Arial", fill: "#ffffff"});
+    this.addChild(text);
+
     // Cooldowns
     this.jumpCooldown = true;
     this.attackCooldown = true;

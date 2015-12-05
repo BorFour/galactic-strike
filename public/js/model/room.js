@@ -8,8 +8,9 @@ Room = function (name, host, maxUsers) {
     this.maxUsers = maxUsers;
     this.players = {};
     this.players[host.id] = host;
+    this.unasigned = new Team ("Unasigned", -1);
+    host.joinTeam(this.unasigned);
     this.teams = [];
-    this.unasigned = {};
     this.current_gamemode = 0;
 
 };

@@ -14,8 +14,6 @@ Player.prototype.joinTeam = function(team) {
 
     this.leaveTeam();
     team.addPlayer(this);
-    this.team = team;
-
 }
 
 

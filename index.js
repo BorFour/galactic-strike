@@ -79,6 +79,10 @@ io.on('connection', function (socket) {
 
     });
 
+    //////////
+    // ROOM
+    //
+
     socket.on('createRoom', function (input) {
 
         var output = {};
@@ -116,10 +120,27 @@ io.on('connection', function (socket) {
             socket.join('Room1');
 //            console.log(socket.rooms);
             room.players[input.id] = input.name;
-            io.to('Room1').emit('userJoinedRoom', output);
+            output.players = room.players;
+            io.to('Room1').emit('joinRoom', output);
 
         }
 //           socket.emit('userJoinedRoom', output);
+
+    });
+
+    socket.on('changeTeam', function (input) {
+
+        var output = {};
+        output.id = input.id;
+        output.team_id = input.team_id;
+
+         console.log('@Server received\t| changeTeam');
+
+        if(room.state === 'lobby')
+        {
+            io.to('Room1').emit('changeTeam', output);
+        }
+
 
     });
 
@@ -134,6 +155,10 @@ io.on('connection', function (socket) {
 
     });
 
+
+    //////////
+    // GAME
+    //
 
     socket.on('joinGame', function (input) {
 

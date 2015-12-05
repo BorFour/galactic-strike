@@ -36,16 +36,19 @@ GALACTIC_STRIKE.Lobby.prototype = {
 
 
         buttonRed = game.add.button(game.world.centerX - 440, game.world.centerY - 300, 'redTeam', function(){
-            delete GALACTIC_STRIKE.room.unasigned[GALACTIC_STRIKE.player.id];
+
+            socket.emit('changeTeam', {id : GALACTIC_STRIKE.player.id, team_id : 0});
             GALACTIC_STRIKE.player.joinTeam(GALACTIC_STRIKE.room.teams[0]);
             bmpText.text = GALACTIC_STRIKE.room.teams[0].name;
         }, this, 0, 0, 0, 0);
         buttonRed.scale.set(0.3);
 
         buttonBlue = game.add.button(game.world.centerX + 200, game.world.centerY - 300, 'blueTeam',function(){
-            delete GALACTIC_STRIKE.room.unasigned[GALACTIC_STRIKE.player.id];
+
+            socket.emit('changeTeam', {id : GALACTIC_STRIKE.player.id, team_id : 1});
             GALACTIC_STRIKE.player.joinTeam(GALACTIC_STRIKE.room.teams[1]);
             bmpText.text = GALACTIC_STRIKE.room.teams[1].name;
+
         }, this, 0,  0, 0, 0);
         buttonBlue.scale.set(0.3);
 
@@ -82,8 +85,7 @@ GALACTIC_STRIKE.Lobby.prototype = {
         }
 
         for (var i = 0; i < 4; i++){
-            var u = Object.keys(GALACTIC_STRIKE.room.unasigned)[i];
-            GALACTIC_STRIKE.room.textUnasigned[i].text = (GALACTIC_STRIKE.room.unasigned[u] ? GALACTIC_STRIKE.room.unasigned[u].nickname : "[     ]");
+            GALACTIC_STRIKE.room.textUnasigned[i].text = (GALACTIC_STRIKE.room.unasigned.players[i] ? GALACTIC_STRIKE.room.unasigned.players[i].nickname : "[     ]");
         }
 
 

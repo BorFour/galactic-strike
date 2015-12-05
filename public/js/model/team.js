@@ -27,7 +27,7 @@ Team.prototype.removePlayer = function (player){
 
     // Warning!
     this.players = this.players.filter(function (el) {
-                        return el === player;
+                        return el.id === player.id;
                        });
     player.team = null;
 

@@ -25,21 +25,19 @@ io.on('connection', function (socket) {
 
         var output = {
             id : currId,
-            players : players
         };
         console.log('@Server received\t| login');
         socket.join('General');
 
         players[currId] = input;
-        socket.id = currId;
+        socket.game_id = currId;
         currId++;
         nPlayers++;
 
 
-        socket.emit('IDPlayers', output);
+//        socket.emit('IDPlayers', output);
+        socket.emit('ID', output);
         console.log('@Server sent    \t| IDPlayer');
-        socket.broadcast.emit('userJoined', output);
-        console.log('@Server sent    \t| userJoined');
         console.log('@Server log     \t| nPlayers = ' + nPlayers);
 
     });
@@ -48,8 +46,8 @@ io.on('connection', function (socket) {
 
         var output = input;
 //        console.log('@Server received | update');
-        players[socket.id] = input;
-        output.id = socket.id;
+        players[socket.game_id] = input;
+        output.id = socket.game_id;
         socket.broadcast.emit('update', input);
 //        console.log('@Server sent | update');
 
@@ -86,6 +84,8 @@ io.on('connection', function (socket) {
         var output = {};
         output.id = input.id;
 
+         console.log('@Server received\t| createRoom');
+
         if(room.state === 'empty')
         {
             socket.join('Room1');
@@ -93,6 +93,8 @@ io.on('connection', function (socket) {
             room.players = {};
             room.players[input.id] = input.name;
             room.host = input.id;
+            socket.emit('roomCreated', output);
+
         }
 
 
@@ -104,13 +106,19 @@ io.on('connection', function (socket) {
         var output = {};
         output.id = input.id;
 
+        console.log('@Server received\t| joinRoom');
+
         if(room.state === 'lobby')
         {
+            console.log('@Server join into lobby');
+            socket.room = 'Room1';
             socket.join('Room1');
+//            console.log(socket.rooms);
             room.players[input.id] = input.name;
-        }
+            io.to('Room1').emit('userJoinedRoom', output);
 
-        socket.in('Room1').emit('userJoinedRoom', output);
+        }
+//           socket.emit('userJoinedRoom', output);
 
     });
 
@@ -121,7 +129,37 @@ io.on('connection', function (socket) {
 
         socket.leave('Room1');
         delete room.players[input.id];
-        socket.in('Room1').emit('userLeftRoom', output);
+        io.to('Room1').emit('userLeftRoom', output);
+
+    });
+
+
+    socket.on('joinGame', function (input) {
+
+        var output = {};
+        output.id = input.id;
+//        output.name = room.players[input.id];
+
+        if(room.state === 'ingame')
+        {
+            io.to('Room1').emit('userJoinedGame', output);
+//            console.log('@Server sent    \t| userJoined');
+        }
+
+        socket.emit('userJoinedGame', output);
+
+
+
+    });
+
+    socket.on('leaveGame', function (input) {
+
+        var output = {};
+        output.id = input.id;
+
+        socket.leave('Room1');
+        delete room.players[input.id];
+        io.to('Room1').emit('userLeftRoom', output);
 
     });
 
@@ -129,6 +167,8 @@ io.on('connection', function (socket) {
 
         var output = {};
         output.id = input.id;
+
+        console.log('@Server received\t| beginMatch');
 
         if(input.id !== room.host){
 
@@ -138,9 +178,12 @@ io.on('connection', function (socket) {
         }
         else{
             room.state = 'ingame';
-            socket.in('Room1').emit('beginMatch', output);
+
+            io.to('Room1').emit('beginMatch', output);
+
         }
 
+        socket.emit('beginMatch', output);
 
     });
 
@@ -148,10 +191,21 @@ io.on('connection', function (socket) {
 
         var output = {};
         console.log('@Server received\t| disconnect');
-        console.log('@Server log     \t| user ' + socket.id + ' left')
-        output.id = socket.id;
+        console.log('@Server log     \t| user ' + socket.game_id + ' left')
+        output.id = socket.game_id;
         socket.broadcast.emit('userLeft', output);
-        delete players[socket.id];
+        delete players[socket.game_id];
+        delete room.players[socket.game_id];
+
+        var playersRoom = 0;
+        for (var pr in room.players) playersRoom ++;
+
+        if(playersRoom === 0) {
+            console.log('@Server log     \t| empty room');
+            room.state = 'empty';
+        } else{
+            console.log(room.players);
+        }
         nPlayers--;
         console.log('@Server sent    \t| userLeft');
 

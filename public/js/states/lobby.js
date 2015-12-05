@@ -19,24 +19,23 @@ GALACTIC_STRIKE.Lobby.prototype = {
     },
 	create: function() {
 
-        GALACTIC_STRIKE.room = new Room("Default", GALACTIC_STRIKE.player, 8, "localhost", 3000);
-        GALACTIC_STRIKE.room.addTeam("Red Team");
-        GALACTIC_STRIKE.room.addTeam("Blue Team");
-
-        console.log(GALACTIC_STRIKE.room);
 
         var style = { font: "bold 32px Arial", fill: "#fff", boundsAlignH: "center", boundsAlignV: "middle" };
-        bmpText = game.add.text(game.world.centerX - 100, game.world.centerY, "Esto es el lobby", style);
+        bmpText = game.add.text(game.world.centerX - 125, game.world.centerY, "Esto es el lobby", style);
+
+
+        if(GALACTIC_STRIKE.player.id === GALACTIC_STRIKE.room.host.id)
+        {
+            buttonBegin = game.add.button(game.world.centerX - 195, 400, 'buttonEnter', this.beginMatch, this, 0, 0, 0, 0);
+        }
+//        buttonDisband = game.add.button(game.world.centerX + 195, 400, 'buttonCreate', this.disbandRoom, this, 0, 0, 0, 0);
 
 
 
-        // Aquí habría que crear todos los elementos gráficos del lobby
-        buttonBegin = game.add.button(game.world.centerX - 195, 400, 'buttonEnter', this.beginMatch, this, 0, 0, 0, 0);
-        buttonDisband = game.add.button(game.world.centerX + 195, 400, 'buttonCreate', this.disbandRoom, this, 0, 0, 0, 0);
-
-        buttonRed = game.add.button(game.world.centerX - 400, game.world.centerY - 250, 'redTeam', function(){GALACTIC_STRIKE.player.joinTeam(GALACTIC_STRIKE.room.teams[0])}, this, 0, 0, 0, 0);
+        buttonRed = game.add.button(game.world.centerX - 440, game.world.centerY - 300, 'redTeam', function(){GALACTIC_STRIKE.player.joinTeam(GALACTIC_STRIKE.room.teams[0])}, this, 0, 0, 0, 0);
         buttonRed.scale.set(0.3);
-        buttonBlue = game.add.button(game.world.centerX + 200, game.world.centerY - 250, 'blueTeam', function(){GALACTIC_STRIKE.player.joinTeam(GALACTIC_STRIKE.room.teams[1])}, this, 0, 0, 0, 0);
+
+        buttonBlue = game.add.button(game.world.centerX + 200, game.world.centerY - 300, 'blueTeam', function(){GALACTIC_STRIKE.player.joinTeam(GALACTIC_STRIKE.room.teams[1])}, this, 0, 0, 0, 0);
         buttonBlue.scale.set(0.3);
 
 	},
@@ -46,7 +45,7 @@ GALACTIC_STRIKE.Lobby.prototype = {
         }
 	},
 	beginMatch: function(pointer) {
-		this.state.start('PlayGame');
+        socket.emit('beginMatch', {id : GALACTIC_STRIKE.player.id });
 	},
     disbandRoom: function(pointer) {
         // El host decide eliminar la sala

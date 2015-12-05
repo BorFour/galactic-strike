@@ -132,7 +132,7 @@ GALACTIC_STRIKE.PlayGame.prototype = {
 //            planets.push(planet)
 //            planets.push(bigPlanet)
         planets.push(giantPlanet)
-
+        giantPlanet.body.setCircle(525);
 
         console.log("Planets: " + planets)
 
@@ -153,17 +153,12 @@ GALACTIC_STRIKE.PlayGame.prototype = {
 //        game.spacePhysics.addDynamic(objetoPrueba);
 
 
-        // Crea la conexión con el servidor
-        socket = io();
-        console.log(io)
-        console.log(socket)
-        if(socket){
-            console.log("@Socket.io | Cliente conectado");
-        }
+//        game.time.events.loop(GALACTIC_STRIKE.updateOnlineRate, function(){if(myCharacter) myCharacter.updateOnline();}, this);
 
-        clientSetup();
+//         myCharacterSetup(GALACTIC_STRIKE.player.character);
 
         var data = {
+            id : GALACTIC_STRIKE.player.id,
             x: game.world.randomX,
             y: game.world.randomY,
             angle: 0,
@@ -172,11 +167,7 @@ GALACTIC_STRIKE.PlayGame.prototype = {
             orientation: 0
         }
 
-        socket.emit('login', data);
-        console.log('@Client sent | login');
-
-//        game.time.events.loop(GALACTIC_STRIKE.updateOnlineRate, function(){if(myCharacter) myCharacter.updateOnline();}, this);
-
+        socket.emit('joinGame', data);
 
 	},
 	update: function(){
@@ -273,4 +264,94 @@ function touchSpikeballEnemy(body1, body2, fixture1, fixture2, begin) {
 function toRad(value){
     return (value * Math.PI) / 180
 }
+
+
+function myCharacterSetup(character){
+
+
+//            character.jumpSound = game.add.audio('jump');
+
+//            game.spacePhysics.addDynamic(sprite);
+
+            // ESTO PROBABLEMENTE NO DEBA IR AQUÍ
+            game.camera.follow(character, Phaser.Camera.FOLLOW_TOPDOWN_TIGHT);
+
+            var fireKey = game.input.keyboard.addKey(Phaser.Keyboard.NUMPAD_0);
+            fireKey.onDown.add(function(){character.fire()}, this);
+            game.input.keyboard.removeKeyCapture(Phaser.Keyboard.NUMPAD_0);
+
+
+
+            var attackKey = game.input.keyboard.addKey(Phaser.Keyboard.UP);
+            attackKey.onDown.add(function(){
+                var output = {id:GALACTIC_STRIKE.player.id};
+                socket.emit('attack', output);
+                character.attack()}, this);
+            game.input.keyboard.removeKeyCapture(Phaser.Keyboard.UP);
+
+
+
+            var attack2Key = game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
+            attack2Key.onDown.add(function(){
+                var output = {id:GALACTIC_STRIKE.player.id};
+                socket.emit('attack2', output);
+                character.attack2()}, this);
+            game.input.keyboard.removeKeyCapture(Phaser.Keyboard.DOWN);
+
+
+
+            var zoomKey = game.input.keyboard.addKey(Phaser.Keyboard.Z);
+            zoomKey.onDown.add(function(){
+                if (!GALACTIC_STRIKE.zoomed){
+                    game.camera.follow(null);
+                    game.add.tween(game.world.scale).to( {x: 0.5, y:0.5}, 350, Phaser.Easing.Quadratic.InOut, true);
+                    GALACTIC_STRIKE.zoomed = true;
+                    game.camera.follow(GALACTIC_STRIKE.player.character, Phaser.Camera.FOLLOW_TOPDOWN_TIGHT);
+
+                }
+                else{
+                    game.camera.follow(null);
+                    game.add.tween(game.world.scale).to( {x: 1, y:1}, 350, Phaser.Easing.Quadratic.InOut, true);
+                    GALACTIC_STRIKE.zoomed = false;
+                    game.camera.follow(GALACTIC_STRIKE.player.character,  Phaser.Camera.FOLLOW_TOPDOWN_TIGHT);
+                }
+            }, this);
+            game.input.keyboard.removeKeyCapture(Phaser.Keyboard.Z);
+
+
+
+            var muteKey = game.input.keyboard.addKey(Phaser.Keyboard.M);
+            muteKey.onDown.add(function(){
+                if (!game.sound.mute){
+                    game.sound.mute = true;
+                }
+                else{
+                    game.sound.mute = false;
+                }
+            }, this);
+            game.input.keyboard.removeKeyCapture(Phaser.Keyboard.M);
+
+
+            var respawnKey = game.input.keyboard.addKey(Phaser.Keyboard.R);
+            respawnKey.onDown.add(function(){
+                console.log("DIE")
+                GALACTIC_STRIKE.player.character.die();
+                charactersList[GALACTIC_STRIKE.player.id] = new Character(game.world.randomX, game.world.randomY, game, GALACTIC_STRIKE.player.id, 'player');
+                GALACTIC_STRIKE.player.character = charactersList[GALACTIC_STRIKE.player.id];
+                myCharacterSetup(GALACTIC_STRIKE.player.character);
+            }, this);
+            game.input.keyboard.removeKeyCapture(Phaser.Keyboard.R);
+
+
+            for (var i = 0; i < planets.length; i++){
+//                myCharacter.body.setBodyContactCallback(planets[i], touchPlanetCallback, this);
+                character.body.setBodyPresolveCallback(planets[i], touchPlanetCallback, this);
+                character.wheels[0].body.setBodyPresolveCallback(planets[i], touchPlanetCallback, this);
+                character.wheels[1].body.setBodyPresolveCallback(planets[i], touchPlanetCallback, this);
+
+            }
+
+//            character.body.setColissionCategory(GALACTIC_STRIKE.COLLISION_CATEGORY.PLAYER);
+}
+
 

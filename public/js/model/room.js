@@ -1,23 +1,23 @@
 
 
-Room = function (name, host, maxUsers, ip, port) {
+Room = function (name, host, maxUsers) {
 
 
     this.name = name;
     this.host = host; // Player
     this.maxUsers = maxUsers;
-    this.ip = ip;
-    this.port = port;
-    this.players = [].push(host);
+    this.players = {};
+    this.players[host.id] = host;
     this.teams = [];
     this.current_gamemode = 0;
 
 };
 
 
-Room.prototype.addPlayer = function(player) {
+Room.prototype.addPlayer = function(id, player) {
 
-    this.players.push(player);
+    this.players[id] = player;
+    player.id = id;
 
 }
 
@@ -29,7 +29,6 @@ Room.prototype.addTeam = function (name){
         if(!name){
           name = "Team " + (this.teams.length+1);
         }
-        console.log("Miau");
         this.teams.push(new Team (name, this.teams.length+1));
     }
 
@@ -42,6 +41,11 @@ Room.prototype.dropTeam = function(){
     }
 
 }
+
+/**
+ * UNUSED
+ * @returns {Bool} all the players are ready
+ */
 
 Room.prototype.playersReady = function(){
 

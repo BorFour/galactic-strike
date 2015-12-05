@@ -57,6 +57,32 @@ load_assets = function (){
 
 }
 
+server_connection = function (){
+
+    // Crea la conexión con el servidor
+    socket = io();
+    console.log(io)
+    console.log(socket)
+    if(socket){
+        console.log("@Socket.io | Cliente conectado");
+    }
+
+    clientSetup();
+
+    var data = {
+        x: game.world.randomX,
+        y: game.world.randomY,
+        angle: 0,
+        velocityX : 0,
+        velocityY : 0,
+        orientation: 0
+    }
+
+    socket.emit('login', data);
+    console.log('@Client sent | login');
+
+}
+
 GALACTIC_STRIKE.Preloader.prototype = {
 
 preload: function () {
@@ -94,7 +120,7 @@ create: function () {
     load_songs();
     load_assets();
 
-
+    server_connection();
 
     /////////////////////
     // FONDO DE ESTRELLAS

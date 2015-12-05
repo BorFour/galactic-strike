@@ -146,9 +146,6 @@ io.on('connection', function (socket) {
 //            console.log('@Server sent    \t| userJoined');
         }
 
-        socket.emit('userJoinedGame', output);
-
-
 
     });
 

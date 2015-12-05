@@ -18,6 +18,7 @@ load_songs = function(){
     GALACTIC_STRIKE.songs.push(game.add.audio('muteCity', 1, true));
     GALACTIC_STRIKE.songs.push(game.add.audio('dreamLand', 1, true));
     GALACTIC_STRIKE.songs.push(game.add.audio('witch', 1, true));
+    GALACTIC_STRIKE.songs.push(game.add.audio('pingasDreamLand', 1, true));
 //    GALACTIC_STRIKE.songs.push(game.add.audio('dedede'));
     GALACTIC_STRIKE.songs[Math.floor(Math.random()*GALACTIC_STRIKE.songs.length)].play();
 
@@ -108,6 +109,7 @@ preload: function () {
     game.load.audio('witch', '../assets/sound/witch_doctor.mp3');
     game.load.audio('jump', ['../assets/jump.ogg', '../assets/jump.mp3']);
     game.load.audio('pingas', '../assets/sound/pingas.mp3');
+    game.load.audio('pingasDreamLand', '../assets/sound/pingas_dreamland.mp3');
 
 //    game.load.audio('dedede', '../assets/sound/king_dedede.mp3');
 

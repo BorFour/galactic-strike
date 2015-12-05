@@ -18,6 +18,8 @@ clientSetupRoom = function (){
 
     socket.on('userJoinedRoom', function (input) {
 
+        var style = { font: "65px Arial", fill: "#ff0044", align: "center" };
+
         console.log('@Client received | userJoinedRoom');
         if(input.id === GALACTIC_STRIKE.player.id)
         {
@@ -25,10 +27,15 @@ clientSetupRoom = function (){
             GALACTIC_STRIKE.room.addTeam("Red Team");
             GALACTIC_STRIKE.room.addTeam("Blue Team");
             game.state.start('Lobby');
+            GALACTIC_STRIKE.player.text = game.add.text(game.world.centerX, game.world.centerY - 100 + GALACTIC_STRIKE.room.unasigned.length * 30, GALACTIC_STRIKE.player.nickname, style);
+            GALACTIC_STRIKE.player.text.anchor.set(0.5);
         }
         else
         {
-            GALACTIC_STRIKE.room.addPlayer(input.id, new Player(input.name));
+
+            var p = GALACTIC_STRIKE.room.addPlayer(input.id, new Player(input.name));
+            p.text = game.add.text(game.world.centerX, 30 + GALACTIC_STRIKE.room.unasigned.length * 30, p.nickname, style);
+//            p.text.anchor.set(0.5);
         }
 
     });

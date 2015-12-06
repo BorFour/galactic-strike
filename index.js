@@ -147,6 +147,14 @@ io.on('connection', function (socket) {
         output.id = input.id;
         output.team = input.team;
 
+        var playersInTeam = 0;
+
+        for (var p in room.players){
+            if(room.players[p].team === input.team) playersInTeam++;
+        }
+
+        if (playersInTeam >= 4) return;
+
         room.players[input.id].team = input.team;
 
          console.log('@Server received\t| changeTeam');

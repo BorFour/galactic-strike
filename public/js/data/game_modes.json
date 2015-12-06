@@ -30,6 +30,7 @@ var gameModes =
             for(var i = 0; i < this.room.teams.length; i++)
             {
                 if(this.room.teams[i].alive()) ++teams_alive;
+                console.log(this.room.teams[i].name + ' ' + this.room.teams[i].alive())
                 winner = this.room.teams[i];
             }
 
@@ -55,18 +56,19 @@ var gameModes =
         },
         'isOverGame' : function (){
 
-            return this.scores.some(function(element, index, array){
-                return element >= this.winScore;
-            });
+                return true;
+ //           return this.scores.some(function(element, index, array){
+ //               return element >= this.winScore;
+ //           });
 
         },
-        'winScore' : 5,
-        'showWinner' : function (winners) {
+        'winScore' : 1,
+        'showWinner' : function (winner) {
 
-        var nameLabel = game.add.text(game.world.centerX, -50, (winners.length > 1 ? 'DRAW!!' : winners[0] + ' wins!'),{ font: '70px Geo   ', fill: '#ffffff' });
+        var nameLabel = game.add.text(game.world.centerX, -50, (winner + ' wins!'),{ font: '70px Geo   ', fill: '#ffffff' });
         nameLabel.anchor.setTo(0.5, 0.5);
 
-        game.add.tween(nameLabel).to({y: 180}, 1000).easing(Phaser.Easing.Bounce.Out).start();
+        game.add.tween(nameLabel).to({y: game.world.centerY/2}, 1000).easing(Phaser.Easing.Bounce.Out).start();
 
 
         },
@@ -79,7 +81,8 @@ var gameModes =
                 console.log(wr.name + ' won this round.' + this.scores[wr] + ' points');
                 if(this.isOverGame())
                 {
-                    this.showWinner(this.winner());
+                    console.log('Showing winner');
+                    this.showWinner(wr);
                     return true;
                 }
                 else

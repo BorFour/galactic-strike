@@ -87,13 +87,28 @@ clientSetupGame = function (){
 
     socket.on('hit', function (input) {
 
-        if(input.target === GALACTIC_STRIKE.player.id) return;
+//        if(input.target === GALACTIC_STRIKE.player.id) return;
 
         console.log('@Client received | hit');
 
         if(charactersList[input.target]){
-            charactersList[input.target].health = input.health;
-            if(input.die) charactersList[input.target].die();
+
+            charactersList[input.target].health -= input.damage;
+//            output.health = body2.mainSprite.health
+            if(charactersList[input.target].health <= 0)
+            {
+                charactersList[input.target].die();
+                delete body2.sprite;
+//                output.die = true;
+            } else
+            {
+//                output.die = false;
+                charactersList[input.target].hitImmune = true;
+                game.time.events.add(charactersList[input.target].hitImmuneTime, function(){charactersList[input.target].hitImmune = false;}, this);
+            }
+
+//            charactersList[input.target].health = input.health;
+//            if(input.die) charactersList[input.target].die();
         }
 
     });

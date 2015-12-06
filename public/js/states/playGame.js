@@ -169,10 +169,12 @@ GALACTIC_STRIKE.PlayGame.prototype = {
         }
 
         socket.emit('joinGame', data);
+        console.log(data);
 
         GALACTIC_STRIKE.room.gameMode = new GameMode(GALACTIC_STRIKE.room, gameModes['deathmatch']);
         GALACTIC_STRIKE.room.gameMode.init();
         GALACTIC_STRIKE.room.gameMode.startRound();
+        GALACTIC_STRIKE.room.gameOver = false;
 
 	},
 	update: function(){
@@ -180,7 +182,7 @@ GALACTIC_STRIKE.PlayGame.prototype = {
         GALACTIC_STRIKE.player.movePlayer();
         if(GALACTIC_STRIKE.player.character) GALACTIC_STRIKE.player.character.updateOnline();
         game.spacePhysics.update();
-        GALACTIC_STRIKE.room.gameMode.update();
+        if(!GALACTIC_STRIKE.room.gameOver) GALACTIC_STRIKE.room.gameOver = GALACTIC_STRIKE.room.gameMode.update();
         orb.rotation += 0.05;
 
 	},
@@ -245,25 +247,21 @@ function touchSpikeballEnemy(body1, body2, fixture1, fixture2, begin) {
            !body2.sprite.hitImmune &&
            body2.sprite.health > 0)
         {
+            if(body1.sprite.owner === GALACTIC_STRIKE.player.character)
+            {
+               console.log(body2.mainSprite.player);
+               var output = {
+                   id : GALACTIC_STRIKE.player.id,
+                   target : body2.mainSprite.player.id,
+                   damage : body1.sprite.damage
+               };
 
-            var output = {  id : GALACTIC_STRIKE.player.id,
-                            target : body2.mainSprite.id };
-            body2.mainSprite.health -= body1.sprite.damage;
-            output.health = body2.mainSprite.health
-            if(body2.mainSprite.health <= 0)
-            {
-                body2.sprite.die();
-                delete body2.sprite;
-                output.die = true;
-            } else
-            {
-                output.die = false;
-                body2.mainSprite.hitImmune = true;
-                game.time.events.add(body2.mainSprite.hitImmuneTime, function(){body2.mainSprite.hitImmune = false;}, this)
+                console.log(output);
+                socket.emit('hit', output);
+                console.log("Hit");
             }
 
-            console.log("Hit")
-            socket.emit('hit', output);
+
         }
 }
 

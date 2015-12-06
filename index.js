@@ -48,7 +48,7 @@ io.on('connection', function (socket) {
 //        console.log('@Server received | update');
         players[socket.game_id] = input;
         output.id = socket.game_id;
-        socket.broadcast.emit('update', input);
+        io.to('Room1').emit('update', input);
 //        console.log('@Server sent | update');
 
     });
@@ -57,7 +57,7 @@ io.on('connection', function (socket) {
 
         var output = {};
         output.id = input.id;
-        socket.broadcast.emit('attack', output);
+        io.to('Room1').emit('attack', output);
 //        console.log('@Server sent | update');
 
     });
@@ -66,16 +66,20 @@ io.on('connection', function (socket) {
 
         var output = {};
         output.id = input.id;
-        socket.broadcast.emit('attack2', output);
+        io.to('Room1').emit('attack2', output);
 //        console.log('@Server sent | update');
 
     });
 
     socket.on('hit', function (input) {
 
+        console.log('@Server received\t| hit');
+        console.log(input);
         var output = {};
         output.id = input.id;
-        socket.broadcast.emit('hit', output);
+        output.target = input.target;
+        output.damage = input.damage;
+        io.to('Room1').emit('hit', output);
 
     });
 
@@ -175,6 +179,8 @@ io.on('connection', function (socket) {
 
         var output = {};
         output.id = input.id;
+        output.x = input.x;
+        output.y = input.y;
 //        output.name = room.players[input.id];
 
         if(room.state === 'ingame')
@@ -217,7 +223,7 @@ io.on('connection', function (socket) {
 
         }
 
-        socket.emit('beginMatch', output);
+//        socket.emit('beginMatch', output);
 
     });
 

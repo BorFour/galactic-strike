@@ -19,8 +19,7 @@ Room = function (name, host, maxUsers) {
 Room.prototype.addPlayer = function(id, player) {
 
     this.players[id] = player;
-//    this.unasigned[id] = player;
-//    player.id = id;
+    player.id = id;
     return player;
 
 }

@@ -378,5 +378,5 @@ Character.prototype.isGrounded = function () {
 
 
 Character.prototype.toString = function () {
-    return "Player id: " + this.player + " HP : " + (this.health > 0 ? this.health : 'dead');
+    return "Player : " + this.player.nickname + " | HP : " + (this.health > 0 ? this.health : 'dead');
 }

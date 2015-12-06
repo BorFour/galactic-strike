@@ -43,8 +43,15 @@ Team.prototype.removePlayer = function (player){
 Team.prototype.alive = function() {
 
 
-    return this.players.every(function (element, index, array) {
-        return (element.character ? element.character.alive : true);
-    });
+    for(var i = 0; i < this.players.length; i++){
 
+        if(this.players[i].character && this.players[i].character.alive) return true;
+
+    }
+
+    return false;
+}
+
+Team.prototype.toString = function (){
+    return this.name;
 }

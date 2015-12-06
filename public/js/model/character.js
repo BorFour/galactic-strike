@@ -131,9 +131,10 @@ function Character (x, y, game, player, asset) {
     //this.shadow = game.add.sprite(x, y, 'enemy', 'shadow');
 
 
-    this.animations.add('left', [0], 10, true);
-    this.animations.add('right', [1], 10, true);
-    this.animations.add('jump', [2], 10, true);
+    this.animations.add('left', [0]);
+    this.animations.add('right', [1]);
+    this.animations.add('jumpL', [2]);
+    this.animations.add('jumpR', [3]);
     //this.animations.add('fly', [3], 10, true);
 
     /*
@@ -214,12 +215,12 @@ Character.prototype.moveGrounded = function(direction){
          case 'down':
             this.motorSpeed = 0;
             this.animations.stop();
-            this.animations.play('left');
+//            this.animations.play('left');
             break;
         case 'still':
             this.motorEnabled = false;
             this.animations.stop();
-            this.animations.play('left');
+//            this.animations.play('left');
 //            this.animations.play('stop');
             break;
     }
@@ -250,10 +251,11 @@ Character.prototype.moveInOrbit = function(direction){
             break;
          case 'jetpack':
             this.body.thrust(700);
-            this.animations.play('jump');
+            if(this.orientation === this.LEFT) this.animations.play('jumpL');
+            if(this.orientation === this.RIGHT) this.animations.play('jumpR');
             break;
          default:
-            this.animations.play('left');
+//            this.animations.play('left');
             break;
     }
 
@@ -277,11 +279,13 @@ Character.prototype.moveSpace = function(direction){
             break;
          case 'up':
             this.body.thrust(200);
-            this.animations.play('jump');
+            if(this.orientation === this.LEFT) this.animations.play('jumpL');
+            if(this.orientation === this.RIGHT) this.animations.play('jumpR');
             break;
          case 'down':
             this.body.reverse(200);
-            this.animations.play('jump');
+            if(this.orientation === this.LEFT) this.animations.play('jumpL');
+            if(this.orientation === this.RIGHT) this.animations.play('jumpR');
             break;
          case 'rotateL':
             this.body.angularVelocity -= 0.15;
@@ -291,7 +295,7 @@ Character.prototype.moveSpace = function(direction){
             break;
         case 'still':
             this.animations.stop();
-            this.animations.play('left');
+//            this.animations.play('left');
             break;
     }
 

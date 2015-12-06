@@ -29,9 +29,13 @@ var gameModes =
             var winner = null;
             for(var i = 0; i < this.room.teams.length; i++)
             {
-                if(this.room.teams[i].alive()) ++teams_alive;
+                if(this.room.teams[i].alive())
+                {
+                    ++teams_alive;
+                    winner = this.room.teams[i];
+                }
                 console.log(this.room.teams[i].name + ' ' + this.room.teams[i].alive())
-                winner = this.room.teams[i];
+
             }
 
             return (teams_alive === 1 ? winner : null);
@@ -67,8 +71,17 @@ var gameModes =
 
         var nameLabel = game.add.text(game.world.centerX, -50, (winner + ' wins!'),{ font: '70px Geo   ', fill: '#ffffff' });
         nameLabel.anchor.setTo(0.5, 0.5);
+        buttonQuit = game.add.button(game.world.centerX, game.world.centerY, 'buttonEnter', function(){
+                socket.emit('leaveGame', {id : GALACTIC_STRIKE.player.id});
+                game.states.start('MainMenu');
+            }, this, 0, 0, 0, 0);
 
+        buttonQuit.anchor.set(0.5);
+
+
+        toButton = game.add.tween(game.camera.follow).to({buttonQuit}, 350, Phaser.Easing.Quadratic.InOut, true);
         game.add.tween(nameLabel).to({y: game.world.centerY/2}, 1000).easing(Phaser.Easing.Bounce.Out).start();
+        toButton.start();
 
 
         },

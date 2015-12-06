@@ -51,7 +51,7 @@ Character.prototype.fire = function (){
 }
 
 Character.prototype.attack = function (){
-    if(this.attackCooldown){
+    if(this.attackCooldown && this.alive){
         this.attackSound.play();
         this.attackCooldown = false;
         this.cucumber = new Item(game, this.body.x + Math.sin(this.body.rotation)* 80, this.body.y - Math.cos(this.body.rotation)*80, items['spikeball']);
@@ -83,7 +83,7 @@ Character.prototype.attack = function (){
 }
 
 Character.prototype.attack2 = function (){
-    if(this.attackCooldown){
+    if(this.attackCooldown && this.alive){
         this.attackSound.play();
         this.attackCooldown = false;
         this.cucumber2 = new Item(game, this.x + Math.cos(this.body.rotation)* 80*this.orientation, this.y + Math.sin(this.body.rotation)*80*this.orientation, items['spikeball']);

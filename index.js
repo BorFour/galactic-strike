@@ -122,7 +122,12 @@ io.on('connection', function (socket) {
 
         console.log('@Server received\t| joinRoom');
 
-        if(room.state === 'lobby')
+        if (room.state === 'ingame')
+        {
+            socket.emit('roomIngame');
+            return;
+        }
+        else if(room.state === 'lobby')
         {
             console.log('@Server join into lobby');
             socket.room = 'Room1';
@@ -203,12 +208,27 @@ io.on('connection', function (socket) {
     socket.on('leaveGame', function (input) {
 
         var output = {};
-        output.id = input.id;
+        output.id = socket.game_id;
 
+        console.log('@Server received\t| leaveGame');
+        console.log('@Server log     \t| user ' + socket.game_id + ' left')
+
+        io.to('Room1').emit('userLeftGame', output);
         socket.leave('Room1');
-        delete room.players[input.id];
-        io.to('Room1').emit('userLeftRoom', output);
 
+        delete room.players[socket.game_id];
+
+        var playersRoom = 0;
+        for (var pr in room.players) playersRoom ++;
+
+        if(playersRoom === 0) {
+            console.log('@Server log     \t| empty room');
+            room.state = 'empty';
+        } else{
+            console.log(room.players);
+        }
+
+        console.log('@Server sent    \t| userLeftGame');
     });
 
     socket.on('beginMatch', function (input) {

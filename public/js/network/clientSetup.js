@@ -22,6 +22,18 @@ clientSetupMenu = function(){
 
     });
 
+
+    socket.on('roomIngame', function (input) {
+
+        var style = { font: "bold 32px Arial", fill: "#fff", boundsAlignH: "center", boundsAlignV: "middle" };
+        if(!this.menuText)
+        {
+            this.menuText = game.add.text(game.world.centerX, game.world.centerY, "Partida en curso", style);
+            this.menuText.anchor.set(0.5);
+        }
+
+    });
+
 }
 
 /**

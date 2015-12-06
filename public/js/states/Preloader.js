@@ -13,12 +13,12 @@ var zz = [];
 
 load_songs = function(){
     GALACTIC_STRIKE.songs = [];
-    GALACTIC_STRIKE.songs.push(game.add.audio('guiles', 1, true));
-    GALACTIC_STRIKE.songs.push(game.add.audio('checker', 1, true));
-    GALACTIC_STRIKE.songs.push(game.add.audio('muteCity', 1, true));
-    GALACTIC_STRIKE.songs.push(game.add.audio('dreamLand', 1, true));
-    GALACTIC_STRIKE.songs.push(game.add.audio('witch', 1, true));
-    GALACTIC_STRIKE.songs.push(game.add.audio('pingasDreamLand', 1, true));
+    GALACTIC_STRIKE.songs.push(game.add.audio('guiles', 0.7, true));
+    GALACTIC_STRIKE.songs.push(game.add.audio('checker', 0.7, true));
+    GALACTIC_STRIKE.songs.push(game.add.audio('muteCity', 0.7, true));
+    GALACTIC_STRIKE.songs.push(game.add.audio('dreamLand', 0.7, true));
+    GALACTIC_STRIKE.songs.push(game.add.audio('witch', 0.7, true));
+    GALACTIC_STRIKE.songs.push(game.add.audio('pingasDreamLand', 0.7, true));
 //    GALACTIC_STRIKE.songs.push(game.add.audio('dedede'));
     GALACTIC_STRIKE.songs[Math.floor(Math.random()*GALACTIC_STRIKE.songs.length)].play();
 

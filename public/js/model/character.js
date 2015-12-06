@@ -344,7 +344,7 @@ Character.prototype.die = function() {
     emitter.x = this.x;
     emitter.y = this.y;
     emitter.start(true, 4000, null, 10);
-    game.time.events.add(2000, function(){emitter.destroy();}, this);
+    game.time.events.add(2000, function(){if(emitter) emitter.destroy();}, this);
     this.wheels[0].destroy();
     this.wheels[1].destroy();
     this.body.destroy();

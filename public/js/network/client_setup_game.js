@@ -18,9 +18,9 @@ clientSetupGame = function (){
 
         var asset = (GALACTIC_STRIKE.room.players[input.id].team === GALACTIC_STRIKE.room.teams[0] ? 'playerRed' : 'playerBlue');
         charactersList[input.id] = new Character(input.x, input.y, game, GALACTIC_STRIKE.room.players[input.id], asset);
+        GALACTIC_STRIKE.room.players[input.id].character = charactersList[input.id];
 
         if(input.id === GALACTIC_STRIKE.player.id){
-            GALACTIC_STRIKE.player.character = charactersList[input.id];
             myCharacterSetup(GALACTIC_STRIKE.player.character);
         }
 
@@ -32,6 +32,18 @@ clientSetupGame = function (){
         console.log("Clients: " + logMsg);
 
     });
+
+
+
+    socket.on('userLeftGame', function (input) {
+
+        console.log('@Client received | userLeftGame');
+        charactersList[input.id].die();
+        delete charactersList[input.id];
+        delete GALACTIC_STRIKE.room.players[input.id];
+
+    });
+
 
 
     socket.on('update', function (input) {

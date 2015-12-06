@@ -46,6 +46,29 @@ clientSetupGame = function (){
             charactersList[input.id].body.velocity.x = input.velocityX;
             charactersList[input.id].body.velocity.y = input.velocityY;
             charactersList[input.id].orientation = input.orientation;
+            charactersList[input.id].jumpAnimation = input.jumpAnimation;
+        }
+
+        if(charactersList[input.id].jumpAnimation){
+            if(charactersList[input.id].orientation === charactersList[input.id].LEFT)
+            {
+                charactersList[input.id].animations.play('jumpL');
+            }
+            else
+            {
+                charactersList[input.id].animations.play('jumpR');
+            }
+        }
+        else
+        {
+            if(charactersList[input.id].orientation === charactersList[input.id].LEFT)
+            {
+                charactersList[input.id].animations.play('left');
+            }
+            else
+            {
+                charactersList[input.id].animations.play('right');
+            }
         }
 
     });

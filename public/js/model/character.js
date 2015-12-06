@@ -29,6 +29,7 @@ function Character (x, y, game, player, asset) {
     this.RIGHT = 1;
     this.LEFT = -1;
     this.orientation = 1;
+    this.jumpAnimation = false;
     this.alive = true;
 
     // Cooldowns
@@ -190,7 +191,8 @@ Character.prototype.updateOnline = function() {
             angle : this.angle,
             velocityX : this.body.velocity.x,
             velocityY : this.body.velocity.y,
-            orientation: this.orientation
+            orientation: this.orientation,
+            jumpAnimation : this.jumpAnimation
     }
 
     socket.emit('update', data);
@@ -213,20 +215,24 @@ Character.prototype.moveGrounded = function(direction){
             this.animations.play('left');
             this.motorSpeed = -30;
             this.orientation = this.LEFT;
+            this.jumpAnimation = false;
             break;
         case 'right':
             this.animations.play('right');
             this.motorSpeed = 30;
             this.orientation = this.RIGHT;
+            this.jumpAnimation = false;
             break;
          case 'down':
             this.motorSpeed = 0;
             this.animations.stop();
+            this.jumpAnimation = false;
 //            this.animations.play('left');
             break;
         case 'still':
             this.motorEnabled = false;
             this.animations.stop();
+            this.jumpAnimation = false;
 //            this.animations.play('left');
 //            this.animations.play('stop');
             break;
@@ -260,10 +266,12 @@ Character.prototype.moveInOrbit = function(direction){
             this.body.thrust(700);
             if(this.orientation === this.LEFT) this.animations.play('jumpL');
             if(this.orientation === this.RIGHT) this.animations.play('jumpR');
+            this.jumpAnimation = true;
             break;
          case 'still':
             if(this.orientation === this.LEFT) this.animations.play('left');
             if(this.orientation === this.RIGHT) this.animations.play('right');
+            this.jumpAnimation = false;
             break;
          default:
 //            this.animations.play('left');
@@ -294,11 +302,13 @@ Character.prototype.moveSpace = function(direction){
             this.body.thrust(200);
             if(this.orientation === this.LEFT) this.animations.play('jumpL');
             if(this.orientation === this.RIGHT) this.animations.play('jumpR');
+            this.jumpAnimation = true;
             break;
          case 'down':
             this.body.reverse(200);
             if(this.orientation === this.LEFT) this.animations.play('jumpL');
             if(this.orientation === this.RIGHT) this.animations.play('jumpR');
+            this.jumpAnimation = true;
             break;
          case 'rotateL':
             this.body.angularVelocity -= 0.15;
@@ -309,6 +319,7 @@ Character.prototype.moveSpace = function(direction){
         case 'still':
             if(this.orientation === this.LEFT) this.animations.play('left');
             if(this.orientation === this.RIGHT) this.animations.play('right');
+            this.jumpAnimation = false;
 //            this.animations.play('left');
             break;
     }

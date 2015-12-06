@@ -79,6 +79,10 @@ Player.prototype.movePlayer = function(){
         {
             this.character.moveInOrbit('jetpack');
         }
+        else
+        {
+            this.character.moveInOrbit('still');
+        }
     }
     else
     {
@@ -94,13 +98,17 @@ Player.prototype.movePlayer = function(){
         {
             this.character.moveSpace('still');
         }
-        if (this.controller.upDown())
+        if (this.controller.upDown() || this.controller.jumpDown())
         {
             this.character.moveSpace('up');
         }
         else if (this.controller.downDown())
         {
             this.character.moveSpace('down');
+        }
+        else
+        {
+            this.character.moveSpace('still');
         }
         if (this.controller.rotateLDown())
         {

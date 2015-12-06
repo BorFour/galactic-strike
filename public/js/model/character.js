@@ -254,6 +254,10 @@ Character.prototype.moveInOrbit = function(direction){
             if(this.orientation === this.LEFT) this.animations.play('jumpL');
             if(this.orientation === this.RIGHT) this.animations.play('jumpR');
             break;
+         case 'still':
+            if(this.orientation === this.LEFT) this.animations.play('left');
+            if(this.orientation === this.RIGHT) this.animations.play('right');
+            break;
          default:
 //            this.animations.play('left');
             break;
@@ -272,10 +276,12 @@ Character.prototype.moveSpace = function(direction){
         case 'left':
             this.body.rotateLeft(100);
             this.animations.play('left');
+            this.orientation = this.LEFT;
             break;
         case 'right':
             this.body.rotateRight(100);
             this.animations.play('right');
+            this.orientation = this.RIGHT;
             break;
          case 'up':
             this.body.thrust(200);
@@ -294,7 +300,8 @@ Character.prototype.moveSpace = function(direction){
             this.body.angularVelocity += 0.15;
             break;
         case 'still':
-            this.animations.stop();
+            if(this.orientation === this.LEFT) this.animations.play('left');
+            if(this.orientation === this.RIGHT) this.animations.play('right');
 //            this.animations.play('left');
             break;
     }

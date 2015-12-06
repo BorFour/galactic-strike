@@ -76,10 +76,11 @@ function Character (x, y, game, player, asset) {
     this.driveJoints = [];
     this.wheels = [];
 
+    var wheel;
     if(asset === 'playerRed') {
-        var wheel = 'wheel_red';
+        wheel = 'wheel_red';
     } else {
-        var wheel = 'wheel_blue';
+        wheel = 'wheel_blue';
     }
     this.wheels[0] = new Phaser.Sprite (game, this.x + -0.22*PTM,  this.y + 0.6*-PTM, wheel);
     this.wheels[0].anchor.set(0.5);

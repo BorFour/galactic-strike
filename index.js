@@ -48,7 +48,7 @@ io.on('connection', function (socket) {
 //        console.log('@Server received | update');
         players[socket.game_id] = input;
         output.id = socket.game_id;
-        io.to('Room1').emit('update', input);
+        socket.broadcast.to('Room1').emit('update', input);
 //        console.log('@Server sent | update');
 
     });

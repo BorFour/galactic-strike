@@ -180,7 +180,10 @@ GALACTIC_STRIKE.PlayGame.prototype = {
 	update: function(){
 
         GALACTIC_STRIKE.player.movePlayer();
-        if(GALACTIC_STRIKE.player.character) GALACTIC_STRIKE.player.character.updateOnline();
+        if(GALACTIC_STRIKE.player.character)
+        {
+            GALACTIC_STRIKE.player.character.updateOnline();
+        }
         game.spacePhysics.update();
         if(!GALACTIC_STRIKE.room.gameOver) GALACTIC_STRIKE.room.gameOver = GALACTIC_STRIKE.room.gameMode.update();
         orb.rotation += 0.05;

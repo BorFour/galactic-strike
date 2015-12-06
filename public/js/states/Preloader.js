@@ -116,7 +116,9 @@ preload: function () {
 },
 create: function () {
 
-    GALACTIC_STRIKE.player = new Player("Default");
+    var currentLocation = window.location.search
+    var formName = currentLocation.replace("?name=", "");
+    GALACTIC_STRIKE.player = new Player(formName ? formName : "Default");
 
     // Loads and plays some songs
     load_songs();

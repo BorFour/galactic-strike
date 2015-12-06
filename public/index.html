@@ -10,8 +10,9 @@
 	</style>
     <script>
         function functionName() {
-            var x = document.getElementById("myName").value;
-            window.open("game.html", "_blank", "fullscreen=yes, titlebar=no, menubar=no, toolbar=no, scrollbars=yes, resizable=no, top=0, left=400, width=1200, height=800");
+            var HTMLname = document.getElementById("myName").value;
+            var url = "game.html?name=" + HTMLname;
+            var w = window.open(url, "_blank", "fullscreen=yes, titlebar=no, menubar=no, toolbar=no, scrollbars=yes, resizable=no, top=0, left=400, width=1200, height=800");
         }
     </script>
 	</head>

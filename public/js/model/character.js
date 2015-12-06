@@ -29,6 +29,7 @@ function Character (x, y, game, player, asset) {
     this.RIGHT = 1;
     this.LEFT = -1;
     this.orientation = 1;
+    this.alive = true;
 
     // Cooldowns
     this.jumpCooldown = true;

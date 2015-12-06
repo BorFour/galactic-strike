@@ -6,7 +6,7 @@ clientSetupRoom = function (){
 
         console.log('@Client received | roomCreated');
 
-        GALACTIC_STRIKE.room = new Room("Default room name", GALACTIC_STRIKE.player, 8);
+        GALACTIC_STRIKE.room = new Room("Default room name", GALACTIC_STRIKE.player.id, 8);
         GALACTIC_STRIKE.room.addTeam("Red Team");
         GALACTIC_STRIKE.room.addTeam("Blue Team");
         GALACTIC_STRIKE.room.addPlayer(GALACTIC_STRIKE.player.id, GALACTIC_STRIKE.player);
@@ -25,7 +25,7 @@ clientSetupRoom = function (){
         console.log('@Client received | joinRoom');
         if(input.id === GALACTIC_STRIKE.player.id)
         {
-            GALACTIC_STRIKE.room = new Room("Default room name", GALACTIC_STRIKE.player, 8);
+            GALACTIC_STRIKE.room = new Room("Default room name", input.host, 8);
             GALACTIC_STRIKE.room.addTeam("Red Team");
             GALACTIC_STRIKE.room.addTeam("Blue Team");
 

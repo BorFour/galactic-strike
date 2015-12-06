@@ -26,7 +26,7 @@ GALACTIC_STRIKE.Lobby.prototype = {
 
 //        GALACTIC_STRIKE.room.addPlayer(GALACTIC_STRIKE.player.id, GALACTIC_STRIKE.player);
 
-        if(GALACTIC_STRIKE.player.id === GALACTIC_STRIKE.room.host.id)
+        if(GALACTIC_STRIKE.player.id === GALACTIC_STRIKE.room.host)
         {
             buttonBegin = game.add.button(game.world.centerX, game.world.centerY + 250, 'buttonEnter', this.beginMatch, this, 0, 0, 0, 0);
             buttonBegin.anchor.set(0.5);

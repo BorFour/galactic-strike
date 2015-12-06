@@ -16,7 +16,8 @@ clientSetupGame = function (){
 
         console.log('@Client received | userJoinedGame');
 
-        charactersList[input.id] = new Character(input.x, input.y, game, GALACTIC_STRIKE.room.players[input.id], 'player');
+        var asset = (GALACTIC_STRIKE.room.players[input.id].team === GALACTIC_STRIKE.room.teams[0] ? 'playerRed' : 'playerBlue');
+        charactersList[input.id] = new Character(input.x, input.y, game, GALACTIC_STRIKE.room.players[input.id], asset);
 
         if(input.id === GALACTIC_STRIKE.player.id){
             GALACTIC_STRIKE.player.character = charactersList[input.id];

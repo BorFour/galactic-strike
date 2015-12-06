@@ -23,6 +23,7 @@ Team.prototype.addPlayer = function(player) {
 }
 
 
+
 Team.prototype.removePlayer = function (player){
 
     // Warning!
@@ -36,5 +37,14 @@ Team.prototype.removePlayer = function (player){
 //                        return el.id !== player.id;
 //                       });
     player.team = null;
+
+}
+
+Team.prototype.alive = function() {
+
+
+    return this.players.every(function (element, index, array) {
+        return (element.character ? element.character.alive : true);
+    });
 
 }

@@ -114,6 +114,7 @@ io.on('connection', function (socket) {
         var output = {};
         output.id = input.id;
         output.name = input.name;
+        output.host = room.host;
 
         console.log('@Server received\t| joinRoom');
 

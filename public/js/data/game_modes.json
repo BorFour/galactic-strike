@@ -5,7 +5,7 @@ var gameModes =
         'init' : function () {
 
              this.scores = []
-             for (var t in this.teams)
+             for (var t in this.room.teams)
              {
                 this.scores[t] = 0;
              }
@@ -13,14 +13,27 @@ var gameModes =
         },
         'startRound' : function () {
 
-            this.stage.load();
+            //this.stage.load();
             for (var i = 0; i < this.room.teams.length; i++)
             {
                 for (var j = 0; j < this.room.teams[i].players.length; j++)
                 {
-                    this.room.teams[i].players[j].spawn();
+                    //this.room.teams[i].players[j].spawn();
                 }
             }
+
+        },
+        'winnerRound' : function (){
+
+            var teams_alive = 0;
+            var winner = null;
+            for(var i = 0; i < this.room.teams.length; i++)
+            {
+                if(this.room.teams[i].alive()) ++teams_alive;
+                winner = this.room.teams[i];
+            }
+
+            return (teams_alive === 1 ? winner : null);
 
         },
         'winner' : function (){
@@ -59,9 +72,11 @@ var gameModes =
         },
         'update' : function (){
 
-            if(this.isOverRound())
+            var wr = this.winnerRound();
+            if(wr)
             {
-                this.scores[this.winnerRound()] += 1;
+                this.scores[wr] += 1;
+                console.log(wr.name + ' won this round.' + this.scores[wr] + ' points');
                 if(this.isOverGame())
                 {
                     this.showWinner(this.winner());

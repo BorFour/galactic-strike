@@ -60,7 +60,8 @@ load_assets = function (){
 		game.load.image("cucumber", "../assets/cucumber.png");
 		game.load.image("spikeball", "../assets/spikeball.gif");
         //game.load.spritesheet("player", "../assets/ironman_45_75.png", 45, 75);
-        game.load.spritesheet("player", "../assets/spritesIndividuales/robotnik/robotnik_blue.png", 48, 59); //rueda: 26_23  | robotnik: 49_43
+        game.load.spritesheet("playerRed", "../assets/spritesIndividuales/robotnik/robotnik_red.png", 48, 59); //rueda: 26_23  | robotnik: 49_43
+        game.load.spritesheet("playerBlue", "../assets/spritesIndividuales/robotnik/robotnik_blue.png", 48, 59); //rueda: 26_23  | robotnik: 49_43
 
         //game.load.spritesheet("player_jump", "assets/jump_fly_land.png", 52, 75);
         game.load.spritesheet("deathstar", "../assets/deathstar.gif", 64, 64);
@@ -169,12 +170,17 @@ GALACTIC_STRIKE.PlayGame.prototype = {
 
         socket.emit('joinGame', data);
 
+        GALACTIC_STRIKE.room.gameMode = new GameMode(GALACTIC_STRIKE.room, gameModes['deathmatch']);
+        GALACTIC_STRIKE.room.gameMode.init();
+        GALACTIC_STRIKE.room.gameMode.startRound();
+
 	},
 	update: function(){
 
         GALACTIC_STRIKE.player.movePlayer();
         if(GALACTIC_STRIKE.player.character) GALACTIC_STRIKE.player.character.updateOnline();
         game.spacePhysics.update();
+        GALACTIC_STRIKE.room.gameMode.update();
         orb.rotation += 0.05;
 
 	},

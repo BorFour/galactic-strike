@@ -76,12 +76,18 @@ function Character (x, y, game, player, asset) {
     this.driveJoints = [];
     this.wheels = [];
 
-    this.wheels[0] = new Phaser.Sprite (game, this.x + -0.22*PTM,  this.y + 0.6*-PTM, 'ruedaL');
+    if(asset === 'playerRed') {
+        var wheel = 'wheel_red';
+    } else {
+        var wheel = 'wheel_blue';
+    }
+    this.wheels[0] = new Phaser.Sprite (game, this.x + -0.22*PTM,  this.y + 0.6*-PTM, wheel);
     this.wheels[0].anchor.set(0.5);
     game.add.existing(this.wheels[0]);
-    this.wheels[1] = new Phaser.Sprite (game, this.x + 0.22*PTM,  this.y + 0.6*-PTM, 'ruedaR');
+    this.wheels[1] = new Phaser.Sprite (game, this.x + 0.22*PTM,  this.y + 0.6*-PTM, wheel);
     this.wheels[1].anchor.set(0.5);
     game.add.existing(this.wheels[1]);
+
 
 	this.wheels[0].body = new Phaser.Physics.Box2D.Body(this.game, null, this.x + -0.22*PTM, this.y + 0.6*-PTM);
 	this.wheels[0].body.sprite = this.wheels[0];

@@ -68,8 +68,8 @@ load_assets = function (){
 		game.load.image("planet", "../assets/planet1.png");
 		game.load.image("bigplanet", "../assets/bigplanet.png");
 		game.load.image("giantplanet", "../assets/giantplanet.png");
-		game.load.image("ruedaL", "../assets/spritesIndividuales/robotnik/slice01_01.png");
-		game.load.image("ruedaR", "../assets/spritesIndividuales/robotnik/slice03_03.png");
+		game.load.image("wheel_red", "../assets/spritesIndividuales/robotnik/wheel_red.png");
+		game.load.image("wheel_blue", "../assets/spritesIndividuales/robotnik/wheel_blue.png");
 
         game.load.audio('jump', ['../assets/jump.ogg', '../assets/jump.mp3']);
         game.load.audio('pingas', '../assets/sound/pingas.mp3');

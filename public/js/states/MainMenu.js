@@ -7,10 +7,13 @@ GALACTIC_STRIKE.MainMenu.prototype = {
         game.load.image('starBackground', '../assets/starBackground.jpg');
         game.load.image('buttonEnter', '../assets/buttons/enterRoom.png');
         game.load.image('buttonCreate', '../assets/buttons/createRoom.png');
+        game.load.image("exitButton" , "../assets/buttons/boton_exit.png");
+
         var buttonEnter;
         var buttonCreate;
     },
     create: function () {
+        GALACTIC_STRIKE.endGame = false;
        buttonEnter = game.add.button(game.world.centerX - 95, 400, 'buttonEnter', this.joinRoom, this, 0, 0, 0, 0);
        buttonCreate = game.add.button(game.world.centerX + 95, 400, 'buttonCreate', this.createRoom, this, 0, 0, 0, 0);
    // buttonCreate.onInputUp.add(up, this);

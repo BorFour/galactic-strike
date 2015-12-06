@@ -52,7 +52,6 @@ load_assets = function (){
 		game.load.image("giantplanet", "../assets/giantplanet.png");
 		game.load.image("ruedaL", "../assets/spritesIndividuales/robotnik/slice01_01.png");
 		game.load.image("ruedaR", "../assets/spritesIndividuales/robotnik/slice03_03.png");
-
         game.load.audio('jump', ['../assets/jump.ogg', '../assets/jump.mp3']);
         game.load.audio('pingas', '../assets/sound/pingas.mp3');
 

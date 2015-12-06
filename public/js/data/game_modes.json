@@ -1,3 +1,8 @@
+
+var quitGameGM = function () {
+    window.close();
+}
+
 var gameModes =
 {
     'deathmatch' : {
@@ -71,16 +76,14 @@ var gameModes =
 
         var nameLabel = game.add.text(game.world.centerX, -50, (winner + ' wins!'),{ font: '70px Geo   ', fill: '#ffffff' });
         nameLabel.anchor.setTo(0.5, 0.5);
-        buttonQuit = game.add.button(game.world.centerX, game.world.centerY, 'buttonEnter', function(){
-                socket.emit('leaveGame', {id : GALACTIC_STRIKE.player.id});
-                game.states.start('MainMenu');
-            }, this, 0, 0, 0, 0);
+        var buttonQuit = game.add.button(game.world.centerX, game.world.centerY , 'exitButton', quitGameGM, this, 0, 0, 0, 0);
 
         buttonQuit.anchor.set(0.5);
+        buttonQuit.scale.set(0.25);
 
-
-        toButton = game.add.tween(game.camera.follow).to({buttonQuit}, 350, Phaser.Easing.Quadratic.InOut, true);
-        game.add.tween(nameLabel).to({y: game.world.centerY/2}, 1000).easing(Phaser.Easing.Bounce.Out).start();
+        game.camera.follow(null);
+        var toButton = game.add.tween(game.camera).to({x : buttonQuit.x  - game.camera.width/2, y : buttonQuit.y - game.camera.height/2}, 350, Phaser.Easing.Quadratic.InOut, true);
+        game.add.tween(nameLabel).to({y: game.world.centerY - 60}, 1000).easing(Phaser.Easing.Bounce.Out).start();
         toButton.start();
 
 

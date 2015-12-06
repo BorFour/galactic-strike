@@ -71,6 +71,7 @@ load_assets = function (){
 		game.load.image("wheel_red", "../assets/spritesIndividuales/robotnik/wheel_red.png");
 		game.load.image("wheel_blue", "../assets/spritesIndividuales/robotnik/wheel_blue.png");
 
+
         game.load.audio('jump', ['../assets/jump.ogg', '../assets/jump.mp3']);
         game.load.audio('pingas', '../assets/sound/pingas.mp3');
 
@@ -187,6 +188,7 @@ GALACTIC_STRIKE.PlayGame.prototype = {
         game.spacePhysics.update();
         if(!GALACTIC_STRIKE.room.gameOver) GALACTIC_STRIKE.room.gameOver = GALACTIC_STRIKE.room.gameMode.update();
         orb.rotation += 0.05;
+        if(GALACTIC_STRIKE.endGame) this.quitGame();
 
 	},
     render: function(){
@@ -228,6 +230,11 @@ GALACTIC_STRIKE.PlayGame.prototype = {
             game.debug.text("Events : " + game.time.events.length, 640, i*32);
 
 
+    },
+    quitGame: function(){
+        console.log("QUIT GAME");
+        socket.emit('leaveGame', {id : GALACTIC_STRIKE.player.id});
+        this.state.start('MainMenu', true, true);
     }
 }
 

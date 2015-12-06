@@ -110,8 +110,7 @@ clientSetupGame = function (){
             if(charactersList[input.target].health <= 0)
             {
                 charactersList[input.target].die();
-                delete body2.sprite;
-//                output.die = true;
+
             } else
             {
 //                output.die = false;

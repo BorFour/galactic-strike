@@ -95,7 +95,11 @@ io.on('connection', function (socket) {
             socket.join('Room1');
             room.state = 'lobby';
             room.players = {};
-            room.players[input.id] = input.name;
+            room.players[input.id] =
+            {
+                name : input.name,
+                team : -1
+            };
             room.host = input.id;
             socket.emit('roomCreated', output);
 
@@ -119,7 +123,11 @@ io.on('connection', function (socket) {
             socket.room = 'Room1';
             socket.join('Room1');
 //            console.log(socket.rooms);
-            room.players[input.id] = input.name;
+            room.players[input.id] =
+            {
+                name : input.name,
+                team : -1
+            };
             output.players = room.players;
             io.to('Room1').emit('joinRoom', output);
 
@@ -132,7 +140,9 @@ io.on('connection', function (socket) {
 
         var output = {};
         output.id = input.id;
-        output.team_id = input.team_id;
+        output.team = input.team;
+
+        room.players[input.id].team = input.team;
 
          console.log('@Server received\t| changeTeam');
 

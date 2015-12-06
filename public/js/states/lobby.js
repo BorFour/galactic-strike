@@ -24,7 +24,7 @@ GALACTIC_STRIKE.Lobby.prototype = {
         bmpText = game.add.text(game.world.centerX, game.world.centerY, "Esto es el lobby", style);
         bmpText.anchor.set(0.5);
 
-        GALACTIC_STRIKE.room.addPlayer(GALACTIC_STRIKE.player.id, GALACTIC_STRIKE.player);
+//        GALACTIC_STRIKE.room.addPlayer(GALACTIC_STRIKE.player.id, GALACTIC_STRIKE.player);
 
         if(GALACTIC_STRIKE.player.id === GALACTIC_STRIKE.room.host.id)
         {
@@ -37,17 +37,16 @@ GALACTIC_STRIKE.Lobby.prototype = {
 
         buttonRed = game.add.button(game.world.centerX - 440, game.world.centerY - 300, 'redTeam', function(){
 
-            socket.emit('changeTeam', {id : GALACTIC_STRIKE.player.id, team_id : 0});
-            GALACTIC_STRIKE.player.joinTeam(GALACTIC_STRIKE.room.teams[0]);
-            bmpText.text = GALACTIC_STRIKE.room.teams[0].name;
+            socket.emit('changeTeam', {id : GALACTIC_STRIKE.player.id, team : 0});
+//            GALACTIC_STRIKE.player.joinTeam(GALACTIC_STRIKE.room.teams[0]);
+
         }, this, 0, 0, 0, 0);
         buttonRed.scale.set(0.3);
 
         buttonBlue = game.add.button(game.world.centerX + 200, game.world.centerY - 300, 'blueTeam',function(){
 
-            socket.emit('changeTeam', {id : GALACTIC_STRIKE.player.id, team_id : 1});
-            GALACTIC_STRIKE.player.joinTeam(GALACTIC_STRIKE.room.teams[1]);
-            bmpText.text = GALACTIC_STRIKE.room.teams[1].name;
+            socket.emit('changeTeam', {id : GALACTIC_STRIKE.player.id, team : 1});
+//            GALACTIC_STRIKE.player.joinTeam(GALACTIC_STRIKE.room.teams[1]);
 
         }, this, 0,  0, 0, 0);
         buttonBlue.scale.set(0.3);
@@ -75,6 +74,8 @@ GALACTIC_STRIKE.Lobby.prototype = {
 
 	},
 	update: function() {
+
+        if(GALACTIC_STRIKE.player.team) bmpText.text = GALACTIC_STRIKE.player.team.name;
 
         for (var i = 0; i < 4; i++){
             GALACTIC_STRIKE.room.textRed[i].text = (GALACTIC_STRIKE.room.teams[0].players[i] ? GALACTIC_STRIKE.room.teams[0].players[i].nickname : "[     ]");

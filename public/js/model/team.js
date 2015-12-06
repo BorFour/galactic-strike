@@ -26,9 +26,15 @@ Team.prototype.addPlayer = function(player) {
 Team.prototype.removePlayer = function (player){
 
     // Warning!
-    this.players = this.players.filter(function (el) {
-                        return el.id === player.id;
-                       });
+    var i = this.players.indexOf(player);
+
+    if(i != -1){
+        this.players.splice(i, 1);
+    }
+
+//    this.players = this.players.filter(function (el) {
+//                        return el.id !== player.id;
+//                       });
     player.team = null;
 
 }

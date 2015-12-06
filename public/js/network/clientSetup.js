@@ -7,6 +7,7 @@ clientSetupMenu = function(){
     socket.on('ID', function (input) {
 
         GALACTIC_STRIKE.player.id = input.id;
+        GALACTIC_STRIKE.player.nickname += input.id;
 //        GALACTIC_STRIKE.player.character = charactersList[GALACTIC_STRIKE.player.id];
 //        myCharacterSetup(GALACTIC_STRIKE.player.character);
 

@@ -10,6 +10,15 @@ Player = function (nickname) {
 };
 
 
+Player.prototype.leaveTeam = function (){
+
+    if (this.team){
+        this.team.removePlayer(this);
+    }
+    this.team = null;
+
+}
+
 Player.prototype.joinTeam = function(team) {
 
     this.leaveTeam();
@@ -17,14 +26,6 @@ Player.prototype.joinTeam = function(team) {
 }
 
 
-Player.prototype.leaveTeam = function (){
-
-    if (this.team){
-        this.team.removePlayer(Player);
-    }
-    this.team = null;
-
-}
 
 // Función que se ejectuará cuando se presione la tecla 'left'
 // del controlador del usuario

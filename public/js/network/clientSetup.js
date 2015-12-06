@@ -17,12 +17,8 @@ clientSetupMenu = function(){
     socket.on('userLeft', function (input) {
 
         console.log('@Client received | userLeft');
-        charactersList[input.id].die();
+        if(charactersList[input.id]) charactersList[input.id].die();
         delete charactersList[input.id];
-        if(input.id === GALACTIC_STRIKE.player.id)
-        {
-            this.state.start('MainMenu');
-        }
 
     });
 

@@ -29,9 +29,18 @@ clientSetupRoom = function (){
             GALACTIC_STRIKE.room.addTeam("Red Team");
             GALACTIC_STRIKE.room.addTeam("Blue Team");
 
-            for (var k in input.players){
-                GALACTIC_STRIKE.room.addPlayer(k, new Player(input.players[k].name)).joinTeam(
-                (input.players[k].team === -1 ? GALACTIC_STRIKE.room.unasigned : GALACTIC_STRIKE.room.teams[input.players[k].team]));
+            for (var k in input.players)
+            {
+                if(k == GALACTIC_STRIKE.player.id)
+                {
+                    GALACTIC_STRIKE.room.addPlayer(k, GALACTIC_STRIKE.player);
+                    GALACTIC_STRIKE.player.joinTeam(GALACTIC_STRIKE.room.unasigned);
+                }
+                else
+                {
+                    GALACTIC_STRIKE.room.addPlayer(k, new Player(input.players[k].name)).joinTeam(
+                        (input.players[k].team === -1 ? GALACTIC_STRIKE.room.unasigned : GALACTIC_STRIKE.room.teams[input.players[k].team]));
+                }
             }
 
             game.state.start('Lobby');

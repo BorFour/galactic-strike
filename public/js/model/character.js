@@ -161,7 +161,7 @@ function Character (x, y, game, player, asset) {
 
     //Display player name
 
-    var text = game.add.text(0, -40, player.nickname, {font: "16px Arial", fill: "#ffffff"});
+    var text = game.add.text(0, -56, player.nickname, {font: "16px Arial", fill: "#ffffff"});
     this.addChild(text);
     text.anchor.set(0.5);
 

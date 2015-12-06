@@ -78,15 +78,15 @@ GALACTIC_STRIKE.Lobby.prototype = {
         if(GALACTIC_STRIKE.player.team) bmpText.text = GALACTIC_STRIKE.player.team.name;
 
         for (var i = 0; i < 4; i++){
-            GALACTIC_STRIKE.room.textRed[i].text = (GALACTIC_STRIKE.room.teams[0].players[i] ? GALACTIC_STRIKE.room.teams[0].players[i].nickname : "[     ]");
+            GALACTIC_STRIKE.room.textRed[i].text = (GALACTIC_STRIKE.room.teams[0].players[i] ? (GALACTIC_STRIKE.room.teams[0].players[i] === GALACTIC_STRIKE.player ? '*' : '') + GALACTIC_STRIKE.room.teams[0].players[i].nickname : "[     ]");
         }
 
         for (var i = 0; i < 4; i++){
-            GALACTIC_STRIKE.room.textBlue[i].text = (GALACTIC_STRIKE.room.teams[1].players[i] ? GALACTIC_STRIKE.room.teams[1].players[i].nickname : "[     ]");
+            GALACTIC_STRIKE.room.textBlue[i].text = (GALACTIC_STRIKE.room.teams[1].players[i] ? (GALACTIC_STRIKE.room.teams[1].players[i] === GALACTIC_STRIKE.player ? '*' : '') + GALACTIC_STRIKE.room.teams[1].players[i].nickname : "[     ]");
         }
 
         for (var i = 0; i < 4; i++){
-            GALACTIC_STRIKE.room.textUnasigned[i].text = (GALACTIC_STRIKE.room.unasigned.players[i] ? GALACTIC_STRIKE.room.unasigned.players[i].nickname : "[     ]");
+            GALACTIC_STRIKE.room.textUnasigned[i].text = (GALACTIC_STRIKE.room.unasigned.players[i] ? (GALACTIC_STRIKE.room.unasigned.players[i] === GALACTIC_STRIKE.player ? '*' : '') +  GALACTIC_STRIKE.room.unasigned.players[i].nickname : "[     ]");
         }
 
 

@@ -260,10 +260,11 @@ io.on('connection', function (socket) {
         var output = {};
         console.log('@Server received\t| disconnect');
         console.log('@Server log     \t| user ' + socket.game_id + ' left')
+        if(!(socket.game_id instanceof Number)) return;
         output.id = socket.game_id;
         socket.broadcast.emit('userLeft', output);
         delete players[socket.game_id];
-        delete room.players[socket.game_id];
+        if(room.players && room.players[socket.game_id]) delete room.players[socket.game_id];
 
         var playersRoom = 0;
         for (var pr in room.players) playersRoom ++;

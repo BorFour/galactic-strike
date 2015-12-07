@@ -60,6 +60,9 @@ clientSetupGame = function (){
             charactersList[input.id].orientation = input.orientation;
             charactersList[input.id].jumpAnimation = input.jumpAnimation;
         }
+        else{
+            return;
+        }
 
         if(charactersList[input.id].jumpAnimation){
             if(charactersList[input.id].orientation === charactersList[input.id].LEFT)

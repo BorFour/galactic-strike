@@ -49,33 +49,6 @@ GALACTIC_STRIKE.PlayGame = function(game){};
 
 // No sé muy bien dónde iría esto, pero de momento aquí
 
-load_assets = function (){
-
-        game.load.image("spaceBackground", "../assets/spaceBackground.jpg");
-		game.load.image("pokeball", "../assets/pokeball.png");
-		game.load.image("potion", "../assets/potion.gif");
-		game.load.image("moon", "../assets/moon1.png");
-		game.load.image("bullet", "../assets/blue-bullet.gif");
-		game.load.image("laser_bullet", "../assets/laser_bullet.jpg");
-		game.load.image("cucumber", "../assets/cucumber.png");
-		game.load.image("spikeball", "../assets/spikeball.gif");
-        //game.load.spritesheet("player", "../assets/ironman_45_75.png", 45, 75);
-        game.load.spritesheet("playerRed", "../assets/spritesIndividuales/robotnik/robotnik_red.png", 48, 59); //rueda: 26_23  | robotnik: 49_43
-        game.load.spritesheet("playerBlue", "../assets/spritesIndividuales/robotnik/robotnik_blue.png", 48, 59); //rueda: 26_23  | robotnik: 49_43
-
-        //game.load.spritesheet("player_jump", "assets/jump_fly_land.png", 52, 75);
-        game.load.spritesheet("deathstar", "../assets/deathstar.gif", 64, 64);
-		game.load.image("planet", "../assets/planet1.png");
-		game.load.image("bigplanet", "../assets/bigplanet.png");
-		game.load.image("giantplanet", "../assets/giantplanet.png");
-		game.load.image("wheel_red", "../assets/spritesIndividuales/robotnik/wheel_red.png");
-		game.load.image("wheel_blue", "../assets/spritesIndividuales/robotnik/wheel_blue.png");
-
-
-        game.load.audio('jump', ['../assets/jump.ogg', '../assets/jump.mp3']);
-        game.load.audio('pingas', '../assets/sound/pingas.mp3');
-
-}
 
 GALACTIC_STRIKE.PlayGame.prototype = {
 	preload: function(){

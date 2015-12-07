@@ -11,7 +11,7 @@ var xx = [];
 var yy = [];
 var zz = [];
 
-load_songs = function(){
+play_songs = function(){
     GALACTIC_STRIKE.songs = [];
     GALACTIC_STRIKE.songs.push(game.add.audio('guiles', 0.7, true));
     GALACTIC_STRIKE.songs.push(game.add.audio('checker', 0.7, true));
@@ -114,8 +114,7 @@ preload: function () {
 
 //    game.load.audio('dedede', '../assets/sound/king_dedede.mp3');
 
-    // Loads and plays some songs
-    load_songs();
+    // Loads assets
     load_assets();
 
 },
@@ -124,6 +123,9 @@ create: function () {
     var currentLocation = window.location.search
     var formName = currentLocation.replace("?name=", "");
     GALACTIC_STRIKE.player = new Player(formName ? formName : "Default");
+
+    //plays some songs
+    play_songs();
 
     server_connection();
 

@@ -80,7 +80,7 @@ load_assets = function (){
 GALACTIC_STRIKE.PlayGame.prototype = {
 	preload: function(){
 
-        load_assets();
+        //load_assets();
 
 
 	},

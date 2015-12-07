@@ -43,18 +43,20 @@ load_assets = function (){
 		game.load.image("cucumber", "../assets/cucumber.png");
 		game.load.image("spikeball", "../assets/spikeball.gif");
         //game.load.spritesheet("player", "../assets/ironman_45_75.png", 45, 75);
-        game.load.image("player", "../assets/spritesIndividuales/robotnik/slice04_04.png"); //rueda: 26_23  | robotnik: 49_43
+        game.load.spritesheet("playerRed", "../assets/spritesIndividuales/robotnik/robotnik_red.png", 48, 59); //rueda: 26_23  | robotnik: 49_43
+        game.load.spritesheet("playerBlue", "../assets/spritesIndividuales/robotnik/robotnik_blue.png", 48, 59); //rueda: 26_23  | robotnik: 49_43
 
         //game.load.spritesheet("player_jump", "assets/jump_fly_land.png", 52, 75);
         game.load.spritesheet("deathstar", "../assets/deathstar.gif", 64, 64);
 		game.load.image("planet", "../assets/planet1.png");
 		game.load.image("bigplanet", "../assets/bigplanet.png");
 		game.load.image("giantplanet", "../assets/giantplanet.png");
-		game.load.image("ruedaL", "../assets/spritesIndividuales/robotnik/slice01_01.png");
-		game.load.image("ruedaR", "../assets/spritesIndividuales/robotnik/slice03_03.png");
+		game.load.image("wheel_red", "../assets/spritesIndividuales/robotnik/wheel_red.png");
+		game.load.image("wheel_blue", "../assets/spritesIndividuales/robotnik/wheel_blue.png");
+
+
         game.load.audio('jump', ['../assets/jump.ogg', '../assets/jump.mp3']);
         game.load.audio('pingas', '../assets/sound/pingas.mp3');
-
 }
 
 server_connection = function (){
@@ -112,16 +114,16 @@ preload: function () {
 
 //    game.load.audio('dedede', '../assets/sound/king_dedede.mp3');
 
+    // Loads and plays some songs
+    load_songs();
+    load_assets();
+
 },
 create: function () {
 
     var currentLocation = window.location.search
     var formName = currentLocation.replace("?name=", "");
     GALACTIC_STRIKE.player = new Player(formName ? formName : "Default");
-
-    // Loads and plays some songs
-    load_songs();
-    load_assets();
 
     server_connection();
 

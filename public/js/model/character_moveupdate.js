@@ -12,11 +12,13 @@ Character.prototype.updateOnline = function() {
             angle : this.angle,
             velocityX : this.body.velocity.x,
             velocityY : this.body.velocity.y,
+//            angularVelocity : this.body.angularVelocity,
             orientation: this.orientation,
             jumpAnimation : this.jumpAnimation
     }
 
     socket.emit('update', data);
+    console.log(data.angularVelocity);
 //    console.log('@Client sent | update');
 
 }

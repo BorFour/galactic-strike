@@ -57,6 +57,7 @@ clientSetupGame = function (){
             charactersList[input.id].body.angle = input.angle;
             charactersList[input.id].body.velocity.x = input.velocityX;
             charactersList[input.id].body.velocity.y = input.velocityY;
+//            charactersList[input.id].body.angularVelocity= input.angularVelocity;
             charactersList[input.id].orientation = input.orientation;
             charactersList[input.id].jumpAnimation = input.jumpAnimation;
         }

@@ -4,8 +4,8 @@ var game;
 
 begin_game = function () {
 
-    var SAFE_ZONE_WIDTH = 960;// * window.devicePixelRatio;
-    var SAFE_ZONE_HEIGHT = 640;// * window.devicePixelRatio;
+    var SAFE_ZONE_WIDTH = 1600;// * window.devicePixelRatio;
+    var SAFE_ZONE_HEIGHT = 900;// * window.devicePixelRatio;
     game = new Phaser.Game(SAFE_ZONE_WIDTH, SAFE_ZONE_HEIGHT, Phaser.AUTO, '');
     //	Add the States your game has.
 

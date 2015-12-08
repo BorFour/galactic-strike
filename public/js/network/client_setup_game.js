@@ -7,7 +7,6 @@ clientSetupGame = function (){
 
         console.log('@Client received | beginMatch');
         game.state.start('PlayGame');
-//        myCharacterSetup(GALACTIC_STRIKE.player.character);
 
     });
 
@@ -21,7 +20,7 @@ clientSetupGame = function (){
         GALACTIC_STRIKE.room.players[input.id].character = charactersList[input.id];
 
         if(input.id === GALACTIC_STRIKE.player.id){
-            myCharacterSetup(GALACTIC_STRIKE.player.character);
+            GALACTIC_STRIKE.player.characterSetup();
         }
 
 

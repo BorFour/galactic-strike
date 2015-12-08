@@ -114,29 +114,31 @@ orb = game.add.sprite(600, 450, 'moon');
 orb.anchor.setTo(0.5);
 orb.pivot.x = 100;
 
-//        var elementoPrueba = new Element(game, game.world.randomX, game.world.randomY, 'deathstar');
-//        game.physics.box2d.enable(elementoPrueba);
+    //        var elementoPrueba = new Element(game, game.world.randomX, game.world.randomY, 'deathstar');
+    //        game.physics.box2d.enable(elementoPrueba);
 
 
         // Mira cómo instancio a la poción
         // la variable 'items' se encuentra en 'items.json', donde estarán definidos todos los objetos del juego
 
-//        var objetoPrueba = new Item(game, game.world.randomX, game.world.randomY, items['potion']);
-//        game.physics.box2d.enable(objetoPrueba);
-//        game.spacePhysics.addDynamic(objetoPrueba);
+    //        var objetoPrueba = new Item(game, game.world.randomX, game.world.randomY, items['potion']);
+    //        game.physics.box2d.enable(objetoPrueba);
+    //        game.spacePhysics.addDynamic(objetoPrueba);
 
           GALACTIC_STRIKE.room.map = new Stage(game, stages['map2']);
-//        game.physics.box2d.enable(objetoPrueba);
-//        game.spacePhysics.addDynamic(objetoPrueba);
+    //        game.physics.box2d.enable(objetoPrueba);
+    //        game.spacePhysics.addDynamic(objetoPrueba);
 
-//        game.time.events.loop(GALACTIC_STRIKE.updateOnlineRate, function(){if(myCharacter) myCharacter.updateOnline();}, this);
+    //        game.time.events.loop(GALACTIC_STRIKE.updateOnlineRate, function(){if(myCharacter) myCharacter.updateOnline();}, this);
 
-//         myCharacterSetup(GALACTIC_STRIKE.player.character);
+    //         myCharacterSetup(GALACTIC_STRIKE.player.character);
+
+        var spawnPosition = GALACTIC_STRIKE.room.map.getPosition(GALACTIC_STRIKE.player.team.color-1);
 
         var data = {
             id : GALACTIC_STRIKE.player.id,
-            x: game.world.randomX,
-            y: game.world.randomY,
+            x: spawnPosition.x,
+            y: spawnPosition.y,
             angle: 0,
             velocityX : 0,
             velocityY : 0,

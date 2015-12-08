@@ -7,6 +7,7 @@ function Star (x, y, gravityRadius, gravityForce, asset, collisionRadius, game) 
         this.anchor.setTo(0.5, 0.5)
         this.gravityRadius = gravityRadius;
         this.gravityForce = gravityForce;
+        this.collisionRadius = collisionRadius;
         this.game = game;
 //        this.planetGroup.add(planet);
         game.spacePhysics.addPlanet(this);

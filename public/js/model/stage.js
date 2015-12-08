@@ -22,23 +22,29 @@ Stage = function (game, conf) {
 
     this.planets = [];
 
-    for(var p in conf.planets){
+    for(var p in conf.planets)
+    {
         console.log(conf.planets[p]);
-        this.planets.push(new Star(conf.planets[p].x, conf.planets[p].y, conf.planets[p].gravity, conf.planets[p].gravityForce, conf.planets[p].asset, conf.planets[p].collisionRadius,game));
+        this.planets.push(new Star(conf.planets[p].x, conf.planets[p].y, conf.planets[p].gravity,
+                                   conf.planets[p].gravityForce, conf.planets[p].asset, conf.planets[p].collisionRadius,game));
     }
 };
 
 
-Stage.prototype.preload = function(player) {
 
-    // Aquí carga todos los assets importados en el constructor
+Stage.prototype.getPosition = function (team) {
+
+    var dataGen = new Phaser.RandomDataGenerator(0);
+    var angle = dataGen.angle();
+
+    console.log({angle : angle,
+                 x : this.planets[team].x,
+                 y : this.planets[team].y,
+                 collisionRadius : this.planets[team].collisionRadius});
+
+    return { x : this.planets[team].x + this.planets[team].collisionRadius * Math.sin(angle),
+             y : this.planets[team].y + this.planets[team].collisionRadius * Math.cos(angle) };
 
 }
 
-
-Stage.prototype.create = function (){
-
-    // Aquí carga todos sprites
-
-}
 

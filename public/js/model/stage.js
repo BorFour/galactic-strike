@@ -34,8 +34,8 @@ Stage = function (game, conf) {
 
 Stage.prototype.getPosition = function (team) {
 
-    var dataGen = new Phaser.RandomDataGenerator(0);
-    var angle = dataGen.angle();
+    var dataGen = new Phaser.RandomDataGenerator(Math.random());
+    var angle = Math.random() * 360 - 180;
 
     console.log({angle : angle,
                  x : this.planets[team].x,

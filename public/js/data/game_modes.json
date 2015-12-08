@@ -74,7 +74,7 @@ var gameModes =
         'winScore' : 1,
         'showWinner' : function (winner) {
 
-        var nameLabel = game.add.text(game.world.centerX, - 80, (winner + ' wins!'),{ font: '70px Geo   ', fill: '#ffffff' });
+        var nameLabel = game.add.text(game.world.centerX, game.world.centerY/3, (winner + ' wins!'),{ font: '70px Geo   ', fill: '#ffffff' });
         nameLabel.anchor.setTo(0.5, 0.5);
         var buttonQuit = game.add.button(game.world.centerX, game.world.centerY , 'exitButton', quitGameGM, this, 0, 0, 0, 0);
 
@@ -90,7 +90,7 @@ var gameModes =
         GALACTIC_STRIKE.readTeamAnthem.play();
         //winner.playAnthem();
 
-        game.add.tween(nameLabel).to({y: game.world.centerY - 90}, 1000).easing(Phaser.Easing.Bounce.Out).start();
+        game.add.tween(nameLabel).to({y: game.world.centerY - 200}, 1000).easing(Phaser.Easing.Bounce.Out).start();
         toButton.start();
 
 

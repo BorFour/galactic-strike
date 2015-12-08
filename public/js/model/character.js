@@ -1,22 +1,8 @@
 
 function Character (x, y, game, player, asset) {
-//	this.cursor = {
-//		left:false,
-//		right:false,
-//		up:false,
-//		fire:false
-//	}
-//
-//	this.input = {
-//		left:false,
-//		right:false,
-//		up:false,
-//		fire:false
-//	}
 
     Element.call(this, game, x, y, asset);
     game.add.existing(this);
-//    this.anchor.set(0.5);
 
     this.player = player;
     this.game = game;
@@ -61,7 +47,6 @@ function Character (x, y, game, player, asset) {
     this.planetTouched = null;
     this.atmosphere = [];
     this.grounded = false;
-//    this = game.add.sprite(x, y, 'player');
 
     var truckVertices = [-10, -10, 10,-10, 20,10,-20, 10];
 
@@ -117,16 +102,6 @@ function Character (x, y, game, player, asset) {
 
     this.body.mainSprite = this;
 
-
-    /* this.bullets = game.add.group();
-    this.bullets.enableBody = true;
-    this.bullets.physicsBodyType = Phaser.Physics.ARCADE;
-    this.bullets.createMultiple(20, 'bullet', 0, false);
-    this.bullets.setAll('anchor.x', 0.5);
-    this.bullets.setAll('anchor.y', 0.5);
-    this.bullets.setAll('outOfBoundsKill', true);
-    this.bullets.setAll('checkWorldBounds', true);	 */
-
 	this.currentSpeed =0;
     this.fireRate = 100;
     this.nextFire = 0;
@@ -137,33 +112,12 @@ function Character (x, y, game, player, asset) {
     this.fireCooldownTime = 100;
     this.hitImmuneTime = 330; //After being attacked, the character cannot be hurted for this time
 
-    //this.shadow = game.add.sprite(x, y, 'enemy', 'shadow');
-
 
     this.animations.add('left', [0]);
     this.animations.add('right', [1]);
     this.animations.add('jumpL', [2]);
     this.animations.add('jumpR', [3]);
-    //this.animations.add('fly', [3], 10, true);
 
-    /*
-       this.animations.add('stop', [3], 10, true);
-    this.animations.add('fly', [9], 10, true);
-    this.animations.add('land', [10, 11], 10, true);
-
-*/
-
-    //this.shadow.anchor.set(0.5);ç
-
-//    this.anchor.setTo(0.5, 0.90);
-
-
-
-    //this.turret.anchor.set(0.3, 0.5);
-
-//    this.character.id = index;
-//    game.physics.box2d.enable(this);
-    //game.physics.enable(this.tank, Phaser.Physics.ARCADE);
     this.body.immovable = false;
     this.body.static = false;
     this.body.collideWorldBounds = true;
@@ -174,10 +128,6 @@ function Character (x, y, game, player, asset) {
     this.addChild(text);
     text.anchor.set(0.5);
 
-
-    //this.tank.angle = 0;
-
-//game.physics.arcade.velocityFromRotation(this.tank.rotation, 0, this.tank.body.velocity);
 
 };
 

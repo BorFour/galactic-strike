@@ -112,3 +112,15 @@ Character.prototype.attack2 = function (){
 
     }
 }
+
+Character.prototype.attacks = function (attack_id){
+
+    switch(attack_id)
+    {
+        case 0 :
+            return this.attack();
+        case 1:
+            return this.attack2();
+    }
+
+}

@@ -95,7 +95,8 @@ clientSetupGame = function (){
         console.log('@Client received | attack');
 
         if(charactersList[input.id]){
-            charactersList[input.id].attack();
+            console.log("Attack id: " + input.attack_id);
+            charactersList[input.id].attacks(input.attack_id);
         }
 
     });

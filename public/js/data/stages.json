@@ -24,28 +24,5 @@ var stages =
                 'gravityForce' : 550
             }
         ]
-    },
-    'map2' : {
-        'planet1' : {
-            'asset' : 'planet1',
-            'x' : 100,
-            'y' : 100,
-            'gravity' : 400,
-            'gravityForce' : 250
-        },
-        'planet2' : {
-            'asset' : 'planet2',
-            'x' : 700,
-            'y' : 700,
-            'gravity' : 400,
-            'gravityForce' : 250
-        },
-        'sun' : {
-            'asset' : 'sun',
-            'x' : 400,
-            'y' : 400,
-            'gravity' : 300,
-            'gravityForce' : 550
-        }
     }
 }

@@ -101,20 +101,18 @@ GALACTIC_STRIKE.PlayGame.prototype = {
 
 //        var planet = new Star(680, 700, 400, 250, "planet", game);
 //        var bigPlanet = new Star(1070, 850, 400, 250, "bigplanet", game);
-        var giantPlanet = new Star(800, 900, 600, 750, "giantplanet", game);
 
-//(Edu) No se si hay que hacer spacePhysics.addPlanet para añadirlo al grupo de esa clase o simplemente con el planets.push de aqui valdría
-//            planets.push(planet)
-//            planets.push(bigPlanet)
-        planets.push(giantPlanet)
-        giantPlanet.body.setCircle(525);
+/*COMENTADO DURANTE PRUEBAS STAGES.JSON
+var giantPlanet = new Star(800, 900, 600, 750, "giantplanet");
+planets.push(giantPlanet), game);
+giantPlanet.body.setCircle(525);
 
-        console.log("Planets: " + planets)
+console.log("Planets: " + planets)
 
-
-        orb = game.add.sprite(600, 450, 'moon');
-        orb.anchor.setTo(0.5);
-        orb.pivot.x = 100;
+*/
+orb = game.add.sprite(600, 450, 'moon');
+orb.anchor.setTo(0.5);
+orb.pivot.x = 100;
 
 //        var elementoPrueba = new Element(game, game.world.randomX, game.world.randomY, 'deathstar');
 //        game.physics.box2d.enable(elementoPrueba);
@@ -127,6 +125,9 @@ GALACTIC_STRIKE.PlayGame.prototype = {
 //        game.physics.box2d.enable(objetoPrueba);
 //        game.spacePhysics.addDynamic(objetoPrueba);
 
+            var map = new Stage(game, stages['map1']);
+//        game.physics.box2d.enable(objetoPrueba);
+//        game.spacePhysics.addDynamic(objetoPrueba);
 
 //        game.time.events.loop(GALACTIC_STRIKE.updateOnlineRate, function(){if(myCharacter) myCharacter.updateOnline();}, this);
 

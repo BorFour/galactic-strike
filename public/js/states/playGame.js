@@ -239,6 +239,7 @@ function touchSpikeballEnemy(body1, body2, fixture1, fixture2, begin) {
            !body2.sprite.hitImmune &&
            body2.sprite.health > 0)
         {
+            if(body1.sprite.owner.player.team === body2.mainSprite.player.team) { return; }
             if(body1.sprite.owner === GALACTIC_STRIKE.player.character)
             {
                console.log(body2.mainSprite.player);

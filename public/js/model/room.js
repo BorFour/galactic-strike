@@ -25,14 +25,14 @@ Room.prototype.addPlayer = function(id, player) {
 }
 
 
-Room.prototype.addTeam = function (name){
+Room.prototype.addTeam = function (name, anthem){
 
     console.log(this.teams.length)
     if(this.teams.length < 4){
         if(!name){
           name = "Team " + (this.teams.length+1);
         }
-        this.teams.push(new Team (name, this.teams.length+1));
+        this.teams.push(new Team (name, this.teams.length+1, anthem));
     }
 
 }

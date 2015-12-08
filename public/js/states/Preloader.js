@@ -13,6 +13,7 @@ var zz = [];
 
 play_songs = function(){
     GALACTIC_STRIKE.songs = [];
+    GALACTIC_STRIKE.songs.push(game.add.audio('sovietAnthem', 0.7, true));
     GALACTIC_STRIKE.songs.push(game.add.audio('guiles', 0.7, true));
     GALACTIC_STRIKE.songs.push(game.add.audio('checker', 0.7, true));
     GALACTIC_STRIKE.songs.push(game.add.audio('muteCity', 0.7, true));
@@ -20,7 +21,8 @@ play_songs = function(){
     GALACTIC_STRIKE.songs.push(game.add.audio('witch', 0.7, true));
     GALACTIC_STRIKE.songs.push(game.add.audio('pingasDreamLand', 0.7, true));
 //    GALACTIC_STRIKE.songs.push(game.add.audio('dedede'));
-    GALACTIC_STRIKE.songs[Math.floor(Math.random()*GALACTIC_STRIKE.songs.length)].play();
+    GALACTIC_STRIKE.currentSong = GALACTIC_STRIKE.songs[Math.floor(Math.random()*GALACTIC_STRIKE.songs.length)];
+    GALACTIC_STRIKE.currentSong.play();
 
     // De momento va así para que podamos probar sin que la música dé por culo
     game.sound.mute = true;
@@ -112,6 +114,7 @@ preload: function () {
     game.load.audio('jump', ['../assets/jump.ogg', '../assets/jump.mp3']);
     game.load.audio('pingas', '../assets/sound/pingas.mp3');
     game.load.audio('pingasDreamLand', '../assets/sound/pingas_dreamland.mp3');
+    game.load.audio('sovietAnthem', '../assets/sound/soviet_anthem.mp3');
 
 //    game.load.audio('dedede', '../assets/sound/king_dedede.mp3');
 

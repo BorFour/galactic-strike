@@ -9,11 +9,6 @@ GALACTIC_STRIKE.Lobby = function() {
 
 GALACTIC_STRIKE.Lobby.prototype = {
     preload: function () {
-        game.load.image('starBackground', '../assets/starBackground.jpg');
-        game.load.image('buttonEnter', '../assets/buttons/enterRoom.png');
-        game.load.image('buttonCreate', '../assets/buttons/createRoom.png');
-        game.load.image('redTeam', '../assets/lobby/red_team.jpg');
-        game.load.image('blueTeam', '../assets/lobby/blue_team.jpg');
         var buttonBegin;
         var buttonDisband;
     },

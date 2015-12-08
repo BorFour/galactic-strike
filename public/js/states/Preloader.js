@@ -60,6 +60,12 @@ load_assets = function (){
 		game.load.image("wheel_red", "../assets/spritesIndividuales/robotnik/wheel_red.png");
 		game.load.image("wheel_blue", "../assets/spritesIndividuales/robotnik/wheel_blue.png");
 
+        game.load.image('starBackground', '../assets/starBackground.jpg');
+        game.load.image('buttonEnter', '../assets/buttons/enterRoom.png');
+        game.load.image('buttonCreate', '../assets/buttons/createRoom.png');
+        game.load.image('redTeam', '../assets/lobby/red_team.jpg');
+        game.load.image('blueTeam', '../assets/lobby/blue_team.jpg');
+        game.load.image('star', '../assets/estrella.png');
 
         game.load.audio('jump', ['../assets/jump.ogg', '../assets/jump.mp3']);
         game.load.audio('pingas', '../assets/sound/pingas.mp3');
@@ -103,9 +109,7 @@ preload: function () {
     progressBar.anchor.setTo(0.5, 0.5);
     game.load.setPreloadSprite(progressBar);
 
-    console.log("Preload preloader")
-    game.load.image('starBackground', '../assets/starBackground.jpg')
-    game.load.image('star', '../assets/estrella.png');
+    console.log("Preload preloader");
     game.load.audio('guiles', '../assets/sound/guiles_theme.mp3');
     game.load.audio('checker', '../assets/sound/checker_knights.mp3');
     /*
@@ -127,7 +131,7 @@ preload: function () {
 },
 create: function () {
 
-    var currentLocation = window.location.search
+    var currentLocation = window.location.search;
     var formName = currentLocation.replace("?name=", "");
     GALACTIC_STRIKE.player = new Player(formName ? formName : "Default");
 

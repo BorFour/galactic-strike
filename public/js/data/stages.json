@@ -43,11 +43,11 @@ var stages =
         backgroundImage : 'spaceBackground',
         planets : [
             {
-                asset : 'planet_earth',
+                asset : 'planet_blue',
                 x : 400,
                 y : 400,
                 gravity : 700,
-                gravityForce : 550,
+                gravityForce : 700,
                 collisionRadius : 220
             },
             {
@@ -55,7 +55,7 @@ var stages =
                 x : 2000,
                 y : 2000,
                 gravity : 700,
-                gravityForce : 550,
+                gravityForce : 700,
                 collisionRadius : 208
             },
             {

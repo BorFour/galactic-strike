@@ -174,7 +174,7 @@ GALACTIC_STRIKE.PlayGame.prototype = {
 
          if(gameDebug)
          {
-             game.debug.text("Jump cooldown: " + game.time.events.duration, 32, 32);
+             game.debug.text("Event cooldown: " + game.time.events.duration, 32, 32);
              if(GALACTIC_STRIKE.player.character)
              {
                 game.debug.text("Planet touched: " + GALACTIC_STRIKE.player.character.planetTouched, 32, 64);

@@ -36,5 +36,44 @@ var stages =
                 collisionRadius : 164
             }*/
         ]
+    },
+    'map2' : {
+        width : 2400,
+        height : 2400,
+        backgroundImage : 'spaceBackground',
+        planets : [
+            {
+                asset : 'planet_earth',
+                x : 400,
+                y : 400,
+                gravity : 700,
+                gravityForce : 550,
+                collisionRadius : 220
+            },
+            {
+                asset : 'planet_red',
+                x : 2000,
+                y : 2000,
+                gravity : 700,
+                gravityForce : 550,
+                collisionRadius : 208
+            },
+            {
+                asset : 'sun',
+                x : 1200,
+                y : 1200,
+                gravity : 1500,
+                gravityForce : 250,
+                collisionRadius : 164
+            }/*,
+            {
+                asset : 'sun',
+                x : 1200,
+                y : 1200,
+                gravity : 400,
+                gravityForce : 800,
+                collisionRadius : 164
+            }*/
+        ]
     }
 }

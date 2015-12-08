@@ -125,7 +125,7 @@ orb.pivot.x = 100;
 //        game.physics.box2d.enable(objetoPrueba);
 //        game.spacePhysics.addDynamic(objetoPrueba);
 
-          GALACTIC_STRIKE.room.map = new Stage(game, stages['map1']);
+          GALACTIC_STRIKE.room.map = new Stage(game, stages['map2']);
 //        game.physics.box2d.enable(objetoPrueba);
 //        game.spacePhysics.addDynamic(objetoPrueba);
 

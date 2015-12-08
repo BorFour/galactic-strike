@@ -26,7 +26,7 @@ io.on('connection', function (socket) {
         var output = {
             id : currId,
         };
-        console.log('@Server received\t| login');
+        console.log('@Server <-      \t| login');
         socket.join('General');
 
         players[currId] = input;
@@ -37,7 +37,7 @@ io.on('connection', function (socket) {
 
 //        socket.emit('IDPlayers', output);
         socket.emit('ID', output);
-        console.log('@Server sent    \t| IDPlayer');
+        console.log('@Server ->      \t| IDPlayer');
         console.log('@Server log     \t| nPlayers = ' + nPlayers);
 
     });
@@ -73,7 +73,7 @@ io.on('connection', function (socket) {
 
     socket.on('hit', function (input) {
 
-        console.log('@Server received\t| hit');
+        console.log('@Server <-      \t| hit');
         console.log(input);
         var output = {};
         output.id = input.id;
@@ -92,7 +92,7 @@ io.on('connection', function (socket) {
         var output = {};
         output.id = input.id;
 
-         console.log('@Server received\t| createRoom');
+         console.log('@Server <-      \t| createRoom');
 
         if(room.state === 'empty')
         {
@@ -120,7 +120,7 @@ io.on('connection', function (socket) {
         output.name = input.name;
         output.host = room.host;
 
-        console.log('@Server received\t| joinRoom');
+        console.log('@Server <-      \t| joinRoom');
 
         if (room.state === 'ingame')
         {
@@ -129,7 +129,6 @@ io.on('connection', function (socket) {
         }
         else if(room.state === 'lobby')
         {
-            console.log('@Server join into lobby');
             socket.room = 'Room1';
             socket.join('Room1');
 //            console.log(socket.rooms);
@@ -140,6 +139,7 @@ io.on('connection', function (socket) {
             };
             output.players = room.players;
             io.to('Room1').emit('joinRoom', output);
+            console.log('@Server ->      \t| joinRoom');
 
         }
 //           socket.emit('userJoinedRoom', output);
@@ -162,11 +162,12 @@ io.on('connection', function (socket) {
 
         room.players[input.id].team = input.team;
 
-         console.log('@Server received\t| changeTeam');
+         console.log('@Server <-      \t| changeTeam');
 
         if(room.state === 'lobby')
         {
             io.to('Room1').emit('changeTeam', output);
+            console.log('@Server ->      \t| changeTeam');
         }
 
 
@@ -196,10 +197,12 @@ io.on('connection', function (socket) {
         output.y = input.y;
 //        output.name = room.players[input.id];
 
+        console.log('@Server <-      \t| joinGame');
+
         if(room.state === 'ingame')
         {
             io.to('Room1').emit('userJoinedGame', output);
-//            console.log('@Server sent    \t| userJoined');
+            console.log('@Server ->      \t| joinGame');
         }
 
 
@@ -210,25 +213,30 @@ io.on('connection', function (socket) {
         var output = {};
         output.id = socket.game_id;
 
-        console.log('@Server received\t| leaveGame');
+        console.log('@Server <-      \t| leaveGame');
         console.log('@Server log     \t| user ' + socket.game_id + ' left')
 
         io.to('Room1').emit('userLeftGame', output);
         socket.leave('Room1');
+        console.log('@Server ->      \t| userLeftGame');
 
         delete room.players[socket.game_id];
 
         var playersRoom = 0;
         for (var pr in room.players) playersRoom ++;
 
-        if(playersRoom === 0) {
+        if(playersRoom === 0)
+        {
             console.log('@Server log     \t| empty room');
             room.state = 'empty';
-        } else{
+        }
+        else
+        {
+            console.log('@Server log     \t| players left in room:');
             console.log(room.players);
         }
 
-        console.log('@Server sent    \t| userLeftGame');
+
     });
 
     socket.on('beginMatch', function (input) {
@@ -236,39 +244,43 @@ io.on('connection', function (socket) {
         var output = {};
         output.id = input.id;
 
-        console.log('@Server received\t| beginMatch');
+        console.log('@Server <-      \t| beginMatch');
 
-        if(input.id !== room.host){
-
-        }
-        else if  (room.state !== 'lobby'){
+        if(input.id !== room.host)
+        {
 
         }
-        else{
+        else if  (room.state !== 'lobby')
+        {
+
+        }
+        else
+        {
             room.state = 'ingame';
-
             io.to('Room1').emit('beginMatch', output);
-
+            console.log('@Server ->      \t| beginMatch');
         }
 
-//        socket.emit('beginMatch', output);
 
     });
 
     socket.on('disconnect', function () {
 
         var output = {};
-        console.log('@Server received\t| disconnect');
+
+        console.log('@Server <-      \t| disconnect');
         console.log('@Server log     \t| user ' + socket.game_id + ' left')
+
         if(isNaN(socket.game_id)) return;
+
         output.id = socket.game_id;
         socket.broadcast.emit('userLeft', output);
+
         delete players[socket.game_id];
         if(room.players && room.players[socket.game_id]) delete room.players[socket.game_id];
 
         var playersRoom = 0;
         for (var pr in room.players) playersRoom ++;
-
         if(playersRoom === 0) {
             console.log('@Server log     \t| empty room');
             room.state = 'empty';
@@ -276,7 +288,8 @@ io.on('connection', function (socket) {
             console.log(room.players);
         }
         nPlayers--;
-        console.log('@Server sent    \t| userLeft');
+
+        console.log('@Server ->      \t| userLeft');
 
     });
 

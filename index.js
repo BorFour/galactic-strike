@@ -57,16 +57,8 @@ io.on('connection', function (socket) {
 
         var output = {};
         output.id = input.id;
+        output.attack_id = input.attack_id;
         io.to('Room1').emit('attack', output);
-//        console.log('@Server sent | update');
-
-    });
-
-    socket.on('attack2', function (input) {
-
-        var output = {};
-        output.id = input.id;
-        io.to('Room1').emit('attack2', output);
 //        console.log('@Server sent | update');
 
     });

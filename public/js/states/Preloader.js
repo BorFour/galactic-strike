@@ -44,6 +44,7 @@ load_assets = function (){
 		game.load.image("laser_bullet", "../assets/laser_bullet.jpg");
 		game.load.image("cucumber", "../assets/cucumber.png");
 		game.load.image("spikeball", "../assets/spikeball.gif");
+		game.load.image("misil", "../assets/misil.png");
         //game.load.spritesheet("player", "../assets/ironman_45_75.png", 45, 75);
         game.load.spritesheet("playerRed", "../assets/spritesIndividuales/robotnik/robotnik_red.png", 48, 59); //rueda: 26_23  | robotnik: 49_43
         game.load.spritesheet("playerBlue", "../assets/spritesIndividuales/robotnik/robotnik_blue.png", 48, 59); //rueda: 26_23  | robotnik: 49_43

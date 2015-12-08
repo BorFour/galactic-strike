@@ -133,29 +133,36 @@ Player.prototype.characterSetup = function () {
             game.camera.follow(this.character, Phaser.Camera.FOLLOW_TOPDOWN_TIGHT);
 
 
-            var attackKey = game.input.keyboard.addKey(Phaser.Keyboard.UP);
-            attackKey.onDown.add(function(){
+            var attack0Key = game.input.keyboard.addKey(Phaser.Keyboard.UP);
+            attack0Key.onDown.add(function(){
                 var output = {id:GALACTIC_STRIKE.player.id, attack_id:0};
                 socket.emit('attack', output);
-                this.character.attack()}, this);
+                this.character.attack0()}, this);
             game.input.keyboard.removeKeyCapture(Phaser.Keyboard.UP);
 
 
 
-            var attack2Key = game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
-            attack2Key.onDown.add(function(){
+            var attack1Key = game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
+            attack1Key.onDown.add(function(){
                 var output = {id:GALACTIC_STRIKE.player.id, attack_id:1};
                 socket.emit('attack', output);
-                this.character.attack2()}, this);
+                this.character.attack1()}, this);
             game.input.keyboard.removeKeyCapture(Phaser.Keyboard.DOWN);
 
 
-            var attack3Key = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
-            attack3Key.onDown.add(function(){
+            var attack2Key = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
+            attack2Key.onDown.add(function(){
                 var output = {id:GALACTIC_STRIKE.player.id, attack_id:2};
                 socket.emit('attack', output);
-                this.character.attack3()}, this);
+                this.character.attack2()}, this);
             game.input.keyboard.removeKeyCapture(Phaser.Keyboard.LEFT);
+
+            var attack3Key = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
+            attack3Key.onDown.add(function(){
+                var output = {id:GALACTIC_STRIKE.player.id, attack_id:3};
+                socket.emit('attack', output);
+                this.character.attack3()}, this);
+            game.input.keyboard.removeKeyCapture(Phaser.Keyboard.RIGHT);
 
 
 

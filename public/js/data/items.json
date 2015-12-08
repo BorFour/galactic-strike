@@ -29,5 +29,9 @@ var items =
     'spikeball' : {
         'asset' : 'spikeball',
         'use' : null
+    },
+    'misil' : {
+        'asset' : 'misil',
+        'use' : null
     }
 }

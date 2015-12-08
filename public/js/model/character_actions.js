@@ -20,7 +20,7 @@ Character.prototype.jump = function (){
     }
 }
 
-Character.prototype.attack = function (){
+Character.prototype.attack0 = function (){
     if(this.attackCooldown && this.alive){
         this.attackSound.play();
         this.attackCooldown = false;
@@ -52,7 +52,7 @@ Character.prototype.attack = function (){
     }
 }
 
-Character.prototype.attack2 = function (){
+Character.prototype.attack1 = function (){
     if(this.attackCooldown && this.alive){
         this.attackSound.play();
         this.attackCooldown = false;
@@ -83,7 +83,7 @@ Character.prototype.attack2 = function (){
     }
 }
 
-Character.prototype.attack3 = function (){
+Character.prototype.attack2 = function (){
     if(this.fireCooldown && this.alive){
         this.fireCooldown = false;
 
@@ -116,15 +116,54 @@ Character.prototype.attack3 = function (){
     }
 }
 
+Character.prototype.attack3 = function (){
+    if(this.fireCooldown && this.alive){
+        this.fireCooldown = false;
+
+        var bullet = new Item(game, this.x, this.y, items['misil']);
+        bullet.body.setCollisionCategory(GALACTIC_STRIKE.COLLISION_CATEGORY.BULLET);
+
+        bullet.angle += 90;
+        bullet.body.angle += 90;
+
+        bullet.owner = this;
+        bullet.damage = 15;
+        bullet.body.fixedRotation = true;
+
+        this.bullets.push(bullet);
+        bullet.body.mass = 0.001;
+        bullet.body.bullet = true;
+
+        if(this.inAtmosphere()){
+            bullet.body.angle = this.angle + 90*this.orientation; // Este ángulo va en grados
+            bullet.body.thrust(155400);
+        }
+        else{
+            bullet.body.angle = this.angle;
+            bullet.body.thrust(155400);
+        }
+
+        for(var c in charactersList){
+            bullet.body.setBodyContactCallback(charactersList[c], touchSpikeballEnemy, this);
+        }
+
+        game.time.events.add(this.fireCooldownTime, function(){this.fireCooldown = true}, this)
+        game.time.events.add(1000, function(){bullet.destroy()}, this)
+
+    }
+}
+
 Character.prototype.attacks = function (attack_id){
 
     switch(attack_id)
     {
         case 0 :
-            return this.attack();
+            return this.attack0();
         case 1:
-            return this.attack2();
+            return this.attack1();
         case 2:
+            return this.attack2();
+        case 3:
             return this.attack3();
     }
 

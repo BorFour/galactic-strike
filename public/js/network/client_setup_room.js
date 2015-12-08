@@ -26,8 +26,8 @@ clientSetupRoom = function (){
         if(input.id === GALACTIC_STRIKE.player.id)
         {
             GALACTIC_STRIKE.room = new Room("Default room name", input.host, 8);
-            GALACTIC_STRIKE.room.addTeam("Red Team");
-            GALACTIC_STRIKE.room.addTeam("Blue Team");
+            GALACTIC_STRIKE.room.addTeam("Red Team", 'sovietAnthem');
+            GALACTIC_STRIKE.room.addTeam("Blue Team", 'sovietAnthem');
 
             for (var k in input.players)
             {

@@ -6,11 +6,12 @@ Team.YELLOW = 3;
 Team.GREEN = 4;
 Team.MAXTEAMS =4
 
-Team = function (name, color) {
+Team = function (name, color, anthem) {
 
     this.name = name;
     this.color = color; // Colores predeterminados?
     this.players = [];
+    this.anthem = anthem;
 
 };
 
@@ -22,6 +23,11 @@ Team.prototype.addPlayer = function(player) {
 
 }
 
+Team.prototype.playAnthem = function() {
+
+    game.add.audio(this.anthem, 0.8, true).play();
+
+}
 
 
 Team.prototype.removePlayer = function (player){

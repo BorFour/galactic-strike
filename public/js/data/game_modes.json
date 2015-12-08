@@ -84,7 +84,11 @@ var gameModes =
         game.camera.follow(null);
         var toButton = game.add.tween(game.camera).to({x : buttonQuit.x  - game.camera.width/2, y : buttonQuit.y - game.camera.height/2}, 350, Phaser.Easing.Quadratic.InOut, true);
 
-        game.time.events.add(10000, quitGameGM, this);
+        game.time.events.add(25000, quitGameGM, this);
+
+        GALACTIC_STRIKE.currentSong.stop();
+        GALACTIC_STRIKE.songs[0].play();
+        //winner.playAnthem();
 
         game.add.tween(nameLabel).to({y: game.world.centerY - 90}, 1000).easing(Phaser.Easing.Bounce.Out).start();
         toButton.start();

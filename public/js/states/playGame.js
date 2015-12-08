@@ -75,8 +75,7 @@ GALACTIC_STRIKE.PlayGame.prototype = {
 
 		// stage setup
 
-		game.stage.backgroundColor = "#122112";
-        game.world.setBounds(0, 0, 2400, 2400);
+
 
         /*
         starfield = game.add.sprite(0, 0, 'spaceBackground');

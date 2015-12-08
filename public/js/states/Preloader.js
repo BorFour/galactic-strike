@@ -13,13 +13,13 @@ var zz = [];
 
 play_songs = function(){
     GALACTIC_STRIKE.songs = [];
-    GALACTIC_STRIKE.songs.push(game.add.audio('sovietAnthem', 0.7, true));
     GALACTIC_STRIKE.songs.push(game.add.audio('guiles', 0.7, true));
     GALACTIC_STRIKE.songs.push(game.add.audio('checker', 0.7, true));
     GALACTIC_STRIKE.songs.push(game.add.audio('muteCity', 0.7, true));
     GALACTIC_STRIKE.songs.push(game.add.audio('dreamLand', 0.7, true));
     GALACTIC_STRIKE.songs.push(game.add.audio('witch', 0.7, true));
     GALACTIC_STRIKE.songs.push(game.add.audio('pingasDreamLand', 0.7, true));
+    GALACTIC_STRIKE.readTeamAnthem = game.add.audio('sovietAnthem', 0.85, true);
 //    GALACTIC_STRIKE.songs.push(game.add.audio('dedede'));
     GALACTIC_STRIKE.currentSong = GALACTIC_STRIKE.songs[Math.floor(Math.random()*GALACTIC_STRIKE.songs.length)];
     GALACTIC_STRIKE.currentSong.play();

@@ -3,25 +3,25 @@ var stages =
     'map1' : {
         planets : [
             {
-                'asset' : 'planet1',
-                'x' : 100,
-                'y' : 100,
-                'gravity' : 400,
-                'gravityForce' : 250
+                asset : 'planet',
+                x : 100,
+                y : 100,
+                gravity : 400,
+                gravityForce : 250
             },
             {
-                'asset' : 'planet2',
-                'x' : 700,
-                'y' : 700,
-                'gravity' : 400,
-                'gravityForce' : 250
+                asset : 'bigplanet',
+                x : 700,
+                y : 700,
+                gravity : 400,
+                gravityForce : 250
             },
             {
-                'asset' : 'sun',
-                'x' : 400,
-                'y' : 400,
-                'gravity' : 300,
-                'gravityForce' : 550
+                asset : 'sun',
+                x : 400,
+                y : 400,
+                gravity : 300,
+                gravityForce : 550
             }
         ]
     }

@@ -6,6 +6,7 @@ var starfield;
 
 var planets;
 
+
 var planetCollisionGroup;
 
 var orb;
@@ -125,7 +126,7 @@ orb.pivot.x = 100;
 //        game.physics.box2d.enable(objetoPrueba);
 //        game.spacePhysics.addDynamic(objetoPrueba);
 
-            var map = new Stage(game, stages['map1']);
+          GALACTIC_STRIKE.room.map = new Stage(game, stages['map1']);
 //        game.physics.box2d.enable(objetoPrueba);
 //        game.spacePhysics.addDynamic(objetoPrueba);
 
@@ -337,11 +338,11 @@ function myCharacterSetup(character){
             game.input.keyboard.removeKeyCapture(Phaser.Keyboard.R);
 
 
-            for (var i = 0; i < planets.length; i++){
+            for (var i = 0; i < GALACTIC_STRIKE.room.map.planets.length; i++){
 //                myCharacter.body.setBodyContactCallback(planets[i], touchPlanetCallback, this);
-                character.body.setBodyPresolveCallback(planets[i], touchPlanetCallback, this);
-                character.wheels[0].body.setBodyPresolveCallback(planets[i], touchPlanetCallback, this);
-                character.wheels[1].body.setBodyPresolveCallback(planets[i], touchPlanetCallback, this);
+                character.body.setBodyPresolveCallback(GALACTIC_STRIKE.room.map.planets[i], touchPlanetCallback, this);
+                character.wheels[0].body.setBodyPresolveCallback(GALACTIC_STRIKE.room.map.planets[i], touchPlanetCallback, this);
+                character.wheels[1].body.setBodyPresolveCallback(GALACTIC_STRIKE.room.map.planets[i], touchPlanetCallback, this);
 
             }
 

@@ -9,9 +9,12 @@ Stage = function (game, conf) {
     //this.planets = conf['planets'];
 
 //    game.spacePhysics.addDynamic(this);
-   for(var p in conf['planets']){
-       new Star(p.x, p.y, p.gravity, p.gravityForce, p.asset, game);
-   }
+    this.planets = [];
+
+    for(var p in conf.planets){
+        console.log(conf.planets[p]);
+        this.planets.push(new Star(conf.planets[p].x, conf.planets[p].y, conf.planets[p].gravity, conf.planets[p].gravityForce, conf.planets[p].asset, game));
+    }
 
     // etc.
 

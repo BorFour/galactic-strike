@@ -50,6 +50,7 @@ load_assets = function (){
         game.load.spritesheet("deathstar", "../assets/deathstar.gif", 64, 64);
 		game.load.image("planet", "../assets/planet1.png");
 		game.load.image("bigplanet", "../assets/bigplanet.png");
+		game.load.image("sun", "../assets/sun.png");
 		game.load.image("giantplanet", "../assets/giantplanet.png");
 		game.load.image("wheel_red", "../assets/spritesIndividuales/robotnik/wheel_red.png");
 		game.load.image("wheel_blue", "../assets/spritesIndividuales/robotnik/wheel_blue.png");

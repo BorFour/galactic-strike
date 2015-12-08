@@ -18,7 +18,6 @@ Character.prototype.updateOnline = function() {
     }
 
     socket.emit('update', data);
-    console.log(data.angularVelocity);
 //    console.log('@Client sent | update');
 
 }

@@ -39,7 +39,7 @@ var gameModes =
                     ++teams_alive;
                     winner = this.room.teams[i];
                 }
-                console.log(this.room.teams[i].name + ' ' + this.room.teams[i].alive())
+                //console.log(this.room.teams[i].name + ' ' + this.room.teams[i].alive())
 
             }
 

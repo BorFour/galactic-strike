@@ -9,15 +9,23 @@ Stage = function (game, conf) {
     //this.planets = conf['planets'];
 
 //    game.spacePhysics.addDynamic(this);
+
+    //GREEN BACKGROUND
+    //game.stage.backgroundColor = "#122112";
+
+    game.world.setBounds(0, 0, conf.width, conf.height);
+    //SPACE BACKGROUND
+    var starfield = game.add.sprite(0, 0, conf.backgroundImage);
+    starfield.height = game.world.height;
+    starfield.width = game.world.width;
+    //game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
+
     this.planets = [];
 
     for(var p in conf.planets){
         console.log(conf.planets[p]);
-        this.planets.push(new Star(conf.planets[p].x, conf.planets[p].y, conf.planets[p].gravity, conf.planets[p].gravityForce, conf.planets[p].asset, game));
+        this.planets.push(new Star(conf.planets[p].x, conf.planets[p].y, conf.planets[p].gravity, conf.planets[p].gravityForce, conf.planets[p].asset, conf.planets[p].collisionRadius,game));
     }
-
-    // etc.
-
 };
 
 

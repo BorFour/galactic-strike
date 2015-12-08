@@ -273,11 +273,6 @@ function myCharacterSetup(character){
             // ESTO PROBABLEMENTE NO DEBA IR AQUÍ
             game.camera.follow(character, Phaser.Camera.FOLLOW_TOPDOWN_TIGHT);
 
-            var fireKey = game.input.keyboard.addKey(Phaser.Keyboard.NUMPAD_0);
-            fireKey.onDown.add(function(){character.fire()}, this);
-            game.input.keyboard.removeKeyCapture(Phaser.Keyboard.NUMPAD_0);
-
-
 
             var attackKey = game.input.keyboard.addKey(Phaser.Keyboard.UP);
             attackKey.onDown.add(function(){
@@ -294,6 +289,14 @@ function myCharacterSetup(character){
                 socket.emit('attack', output);
                 character.attack2()}, this);
             game.input.keyboard.removeKeyCapture(Phaser.Keyboard.DOWN);
+
+
+            var attack3Key = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
+            attack3Key.onDown.add(function(){
+                var output = {id:GALACTIC_STRIKE.player.id, attack_id:2};
+                socket.emit('attack', output);
+                character.attack3()}, this);
+            game.input.keyboard.removeKeyCapture(Phaser.Keyboard.LEFT);
 
 
 

@@ -129,15 +129,4 @@ clientSetupGame = function (){
 
     });
 
-    socket.on('attack2', function (input) {
-
-        if(input.id === GALACTIC_STRIKE.player.id) return;
-        console.log('@Client received | attack2');
-
-        if(charactersList[input.id]){
-            charactersList[input.id].attack2();
-        }
-
-    });
-
 }

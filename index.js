@@ -260,7 +260,7 @@ io.on('connection', function (socket) {
         var output = {};
         console.log('@Server received\t| disconnect');
         console.log('@Server log     \t| user ' + socket.game_id + ' left')
-        if(!(socket.game_id instanceof Number)) return;
+        if(isNaN(socket.game_id)) return;
         output.id = socket.game_id;
         socket.broadcast.emit('userLeft', output);
         delete players[socket.game_id];

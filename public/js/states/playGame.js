@@ -149,14 +149,20 @@ GALACTIC_STRIKE.PlayGame.prototype = {
         GALACTIC_STRIKE.room.gameMode.init();
         GALACTIC_STRIKE.room.gameMode.startRound();
         GALACTIC_STRIKE.room.gameOver = false;
+        GALACTIC_STRIKE.room.updateCounter = 0;
 
 	},
 	update: function(){
 
         GALACTIC_STRIKE.player.movePlayer();
-        if(GALACTIC_STRIKE.player.character)
+        if(GALACTIC_STRIKE.room.updateCounter >= (GALACTIC_STRIKE.room.players.length - 2) && GALACTIC_STRIKE.player.character)
         {
             GALACTIC_STRIKE.player.character.updateOnline();
+            GALACTIC_STRIKE.room.updateCounter = 0;
+        }
+        else
+        {
+            GALACTIC_STRIKE.room.updateCounter++;
         }
         game.spacePhysics.update();
         if(!GALACTIC_STRIKE.room.gameOver) GALACTIC_STRIKE.room.gameOver = GALACTIC_STRIKE.room.gameMode.update();

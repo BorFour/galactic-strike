@@ -44,10 +44,8 @@ io.on('connection', function (socket) {
 
     socket.on('update', function (input) {
 
-        var output = input;
 //        console.log('@Server received | update');
         players[socket.game_id] = input;
-        output.id = socket.game_id;
         socket.broadcast.to('Room1').emit('update', input);
 //        console.log('@Server sent | update');
 
@@ -55,9 +53,6 @@ io.on('connection', function (socket) {
 
     socket.on('attack', function (input) {
 
-        var output = {};
-        output.id = input.id;
-        output.attack_id = input.attack_id;
         io.to('Room1').emit('attack', output);
 //        console.log('@Server sent | update');
 
@@ -67,11 +62,7 @@ io.on('connection', function (socket) {
 
         console.log('@Server <-      \t| hit');
         console.log(input);
-        var output = {};
-        output.id = input.id;
-        output.target = input.target;
-        output.damage = input.damage;
-        io.to('Room1').emit('hit', output);
+        io.to('Room1').emit('hit', input);
 
     });
 

@@ -266,7 +266,7 @@ function touchSpikeballEnemy(body1, body2, fixture1, fixture2, begin) {
 function spacePhysicsTimer(){
     game.spacePhysics.update();
 
-    if(GALACTIC_STRIKE.player.character){
+    if(GALACTIC_STRIKE.player.character && !GALACTIC_STRIKE.room.gameOver){
         if(GALACTIC_STRIKE.zoomed && GALACTIC_STRIKE.player.character.inAtmosphere()){
                 game.camera.follow(null);
                 game.add.tween(game.world.scale).to( {x: 1, y:1}, 350, Phaser.Easing.Quadratic.InOut, true);

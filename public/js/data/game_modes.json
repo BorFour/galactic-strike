@@ -74,6 +74,8 @@ var gameModes =
         'winScore' : 1,
         'showWinner' : function (winner) {
 
+
+            GALACTIC_STRIKE.room.gameOver = true;
             if (GALACTIC_STRIKE.zoomed)
             {
                 game.camera.follow(null);

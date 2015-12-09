@@ -88,8 +88,8 @@ GALACTIC_STRIKE.Lobby.prototype = {
 	},
 	beginMatch: function(pointer) {
         if(GALACTIC_STRIKE.room.unasigned.players.length === 0
-           && GALACTIC_STRIKE.room.teams[0].players.length > 0
-           && GALACTIC_STRIKE.room.teams[1].players.length > 0 ) socket.emit('beginMatch', {id : GALACTIC_STRIKE.player.id });
+           /*&& GALACTIC_STRIKE.room.teams[0].players.length > 0
+           && GALACTIC_STRIKE.room.teams[1].players.length > 0*/ ) socket.emit('beginMatch', {id : GALACTIC_STRIKE.player.id });
         else console.log(GALACTIC_STRIKE.room.unasigned);
 	},
 	render: function() {

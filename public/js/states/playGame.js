@@ -154,23 +154,26 @@ orb.pivot.x = 100;
         GALACTIC_STRIKE.room.gameOver = false;
 //        GALACTIC_STRIKE.room.updateCounter = 0;
 
+        spacePhysicsTimer();
+        updateOnlineTimer();
+
 	},
 	update: function(){
 
         GALACTIC_STRIKE.player.movePlayer();
 //        if(GALACTIC_STRIKE.room.updateCounter >= (GALACTIC_STRIKE.room.players.length))
 //        {
-        if(GALACTIC_STRIKE.player.character) GALACTIC_STRIKE.player.character.updateOnline();
-        GALACTIC_STRIKE.room.updateCounter = 0;
+//        if(GALACTIC_STRIKE.player.character) GALACTIC_STRIKE.player.character.updateOnline();
+//        GALACTIC_STRIKE.room.updateCounter = 0;
 //        }
 //        else
 //        {
 //            GALACTIC_STRIKE.room.updateCounter++;
 //        }
-        game.spacePhysics.update();
-        if(!GALACTIC_STRIKE.room.gameOver) GALACTIC_STRIKE.room.gameOver = GALACTIC_STRIKE.room.gameMode.update();
-        orb.rotation += 0.05;
-        if(GALACTIC_STRIKE.endGame) this.quitGame();
+//        game.spacePhysics.update();
+//        if(!GALACTIC_STRIKE.room.gameOver) GALACTIC_STRIKE.room.gameOver = GALACTIC_STRIKE.room.gameMode.update();
+//        orb.rotation += 0.05;
+//        if(GALACTIC_STRIKE.endGame) this.quitGame();
 
 	},
     render: function(){
@@ -257,6 +260,18 @@ function touchSpikeballEnemy(body1, body2, fixture1, fixture2, begin) {
 
         }
 }
+
+function spacePhysicsTimer(){
+    game.spacePhysics.update();
+    game.time.events.add(100, spacePhysicsTimer,this);
+
+}
+
+function updateOnlineTimer() {
+    if(GALACTIC_STRIKE.player.character) GALACTIC_STRIKE.player.character.updateOnline();
+    game.time.events.add(30*(Object.keys(GALACTIC_STRIKE.room.players).length - 1), updateOnlineTimer, this);
+}
+
 
 function toRad(value){
     return (value * Math.PI) / 180

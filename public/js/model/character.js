@@ -220,7 +220,7 @@ Character.prototype.moveInOrbit = function(direction){
             this.orientation = this.RIGHT;
             break;
          case 'jetpack':
-            this.body.thrust(700);
+            this.body.thrust(1200);
             if(this.orientation === this.LEFT) this.animations.play('jumpL');
             if(this.orientation === this.RIGHT) this.animations.play('jumpR');
             this.jumpAnimation = true;
@@ -302,6 +302,7 @@ Character.prototype.die = function() {
     this.wheels[1].destroy();
     this.body.destroy();
 	this.kill();
+    if(!GALACTIC_STRIKE.room.gameOver) GALACTIC_STRIKE.room.gameOver = GALACTIC_STRIKE.room.gameMode.update();
     console.log(game.spacePhysics);
 }
 

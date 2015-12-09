@@ -26,7 +26,7 @@ function SpacePhysics(game){
 
     // a force reducer to let the simulation run smoothly
 
-    this.forceReducer = 0.015;
+    this.forceReducer = 0.115;
 
     // graphic object where to draw planet gravity area
 

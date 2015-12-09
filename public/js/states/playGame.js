@@ -183,7 +183,9 @@ orb.pivot.x = 100;
              game.debug.text("Event cooldown: " + game.time.events.duration, 32, 32);
              if(GALACTIC_STRIKE.player.character)
              {
-                game.debug.text("Planet touched: " + GALACTIC_STRIKE.player.character.planetTouched, 32, 64);
+                game.debug.text("Planet touched: " +
+                (GALACTIC_STRIKE.player.character.planetTouched ? GALACTIC_STRIKE.player.character.planetTouched.sprite
+                 : GALACTIC_STRIKE.player.character.planetTouched), 32, 64);
                 game.debug.text("In atmosphere: " + GALACTIC_STRIKE.player.character.inAtmosphere(), 32, 96);
                 game.debug.text("Grounded: " + GALACTIC_STRIKE.player.character.isGrounded(), 32, 128);
                 game.debug.text('My ID: ' + GALACTIC_STRIKE.player.id, 32, 160);

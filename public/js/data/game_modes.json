@@ -39,7 +39,7 @@ var gameModes =
                     ++teams_alive;
                     winner = this.room.teams[i];
                 }
-                //console.log(this.room.teams[i].name + ' ' + this.room.teams[i].alive())
+                console.log(this.room.teams[i].name + ' ' + this.room.teams[i].alive())
 
             }
 
@@ -74,37 +74,38 @@ var gameModes =
         'winScore' : 1,
         'showWinner' : function (winner) {
 
-        if (GALACTIC_STRIKE.zoomed)
-        {
+            if (GALACTIC_STRIKE.zoomed)
+            {
+                game.camera.follow(null);
+                game.add.tween(game.world.scale).to( {x: 1, y:1}, 350, Phaser.Easing.Quadratic.InOut, true);
+                GALACTIC_STRIKE.zoomed = false;
+                game.camera.follow(GALACTIC_STRIKE.player.character,  Phaser.Camera.FOLLOW_TOPDOWN_TIGHT);
+            }
+
+            var nameLabel = game.add.text(game.world.centerX, game.world.centerY/3, (winner + ' wins!'),{ font: '70px Geo   ', fill: '#ffffff' });
+            nameLabel.anchor.setTo(0.5, 0.5);
+            var buttonQuit = game.add.button(game.world.centerX, game.world.centerY , 'exitButton', quitGameGM, this, 0, 0, 0, 0);
+
+            buttonQuit.anchor.set(0.5);
+            buttonQuit.scale.set(0.25);
+
             game.camera.follow(null);
-            game.add.tween(game.world.scale).to( {x: 1, y:1}, 350, Phaser.Easing.Quadratic.InOut, true);
-            GALACTIC_STRIKE.zoomed = false;
-            game.camera.follow(GALACTIC_STRIKE.player.character,  Phaser.Camera.FOLLOW_TOPDOWN_TIGHT);
-        }
+            var toButton = game.add.tween(game.camera).to({x : buttonQuit.x  - game.camera.width/2, y : buttonQuit.y - game.camera.height/2}, 350, Phaser.Easing.Quadratic.InOut, true);
 
-        var nameLabel = game.add.text(game.world.centerX, game.world.centerY/3, (winner + ' wins!'),{ font: '70px Geo   ', fill: '#ffffff' });
-        nameLabel.anchor.setTo(0.5, 0.5);
-        var buttonQuit = game.add.button(game.world.centerX, game.world.centerY , 'exitButton', quitGameGM, this, 0, 0, 0, 0);
+            game.time.events.add(26000, quitGameGM, this);
 
-        buttonQuit.anchor.set(0.5);
-        buttonQuit.scale.set(0.25);
+            GALACTIC_STRIKE.currentSong.stop();
+            GALACTIC_STRIKE.readTeamAnthem.play();
+            //winner.playAnthem();
 
-        game.camera.follow(null);
-        var toButton = game.add.tween(game.camera).to({x : buttonQuit.x  - game.camera.width/2, y : buttonQuit.y - game.camera.height/2}, 350, Phaser.Easing.Quadratic.InOut, true);
-
-        game.time.events.add(26000, quitGameGM, this);
-
-        GALACTIC_STRIKE.currentSong.stop();
-        GALACTIC_STRIKE.readTeamAnthem.play();
-        //winner.playAnthem();
-
-        game.add.tween(nameLabel).to({y: game.world.centerY - 200}, 1000).easing(Phaser.Easing.Bounce.Out).start();
-        toButton.start();
+            game.add.tween(nameLabel).to({y: game.world.centerY - 200}, 1000).easing(Phaser.Easing.Bounce.Out).start();
+            toButton.start();
 
 
         },
         'update' : function (){
 
+            console.log("Deathmatch update");
             var wr = this.winnerRound();
             if(wr)
             {

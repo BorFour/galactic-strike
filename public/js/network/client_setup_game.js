@@ -114,6 +114,8 @@ clientSetupGame = function (){
             if(charactersList[input.target].health <= 0)
             {
                 charactersList[input.target].die();
+//          if(!GALACTIC_STRIKE.room.gameOver) GALACTIC_STRIKE.room.gameOver =
+                GALACTIC_STRIKE.room.gameMode.update();
 
             } else
             {

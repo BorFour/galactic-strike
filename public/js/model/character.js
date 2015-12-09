@@ -302,7 +302,6 @@ Character.prototype.die = function() {
     this.wheels[1].destroy();
     this.body.destroy();
 	this.kill();
-    if(!GALACTIC_STRIKE.room.gameOver) GALACTIC_STRIKE.room.gameOver = GALACTIC_STRIKE.room.gameMode.update();
     console.log(game.spacePhysics);
 }
 

@@ -44,16 +44,16 @@ var stages =
         planets : [
             {
                 asset : 'planet_red',
-                x : 3600,
-                y : 3600,
+                x : 3200,
+                y : 3200,
                 gravityRadius : 900,
                 gravityForce : 900,
                 collisionRadius : 355
             },
             {
                 asset : 'planet_blue',
-                x : 800,
-                y : 800,
+                x : 1200,
+                y : 1200,
                 gravityRadius : 900,
                 gravityForce : 900,
                 collisionRadius : 375

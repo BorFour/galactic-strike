@@ -165,24 +165,24 @@ Player.prototype.characterSetup = function () {
             game.input.keyboard.removeKeyCapture(Phaser.Keyboard.RIGHT);
 
 
-
-            var zoomKey = game.input.keyboard.addKey(Phaser.Keyboard.Z);
-            zoomKey.onDown.add(function(){
-                if (!GALACTIC_STRIKE.zoomed){
-                    game.camera.follow(null);
-                    game.add.tween(game.world.scale).to( {x: 0.5, y:0.5}, 350, Phaser.Easing.Quadratic.InOut, true);
-                    GALACTIC_STRIKE.zoomed = true;
-                    game.camera.follow(this.character, Phaser.Camera.FOLLOW_TOPDOWN_TIGHT);
-
-                }
-                else{
-                    game.camera.follow(null);
-                    game.add.tween(game.world.scale).to( {x: 1, y:1}, 350, Phaser.Easing.Quadratic.InOut, true);
-                    GALACTIC_STRIKE.zoomed = false;
-                    game.camera.follow(this.character,  Phaser.Camera.FOLLOW_TOPDOWN_TIGHT);
-                }
-            }, this);
-            game.input.keyboard.removeKeyCapture(Phaser.Keyboard.Z);
+//
+//            var zoomKey = game.input.keyboard.addKey(Phaser.Keyboard.Z);
+//            zoomKey.onDown.add(function(){
+//                if (!GALACTIC_STRIKE.zoomed){
+//                    game.camera.follow(null);
+//                    game.add.tween(game.world.scale).to( {x: 0.5, y:0.5}, 350, Phaser.Easing.Quadratic.InOut, true);
+//                    GALACTIC_STRIKE.zoomed = true;
+//                    game.camera.follow(this.character, Phaser.Camera.FOLLOW_TOPDOWN_TIGHT);
+//
+//                }
+//                else{
+//                    game.camera.follow(null);
+//                    game.add.tween(game.world.scale).to( {x: 1, y:1}, 350, Phaser.Easing.Quadratic.InOut, true);
+//                    GALACTIC_STRIKE.zoomed = false;
+//                    game.camera.follow(this.character,  Phaser.Camera.FOLLOW_TOPDOWN_TIGHT);
+//                }
+//            }, this);
+//            game.input.keyboard.removeKeyCapture(Phaser.Keyboard.Z);
 
 
 

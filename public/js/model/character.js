@@ -1,8 +1,10 @@
 
-function Character (x, y, game, player, asset) {
+function Character (x, y, angle, game, player, asset) {
 
     Element.call(this, game, x, y, asset);
     game.add.existing(this);
+
+    this.rotation = angle;
 
     this.player = player;
     this.game = game;
@@ -10,6 +12,7 @@ function Character (x, y, game, player, asset) {
     this.game.spacePhysics.addDynamic(this);
     this.game.physics.box2d.enable(this);
     this.body.dynamic = true;
+//    this.body.angle = angle;
 
     // States
     this.RIGHT = 1;

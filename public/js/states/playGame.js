@@ -139,7 +139,7 @@ orb.pivot.x = 100;
             id : GALACTIC_STRIKE.player.id,
             x: spawnPosition.x,
             y: spawnPosition.y,
-            angle: 0,
+            angle: toRad(spawnPosition.angle - 180),
             velocityX : 0,
             velocityY : 0,
             orientation: 0
@@ -265,13 +265,29 @@ function touchSpikeballEnemy(body1, body2, fixture1, fixture2, begin) {
 
 function spacePhysicsTimer(){
     game.spacePhysics.update();
+
+    if(GALACTIC_STRIKE.player.character){
+        if(GALACTIC_STRIKE.zoomed && GALACTIC_STRIKE.player.character.inAtmosphere()){
+                game.camera.follow(null);
+                game.add.tween(game.world.scale).to( {x: 1, y:1}, 350, Phaser.Easing.Quadratic.InOut, true);
+                GALACTIC_STRIKE.zoomed = false;
+                game.camera.follow(GALACTIC_STRIKE.player.character,  Phaser.Camera.FOLLOW_TOPDOWN_TIGHT);
+        }
+        else if(!GALACTIC_STRIKE.zoomed && !GALACTIC_STRIKE.player.character.inAtmosphere()){
+                game.camera.follow(null);
+                game.add.tween(game.world.scale).to( {x: 0.5, y:0.5}, 350, Phaser.Easing.Quadratic.InOut, true);
+                GALACTIC_STRIKE.zoomed = true;
+                game.camera.follow(GALACTIC_STRIKE.player.character, Phaser.Camera.FOLLOW_TOPDOWN_TIGHT);
+        }
+    }
+
     game.time.events.add(100, spacePhysicsTimer,this);
 
 }
 
 function updateOnlineTimer() {
     if(GALACTIC_STRIKE.player.character) GALACTIC_STRIKE.player.character.updateOnline();
-    game.time.events.add(30*(Object.keys(GALACTIC_STRIKE.room.players).length - 1), updateOnlineTimer, this);
+    game.time.events.add(30*(Object.keys(GALACTIC_STRIKE.room.players).length), updateOnlineTimer, this);
 }
 
 

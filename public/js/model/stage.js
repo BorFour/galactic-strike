@@ -25,7 +25,7 @@ Stage = function (game, conf) {
     for(var p in conf.planets)
     {
         console.log(conf.planets[p]);
-        this.planets.push(new Star(conf.planets[p].x, conf.planets[p].y, conf.planets[p].gravity,
+        this.planets.push(new Star(conf.planets[p].x, conf.planets[p].y, conf.planets[p].gravityRadius,
                                    conf.planets[p].gravityForce, conf.planets[p].asset, conf.planets[p].collisionRadius,game));
     }
 };
@@ -43,7 +43,8 @@ Stage.prototype.getPosition = function (team) {
                  collisionRadius : this.planets[team].collisionRadius});
 
     return { x : this.planets[team].x + this.planets[team].collisionRadius * Math.sin(angle),
-             y : this.planets[team].y + this.planets[team].collisionRadius * Math.cos(angle) };
+             y : this.planets[team].y + this.planets[team].collisionRadius * Math.cos(angle),
+             angle : angle };
 
 }
 

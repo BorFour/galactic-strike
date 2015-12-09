@@ -187,6 +187,7 @@ io.on('connection', function (socket) {
         output.id = input.id;
         output.x = input.x;
         output.y = input.y;
+        output.angle = input.angle;
 //        output.name = room.players[input.id];
 
         console.log('@Server <-      \t| joinGame');
@@ -296,7 +297,9 @@ http.listen(puerto, function(){
 });
 
 // Cloud 9
-// https://galacticstrikesocketio-borfour-1.c9users.io/
+/*
+https://galacticstrikesocketio-borfour-1.c9users.io/
+*/
 //http.listen(process.env.PORT, process.env.IP, function(){
 //  console.log('listening on ' + process.env.IP + ':' + process.env.PORT);
 //});

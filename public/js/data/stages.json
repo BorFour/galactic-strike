@@ -46,15 +46,15 @@ var stages =
                 asset : 'planet_red',
                 x : 3600,
                 y : 3600,
-                gravity : 900,
-                gravityForce : 850,
+                gravityRadius : 900,
+                gravityForce : 900,
                 collisionRadius : 355
             },
             {
                 asset : 'planet_blue',
                 x : 800,
                 y : 800,
-                gravity : 850,
+                gravityRadius : 900,
                 gravityForce : 900,
                 collisionRadius : 375
             },
@@ -62,7 +62,7 @@ var stages =
                 asset : 'sun',
                 x : 2200,
                 y : 2200,
-                gravity : 2200,
+                gravityRadius : 900,
                 gravityForce : 550,
                 collisionRadius : 164
             }/*,

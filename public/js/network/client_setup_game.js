@@ -47,42 +47,42 @@ clientSetupGame = function (){
 
     socket.on('update', function (input) {
 
-        if(input.game_id === GALACTIC_STRIKE.player.id) return;
+        if(input.id === GALACTIC_STRIKE.player.id) return;
 //        console.log('@Client received | updatePlayers');
 
-        if(charactersList[input.game_id]){
-            charactersList[input.game_id].body.x = input.x;
-            charactersList[input.game_id].body.y = input.y;
-            charactersList[input.game_id].body.angle = input.angle;
-            charactersList[input.game_id].body.velocity.x = input.velocityX;
-            charactersList[input.game_id].body.velocity.y = input.velocityY;
+        if(charactersList[input.id]){
+            charactersList[input.id].body.x = input.x;
+            charactersList[input.id].body.y = input.y;
+            charactersList[input.id].body.angle = input.angle;
+            charactersList[input.id].body.velocity.x = input.velocityX;
+            charactersList[input.id].body.velocity.y = input.velocityY;
 //            charactersList[input.id].body.angularVelocity= input.angularVelocity;
-            charactersList[input.game_id].orientation = input.orientation;
-            charactersList[input.game_id].jumpAnimation = input.jumpAnimation;
+            charactersList[input.id].orientation = input.orientation;
+            charactersList[input.id].jumpAnimation = input.jumpAnimation;
         }
         else{
             return;
         }
 
-        if(charactersList[input.game_id].jumpAnimation){
-            if(charactersList[input.game_id].orientation === charactersList[input.game_id].LEFT)
+        if(charactersList[input.id].jumpAnimation){
+            if(charactersList[input.id].orientation === charactersList[input.id].LEFT)
             {
-                charactersList[input.game_id].animations.play('jumpL');
+                charactersList[input.id].animations.play('jumpL');
             }
             else
             {
-                charactersList[input.game_id].animations.play('jumpR');
+                charactersList[input.id].animations.play('jumpR');
             }
         }
         else
         {
-            if(charactersList[input.game_id].orientation === charactersList[input.game_id].LEFT)
+            if(charactersList[input.id].orientation === charactersList[input.id].LEFT)
             {
-                charactersList[input.game_id].animations.play('left');
+                charactersList[input.id].animations.play('left');
             }
             else
             {
-                charactersList[input.game_id].animations.play('right');
+                charactersList[input.id].animations.play('right');
             }
         }
 

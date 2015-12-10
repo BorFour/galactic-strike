@@ -7,6 +7,7 @@ Room = function (name, host, maxUsers) {
     this.host = host; // Host ID
     this.maxUsers = maxUsers;
     this.players = {};
+    this.characters = {};
 //    this.players[host.id] = host;
     this.unasigned = new Team ("Unasigned", -1);
 //    host.joinTeam(this.unasigned);

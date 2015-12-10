@@ -8,7 +8,7 @@ clientSetupMenu = function(){
 
         GALACTIC_STRIKE.player.id = input.id;
         GALACTIC_STRIKE.player.nickname += input.id;
-//        GALACTIC_STRIKE.player.character = charactersList[GALACTIC_STRIKE.player.id];
+//        GALACTIC_STRIKE.player.character = GALACTIC_STRIKE.room.characters[GALACTIC_STRIKE.player.id];
 //        myCharacterSetup(GALACTIC_STRIKE.player.character);
 
     });
@@ -17,8 +17,8 @@ clientSetupMenu = function(){
     socket.on('userLeft', function (input) {
 
         console.log('@Client received | userLeft');
-        if(charactersList[input.id]) charactersList[input.id].die();
-        delete charactersList[input.id];
+        if(GALACTIC_STRIKE.room.characters[input.id]) GALACTIC_STRIKE.room.characters[input.id].die();
+        delete GALACTIC_STRIKE.room.characters[input.id];
 
     });
 

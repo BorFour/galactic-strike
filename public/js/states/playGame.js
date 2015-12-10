@@ -57,10 +57,21 @@ GALACTIC_STRIKE.PlayGame.prototype = {
 	},
   	create: function(){
 
+        if(!game.spacePhysics)
+        {
+            // Inicializamos el motor de físicas
+            game.spacePhysics = new SpacePhysics(game)
+            game.spacePhysics.debug = true;
+            // physics initialization
+            game.physics.startSystem(Phaser.Physics.BOX2D);
+            game.physics.box2d.setBoundsToWorld();
+            game.physics.box2d.friction = 50;
+        }
 
         planets = [];
 //        planetCollisionGroup =  game.physics.box2d.createCollisionGroup();
         charactersList = {};
+
 
 		// adding graphic objects
 
@@ -84,16 +95,8 @@ GALACTIC_STRIKE.PlayGame.prototype = {
         //game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
 
 
-		// physics initialization
-
-		game.physics.startSystem(Phaser.Physics.BOX2D);
-        game.physics.box2d.setBoundsToWorld();
-        game.physics.box2d.friction = 50;
 
 
-        // Inicializamos el motor de físicas
-        game.spacePhysics = new SpacePhysics(game)
-        game.spacePhysics.debug = true;
 		//game.physics.box2d.friction = 5000;
 
 //        var planet = new Star(680, 700, 400, 250, "planet", game);
@@ -122,7 +125,7 @@ orb.pivot.x = 100;
     //        game.physics.box2d.enable(objetoPrueba);
     //        game.spacePhysics.addDynamic(objetoPrueba);
 
-          GALACTIC_STRIKE.room.map = new Stage(game, stages['map3']);
+          GALACTIC_STRIKE.room.map = new Stage(game, stages['map2']);
     //        game.physics.box2d.enable(objetoPrueba);
     //        game.spacePhysics.addDynamic(objetoPrueba);
 
@@ -207,8 +210,8 @@ orb.pivot.x = 100;
             // var c se almacena el valor de las CLAVES
             // Para acceder a los valores, hay que indexar la
             // lista con la propia clave 'c'
-            for (var c in charactersList){
-                game.debug.text(charactersList[c], 640, i*32);
+            for (var c in GALACTIC_STRIKE.room.characters){
+                game.debug.text(GALACTIC_STRIKE.room.characters[c], 640, i*32);
                 ++i;
             }
             game.debug.text("Events : " + game.time.events.length, 640, i*32);
@@ -265,26 +268,26 @@ function spacePhysicsTimer(){
 
     if(GALACTIC_STRIKE.player.character && !GALACTIC_STRIKE.room.gameOver){
         if(GALACTIC_STRIKE.zoomed && GALACTIC_STRIKE.player.character.inAtmosphere()){
-                game.camera.follow(null);
+//                game.camera.follow(null);
                 game.add.tween(game.world.scale).to( {x: 1, y:1}, 350, Phaser.Easing.Quadratic.InOut, true);
                 GALACTIC_STRIKE.zoomed = false;
                 game.camera.follow(GALACTIC_STRIKE.player.character,  Phaser.Camera.FOLLOW_TOPDOWN_TIGHT);
         }
         else if(!GALACTIC_STRIKE.zoomed && !GALACTIC_STRIKE.player.character.inAtmosphere()){
-                game.camera.follow(null);
+//                game.camera.follow(null);
                 game.add.tween(game.world.scale).to( {x: 0.5, y:0.5}, 350, Phaser.Easing.Quadratic.InOut, true);
                 GALACTIC_STRIKE.zoomed = true;
                 game.camera.follow(GALACTIC_STRIKE.player.character, Phaser.Camera.FOLLOW_TOPDOWN_TIGHT);
         }
     }
 
-    game.time.events.add(100, spacePhysicsTimer,this);
+    game.time.events.add(80, spacePhysicsTimer,this);
 
 }
 
 function updateOnlineTimer() {
     if(GALACTIC_STRIKE.player.character) GALACTIC_STRIKE.player.character.updateOnline();
-    game.time.events.add(17*(Object.keys(GALACTIC_STRIKE.room.players).length), updateOnlineTimer, this);
+    game.time.events.add(11*(Object.keys(GALACTIC_STRIKE.room.players).length), updateOnlineTimer, this);
 }
 
 

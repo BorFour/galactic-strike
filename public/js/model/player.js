@@ -202,8 +202,8 @@ Player.prototype.characterSetup = function () {
 //            respawnKey.onDown.add(function(){
 //                console.log("DIE")
 //                GALACTIC_STRIKE.player.character.die();
-//                charactersList[GALACTIC_STRIKE.player.id] = new Character(game.world.randomX, game.world.randomY, game, GALACTIC_STRIKE.player.id, 'player');
-//                GALACTIC_STRIKE.player.character = charactersList[GALACTIC_STRIKE.player.id];
+//                GALACTIC_STRIKE.room.characters[GALACTIC_STRIKE.player.id] = new Character(game.world.randomX, game.world.randomY, game, GALACTIC_STRIKE.player.id, 'player');
+//                GALACTIC_STRIKE.player.character = GALACTIC_STRIKE.room.characters[GALACTIC_STRIKE.player.id];
 //                GALACTIC_STRIKE.player.characterSetup();
 //            }, this);
 //            game.input.keyboard.removeKeyCapture(Phaser.Keyboard.R);

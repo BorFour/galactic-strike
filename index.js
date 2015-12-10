@@ -281,7 +281,7 @@ io.on('connection', function (socket) {
 });
 
 
-var puerto = 3000;
+var puerto = 8080;
 var ip = 'localhost';
 
 http.listen(puerto, function(){

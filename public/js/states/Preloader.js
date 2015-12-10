@@ -37,6 +37,9 @@ play_songs = function(){
 load_assets = function (){
 
         game.load.image("spaceBackground", "../assets/spaceBackground.jpg");
+        game.load.image('starBackground', '../assets/starBackground.jpg');
+        game.load.image('fondo_estrellas', '../assets/fondo_estrellas.png');
+
 		game.load.image("pokeball", "../assets/pokeball.png");
 		game.load.image("potion", "../assets/potion.gif");
 		game.load.image("moon", "../assets/moon1.png");
@@ -57,10 +60,11 @@ load_assets = function (){
         game.load.image("planet_blue", "../assets/planet_blue.png");
         game.load.image("planet_red", "../assets/planet_red.png");
 		game.load.image("giantplanet", "../assets/giantplanet.png");
+		game.load.image("giant_moon", "../assets/giantmoon.png");
+
 		game.load.image("wheel_red", "../assets/spritesIndividuales/robotnik/wheel_red.png");
 		game.load.image("wheel_blue", "../assets/spritesIndividuales/robotnik/wheel_blue.png");
 
-        game.load.image('starBackground', '../assets/starBackground.jpg');
         game.load.image('buttonEnter', '../assets/buttons/enterRoom.png');
         game.load.image('buttonCreate', '../assets/buttons/createRoom.png');
         game.load.image('redTeam', '../assets/lobby/red_team.jpg');

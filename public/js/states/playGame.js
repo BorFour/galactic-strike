@@ -48,9 +48,6 @@ GALACTIC_STRIKE.PlayGame = function(game){};
  * Load all the assets (images and sound) for this game
  */
 
-// No sé muy bien dónde iría esto, pero de momento aquí
-
-
 GALACTIC_STRIKE.PlayGame.prototype = {
 	preload: function(){
 
@@ -61,7 +58,7 @@ GALACTIC_STRIKE.PlayGame.prototype = {
   	create: function(){
 
 
-        planets = []
+        planets = [];
 //        planetCollisionGroup =  game.physics.box2d.createCollisionGroup();
         charactersList = {};
 
@@ -125,7 +122,7 @@ orb.pivot.x = 100;
     //        game.physics.box2d.enable(objetoPrueba);
     //        game.spacePhysics.addDynamic(objetoPrueba);
 
-          GALACTIC_STRIKE.room.map = new Stage(game, stages['map2']);
+          GALACTIC_STRIKE.room.map = new Stage(game, stages['map3']);
     //        game.physics.box2d.enable(objetoPrueba);
     //        game.spacePhysics.addDynamic(objetoPrueba);
 

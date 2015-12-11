@@ -156,6 +156,26 @@ orb.pivot.x = 100;
 
         spacePhysicsTimer();
         updateOnlineTimer();
+        GALACTIC_STRIKE.createGameReady = true;
+
+        for(var c in GALACTIC_STRIKE.charactersBuffer)
+        {
+            var input = GALACTIC_STRIKE.charactersBuffer[c];
+            var asset = (GALACTIC_STRIKE.room.players[input.id].team === GALACTIC_STRIKE.room.teams[0] ? 'playerRed' : 'playerBlue');
+            GALACTIC_STRIKE.room.characters[input.id] = new Character(input.x, input.y, input.angle, game, GALACTIC_STRIKE.room.players[input.id], asset);
+            GALACTIC_STRIKE.room.players[input.id].character = GALACTIC_STRIKE.room.characters[input.id];
+
+            if(input.id === GALACTIC_STRIKE.player.id){
+                GALACTIC_STRIKE.player.characterSetup();
+            }
+
+
+            var logMsg = "";
+            for (var c in GALACTIC_STRIKE.room.characters){
+                logMsg += GALACTIC_STRIKE.room.characters[c] + " ";
+            }
+            console.log("Clients: " + logMsg);
+        }
 
 	},
 	update: function(){
@@ -270,15 +290,15 @@ function spacePhysicsTimer(){
 
     if(GALACTIC_STRIKE.player.character && !GALACTIC_STRIKE.room.gameOver){
         if(GALACTIC_STRIKE.zoomed && GALACTIC_STRIKE.player.character.inAtmosphere()){
-//                game.camera.follow(null);
-                game.add.tween(game.world.scale).to( {x: 1, y:1}, 350, Phaser.Easing.Quadratic.InOut, true);
+                game.camera.follow(null);
                 GALACTIC_STRIKE.zoomed = false;
+                game.add.tween(game.world.scale).to( {x: 1, y:1}, 350, Phaser.Easing.Quadratic.InOut, true);
                 game.camera.follow(GALACTIC_STRIKE.player.character,  Phaser.Camera.FOLLOW_TOPDOWN_TIGHT);
         }
         else if(!GALACTIC_STRIKE.zoomed && !GALACTIC_STRIKE.player.character.inAtmosphere()){
-//                game.camera.follow(null);
-                game.add.tween(game.world.scale).to( {x: 0.5, y:0.5}, 350, Phaser.Easing.Quadratic.InOut, true);
+                game.camera.follow(null);
                 GALACTIC_STRIKE.zoomed = true;
+                game.add.tween(game.world.scale).to( {x: 0.5, y:0.5}, 350, Phaser.Easing.Quadratic.InOut, true);
                 game.camera.follow(GALACTIC_STRIKE.player.character, Phaser.Camera.FOLLOW_TOPDOWN_TIGHT);
         }
     }

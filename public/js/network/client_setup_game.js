@@ -8,6 +8,7 @@ clientSetupGame = function (){
         console.log('@Client received | beginMatch');
 
         game.state.start('PlayGame');
+        GALACTIC_STRIKE.charactersBuffer = {};
 
     });
 
@@ -16,31 +17,28 @@ clientSetupGame = function (){
 
         console.log('@Client received | userJoinedGame');
 
-        if(!game.spacePhysics)
+        if(GALACTIC_STRIKE.createGameReady)
         {
-            // Inicializamos el motor de físicas
-            game.spacePhysics = new SpacePhysics(game)
-            game.spacePhysics.debug = true;
-            // physics initialization
-            game.physics.startSystem(Phaser.Physics.BOX2D);
-            game.physics.box2d.setBoundsToWorld();
-            game.physics.box2d.friction = 50;
+            var asset = (GALACTIC_STRIKE.room.players[input.id].team === GALACTIC_STRIKE.room.teams[0] ? 'playerRed' : 'playerBlue');
+            GALACTIC_STRIKE.room.characters[input.id] = new Character(input.x, input.y, input.angle, game, GALACTIC_STRIKE.room.players[input.id], asset);
+            GALACTIC_STRIKE.room.players[input.id].character = GALACTIC_STRIKE.room.characters[input.id];
+
+            if(input.id === GALACTIC_STRIKE.player.id){
+                GALACTIC_STRIKE.player.characterSetup();
+            }
+
+
+            var logMsg = "";
+            for (var c in GALACTIC_STRIKE.room.characters){
+                logMsg += GALACTIC_STRIKE.room.characters[c] + " ";
+            }
+            console.log("Clients: " + logMsg);
+        }
+        else
+        {
+            GALACTIC_STRIKE.charactersBuffer[input.id] = input;
         }
 
-        var asset = (GALACTIC_STRIKE.room.players[input.id].team === GALACTIC_STRIKE.room.teams[0] ? 'playerRed' : 'playerBlue');
-        GALACTIC_STRIKE.room.characters[input.id] = new Character(input.x, input.y, input.angle, game, GALACTIC_STRIKE.room.players[input.id], asset);
-        GALACTIC_STRIKE.room.players[input.id].character = GALACTIC_STRIKE.room.characters[input.id];
-
-        if(input.id === GALACTIC_STRIKE.player.id){
-            GALACTIC_STRIKE.player.characterSetup();
-        }
-
-
-        var logMsg = "";
-        for (var c in GALACTIC_STRIKE.room.characters){
-            logMsg += GALACTIC_STRIKE.room.characters[c] + " ";
-        }
-        console.log("Clients: " + logMsg);
 
     });
 

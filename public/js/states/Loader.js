@@ -57,8 +57,8 @@ load_assets = function (){
 
         //PLAYERS
         ///////////////////////
-        game.load.spritesheet("playerRed", "../assets/spritesIndividuales/robotnik/robotnik_red.png", 48, 59); //rueda: 26_23  | robotnik: 49_43
-        game.load.spritesheet("playerBlue", "../assets/spritesIndividuales/robotnik/robotnik_blue.png", 48, 59); //rueda: 26_23  | robotnik: 49_43
+        game.load.spritesheet("playerRed", "../assets/spritesIndividuales/robotnik/robotnik_red_turbo.png", 48, 87); //rueda: 26_23  | robotnik: 49_43
+        game.load.spritesheet("playerBlue", "../assets/spritesIndividuales/robotnik/robotnik_blue_turbo.png", 48, 87); //rueda: 26_23  | robotnik: 49_43
 		game.load.image("wheel_red", "../assets/spritesIndividuales/robotnik/wheel_red.png");
 		game.load.image("wheel_blue", "../assets/spritesIndividuales/robotnik/wheel_blue.png");
         //game.load.spritesheet("player_jump", "assets/jump_fly_land.png", 52, 75);

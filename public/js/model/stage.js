@@ -32,7 +32,7 @@ Stage = function (game, conf) {
 
 
 
-Stage.prototype.getPosition = function (team) {
+Stage.prototype.spawnPositionTeam = function (team) {
 
     var dataGen = new Phaser.RandomDataGenerator(Math.random());
     var angle = Math.random() * 360 - 180;
@@ -44,6 +44,24 @@ Stage.prototype.getPosition = function (team) {
 
     return { x : this.planets[team].x + this.planets[team].collisionRadius * Math.sin(angle),
              y : this.planets[team].y + this.planets[team].collisionRadius * Math.cos(angle),
+             angle : angle };
+
+}
+
+
+Stage.prototype.spawnPositionRandomPlanet = function () {
+
+    var dataGen = new Phaser.RandomDataGenerator(Math.random());
+    var angle = Math.random() * 360 - 180;
+    var planet = this.planets[Math.floor(Math.random * this.planets.length)];
+
+    console.log({angle : angle,
+                 x : planet.x,
+                 y : planet.y,
+                 collisionRadius : planet.collisionRadius});
+
+    return { x : planet.x + planet.collisionRadius * Math.sin(angle),
+             y : planet.y + planet.collisionRadius * Math.cos(angle),
              angle : angle };
 
 }

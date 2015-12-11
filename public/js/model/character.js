@@ -33,6 +33,17 @@ function Character (x, y, angle, game, player, asset) {
     this.items = [];
     this.bullets = [];
 
+	this.currentSpeed =0;
+    this.fireRate = 100;
+    this.nextFire = 0;
+    this.alive = true;
+    this.jumpCooldownTime = 350;
+    this.attackCooldownTime = 500;
+    this.attack2CooldownTime = 200;
+    this.fireCooldownTime = 250;
+    this.hitImmuneTime = 330; //After being attacked, the character cannot be hurted for this time
+
+
     // Sounds
 
     this.attackSound = game.add.audio('pingas', 1, false);
@@ -104,16 +115,6 @@ function Character (x, y, angle, game, player, asset) {
     this.wheels[1].body.friction = 0.8;
 
     this.body.mainSprite = this;
-
-	this.currentSpeed =0;
-    this.fireRate = 100;
-    this.nextFire = 0;
-    this.alive = true;
-    this.jumpCooldownTime = 350;
-    this.attackCooldownTime = 500;
-    this.attack2CooldownTime = 200;
-    this.fireCooldownTime = 100;
-    this.hitImmuneTime = 330; //After being attacked, the character cannot be hurted for this time
 
 
     this.animations.add('left', [0]);

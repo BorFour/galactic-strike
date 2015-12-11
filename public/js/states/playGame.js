@@ -133,7 +133,7 @@ orb.pivot.x = 100;
 
     //         myCharacterSetup(GALACTIC_STRIKE.player.character);
 
-        var spawnPosition = GALACTIC_STRIKE.room.map.getPosition(GALACTIC_STRIKE.player.team.color-1);
+        var spawnPosition = GALACTIC_STRIKE.room.map.spawnPositionTeam(GALACTIC_STRIKE.player.team.color-1);
 
         var data = {
             id : GALACTIC_STRIKE.player.id,

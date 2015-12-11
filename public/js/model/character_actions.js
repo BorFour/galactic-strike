@@ -49,6 +49,11 @@ Character.prototype.attack0 = function (){
 
         game.time.events.add(this.attackCooldownTime, function(){this.cucumber.destroy(); this.attackCooldown = true;}, this)
 
+        return true;
+    }
+    else
+    {
+        return false;
     }
 }
 
@@ -80,12 +85,17 @@ Character.prototype.attack1 = function (){
         }
         game.time.events.add(this.attack2CooldownTime, function(){this.cucumber2.destroy(); this.attackCooldown = true;}, this)
 
+        return true;
+    }
+    else
+    {
+        return false;
     }
 }
 
 Character.prototype.attack2 = function (){
-    if(this.fireCooldown && this.alive){
-        this.fireCooldown = false;
+    if(this.attackCooldown && this.alive){
+        this.attackCooldown = false;
 
         var bullet = new Item(game, this.x, this.y, items['bullet']);
         bullet.body.setCollisionCategory(GALACTIC_STRIKE.COLLISION_CATEGORY.BULLET);
@@ -110,15 +120,20 @@ Character.prototype.attack2 = function (){
             bullet.body.setBodyContactCallback(GALACTIC_STRIKE.room.characters[c], touchSpikeballEnemy, this);
         }
 
-        game.time.events.add(this.fireCooldownTime, function(){this.fireCooldown = true}, this)
+        game.time.events.add(this.fireCooldownTime, function(){this.attackCooldown = true}, this)
         game.time.events.add(1000, function(){bullet.destroy()}, this)
 
+        return true;
+    }
+    else
+    {
+        return false;
     }
 }
 
 Character.prototype.attack3 = function (){
-    if(this.fireCooldown && this.alive){
-        this.fireCooldown = false;
+    if(this.attackCooldown && this.alive){
+        this.attackCooldown = false;
 
         var bullet = new Item(game, this.x, this.y, items['misil']);
         bullet.body.setCollisionCategory(GALACTIC_STRIKE.COLLISION_CATEGORY.BULLET);
@@ -147,9 +162,14 @@ Character.prototype.attack3 = function (){
             bullet.body.setBodyContactCallback(GALACTIC_STRIKE.room.characters[c], touchSpikeballEnemy, this);
         }
 
-        game.time.events.add(this.fireCooldownTime, function(){this.fireCooldown = true}, this)
+        game.time.events.add(this.fireCooldownTime, function(){this.attackCooldown = true}, this)
         game.time.events.add(1000, function(){bullet.destroy()}, this)
 
+        return true;
+    }
+    else
+    {
+        return false;
     }
 }
 

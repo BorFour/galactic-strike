@@ -152,6 +152,31 @@ Character.prototype.moveSpace = function(direction){
  * This method is called when a character is killed or his owner disconnects
  */
 
+Character.prototype.flightMode = function () {
+
+    var PTM = 50;
+
+    this.wheels[0] = new Phaser.Sprite (game, this.x + -0.22*50,  this.y + 0.6*-50, this.wheel);
+    this.wheels[0].anchor.set(0.5);
+    game.add.existing(this.wheels[0]);
+    this.wheels[1] = new Phaser.Sprite (game, this.x + 0.22*50,  this.y + 0.6*-50, this.wheel);
+    this.wheels[1].anchor.set(0.5);
+    game.add.existing(this.wheels[1]);
+
+    this.wheels[0].body = new Phaser.Physics.Box2D.Body(this.game, null, this.x + -0.22*PTM, this.y + 0.6*-PTM);
+	this.wheels[0].body.sprite = this.wheels[0];
+	this.wheels[1].body = new Phaser.Physics.Box2D.Body(this.game, null, this.x + 0.22*PTM, this.y + 0.6*-PTM);
+	this.wheels[1].body.sprite = this.wheels[1];
+	this.wheels[0].body.setCircle(0.2*PTM);
+	this.wheels[1].body.setCircle(0.2*PTM);
+    this.wheels[0].body.setCircle(0.2*PTM);
+	this.wheels[1].body.setCircle(0.2*PTM);
+
+    this.driveJoints[0] = game.physics.box2d.wheelJoint(this.body, this.wheels[0].body, -3, 8, 0,0, 0,1, 0, 0, 0, 0, true ); // rear
+	this.driveJoints[1] = game.physics.box2d.wheelJoint(this.body, this.wheels[1].body,  3, 8, 0,0, 0,1, 0, 0, 0, 0, true ); // front
+
+}
+
 Character.prototype.die = function() {
 
     if(!this.alive) return;
@@ -177,7 +202,7 @@ Character.prototype.setGrounded = function (){
     }
 
     this.grounded = true;
-    this.groundedTimer = game.time.events.add(50,function() {this.grounded = false;}, this);
+    this.groundedTimer = game.time.events.add(100,function() {this.grounded = false;}, this);
 
 }
 

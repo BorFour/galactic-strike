@@ -46,18 +46,18 @@ io.on('connection', function (socket) {
 
     socket.on('update', function (input) {
 
-//        console.log('@Server received | update');
+    //        console.log('@Server received | update');
         players[socket.game_id] = input;
         input.id = socket.game_id;
         socket.broadcast.to('Room1').emit('update', input);
-//        console.log('@Server sent | update');
+    //        console.log('@Server sent | update');
 
     });
 
     socket.on('attack', function (input) {
 
         io.to('Room1').emit('attack', input);
-//        console.log('@Server sent | update');
+    //        console.log('@Server sent | update');
 
     });
 
@@ -127,7 +127,7 @@ io.on('connection', function (socket) {
         {
             socket.room = 'Room1';
             socket.join('Room1');
-//            console.log(socket.rooms);
+    //            console.log(socket.rooms);
             room.players[input.id] =
             {
                 name : input.name,
@@ -138,7 +138,7 @@ io.on('connection', function (socket) {
             console.log('@Server ->      \t| joinRoom');
 
         }
-//           socket.emit('userJoinedRoom', output);
+    //           socket.emit('userJoinedRoom', output);
 
     });
 
@@ -192,7 +192,7 @@ io.on('connection', function (socket) {
         output.x = input.x;
         output.y = input.y;
         output.angle = input.angle;
-//        output.name = room.players[input.id];
+    //        output.name = room.players[input.id];
 
         console.log('@Server <-      \t| joinGame');
 
@@ -233,7 +233,6 @@ io.on('connection', function (socket) {
             console.log(room.players);
         }
 
-
     });
 
     socket.on('beginMatch', function (input) {
@@ -258,8 +257,53 @@ io.on('connection', function (socket) {
             console.log('@Server ->      \t| beginMatch');
         }
 
+    });
+
+    socket.on('finishRound', function (input) {
+
+        var output = {};
+        output.id = input.id;
+
+        console.log('@Server <-      \t| finishRound');
+
+        if(input.id !== room.host)
+        {
+
+        }
+        else if  (room.state !== 'ingame')
+        {
+
+        }
+        else
+        {
+            io.to('Room1').emit('finishRound', output);
+            console.log('@Server ->      \t| finishRound');
+        }
 
     });
+
+    socket.on('respawn', function (input) {
+
+        var output = {};
+        output.id = input.id;
+        output.x = input.x;
+        output.y = input.y;
+        output.angle = input.angle;
+
+        console.log('@Server <-      \t| respawn');
+
+        if (room.state !== 'ingame')
+        {
+
+        }
+        else
+        {
+            io.to('Room1').emit('respawn', output);
+            console.log('@Server ->      \t| respawn');
+        }
+
+    });
+
 
     socket.on('disconnect', function () {
 
@@ -290,7 +334,7 @@ io.on('connection', function (socket) {
 
     });
 
-});
+    });
 
 
 var puerto = 8080;

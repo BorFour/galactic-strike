@@ -43,6 +43,32 @@ clientSetupGame = function (){
     });
 
 
+    socket.on('finishRound', function (input) {
+
+        console.log('@Client received | finishRound');
+
+        for (var c in GALACTIC_STRIKE.room.characters)
+        {
+            if (GALACTIC_STRIKE.room.characters[c]) { GALACTIC_STRIKE.room.characters[c].die(); }
+        }
+
+        var spawnPosition = GALACTIC_STRIKE.room.map.spawnPositionTeam(GALACTIC_STRIKE.player.team.color-1);
+
+        var data = {
+            id : GALACTIC_STRIKE.player.id,
+            x: spawnPosition.x,
+            y: spawnPosition.y,
+            angle: toRad(spawnPosition.angle - 180),
+            velocityX : 0,
+            velocityY : 0,
+            orientation: 0
+        }
+
+        socket.emit('respawn', data);
+        console.log(data);
+
+    });
+
 
     socket.on('userLeftGame', function (input) {
 
@@ -50,8 +76,42 @@ clientSetupGame = function (){
         GALACTIC_STRIKE.room.characters[input.id].die();
         delete GALACTIC_STRIKE.room.characters[input.id];
         delete GALACTIC_STRIKE.room.players[input.id];
+        GALACTIC_STRIKE.room.gameMode.update();
 
     });
+
+
+
+    socket.on('respawn', function (input) {
+
+        console.log('@Client received | respawn');
+
+        if(GALACTIC_STRIKE.createGameReady)
+        {
+            var asset = (GALACTIC_STRIKE.room.players[input.id].team === GALACTIC_STRIKE.room.teams[0] ? 'playerRed' : 'playerBlue');
+            GALACTIC_STRIKE.room.characters[input.id] = new Character(input.x, input.y, input.angle, game, GALACTIC_STRIKE.room.players[input.id], asset);
+            GALACTIC_STRIKE.room.players[input.id].character = GALACTIC_STRIKE.room.characters[input.id];
+
+            if(input.id === GALACTIC_STRIKE.player.id)
+            {
+                GALACTIC_STRIKE.player.characterSetup();
+                game.time.events.add(2000 ,function () { GALACTIC_STRIKE.room.roundFinished = false; }, this);
+            }
+
+            var logMsg = "";
+            for (var c in GALACTIC_STRIKE.room.characters)
+            {
+                logMsg += GALACTIC_STRIKE.room.characters[c] + " ";
+            }
+            console.log("Clients: " + logMsg);
+        }
+        else
+        {
+            GALACTIC_STRIKE.charactersBuffer[input.id] = input;
+        }
+
+    });
+
 
 
 

@@ -210,6 +210,20 @@ Player.prototype.characterSetup = function () {
             game.input.keyboard.removeKeyCapture(Phaser.Keyboard.M);
 
 
+            var finishRoundKey = game.input.keyboard.addKey(Phaser.Keyboard.F);
+            finishRoundKey.onDown.add(function(){
+
+                if (GALACTIC_STRIKE.room.host !== GALACTIC_STRIKE.player.id || GALACTIC_STRIKE.room.roundFinished) { return; }
+
+                GALACTIC_STRIKE.room.roundFinished = true;
+
+                console.log('@Client sent | finishRound');
+                socket.emit('finishRound', { id : GALACTIC_STRIKE.player.id });
+
+            }, this);
+            game.input.keyboard.removeKeyCapture(Phaser.Keyboard.F);
+
+
 //            var respawnKey = game.input.keyboard.addKey(Phaser.Keyboard.R);
 //            respawnKey.onDown.add(function(){
 //                console.log("DIE")

@@ -181,6 +181,7 @@ orb.pivot.x = 100;
 	update: function(){
 
         GALACTIC_STRIKE.player.movePlayer();
+        game.camera.setBoundsToWorld();
 //        if(GALACTIC_STRIKE.room.updateCounter >= (GALACTIC_STRIKE.room.players.length))
 //        {
 //        if(GALACTIC_STRIKE.player.character) GALACTIC_STRIKE.player.character.updateOnline();
@@ -290,16 +291,23 @@ function spacePhysicsTimer(){
 
     if(GALACTIC_STRIKE.player.character && !GALACTIC_STRIKE.room.gameOver){
         if(GALACTIC_STRIKE.zoomed && GALACTIC_STRIKE.player.character.inAtmosphere()){
-                game.camera.follow(null);
+//                game.camera.follow(null);
                 GALACTIC_STRIKE.zoomed = false;
-                game.add.tween(game.world.scale).to( {x: 1, y:1}, 350, Phaser.Easing.Quadratic.InOut, true);
-                game.camera.follow(GALACTIC_STRIKE.player.character,  Phaser.Camera.FOLLOW_TOPDOWN_TIGHT);
+                var tween = game.add.tween(game.world.scale).to( {x: 1, y:1}, 350, Phaser.Easing.Quadratic.InOut, true);
+                tween.onComplete.add(function (){
+                    game.camera.follow(GALACTIC_STRIKE.player.character,  Phaser.Camera.FOLLOW_TOPDOWN_TIGHT);
+                }, this);
+
         }
         else if(!GALACTIC_STRIKE.zoomed && !GALACTIC_STRIKE.player.character.inAtmosphere()){
-                game.camera.follow(null);
+//                game.camera.follow(null);
                 GALACTIC_STRIKE.zoomed = true;
-                game.add.tween(game.world.scale).to( {x: 0.5, y:0.5}, 350, Phaser.Easing.Quadratic.InOut, true);
-                game.camera.follow(GALACTIC_STRIKE.player.character, Phaser.Camera.FOLLOW_TOPDOWN_TIGHT);
+                var tween = game.add.tween(game.world.scale).to( {x: 0.5, y:0.5}, 350, Phaser.Easing.Quadratic.InOut, true);
+                tween.onComplete.add(function (){
+                    game.camera.follow(GALACTIC_STRIKE.player.character,  Phaser.Camera.FOLLOW_TOPDOWN_TIGHT);
+                }, this);
+
+//                GALACTIC_STRIKE.player.character.flightMode();
         }
     }
 
@@ -309,7 +317,7 @@ function spacePhysicsTimer(){
 
 function updateOnlineTimer() {
     if(GALACTIC_STRIKE.player.character) GALACTIC_STRIKE.player.character.updateOnline();
-    game.time.events.add(18*(Object.keys(GALACTIC_STRIKE.room.players).length), updateOnlineTimer, this);
+    game.time.events.add(32*(Object.keys(GALACTIC_STRIKE.room.players).length), updateOnlineTimer, this);
 }
 
 

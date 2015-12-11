@@ -63,7 +63,7 @@ function Character (x, y, angle, game, player, asset) {
     this.atmosphere = [];
     this.grounded = false;
 
-    var truckVertices = [-10, -10, 10,-10, 20,10,-20, 10];
+    var truckVertices = [-10, -30, 10,-30, 20,15,-20, 15];
 
     this.body.setPolygon(truckVertices);
     this.body.mass = 1;

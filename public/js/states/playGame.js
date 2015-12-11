@@ -248,6 +248,7 @@ function touchSpikeballEnemy(body1, body2, fixture1, fixture2, begin) {
             if(body1.sprite.owner.player.team === body2.mainSprite.player.team) { return; }
             if(body1.sprite.owner === GALACTIC_STRIKE.player.character)
             {
+               body2.sprite.hitImmune = true;
                console.log(body2.mainSprite.player);
                var output = {
                    id : GALACTIC_STRIKE.player.id,
@@ -288,7 +289,7 @@ function spacePhysicsTimer(){
 
 function updateOnlineTimer() {
     if(GALACTIC_STRIKE.player.character) GALACTIC_STRIKE.player.character.updateOnline();
-    game.time.events.add(11*(Object.keys(GALACTIC_STRIKE.room.players).length), updateOnlineTimer, this);
+    game.time.events.add(18*(Object.keys(GALACTIC_STRIKE.room.players).length), updateOnlineTimer, this);
 }
 
 

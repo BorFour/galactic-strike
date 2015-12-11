@@ -18,6 +18,7 @@ var players = [];
 var nPlayers = 0;
 var room = {state : 'empty'};
 var MAXPLAYERSROOM = 8;
+var timestamp = Date.now();
 
 io.on('connection', function (socket) {
 
@@ -25,6 +26,7 @@ io.on('connection', function (socket) {
 
         var output = {
             id : currId,
+            timestamp : timestamp
         };
         console.log('@Server <-      \t| login');
         socket.join('General');
@@ -78,7 +80,12 @@ io.on('connection', function (socket) {
 
          console.log('@Server <-      \t| createRoom');
 
-        if(room.state === 'empty')
+        if (input.timestamp !== timestamp)
+        {
+            socket.emit('obsoletClient', output);
+            console.log('@Server ->      \t| obsoletClient');
+        }
+        else if(room.state === 'empty')
         {
             socket.join('Room1');
             room.state = 'lobby';
@@ -106,7 +113,12 @@ io.on('connection', function (socket) {
 
         console.log('@Server <-      \t| joinRoom');
 
-        if (room.state === 'ingame')
+        if (input.timestamp !== timestamp)
+        {
+            socket.emit('obsoletClient', output);
+            console.log('@Server ->      \t| obsoletClient');
+        }
+        else if (room.state === 'ingame')
         {
             socket.emit('roomIngame');
             return;

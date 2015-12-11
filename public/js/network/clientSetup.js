@@ -8,6 +8,7 @@ clientSetupMenu = function(){
 
         GALACTIC_STRIKE.player.id = input.id;
         GALACTIC_STRIKE.player.nickname += input.id;
+        GALACTIC_STRIKE.serverTimestamp = input.timestamp;
 //        GALACTIC_STRIKE.player.character = GALACTIC_STRIKE.room.characters[GALACTIC_STRIKE.player.id];
 //        myCharacterSetup(GALACTIC_STRIKE.player.character);
 
@@ -31,6 +32,12 @@ clientSetupMenu = function(){
             this.menuText = game.add.text(game.world.centerX, game.world.centerY, "Partida en curso", style);
             this.menuText.anchor.set(0.5);
         }
+
+    });
+
+    socket.on('obsoletClient', function (input) {
+
+        window.close();
 
     });
 

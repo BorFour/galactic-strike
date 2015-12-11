@@ -120,8 +120,8 @@ function Character (x, y, angle, game, player, asset) {
 
     this.animations.add('left', [0]);
     this.animations.add('right', [1]);
-    this.animations.add('jumpL', [2]);
-    this.animations.add('jumpR', [3]);
+    this.animations.add('jumpL', [4]);
+    this.animations.add('jumpR', [5]);
 
     this.body.immovable = false;
     this.body.static = false;

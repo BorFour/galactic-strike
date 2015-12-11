@@ -110,7 +110,7 @@ Character.prototype.attack2 = function () {
 //        }
 
 //        game.physics.box2d.motorJoint(spriteA, spriteB, 800, 500, 0.25, -100, 200, 45);
-        this.cucumber3.damage = 35;
+        this.cucumber3.damage = 25;
 //        game.physics.box2d.motorJoint(this, this.cucumber2, 80*this.orientation, 0, 0.25, 120, 0, 4.5);
         game.physics.box2d.motorJoint(this, this.cucumber3, 80 , 50, 0.25, this.orientation*120, 0, 4.5);
 //        cucumber.body.rotation = this.body.rotation; // Este ángulo va en grados

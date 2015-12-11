@@ -33,5 +33,13 @@ var items =
     'misil' : {
         'asset' : 'misil',
         'use' : null
+    },
+    'shield' : {
+        'asset' : 'stick',
+        'use' : null
+    },
+    'hammer' : {
+        'asset' : 'hammer',
+        'use' : null
     }
 }

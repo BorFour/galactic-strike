@@ -94,34 +94,33 @@ Character.prototype.attack1 = function (){
 }
 
 Character.prototype.attack2 = function (){
-    if(this.attackCooldown && this.alive){
+      if(this.attackCooldown && this.alive){
+        this.attackSound.play();
         this.attackCooldown = false;
+        this.cucumber3 = new Item(game, this.x + Math.cos(this.body.rotation)* 80*this.orientation,
+                                  this.y + Math.sin(this.body.rotation)*80*this.orientation, items['hammer']);
+//        console.log(this.cucumber2)
+        this.cucumber3.owner = this;
+//        this.bullets.push(bullet);
+//        var fn = cucumber.collide;
+//        cucumber.body.mass = 0.1;
+//        cucumber.body.bullet = true;
+//        for (c in GALACTIC_STRIKE.room.characters){
+//            cucumber.body.setBodyContactCallback(GALACTIC_STRIKE.room.characters[c], fn, this);
+//        }
 
-        var bullet = new Item(game, this.x, this.y, items['bullet']);
-        bullet.body.setCollisionCategory(GALACTIC_STRIKE.COLLISION_CATEGORY.BULLET);
-
-        bullet.owner = this;
-        bullet.damage = 15;
-
-        this.bullets.push(bullet);
-        bullet.body.mass = 0.001;
-        bullet.body.bullet = true;
-
-        if(this.inAtmosphere()){
-            bullet.body.angle = this.angle + 90*this.orientation; // Este ángulo va en grados
-            bullet.body.thrust(155400);
-        }
-        else{
-            bullet.body.angle = this.angle;
-            bullet.body.thrust(155400);
-        }
+//        game.physics.box2d.motorJoint(spriteA, spriteB, 800, 500, 0.25, -100, 200, 45);
+        this.cucumber3.damage = 35;
+//        game.physics.box2d.motorJoint(this, this.cucumber2, 80*this.orientation, 0, 0.25, 120, 0, 4.5);
+        game.physics.box2d.motorJoint(this, this.cucumber3, 80 , 50, 0.25, this.orientation*120, 0, 4.5);
+//        cucumber.body.rotation = this.body.rotation; // Este ángulo va en grados
+//        cucumber.body.angularVelocity = 20;
+        this.cucumber3.body.thrust(1000);
 
         for(var c in GALACTIC_STRIKE.room.characters){
-            bullet.body.setBodyContactCallback(GALACTIC_STRIKE.room.characters[c], touchSpikeballEnemy, this);
+            this.cucumber3.body.setBodyContactCallback(GALACTIC_STRIKE.room.characters[c], touchSpikeballEnemy, this);
         }
-
-        game.time.events.add(this.fireCooldownTime, function(){this.attackCooldown = true}, this)
-        game.time.events.add(1000, function(){bullet.destroy()}, this)
+        game.time.events.add(this.attack3CooldownTime, function(){this.cucumber3.destroy(); this.attackCooldown = true;}, this)
 
         return true;
     }

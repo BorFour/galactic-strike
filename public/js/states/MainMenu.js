@@ -17,10 +17,10 @@ GALACTIC_STRIKE.MainMenu.prototype = {
     },
     createRoom: function() {
 //        this.state.start('Lobby');
-        socket.emit('createRoom', {id : GALACTIC_STRIKE.player.id, name : GALACTIC_STRIKE.player.nickname});
+        socket.emit('createRoom', {id : GALACTIC_STRIKE.player.id, name : GALACTIC_STRIKE.player.nickname, timestamp : GALACTIC_STRIKE.serverTimestamp});
     },
     joinRoom: function() {
 //        this.state.start('Lobby');
-        socket.emit('joinRoom', {id : GALACTIC_STRIKE.player.id, name : GALACTIC_STRIKE.player.nickname});
+        socket.emit('joinRoom', {id : GALACTIC_STRIKE.player.id, name : GALACTIC_STRIKE.player.nickname, timestamp : GALACTIC_STRIKE.serverTimestamp});
     }
 };

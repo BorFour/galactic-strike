@@ -7,8 +7,8 @@
 /**
  * Jumps from the planet the character is grounded to
  */
-Character.prototype.jump = function (){
-    if(this.planetTouched != null && this.jumpCooldown){
+Character.prototype.jump = function () {
+    if(this.planetTouched != null && this.jumpCooldown) {
         this.jumpCooldown = false;
         var angle = Phaser.Math.angleBetween(this.x,this.y,this.planetTouched.x,this.planetTouched.y);
         // add gravity force to the crate in the direction of planet center
@@ -20,7 +20,7 @@ Character.prototype.jump = function (){
     }
 }
 
-Character.prototype.attack0 = function (){
+Character.prototype.attack0 = function () {
     if(this.attackCooldown && this.alive){
         this.attackSound.play();
         this.attackCooldown = false;
@@ -36,7 +36,7 @@ Character.prototype.attack0 = function (){
 //        }
 
 //        game.physics.box2d.motorJoint(spriteA, spriteB, 800, 500, 0.25, -100, 200, 45);
-        this.cucumber.damage = 80;
+        this.cucumber.damage = 65;
         game.physics.box2d.motorJoint(this, this.cucumber, 80 , 50, 0.25, this.orientation*80, 50, 4.5);
 
 //        cucumber.body.rotation = this.body.rotation; // Este ángulo va en grados
@@ -57,7 +57,7 @@ Character.prototype.attack0 = function (){
     }
 }
 
-Character.prototype.attack1 = function (){
+Character.prototype.attack1 = function () {
     if(this.attackCooldown && this.alive){
         this.attackSound.play();
         this.attackCooldown = false;
@@ -93,7 +93,7 @@ Character.prototype.attack1 = function (){
     }
 }
 
-Character.prototype.attack2 = function (){
+Character.prototype.attack2 = function () {
       if(this.attackCooldown && this.alive){
         this.attackSound.play();
         this.attackCooldown = false;
@@ -130,7 +130,7 @@ Character.prototype.attack2 = function (){
     }
 }
 
-Character.prototype.attack3 = function (){
+Character.prototype.attack3 = function () {
     if(this.attackCooldown && this.alive){
         this.attackCooldown = false;
 
@@ -172,7 +172,7 @@ Character.prototype.attack3 = function (){
     }
 }
 
-Character.prototype.attacks = function (attack_id){
+Character.prototype.attacks = function (attack_id) {
 
     switch(attack_id)
     {

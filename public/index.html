@@ -83,6 +83,12 @@
             var url = "game.html?name=" + HTMLname;
             var w = window.open(url, "_blank", "fullscreen=yes, titlebar=no, menubar=no, toolbar=no, scrollbars=yes, resizable=no, top=0, left=400, width=1200, height=800");
         }
+        function handle(e) {
+            if(e.keyCode === 13){
+                 functionName();
+            }
+            return false;
+        }
     </script>
 	</head>
 	<body>
@@ -125,8 +131,7 @@
             <box>
 
                 <p>Enter your nickname to continue</p>
-                <input type="text" id="myName" value="" placeholder="Enter your nickname">
-
+                <input type="text" id="myName" value="" placeholder="Enter your nickname" onkeypress="handle(event)">
                 <button onclick="functionName()" id="enter">ENTER THE GAME</button>
             </box>
 	</body>

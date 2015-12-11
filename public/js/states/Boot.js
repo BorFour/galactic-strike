@@ -32,6 +32,6 @@ GALACTIC_STRIKE.Boot.prototype = {
          game.load.image('progressBar', '../assets/progressBar.png');
 },
     create: function () {
-        this.state.start('Preloader');
+        this.state.start('Loader');
     }
 };

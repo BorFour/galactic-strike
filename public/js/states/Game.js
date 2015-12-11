@@ -10,7 +10,7 @@ begin_game = function () {
     //	Add the States your game has.
 
     game.state.add('Boot', GALACTIC_STRIKE.Boot);
-    game.state.add('Preloader', GALACTIC_STRIKE.Preloader);
+    game.state.add('Loader', GALACTIC_STRIKE.Loader);
     game.state.add('MainMenu', GALACTIC_STRIKE.MainMenu);
     game.state.add('Lobby', GALACTIC_STRIKE.Lobby);
     game.state.add('Play', GALACTIC_STRIKE.Play);

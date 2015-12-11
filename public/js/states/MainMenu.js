@@ -4,9 +4,6 @@ GALACTIC_STRIKE.MainMenu = function(game) {
 GALACTIC_STRIKE.MainMenu.prototype = {
 
     preload: function () {
-        game.load.image('buttonEnter', '../assets/buttons/enterRoom.png');
-        game.load.image('buttonCreate', '../assets/buttons/createRoom.png');
-        game.load.image("exitButton" , "../assets/buttons/boton_exit.png");
 
         var buttonEnter;
         var buttonCreate;

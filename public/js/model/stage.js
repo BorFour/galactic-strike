@@ -15,6 +15,7 @@ Stage = function (game, conf) {
 
     this.width = conf.width;
     this.height = conf.height;
+    this.zoomedOut = false;
 
     game.world.setBounds(0, 0, conf.width, conf.height);
     //SPACE BACKGROUND
@@ -34,16 +35,24 @@ Stage = function (game, conf) {
 };
 
 Stage.prototype.zoomIn = function () {
-    game.world.setBounds(0, 0, this.width, this.height);
+    game.camera.bounds.setTo(0, 0, this.width, this.height);
+    game.physics.setBoundsToWorld();
+    this.zoomedOut = false;
 }
 
 Stage.prototype.zoomOut = function () {
-    game.world.setBounds(0, 0, this.width/2, this.width/2);
+    game.camera.bounds.setTo(0, 0, this.width/2, this.height/2);
+    game.physics.setBoundsToWorld();
+    this.zoomedOut = true;
 }
+
+Stage.prototype.inWorld = function (element) {
+    return game.getBounds().intersect(element);
+}
+
 
 Stage.prototype.spawnPositionTeam = function (team) {
 
-    var dataGen = new Phaser.RandomDataGenerator(Math.random());
     var angle = Math.random() * 360 - 180;
 
     console.log({angle : angle,

@@ -294,20 +294,24 @@ function spacePhysicsTimer(){
         if(GALACTIC_STRIKE.zoomed && GALACTIC_STRIKE.player.character.inAtmosphere()){
 //                game.camera.follow(null);
                 GALACTIC_STRIKE.zoomed = false;
+                GALACTIC_STRIKE.zooming = true;
                 var tween = game.add.tween(game.world.scale).to( {x: 1, y:1}, 350, Phaser.Easing.Quadratic.InOut, true);
                 tween.onComplete.add(function (){
                     game.camera.follow(GALACTIC_STRIKE.player.character,  Phaser.Camera.FOLLOW_TOPDOWN_TIGHT);
                     GALACTIC_STRIKE.room.map.zoomIn();
+                    GALACTIC_STRIKE.zooming = false;
                 }, this);
 
         }
         else if(!GALACTIC_STRIKE.zoomed && !GALACTIC_STRIKE.player.character.inAtmosphere()){
 //                game.camera.follow(null);
                 GALACTIC_STRIKE.zoomed = true;
+                GALACTIC_STRIKE.zooming = true;
                 var tween = game.add.tween(game.world.scale).to( {x: 0.5, y:0.5}, 350, Phaser.Easing.Quadratic.InOut, true);
                 tween.onComplete.add(function (){
                     game.camera.follow(GALACTIC_STRIKE.player.character,  Phaser.Camera.FOLLOW_TOPDOWN_TIGHT);
                     GALACTIC_STRIKE.room.map.zoomOut();
+                    GALACTIC_STRIKE.zooming = false;
                 }, this);
 
 //                GALACTIC_STRIKE.player.character.flightMode();

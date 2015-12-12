@@ -95,8 +95,8 @@ function Character (x, y, angle, game, player, asset) {
 	this.wheels[1].body.sprite = this.wheels[1];
 	this.wheels[0].body.setCircle(0.2*PTM);
 	this.wheels[1].body.setCircle(0.2*PTM);
-    this.wheels[0].body.collideWorldBounds = false;
-    this.wheels[1].body.collideWorldBounds = false;
+    this.wheels[0].body.collideWorldBounds = true;
+    this.wheels[1].body.collideWorldBounds = true;
 	this.motorEnabled = false;
     this.motorSpeed = 30;
 
@@ -126,7 +126,7 @@ function Character (x, y, angle, game, player, asset) {
 
     this.body.immovable = false;
     this.body.static = false;
-    this.body.collideWorldBounds = false;
+    this.body.collideWorldBounds = true;
 
     //Display player name
 
@@ -171,6 +171,15 @@ Character.prototype.simpleDie = function() {
     this.wheels[1].destroy();
     this.body.destroy();
 	this.kill();
+}
+
+Character.prototype.inWorldCustom = function () {
+
+    return  this.x >= 0 &&
+            this.y >= 0 &&
+            this.x <= game.world.x &&
+            this.y <= game.world.y;
+
 }
 
 Character.prototype.setGrounded = function (){

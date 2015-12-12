@@ -120,7 +120,7 @@ Player.prototype.movePlayer = function(){
         }
     }
         //comprobamos si el jugador sigue en el mundo
-        if (!this.character.inWorld) {
+        if (!this.character.inWorld && this.character.alive) {
             this.character.simpleDie();
             var output = {
                    id : -1,

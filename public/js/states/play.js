@@ -14,7 +14,7 @@ GALACTIC_STRIKE.Play.prototype = {
 
 
 
-        GALACTIC_STRIKE.room.gameMode.startRound();
+//        GALACTIC_STRIKE.room.gameMode.startRound();
 
 	},
 	update: function() {

@@ -150,7 +150,7 @@ orb.pivot.x = 100;
 
         GALACTIC_STRIKE.room.gameMode = new GameMode(GALACTIC_STRIKE.room, gameModes['deathmatch']);
         GALACTIC_STRIKE.room.gameMode.init();
-        GALACTIC_STRIKE.room.gameMode.startRound();
+//        GALACTIC_STRIKE.room.gameMode.startRound();
         GALACTIC_STRIKE.room.gameOver = false;
 //        GALACTIC_STRIKE.room.updateCounter = 0;
 

@@ -189,7 +189,7 @@ Player.prototype.characterSetup = function () {
 
             var attack2Key = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
             attack2Key.onDown.add(function(){
-                     if (this.character.inAtmosphere())
+                    if (this.character.inAtmosphere())
                     {
                         if(this.character.attack2())
                         {

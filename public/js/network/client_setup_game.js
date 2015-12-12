@@ -129,7 +129,7 @@ clientSetupGame = function (){
             GALACTIC_STRIKE.room.characters[input.id].body.angle = input.angle;
             GALACTIC_STRIKE.room.characters[input.id].body.velocity.x = input.velocityX;
             GALACTIC_STRIKE.room.characters[input.id].body.velocity.y = input.velocityY;
-//            GALACTIC_STRIKE.room.characters[input.id].body.angularVelocity= input.angularVelocity;
+            GALACTIC_STRIKE.room.characters[input.id].body.angularVelocity= input.angularVelocity;
             GALACTIC_STRIKE.room.characters[input.id].orientation = input.orientation;
             GALACTIC_STRIKE.room.characters[input.id].jumpAnimation = input.jumpAnimation;
         }

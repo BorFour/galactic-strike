@@ -47,7 +47,7 @@ load_assets = function (){
         ///////////////////////
 		game.load.image("pokeball", "../assets/pokeball.png");
 		game.load.image("potion", "../assets/potion.gif");
-		game.load.image("moon", "../assets/moon1.png");
+		game.load.image("moon", "../assets/planets/moon1.png");
 		game.load.image("bullet", "../assets/blue-bullet.gif");
 		game.load.image("laser_bullet", "../assets/laser_bullet.jpg");
 		game.load.image("cucumber", "../assets/cucumber.png");

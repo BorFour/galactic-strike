@@ -56,7 +56,7 @@ io.on('connection', function (socket) {
 
     socket.on('attack', function (input) {
 
-        io.to('Room1').emit('attack', input);
+        socket.broadcast.to('Room1').emit('attack', input);
     //        console.log('@Server sent | update');
 
     });
@@ -338,18 +338,19 @@ io.on('connection', function (socket) {
 
 
 var puerto = 8080;
-var ip = 'localhost';
+var ip = '0.0.0.0';
 
-http.listen(puerto, function(){
-  console.log('listening on ' + ip + ':' + puerto);
-});
+//http.listen(puerto, function(){
+//  console.log('listening on ' + ip + ':' + puerto);
+//});
 
 // Cloud 9
 /*
 https://galacticstrikesocketio-borfour-1.c9users.io/
 */
-//http.listen(process.env.PORT, process.env.IP, function(){
-//  console.log('listening on ' + process.env.IP + ':' + process.env.PORT);
-//});
+
+http.listen(puerto, ip, function(){
+  console.log('listening on ' + ip + ':' + puerto);
+});
 
 

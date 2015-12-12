@@ -12,7 +12,7 @@ Character.prototype.updateOnline = function() {
             angle : this.angle,
             velocityX : this.body.velocity.x,
             velocityY : this.body.velocity.y,
-//            angularVelocity : this.body.angularVelocity,
+            angularVelocity : this.body.angularVelocity,
             orientation: this.orientation,
             jumpAnimation : this.jumpAnimation
     }

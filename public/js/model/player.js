@@ -119,7 +119,10 @@ Player.prototype.movePlayer = function(){
             this.character.moveSpace('rotateR');
         }
     }
-
+        //comprobamos si el jugador sigue en el mundo
+        if (!this.character.inWorld) {
+            this.character.simpleDie();
+        }
 }
 
 Player.prototype.characterSetup = function () {

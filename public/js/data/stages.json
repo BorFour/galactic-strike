@@ -32,7 +32,7 @@ var stages =
     'map2' : {
         width : 4400,
         height : 4400,
-        backgroundImage : 'fondo_estrellas',
+        backgroundImage : 'background_map2',
         planets : [
             {
                 asset : 'planet_red',

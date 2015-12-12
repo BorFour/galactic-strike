@@ -40,6 +40,7 @@ load_assets = function (){
         ///////////////////////
         //game.load.image("spaceBackground", "../assets/backgrounds/spaceBackground.jpg");
         game.load.image('starBackground', '../assets/backgrounds/starBackground.jpg');
+        game.load.image('background_map2', '../assets/backgrounds/background_map2.png');
         game.load.image('fondo_estrellas', '../assets/backgrounds/fondo_estrellas.png');
 
         //ITEMS

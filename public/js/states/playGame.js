@@ -181,6 +181,7 @@ orb.pivot.x = 100;
 	update: function(){
 
         GALACTIC_STRIKE.player.movePlayer();
+
 //        game.camera.setBoundsToWorld();
 //        if(GALACTIC_STRIKE.room.updateCounter >= (GALACTIC_STRIKE.room.players.length))
 //        {

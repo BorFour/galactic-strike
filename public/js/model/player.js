@@ -122,6 +122,12 @@ Player.prototype.movePlayer = function(){
         //comprobamos si el jugador sigue en el mundo
         if (!this.character.inWorld) {
             this.character.simpleDie();
+            var output = {
+                   id : -1,
+                   target : this.id,
+                   damage : 100
+               };
+            socket.emit('hit', output);
         }
 }
 

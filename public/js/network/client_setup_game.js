@@ -163,12 +163,12 @@ clientSetupGame = function (){
 
     socket.on('attack', function (input) {
 
-        if(input.id === GALACTIC_STRIKE.player.id) return;
+        if(input.id === GALACTIC_STRIKE.player.id) { return; }
         console.log('@Client received | attack');
 
         if(GALACTIC_STRIKE.room.characters[input.id]){
             console.log("Attack id: " + input.attack_id);
-            GALACTIC_STRIKE.room.characters[input.id].attacks(input.attack_id);
+            GALACTIC_STRIKE.room.characters[input.id].attacks(input.attack_id, input.space);
         }
 
     });

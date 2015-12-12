@@ -176,7 +176,7 @@ Character.prototype.attackSpace1 = function () {
      if(this.attackCooldown && this.alive){
         this.attackSound.play();
         this.attackCooldown = false;
-        this.cucumber2 =  new Item(game, this.body.x + Math.sin(this.body.rotation)* 180, this.body.y - Math.cos(this.body.rotation)*180, items['spaceAttack1']);
+        this.cucumber2 =  new Item(game, this.body.x + Math.sin(this.body.rotation)* 80, this.body.y - Math.cos(this.body.rotation)*80, items['spaceAttack1']);
         this.cucumber2.body.rotation = this.body.rotation;
 //        console.log(this.cucumber2)
         this.cucumber2.owner = this;
@@ -211,18 +211,35 @@ Character.prototype.attackSpace1 = function () {
     }
 }
 
-Character.prototype.attacks = function (attack_id) {
+Character.prototype.attacks = function (attack_id, space) {
 
-    switch(attack_id)
+    if (space)
     {
-        case 0 :
-            return this.attack0();
-        case 1:
-            return this.attack1();
-        case 2:
-            return this.attack2();
-        case 3:
-            return this.attack3();
+        switch(attack_id)
+        {
+            case 0 :
+                return this.attack0();
+            case 1:
+                return this.attackSpace1();
+            case 2:
+                return this.attack2();
+            case 3:
+                return this.attack3();
+        }
+    }
+    else
+    {
+         switch(attack_id)
+        {
+            case 0 :
+                return this.attack0();
+            case 1:
+                return this.attack1();
+            case 2:
+                return this.attack2();
+            case 3:
+                return this.attack3();
+        }
     }
 
 }

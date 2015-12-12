@@ -13,6 +13,9 @@ Stage = function (game, conf) {
     //GREEN BACKGROUND
     //game.stage.backgroundColor = "#122112";
 
+    this.width = conf.width;
+    this.height = conf.height;
+
     game.world.setBounds(0, 0, conf.width, conf.height);
     //SPACE BACKGROUND
     var starfield = game.add.sprite(0, 0, conf.backgroundImage);
@@ -30,7 +33,13 @@ Stage = function (game, conf) {
     }
 };
 
+Stage.prototype.zoomIn = function () {
+    game.world.setBounds(0, 0, this.width, this.height);
+}
 
+Stage.prototype.zoomOut = function () {
+    game.world.setBounds(0, 0, this.width/2, this.width/2);
+}
 
 Stage.prototype.spawnPositionTeam = function (team) {
 

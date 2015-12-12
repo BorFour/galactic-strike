@@ -39,7 +39,7 @@ var stages =
                 x : 3200,
                 y : 3200,
                 gravityRadius : 900,
-                gravityForce : 850,
+                gravityForce : 800,
                 collisionRadius : 355
             },
             {
@@ -47,7 +47,7 @@ var stages =
                 x : 1200,
                 y : 1200,
                 gravityRadius : 900,
-                gravityForce : 850,
+                gravityForce : 800,
                 collisionRadius : 375
             },
             {

@@ -114,22 +114,26 @@ Character.prototype.moveSpace = function(direction){
             this.body.rotateLeft(100);
             this.animations.play('left');
             this.orientation = this.LEFT;
+            this.body.angularDamping = 0.15;
             break;
         case 'right':
             this.body.rotateRight(100);
             this.animations.play('right');
             this.orientation = this.RIGHT;
+            this.body.angularDamping = 0.15;
             break;
          case 'up':
             this.body.thrust(200);
             if(this.orientation === this.LEFT) this.animations.play('jumpL');
             if(this.orientation === this.RIGHT) this.animations.play('jumpR');
+            this.body.angularDamping = 10;
             this.jumpAnimation = true;
             break;
          case 'down':
             this.body.reverse(200);
             if(this.orientation === this.LEFT) this.animations.play('jumpL');
             if(this.orientation === this.RIGHT) this.animations.play('jumpR');
+            this.body.angularDamping = 10;
             this.jumpAnimation = true;
             break;
          case 'rotateL':
@@ -141,6 +145,7 @@ Character.prototype.moveSpace = function(direction){
         case 'still':
             if(this.orientation === this.LEFT) this.animations.play('left');
             if(this.orientation === this.RIGHT) this.animations.play('right');
+            this.body.angularDamping = 0.15;
             this.jumpAnimation = false;
 //            this.animations.play('left');
             break;

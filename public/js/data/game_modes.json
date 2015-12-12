@@ -12,20 +12,18 @@ var gameModes =
              this.scores = []
              for (var t in this.room.teams)
              {
-                this.scores[t] = 0;
+                this.scores[this.room.teams[t]] = 0;
              }
 
         },
         'startRound' : function () {
 
-            //this.stage.load();
-            for (var i = 0; i < this.room.teams.length; i++)
-            {
-                for (var j = 0; j < this.room.teams[i].players.length; j++)
-                {
-                    //this.room.teams[i].players[j].spawn();
-                }
-            }
+                if (GALACTIC_STRIKE.room.host !== GALACTIC_STRIKE.player.id || GALACTIC_STRIKE.room.roundFinished) { return; }
+
+                GALACTIC_STRIKE.room.roundFinished = true;
+
+                console.log('@Client sent | finishRound');
+                socket.emit('finishRound', { id : GALACTIC_STRIKE.player.id });
 
         },
         'winnerRound' : function (){
@@ -66,12 +64,12 @@ var gameModes =
         'isOverGame' : function (){
 
                 return true;
- //           return this.scores.some(function(element, index, array){
- //               return element >= this.winScore;
- //           });
+         //  return this.scores.some(function(element, index, array){
+          //     return element >= this.winScore;
+          //   });
 
         },
-        'winScore' : 1,
+        'winScore' : 2,
         'showWinner' : function (winner) {
 
 
@@ -110,7 +108,7 @@ var gameModes =
             console.log("Deathmatch update");
             var wr = this.winnerRound();
             if(wr)
-            {
+            {1
                 this.scores[wr] += 1;
                 console.log(wr.name + ' won this round.' + this.scores[wr] + ' points');
                 if(this.isOverGame())

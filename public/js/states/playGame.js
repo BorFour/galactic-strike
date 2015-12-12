@@ -64,7 +64,7 @@ GALACTIC_STRIKE.PlayGame.prototype = {
             game.spacePhysics.debug = true;
             // physics initialization
             game.physics.startSystem(Phaser.Physics.BOX2D);
-            game.physics.box2d.setBoundsToWorld();
+//            game.physics.box2d.setBoundsToWorld();
             game.physics.box2d.friction = 50;
         }
 

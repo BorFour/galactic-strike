@@ -49,7 +49,7 @@ clientSetupGame = function (){
 
         for (var c in GALACTIC_STRIKE.room.characters)
         {
-            if (GALACTIC_STRIKE.room.characters[c]) { GALACTIC_STRIKE.room.characters[c].die(); }
+            if (GALACTIC_STRIKE.room.characters[c]) { GALACTIC_STRIKE.room.characters[c].simpleDie(); }
         }
 
         var spawnPosition = GALACTIC_STRIKE.room.map.spawnPositionTeam(GALACTIC_STRIKE.player.team.color-1);
@@ -73,10 +73,13 @@ clientSetupGame = function (){
     socket.on('userLeftGame', function (input) {
 
         console.log('@Client received | userLeftGame');
-        GALACTIC_STRIKE.room.characters[input.id].die();
+        if (GALACTIC_STRIKE.room.characters[input.id] && GALACTIC_STRIKE.room.characters[input.id].alive)
+        {
+            GALACTIC_STRIKE.room.characters[input.id].die();
+            GALACTIC_STRIKE.room.gameMode.update();
+        }
         delete GALACTIC_STRIKE.room.characters[input.id];
         delete GALACTIC_STRIKE.room.players[input.id];
-        GALACTIC_STRIKE.room.gameMode.update();
 
     });
 

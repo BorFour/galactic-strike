@@ -18,9 +18,12 @@ clientSetupMenu = function(){
     socket.on('userLeft', function (input) {
 
         console.log('@Client received | userLeft');
-        if(GALACTIC_STRIKE.room.characters[input.id]) { GALACTIC_STRIKE.room.characters[input.id].die(); }
-        delete GALACTIC_STRIKE.room.characters[input.id];
-        if(GALACTIC_STRIKE.room && GALACTIC_STRIKE.room.gameMode) { GALACTIC_STRIKE.room.gameMode.update(); }
+        if(GALACTIC_STRIKE.room.characters[input.id] && GALACTIC_STRIKE.room.characters[input.id].alive)
+        {
+            GALACTIC_STRIKE.room.characters[input.id].die();
+            if(GALACTIC_STRIKE.room && GALACTIC_STRIKE.room.gameMode) { GALACTIC_STRIKE.room.gameMode.update(); }
+            delete GALACTIC_STRIKE.room.characters[input.id];
+        }
 
     });
 

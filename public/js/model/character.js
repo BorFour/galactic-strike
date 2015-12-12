@@ -161,6 +161,16 @@ Character.prototype.die = function() {
     console.log(game.spacePhysics);
 }
 
+Character.prototype.simpleDie = function() {
+
+    if(!this.alive) return;
+	this.alive = false;
+    this.wheels[0].destroy();
+    this.wheels[1].destroy();
+    this.body.destroy();
+	this.kill();
+}
+
 Character.prototype.setGrounded = function (){
     if(this.groundedTimer){
         game.time.events.remove(this.groundedTimer);

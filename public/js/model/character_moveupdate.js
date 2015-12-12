@@ -32,6 +32,7 @@ Character.prototype.moveGrounded = function(direction){
     var moveForce1 = 250;
     this.motorEnabled = true;
 
+    this.body.angularDamping = 0.15;
     switch(direction){
         case 'left':
             this.animations.play('left');
@@ -73,6 +74,7 @@ Character.prototype.moveGrounded = function(direction){
 
 Character.prototype.moveInOrbit = function(direction){
 
+    this.body.angularDamping = 0.15;
     switch(direction){
         case 'left':
             this.animations.play('left');
@@ -123,14 +125,14 @@ Character.prototype.moveSpace = function(direction){
             this.body.angularDamping = 0.15;
             break;
          case 'up':
-            this.body.thrust(200);
+            this.body.thrust(250);
             if(this.orientation === this.LEFT) this.animations.play('jumpL');
             if(this.orientation === this.RIGHT) this.animations.play('jumpR');
             this.body.angularDamping = 10;
             this.jumpAnimation = true;
             break;
          case 'down':
-            this.body.reverse(200);
+            this.body.reverse(250);
             if(this.orientation === this.LEFT) this.animations.play('jumpL');
             if(this.orientation === this.RIGHT) this.animations.play('jumpR');
             this.body.angularDamping = 10;

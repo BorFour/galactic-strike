@@ -95,6 +95,8 @@ function Character (x, y, angle, game, player, asset) {
 	this.wheels[1].body.sprite = this.wheels[1];
 	this.wheels[0].body.setCircle(0.2*PTM);
 	this.wheels[1].body.setCircle(0.2*PTM);
+    this.wheels[0].body.collideWorldBounds = false;
+    this.wheels[1].body.collideWorldBounds = false;
 	this.motorEnabled = false;
     this.motorSpeed = 30;
 
@@ -124,7 +126,7 @@ function Character (x, y, angle, game, player, asset) {
 
     this.body.immovable = false;
     this.body.static = false;
-    this.body.collideWorldBounds = true;
+    this.body.collideWorldBounds = false;
 
     //Display player name
 

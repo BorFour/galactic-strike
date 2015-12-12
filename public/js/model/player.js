@@ -135,10 +135,21 @@ Player.prototype.characterSetup = function () {
 
             var attack0Key = game.input.keyboard.addKey(Phaser.Keyboard.UP);
             attack0Key.onDown.add(function(){
-                    if(this.character.attack0())
+                    if (this.character.inAtmosphere())
                     {
-                        var output = {id:GALACTIC_STRIKE.player.id, attack_id:0};
-                        socket.emit('attack', output);
+                        if(this.character.attack0())
+                        {
+                            var output = {id:GALACTIC_STRIKE.player.id, attack_id:0, space : false};
+                            socket.emit('attack', output);
+                        }
+                    }
+                    else
+                    {
+                        if(this.character.attack0())
+                        {
+                            var output = {id:GALACTIC_STRIKE.player.id, attack_id:0, space : true};
+                            socket.emit('attack', output);
+                        }
                     }
                 }, this);
             game.input.keyboard.removeKeyCapture(Phaser.Keyboard.UP);
@@ -147,10 +158,21 @@ Player.prototype.characterSetup = function () {
 
             var attack1Key = game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
             attack1Key.onDown.add(function(){
-                    if(this.character.attack1())
+                    if (this.character.inAtmosphere())
                     {
-                        var output = {id:GALACTIC_STRIKE.player.id, attack_id:1};
-                        socket.emit('attack', output);
+                        if(this.character.attack1())
+                        {
+                            var output = {id:GALACTIC_STRIKE.player.id, attack_id:1, space : false};
+                            socket.emit('attack', output);
+                        }
+                    }
+                    else
+                    {
+                        if(this.character.attackSpace1())
+                        {
+                            var output = {id:GALACTIC_STRIKE.player.id, attack_id:1, space : true};
+                            socket.emit('attack', output);
+                        }
                     }
                 }, this);
             game.input.keyboard.removeKeyCapture(Phaser.Keyboard.DOWN);
@@ -158,23 +180,34 @@ Player.prototype.characterSetup = function () {
 
             var attack2Key = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
             attack2Key.onDown.add(function(){
-                    if(this.character.attack2())
+                     if (this.character.inAtmosphere())
                     {
-                        var output = {id:GALACTIC_STRIKE.player.id, attack_id:2};
-                        socket.emit('attack', output);
+                        if(this.character.attack2())
+                        {
+                            var output = {id:GALACTIC_STRIKE.player.id, attack_id:2, space : false};
+                            socket.emit('attack', output);
+                        }
+                    }
+                    else
+                    {
+                        if(this.character.attack2())
+                        {
+                            var output = {id:GALACTIC_STRIKE.player.id, attack_id:2, space : true};
+                            socket.emit('attack', output);
+                        }
                     }
                 }, this);
             game.input.keyboard.removeKeyCapture(Phaser.Keyboard.LEFT);
 
-            var attack3Key = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
-            attack3Key.onDown.add(function(){
-                    if(this.character.attack3())
-                    {
-                        var output = {id:GALACTIC_STRIKE.player.id, attack_id:3};
-                        socket.emit('attack', output);
-                    }
-                }, this);
-            game.input.keyboard.removeKeyCapture(Phaser.Keyboard.RIGHT);
+//            var attack3Key = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
+//            attack3Key.onDown.add(function(){
+//                    if(this.character.attack3())
+//                    {
+//                        var output = {id:GALACTIC_STRIKE.player.id, attack_id:3};
+//                        socket.emit('attack', output);
+//                    }
+//                }, this);
+//            game.input.keyboard.removeKeyCapture(Phaser.Keyboard.RIGHT);
 
 
 //

@@ -1,15 +1,18 @@
 
 
 function Item (game,x,y, conf) {
-    Element.call(this,game,x,y, conf['asset']);
+    Element.call(this,game,x,y, conf.asset);
     game.add.existing(this);
     game.physics.box2d.enable(this);
 //    game.spacePhysics.addDynamic(this);
-    this.use = conf['use'];             // Función que se ejecuta cuando se 'usa' el objeto
+    this.use = conf.use;             // Función que se ejecuta cuando se 'usa' el objeto
     this.owner = null;
-    this.collide = conf['collide'];
-    if (conf['body']){
-        conf['body'](this);
+    this.collide = conf.collide;
+    if (conf.body){
+        conf.body(this);
+    }
+    if(conf.scale){
+        this.scale.set(conf.scale);
     }
 }
 //Inheritance

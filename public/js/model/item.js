@@ -1,17 +1,15 @@
-
-
-function Item (game,x,y, conf) {
-    Element.call(this,game,x,y, conf.asset);
+function Item(game, x, y, conf) {
+    Element.call(this, game, x, y, conf.asset);
     game.add.existing(this);
     game.physics.box2d.enable(this);
-//    game.spacePhysics.addDynamic(this);
-    this.use = conf.use;             // Función que se ejecuta cuando se 'usa' el objeto
+    //    game.spacePhysics.addDynamic(this);
+    this.use = conf.use; // Función que se ejecuta cuando se 'usa' el objeto
     this.owner = null;
     this.collide = conf.collide;
-    if (conf.body){
+    if (conf.body) {
         conf.body(this);
     }
-    if(conf.scale){
+    if (conf.scale) {
         this.scale.set(conf.scale);
     }
 }
@@ -24,12 +22,11 @@ Item.prototype.constructor = Element;
 
 // }
 
-Item.prototype.use = function (){
+Item.prototype.use = function () {
 
 }
 
-Item.prototype.destroy = function (){
+Item.prototype.destroy = function () {
     this.body.destroy();
     this.kill();
 }
-

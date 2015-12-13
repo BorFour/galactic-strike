@@ -1,5 +1,3 @@
-
-
 Room = function (name, host, maxUsers) {
 
 
@@ -8,16 +6,16 @@ Room = function (name, host, maxUsers) {
     this.maxUsers = maxUsers;
     this.players = {};
     this.characters = {};
-//    this.players[host.id] = host;
-    this.unasigned = new Team ("Unasigned", -1);
-//    host.joinTeam(this.unasigned);
+    //    this.players[host.id] = host;
+    this.unasigned = new Team("Unasigned", -1);
+    //    host.joinTeam(this.unasigned);
     this.teams = [];
     this.current_gamemode = 0;
 
 };
 
 
-Room.prototype.addPlayer = function(id, player) {
+Room.prototype.addPlayer = function (id, player) {
 
     this.players[id] = player;
     player.id = id;
@@ -26,21 +24,21 @@ Room.prototype.addPlayer = function(id, player) {
 }
 
 
-Room.prototype.addTeam = function (name, anthem){
+Room.prototype.addTeam = function (name, anthem) {
 
     console.log(this.teams.length)
-    if(this.teams.length < 4){
-        if(!name){
-          name = "Team " + (this.teams.length+1);
+    if (this.teams.length < 4) {
+        if (!name) {
+            name = "Team " + (this.teams.length + 1);
         }
-        this.teams.push(new Team (name, this.teams.length+1, anthem));
+        this.teams.push(new Team(name, this.teams.length + 1, anthem));
     }
 
 }
 
-Room.prototype.dropTeam = function(){
+Room.prototype.dropTeam = function () {
 
-    if(this.teams.length > 0){
+    if (this.teams.length > 0) {
         this.teams.pop();
     }
 
@@ -51,11 +49,9 @@ Room.prototype.dropTeam = function(){
  * @returns {Bool} all the players are ready
  */
 
-Room.prototype.playersReady = function(){
+Room.prototype.playersReady = function () {
 
-    return this.players.reduce(function(prevValue, currValue, index, array){
+    return this.players.reduce(function (prevValue, currValue, index, array) {
         return prevValue && currValue.isReady;
     }, true);
 }
-
-

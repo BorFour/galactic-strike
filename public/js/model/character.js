@@ -152,19 +152,18 @@ Character.prototype.die = function () {
     if (!this.alive) return;
 
     this.alive = false;
-    var emitter = game.add.emitter(0, 0, 100);
-    emitter.makeParticles('pokeball');
-    emitter.x = this.x;
-    emitter.y = this.y;
-    emitter.start(true, 2000, null, 10);
-    game.time.events.add(2000, function () {
-        if (emitter) emitter.destroy();
-    }, this);
+//    var emitter = game.add.emitter(0, 0, 100);
+//    emitter.makeParticles('pokeball');
+//    emitter.x = this.x;
+//    emitter.y = this.y;
+//    emitter.start(true, 2000, null, 10);
+//    game.time.events.add(2000, function () {
+//        if (emitter) emitter.destroy();
+//    }, this);
     this.wheels[0].destroy();
     this.wheels[1].destroy();
     this.body.destroy();
     this.kill();
-    console.log(game.spacePhysics);
 }
 
 Character.prototype.simpleDie = function () {

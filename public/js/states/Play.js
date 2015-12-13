@@ -295,7 +295,7 @@ function spacePhysicsTimer() {
             var tween = game.add.tween(game.world.scale).to({
                 x: 1,
                 y: 1
-            }, 350, Phaser.Easing.Quadratic.InOut, true);
+            }, 350, Phaser.Easing.Linear.None, true);
             tween.onComplete.add(function () {
                 game.camera.follow(GALACTIC_STRIKE.player.character, Phaser.Camera.FOLLOW_TOPDOWN_TIGHT);
                 GALACTIC_STRIKE.room.map.zoomIn();
@@ -309,7 +309,7 @@ function spacePhysicsTimer() {
             var tween = game.add.tween(game.world.scale).to({
                 x: 0.5,
                 y: 0.5
-            }, 350, Phaser.Easing.Quadratic.InOut, true);
+            }, 350, Phaser.Easing.Linear.None, true);
             tween.onComplete.add(function () {
 
                 game.camera.follow(GALACTIC_STRIKE.player.character, Phaser.Camera.FOLLOW_TOPDOWN_TIGHT);

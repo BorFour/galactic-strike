@@ -70,8 +70,17 @@ var gameModes =
             return false;
         },
         'winScore' : 2,
-        'showWinner' : function (winner) {
+        'showWinnerRound' : function (winner) {
 
+            var t = game.add.text(0, 0, winner + " won this round!", { font: "32px Arial", fill: "#ffffff", align: "center" });
+            t.anchor.set(0.5);
+            t.fixedToCamera = true;
+            t.cameraOffset.setTo(game.camera.width/2, game.camera.height*3/4);
+            var tw = game.add.tween(t).to( { alpha: 0 }, 5000, "Linear", true);
+            tw.onComplete.add(function () { t.destroy(); });
+
+        },
+        'showWinner' : function (winner) {
 
             GALACTIC_STRIKE.room.gameOver = true;
             if (GALACTIC_STRIKE.zoomed)
@@ -101,7 +110,6 @@ var gameModes =
             game.add.tween(nameLabel).to({y: game.world.centerY - 200}, 1000).easing(Phaser.Easing.Bounce.Out).start();
             toButton.start();
 
-
         },
         'update' : function (){
 
@@ -119,6 +127,7 @@ var gameModes =
                 }
                 else
                 {
+                    this.showWinnerRound(wr);
                     this.startRound();
                 }
             }

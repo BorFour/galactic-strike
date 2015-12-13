@@ -217,9 +217,6 @@ GALACTIC_STRIKE.Loader.prototype = {
         var spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
         // When the 'upKey' is pressed, it will call the 'start' function once
         spaceKey.onDown.addOnce(this.startGame, this);
-        var spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-        // When the 'upKey' is pressed, it will call the 'start' function once
-        spaceKey.onDown.addOnce(this.startGame, this);
 
         game.input.onTap.add(this.startGame, this);
         game.input.addPointer();

@@ -2,7 +2,7 @@
 var networkDebug = true;
 
 
-clientSetupMenu = function(){
+clientSetupMenu = function () {
 
     socket.on('ID', function (input) {
 
@@ -18,10 +18,12 @@ clientSetupMenu = function(){
     socket.on('userLeft', function (input) {
 
         console.log('@Client received | userLeft');
-        if(GALACTIC_STRIKE.room.characters[input.id] && GALACTIC_STRIKE.room.characters[input.id].alive)
+        if (GALACTIC_STRIKE.room.characters[input.id] && GALACTIC_STRIKE.room.characters[input.id].alive)
         {
             GALACTIC_STRIKE.room.characters[input.id].die();
-            if(GALACTIC_STRIKE.room && GALACTIC_STRIKE.room.gameMode) { GALACTIC_STRIKE.room.gameMode.update(); }
+            if (GALACTIC_STRIKE.room && GALACTIC_STRIKE.room.gameMode) {
+                GALACTIC_STRIKE.room.gameMode.update();
+            }
             delete GALACTIC_STRIKE.room.characters[input.id];
         }
 
@@ -30,8 +32,8 @@ clientSetupMenu = function(){
 
     socket.on('roomIngame', function (input) {
 
-        var style = { font: "bold 32px Arial", fill: "#fff", boundsAlignH: "center", boundsAlignV: "middle" };
-        if(!this.menuText)
+        var style = {font: "bold 32px Arial", fill: "#fff", boundsAlignH: "center", boundsAlignV: "middle"};
+        if (!this.menuText)
         {
             this.menuText = game.add.text(game.world.centerX, game.world.centerY, "Partida en curso", style);
             this.menuText.anchor.set(0.5);
@@ -51,7 +53,7 @@ clientSetupMenu = function(){
  * Set up for the events that can be received from the server
  */
 
-function clientSetup(){
+function clientSetup() {
 
     clientSetupMenu();
     clientSetupRoom();

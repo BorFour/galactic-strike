@@ -1,5 +1,5 @@
 
-clientSetupRoom = function (){
+clientSetupRoom = function () {
 
 
     socket.on('roomCreated', function (input) {
@@ -20,10 +20,10 @@ clientSetupRoom = function (){
 
     socket.on('joinRoom', function (input) {
 
-        var style = { font: "20px Arial", fill: "#ffffff", align: "center" };
+        var style = {font: "20px Arial", fill: "#ffffff", align: "center"};
 
         console.log('@Client received | joinRoom');
-        if(input.id === GALACTIC_STRIKE.player.id)
+        if (input.id === GALACTIC_STRIKE.player.id)
         {
             GALACTIC_STRIKE.room = new Room("Default room name", input.host, 8);
             GALACTIC_STRIKE.room.addTeam("Red Team", 'sovietAnthem');
@@ -31,7 +31,7 @@ clientSetupRoom = function (){
 
             for (var k in input.players)
             {
-                if(k == GALACTIC_STRIKE.player.id)
+                if (k == GALACTIC_STRIKE.player.id)
                 {
                     GALACTIC_STRIKE.room.addPlayer(k, GALACTIC_STRIKE.player);
                     GALACTIC_STRIKE.player.joinTeam(GALACTIC_STRIKE.room.unasigned);
@@ -39,7 +39,7 @@ clientSetupRoom = function (){
                 else
                 {
                     GALACTIC_STRIKE.room.addPlayer(k, new Player(input.players[k].name)).joinTeam(
-                        (input.players[k].team === -1 ? GALACTIC_STRIKE.room.unasigned : GALACTIC_STRIKE.room.teams[input.players[k].team]));
+                            (input.players[k].team === -1 ? GALACTIC_STRIKE.room.unasigned : GALACTIC_STRIKE.room.teams[input.players[k].team]));
                 }
             }
 
@@ -49,7 +49,7 @@ clientSetupRoom = function (){
         else
         {
             var p = GALACTIC_STRIKE.room.addPlayer(input.id, new Player(input.name)).joinTeam(
-                GALACTIC_STRIKE.room.unasigned);
+                    GALACTIC_STRIKE.room.unasigned);
         }
 
     });
@@ -64,4 +64,4 @@ clientSetupRoom = function (){
     });
 
 
- }
+}

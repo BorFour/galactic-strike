@@ -1,5 +1,4 @@
-
-function Character (x, y, angle, game, player, asset) {
+function Character(x, y, angle, game, player, asset) {
 
     Element.call(this, game, x, y, asset);
     game.add.existing(this);
@@ -12,7 +11,7 @@ function Character (x, y, angle, game, player, asset) {
     this.game.spacePhysics.addDynamic(this);
     this.game.physics.box2d.enable(this);
     this.body.dynamic = true;
-//    this.body.angle = angle;
+    //    this.body.angle = angle;
 
     // States
     this.RIGHT = 1;
@@ -33,7 +32,7 @@ function Character (x, y, angle, game, player, asset) {
     this.items = [];
     this.bullets = [];
 
-	this.currentSpeed =0;
+    this.currentSpeed = 0;
     this.fireRate = 100;
     this.nextFire = 0;
     this.alive = true;
@@ -53,62 +52,62 @@ function Character (x, y, angle, game, player, asset) {
     var driveJoints = [];
 
 
-	var frequency = 12;
-	var damping = 100;
-	var motorTorque = 1;
-	var rideHeight = 0.25;
+    var frequency = 12;
+    var damping = 100;
+    var motorTorque = 1;
+    var rideHeight = 0.25;
 
 
     this.planetTouched = null;
     this.atmosphere = [];
     this.grounded = false;
 
-    var truckVertices = [-10, -30, 10,-30, 20,0,-20, 0];
+    var truckVertices = [-10, -30, 10, -30, 20, 0, -20, 0];
 
     this.body.setPolygon(truckVertices);
     this.body.mass = 1;
     this.body.angularDamping = 0.15;
-    this.body.linearDamping =0.4// 0.94;
-//    this.body.friction = 0.001;
+    this.body.linearDamping = 0.4 // 0.94;
+        //    this.body.friction = 0.001;
 
 
 
     this.driveJoints = [];
     this.wheels = [];
 
-    if(asset === 'playerRed') {
+    if (asset === 'playerRed') {
         this.wheel = 'wheel_red';
     } else {
         this.wheel = 'wheel_blue';
     }
-    this.wheels[0] = new Phaser.Sprite (game, this.x + -0.22*PTM,  this.y + 0.6*-PTM, this.wheel);
+    this.wheels[0] = new Phaser.Sprite(game, this.x + -0.22 * PTM, this.y + 0.6 * -PTM, this.wheel);
     this.wheels[0].anchor.set(0.5);
     game.add.existing(this.wheels[0]);
-    this.wheels[1] = new Phaser.Sprite (game, this.x + 0.22*PTM,  this.y + 0.6*-PTM, this.wheel);
+    this.wheels[1] = new Phaser.Sprite(game, this.x + 0.22 * PTM, this.y + 0.6 * -PTM, this.wheel);
     this.wheels[1].anchor.set(0.5);
     game.add.existing(this.wheels[1]);
 
 
-	this.wheels[0].body = new Phaser.Physics.Box2D.Body(this.game, null, this.x + -0.22*PTM, this.y + 0.6*-PTM);
-	this.wheels[0].body.sprite = this.wheels[0];
-	this.wheels[1].body = new Phaser.Physics.Box2D.Body(this.game, null, this.x + 0.22*PTM, this.y + 0.6*-PTM);
-	this.wheels[1].body.sprite = this.wheels[1];
-	this.wheels[0].body.setCircle(0.2*PTM);
-	this.wheels[1].body.setCircle(0.2*PTM);
+    this.wheels[0].body = new Phaser.Physics.Box2D.Body(this.game, null, this.x + -0.22 * PTM, this.y + 0.6 * -PTM);
+    this.wheels[0].body.sprite = this.wheels[0];
+    this.wheels[1].body = new Phaser.Physics.Box2D.Body(this.game, null, this.x + 0.22 * PTM, this.y + 0.6 * -PTM);
+    this.wheels[1].body.sprite = this.wheels[1];
+    this.wheels[0].body.setCircle(0.2 * PTM);
+    this.wheels[1].body.setCircle(0.2 * PTM);
     this.wheels[0].body.collideWorldBounds = true;
     this.wheels[1].body.collideWorldBounds = true;
-	this.motorEnabled = false;
+    this.motorEnabled = false;
     this.motorSpeed = 30;
 
-	var frequency = 3.5;
-	var damping = 0.5;
-	var motorTorque = 2;
-	var rideHeight = 0.5;
+    var frequency = 3.5;
+    var damping = 0.5;
+    var motorTorque = 2;
+    var rideHeight = 0.5;
 
-	// Make wheel joints
-	// bodyA, bodyB, ax, ay, bx, by, axisX, axisY, frequency, damping, motorSpeed, motorTorque, motorEnabled
-	this.driveJoints[0] = game.physics.box2d.wheelJoint(this.body, this.wheels[0].body, -0.65*PTM,rideHeight*PTM, 0,0, 0,1, frequency, damping, 0, motorTorque, true ); // rear
-	this.driveJoints[1] = game.physics.box2d.wheelJoint(this.body, this.wheels[1].body,  0.65*PTM,rideHeight*PTM, 0,0, 0,1, frequency, damping, 0, motorTorque, true ); // front
+    // Make wheel joints
+    // bodyA, bodyB, ax, ay, bx, by, axisX, axisY, frequency, damping, motorSpeed, motorTorque, motorEnabled
+    this.driveJoints[0] = game.physics.box2d.wheelJoint(this.body, this.wheels[0].body, -0.65 * PTM, rideHeight * PTM, 0, 0, 0, 1, frequency, damping, 0, motorTorque, true); // rear
+    this.driveJoints[1] = game.physics.box2d.wheelJoint(this.body, this.wheels[1].body, 0.65 * PTM, rideHeight * PTM, 0, 0, 0, 1, frequency, damping, 0, motorTorque, true); // front
 
 
     this.wheels[0].body.mainSprite = this;
@@ -130,7 +129,10 @@ function Character (x, y, angle, game, player, asset) {
 
     //Display player name
 
-    var text = game.add.text(0, -56, player.nickname, {font: "16px Arial", fill: "#ffffff"});
+    var text = game.add.text(0, -56, player.nickname, {
+        font: "16px Arial",
+        fill: "#ffffff"
+    });
     this.addChild(text);
     text.anchor.set(0.5);
 
@@ -145,51 +147,55 @@ Character.prototype.constructor = Element;
  * This method is called when a character is killed or his owner disconnects
  */
 
-Character.prototype.die = function() {
+Character.prototype.die = function () {
 
-    if(!this.alive) return;
+    if (!this.alive) return;
 
-	this.alive = false;
+    this.alive = false;
     var emitter = game.add.emitter(0, 0, 100);
     emitter.makeParticles('pokeball');
     emitter.x = this.x;
     emitter.y = this.y;
     emitter.start(true, 2000, null, 10);
-    game.time.events.add(2000, function(){if(emitter) emitter.destroy();}, this);
+    game.time.events.add(2000, function () {
+        if (emitter) emitter.destroy();
+    }, this);
     this.wheels[0].destroy();
     this.wheels[1].destroy();
     this.body.destroy();
-	this.kill();
+    this.kill();
     console.log(game.spacePhysics);
 }
 
-Character.prototype.simpleDie = function() {
+Character.prototype.simpleDie = function () {
 
-    if(!this.alive) return;
-	this.alive = false;
+    if (!this.alive) return;
+    this.alive = false;
     this.wheels[0].destroy();
     this.wheels[1].destroy();
     this.body.destroy();
-	this.kill();
+    this.kill();
 }
 
 Character.prototype.inWorldCustom = function () {
 
-    return  this.x >= 0 &&
-            this.y >= 0 &&
-            this.x <= game.world.x &&
-            this.y <= game.world.y;
+    return this.x >= 0 &&
+        this.y >= 0 &&
+        this.x <= game.world.x &&
+        this.y <= game.world.y;
 
 }
 
-Character.prototype.setGrounded = function (){
-    if(this.groundedTimer){
+Character.prototype.setGrounded = function () {
+    if (this.groundedTimer) {
         game.time.events.remove(this.groundedTimer);
         this.groundedTimer = null;
     }
 
     this.grounded = true;
-    this.groundedTimer = game.time.events.add(50,function() {this.grounded = false;}, this);
+    this.groundedTimer = game.time.events.add(50, function () {
+        this.grounded = false;
+    }, this);
 
 }
 
@@ -200,7 +206,7 @@ Character.prototype.setGrounded = function (){
  * @returns {Boolean} False if the list of atmospheres is empty, True IOC
  */
 
-Character.prototype.inAtmosphere = function (){
+Character.prototype.inAtmosphere = function () {
     return this.atmosphere.length > 0;
 }
 

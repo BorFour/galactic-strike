@@ -1,28 +1,17 @@
-
-
 /**
  *
  * @file spacePhysics.js
  * @date 07/11/2015
  */
 
-function SpacePhysics(game){
+function SpacePhysics(game) {
+
     this.game = game;
 
     // groups containing crates and planets
 
     this.dynamicGroup = [];
     this.planetGroup = [];
-    this.planet;
-
-    //flag for gameover and limit of crates
-    this.gameover = 0;
-    this.numCrates = 0;
-    this.numCollision = 0;
-    this.x = -1;
-    this.y = -1;
-
-    this.grounded = false;
 
     // a force reducer to let the simulation run smoothly
 
@@ -30,15 +19,14 @@ function SpacePhysics(game){
 
     // graphic object where to draw planet gravity area
 
-    this.gravityGraphics;
-    this.sprite;
     this.debug = false;
-
 
 }
 
-SpacePhysics.prototype.consoleLog = function() {
+SpacePhysics.prototype.consoleLog = function () {
+
     console.log("@Physics: " + dynamicGroup);
+
 };
 
 /**
@@ -47,8 +35,10 @@ SpacePhysics.prototype.consoleLog = function() {
  */
 
 SpacePhysics.prototype.addPlanet = function (planet) {
-        this.planetGroup.push(planet);
-        return planet;
+
+    this.planetGroup.push(planet);
+    return planet;
+
 }
 
 /**
@@ -56,46 +46,39 @@ SpacePhysics.prototype.addPlanet = function (planet) {
  * @param {Element} sprite element with a body
  */
 
-SpacePhysics.prototype.addDynamic = function (sprite){
+SpacePhysics.prototype.addDynamic = function (sprite) {
+
     this.dynamicGroup.push(sprite)
+
 }
 
 /**
  * This function is called in the game loop. It applies the gravitational field of each planet to each dynamic element
  */
 
-SpacePhysics.prototype.update = function (){
+SpacePhysics.prototype.update = function () {
 
-		for(var i=0; i < this.dynamicGroup.length; i++)
-        {
-			var c = this.dynamicGroup[i];
-            var atmosphere = [];
+    for (var i = 0; i < this.dynamicGroup.length; i++) {
+        var c = this.dynamicGroup[i];
+        var atmosphere = [];
 
-            if (c.body.static) { continue; }
-			for (var j=0;j<this.planetGroup.length;j++)
-            {
-                var p = this.planetGroup[j];
-				x = c.x;
-				y = c.y;
-				if(Phaser.Math.distance(c.x,c.y,p.x,p.y) <p.width/2+p.gravityRadius/2){
-					// calculating angle between the planet and the crate
-					var angle = Phaser.Math.angleBetween(c.x,c.y,p.x,p.y);
-					// add gravity force to the crate in the direction of planet center
-                    c.body.applyForce(p.gravityForce*Math.cos(angle)*this.forceReducer,
-                              p.gravityForce*Math.sin(angle)*this.forceReducer);
-                    atmosphere.push(p);
-                }
-            }
-            c.atmosphere = atmosphere;
+        if (c.body.static) {
+            continue;
         }
+        for (var j = 0; j < this.planetGroup.length; j++) {
+            var p = this.planetGroup[j];
+            x = c.x;
+            y = c.y;
+            if (Phaser.Math.distance(c.x, c.y, p.x, p.y) < p.width / 2 + p.gravityRadius / 2) {
+                // calculating angle between the planet and the crate
+                var angle = Phaser.Math.angleBetween(c.x, c.y, p.x, p.y);
+                // add gravity force to the crate in the direction of planet center
+                c.body.applyForce(p.gravityForce * Math.cos(angle) * this.forceReducer,
+                    p.gravityForce * Math.sin(angle) * this.forceReducer);
+                atmosphere.push(p);
+            }
+        }
+        c.atmosphere = atmosphere;
+    }
+
 }
-
-
-
-
-
-
-
-
-
-

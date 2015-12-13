@@ -1,11 +1,9 @@
-
 /**
-* Main menu of the game.
-* @private
-*/
+ * Main menu of the game.
+ * @private
+ */
 
-GALACTIC_STRIKE.MainMenu = function(game) {
-};
+GALACTIC_STRIKE.MainMenu = function (game) {};
 
 GALACTIC_STRIKE.MainMenu.prototype = {
 
@@ -25,16 +23,24 @@ GALACTIC_STRIKE.MainMenu.prototype = {
         buttonCreate = game.add.button(game.world.centerX + 95, 400, 'buttonCreate', this.createRoom, this, 0, 0, 0, 0);
 
     },
-    createRoom: function() {
+    createRoom: function () {
 
         // The client emits the 'createRoom' event
-        socket.emit('createRoom', {id : GALACTIC_STRIKE.player.id, name : GALACTIC_STRIKE.player.nickname, timestamp : GALACTIC_STRIKE.serverTimestamp});
+        socket.emit('createRoom', {
+            id: GALACTIC_STRIKE.player.id,
+            name: GALACTIC_STRIKE.player.nickname,
+            timestamp: GALACTIC_STRIKE.serverTimestamp
+        });
 
     },
-    joinRoom: function() {
+    joinRoom: function () {
 
         // The client emits the 'joinRoom' event
-        socket.emit('joinRoom', {id : GALACTIC_STRIKE.player.id, name : GALACTIC_STRIKE.player.nickname, timestamp : GALACTIC_STRIKE.serverTimestamp});
+        socket.emit('joinRoom', {
+            id: GALACTIC_STRIKE.player.id,
+            name: GALACTIC_STRIKE.player.nickname,
+            timestamp: GALACTIC_STRIKE.serverTimestamp
+        });
 
     }
 };

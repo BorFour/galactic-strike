@@ -200,10 +200,10 @@ orb.pivot.x = 100;
 	},
     render: function(){
 
-         if(gameDebug)
+         if (gameDebug)
          {
              game.debug.text("Event cooldown: " + game.time.events.duration, 32, 32);
-             if(GALACTIC_STRIKE.player.character)
+             if (GALACTIC_STRIKE.player.character)
              {
                 game.debug.text("Planet touched: " +
                 (GALACTIC_STRIKE.player.character.planetTouched ? GALACTIC_STRIKE.player.character.planetTouched.sprite
@@ -233,7 +233,8 @@ orb.pivot.x = 100;
             // var c se almacena el valor de las CLAVES
             // Para acceder a los valores, hay que indexar la
             // lista con la propia clave 'c'
-            for (var c in GALACTIC_STRIKE.room.characters){
+            for (var c in GALACTIC_STRIKE.room.characters)
+            {
                 game.debug.text(GALACTIC_STRIKE.room.characters[c], 640, i*32);
                 ++i;
             }
@@ -242,9 +243,11 @@ orb.pivot.x = 100;
 
     },
     quitGame: function(){
+
         console.log("QUIT GAME");
         socket.emit('leaveGame', {id : GALACTIC_STRIKE.player.id});
         this.state.start('MainMenu', true, true);
+
     }
 }
 
@@ -252,26 +255,23 @@ function touchPlanetCallback(body1, body2, fixture1, fixture2, begin) {
 
         body1.mainSprite.planetTouched = body2;
         body1.mainSprite.setGrounded();
-//        body1.fixedRotation = true;
-        if(debug) {
-//            console.log("planet touched gravity force: " + body2.x)
-//            console.log(body1)
-        }
+
 }
 
 function touchSpikeballEnemy(body1, body2, fixture1, fixture2, begin) {
 
-        if(body1.sprite &&
-           body2.sprite &&
-           body1.sprite.owner !== body2.sprite &&
-           !body2.sprite.hitImmune &&
-           body2.sprite.health > 0)
+        if (body1.sprite &&
+            body2.sprite &&
+            body1.sprite.owner !== body2.sprite &&
+            !body2.sprite.hitImmune &&
+            body2.sprite.health > 0)
         {
-            if(body1.sprite.owner.player.team === body2.mainSprite.player.team) { return; }
-            if(body1.sprite.owner === GALACTIC_STRIKE.player.character)
+            if (body1.sprite.owner.player.team === body2.mainSprite.player.team) { return; }
+            if (body1.sprite.owner === GALACTIC_STRIKE.player.character)
             {
                body2.sprite.hitImmune = true;
                console.log(body2.mainSprite.player);
+
                var output = {
                    id : GALACTIC_STRIKE.player.id,
                    target : body2.mainSprite.player.id,
@@ -287,34 +287,40 @@ function touchSpikeballEnemy(body1, body2, fixture1, fixture2, begin) {
         }
 }
 
-function spacePhysicsTimer(){
+function spacePhysicsTimer() {
+
     game.spacePhysics.update();
 
-    if(GALACTIC_STRIKE.player.character && !GALACTIC_STRIKE.room.gameOver){
-        if(GALACTIC_STRIKE.zoomed && GALACTIC_STRIKE.player.character.inAtmosphere()){
-//                game.camera.follow(null);
-                GALACTIC_STRIKE.zoomed = false;
-                GALACTIC_STRIKE.zooming = true;
-                var tween = game.add.tween(game.world.scale).to( {x: 1, y:1}, 350, Phaser.Easing.Quadratic.InOut, true);
-                tween.onComplete.add(function (){
-                    game.camera.follow(GALACTIC_STRIKE.player.character,  Phaser.Camera.FOLLOW_TOPDOWN_TIGHT);
-                    GALACTIC_STRIKE.room.map.zoomIn();
-                    GALACTIC_STRIKE.zooming = false;
-                }, this);
+    if (GALACTIC_STRIKE.player.character && !GALACTIC_STRIKE.room.gameOver)
+    {
+        if (GALACTIC_STRIKE.zoomed && GALACTIC_STRIKE.player.character.inAtmosphere())
+        {
+//          game.camera.follow(null);
+            GALACTIC_STRIKE.zoomed = false;
+            GALACTIC_STRIKE.zooming = true;
+            var tween = game.add.tween(game.world.scale).to( {x: 1, y:1}, 350, Phaser.Easing.Quadratic.InOut, true);
+            tween.onComplete.add(function (){
+                game.camera.follow(GALACTIC_STRIKE.player.character,  Phaser.Camera.FOLLOW_TOPDOWN_TIGHT);
+                GALACTIC_STRIKE.room.map.zoomIn();
+                GALACTIC_STRIKE.zooming = false;
+            }, this);
 
         }
-        else if(!GALACTIC_STRIKE.zoomed && !GALACTIC_STRIKE.player.character.inAtmosphere()){
-//                game.camera.follow(null);
-                GALACTIC_STRIKE.zoomed = true;
-                GALACTIC_STRIKE.zooming = true;
-                var tween = game.add.tween(game.world.scale).to( {x: 0.5, y:0.5}, 350, Phaser.Easing.Quadratic.InOut, true);
-                tween.onComplete.add(function (){
-                    game.camera.follow(GALACTIC_STRIKE.player.character,  Phaser.Camera.FOLLOW_TOPDOWN_TIGHT);
-                    GALACTIC_STRIKE.room.map.zoomOut();
-                    GALACTIC_STRIKE.zooming = false;
-                }, this);
+        else if (!GALACTIC_STRIKE.zoomed && !GALACTIC_STRIKE.player.character.inAtmosphere())
+        {
+//          game.camera.follow(null);
+            GALACTIC_STRIKE.zoomed = true;
+            GALACTIC_STRIKE.zooming = true;
+            var tween = game.add.tween(game.world.scale).to( {x: 0.5, y:0.5}, 350, Phaser.Easing.Quadratic.InOut, true);
+            tween.onComplete.add(function () {
 
-//                GALACTIC_STRIKE.player.character.flightMode();
+                game.camera.follow(GALACTIC_STRIKE.player.character,  Phaser.Camera.FOLLOW_TOPDOWN_TIGHT);
+                GALACTIC_STRIKE.room.map.zoomOut();
+                GALACTIC_STRIKE.zooming = false;
+
+            }, this);
+
+//          GALACTIC_STRIKE.player.character.flightMode();
         }
     }
 
@@ -323,12 +329,16 @@ function spacePhysicsTimer(){
 }
 
 function updateOnlineTimer() {
-    if(GALACTIC_STRIKE.player.character) GALACTIC_STRIKE.player.character.updateOnline();
+
+    if (GALACTIC_STRIKE.player.character) { GALACTIC_STRIKE.player.character.updateOnline(); }
     game.time.events.add(130*(Object.keys(GALACTIC_STRIKE.room.players).length), updateOnlineTimer, this);
+
 }
 
 
 function toRad(value){
-    return (value * Math.PI) / 180
+
+    return (value * Math.PI) / 180;
+
 }
 

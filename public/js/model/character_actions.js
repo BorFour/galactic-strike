@@ -8,20 +8,24 @@
  * Jumps from the planet the character is grounded to
  */
 Character.prototype.jump = function () {
-    if(this.planetTouched != null && this.jumpCooldown) {
+
+    if (this.planetTouched != null && this.jumpCooldown)
+    {
         this.jumpCooldown = false;
         var angle = Phaser.Math.angleBetween(this.x,this.y,this.planetTouched.x,this.planetTouched.y);
-        // add gravity force to the crate in the direction of planet center
         this.body.applyForce(-Math.cos(angle)*this.jumpForce,-Math.sin(angle)*this.jumpForce);
-        if(debug) console.log("jump from (" + this.planetTouched.x + "," + this.planetTouched.y + ")")
-        this.planetTouched = null
+        if(debug) console.log("jump from (" + this.planetTouched.x + "," + this.planetTouched.y + ")");
+        this.planetTouched = null;
 //      this.jumpSound.play();
-        game.time.events.add(560, function(){this.jumpCooldown = true}, this)
+        game.time.events.add(560, function(){ this.jumpCooldown = true; }, this);
     }
+
 }
 
 Character.prototype.attack0 = function () {
-    if(this.attackCooldown && this.alive){
+
+    if (this.attackCooldown && this.alive)
+    {
         this.attackSound.play();
         this.attackCooldown = false;
         this.cucumber = new Item(game, this.body.x + Math.sin(this.body.rotation)* 80, this.body.y - Math.cos(this.body.rotation)*80, items['spikeball']);
@@ -58,7 +62,8 @@ Character.prototype.attack0 = function () {
 }
 
 Character.prototype.attack1 = function () {
-    if(this.attackCooldown && this.alive){
+    if (this.attackCooldown && this.alive)
+    {
         this.attackSound.play();
         this.attackCooldown = false;
         this.cucumber2 = new Item(game, this.x + Math.cos(this.body.rotation)* 80*this.orientation, this.y + Math.sin(this.body.rotation)*80*this.orientation, items['spikeball']);

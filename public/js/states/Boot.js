@@ -3,10 +3,10 @@ GALACTIC_STRIKE.Boot = function (game) {
 };
 
 /**
-* First state of the game
-* @public
-* @property undefined
-*/
+ * First state of the game
+ * @public
+ * @property undefined
+ */
 
 GALACTIC_STRIKE.Boot.prototype = {
 
@@ -35,8 +35,8 @@ GALACTIC_STRIKE.Boot.prototype = {
     },
     preload: function () {
         //this.load.image('appsbude', 'images/appsbude-logo.jpg');
-         game.load.image('progressBar', '../assets/progressBar.png');
-},
+        game.load.image('progressBar', '../assets/progressBar.png');
+    },
     create: function () {
         this.state.start('Loader');
     }

@@ -1,18 +1,17 @@
-
 var game;
 
 /**
-* Function that initializes the Phaser.Game, adds the states and starts 'Boot'
-* @public
-* @property undefined
-*/
+ * Function that initializes the Phaser.Game, adds the states and starts 'Boot'
+ * @public
+ * @property undefined
+ */
 
 begin_game = function () {
 
     // Phaser game resolution
     var RESOLUTION = {
-        WIDTH : 1600,
-        HEIGHT : 900
+        WIDTH: 1600,
+        HEIGHT: 900
     }
 
     game = new Phaser.Game(RESOLUTION.WIDTH, RESOLUTION.HEIGHT, Phaser.AUTO, '');

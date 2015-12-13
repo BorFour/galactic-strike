@@ -63,11 +63,11 @@ var gameModes =
         },
         'isOverGame' : function (){
 
-                return true;
-         //  return this.scores.some(function(element, index, array){
-          //     return element >= this.winScore;
-          //   });
-
+//                return true;
+            for(var t in this.scores){
+                if(this.scores[t] >= this.winScore) return true;
+            }
+            return false;
         },
         'winScore' : 2,
         'showWinner' : function (winner) {

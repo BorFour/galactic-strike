@@ -331,7 +331,7 @@ function updateOnlineTimer() {
     if (GALACTIC_STRIKE.player.character) {
         GALACTIC_STRIKE.player.character.updateOnline();
     }
-    game.time.events.add(130 * (Object.keys(GALACTIC_STRIKE.room.players).length), updateOnlineTimer, this);
+    game.time.events.add(16 * (Object.keys(GALACTIC_STRIKE.room.players).length), updateOnlineTimer, this);
 
 }
 

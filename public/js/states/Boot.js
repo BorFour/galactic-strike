@@ -2,6 +2,12 @@ GALACTIC_STRIKE.Boot = function (game) {
 
 };
 
+/**
+* First state of the game
+* @public
+* @property undefined
+*/
+
 GALACTIC_STRIKE.Boot.prototype = {
 
     init: function () {

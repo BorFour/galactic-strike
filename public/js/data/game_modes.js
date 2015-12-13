@@ -9,7 +9,7 @@ var gameModes =
         'name' : 'deathmatch',
         'init' : function () {
 
-             this.scores = []
+             this.scores = [];
              for (var t in this.room.teams)
              {
                 this.scores[this.room.teams[t]] = 0;

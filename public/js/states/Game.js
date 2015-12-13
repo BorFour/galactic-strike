@@ -1,14 +1,23 @@
-//	100% of the browser window - see Boot.js for additional configuration
 
 var game;
 
+/**
+* Function that initializes the Phaser.Game, adds the states and starts 'Boot'
+* @public
+* @property undefined
+*/
+
 begin_game = function () {
 
-    var SAFE_ZONE_WIDTH = 1600;// * window.devicePixelRatio;
-    var SAFE_ZONE_HEIGHT = 900;// * window.devicePixelRatio;
-    game = new Phaser.Game(SAFE_ZONE_WIDTH, SAFE_ZONE_HEIGHT, Phaser.AUTO, '');
-    //	Add the States your game has.
+    // Phaser game resolution
+    var RESOLUTION = {
+        WIDTH : 1600,
+        HEIGHT : 900
+    }
 
+    game = new Phaser.Game(RESOLUTION.WIDTH, RESOLUTION.HEIGHT, Phaser.AUTO, '');
+
+    //	Add the states your game has.
     game.state.add('Boot', GALACTIC_STRIKE.Boot);
     game.state.add('Loader', GALACTIC_STRIKE.Loader);
     game.state.add('MainMenu', GALACTIC_STRIKE.MainMenu);

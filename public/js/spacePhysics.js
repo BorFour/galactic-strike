@@ -65,20 +65,19 @@ SpacePhysics.prototype.addDynamic = function (sprite){
  */
 
 SpacePhysics.prototype.update = function (){
-        // Para cada elemento dinámico
-		for(var i=0;i<this.dynamicGroup.length;i++){
+
+		for(var i=0; i < this.dynamicGroup.length; i++)
+        {
 			var c = this.dynamicGroup[i];
-            var atmosphere = []; // Planetas en cuya atmósfera se encuentra c
-			// Para cada planeta (generador de gravedad)
-            if (c.body.static) continue;
-			for(var j=0;j<this.planetGroup.length;j++){
-				var p = this.planetGroup[j];
-				// Distancia entre dos puntos
-				var distance = Phaser.Math.distance(c.x,c.y,p.x,p.y);
-				// Si la distancia es menor que el radio de acción del planeta
+            var atmosphere = [];
+
+            if (c.body.static) { continue; }
+			for (var j=0;j<this.planetGroup.length;j++)
+            {
+                var p = this.planetGroup[j];
 				x = c.x;
 				y = c.y;
-				if(distance<p.width/2+p.gravityRadius/2){
+				if(Phaser.Math.distance(c.x,c.y,p.x,p.y) <p.width/2+p.gravityRadius/2){
 					// calculating angle between the planet and the crate
 					var angle = Phaser.Math.angleBetween(c.x,c.y,p.x,p.y);
 					// add gravity force to the crate in the direction of planet center

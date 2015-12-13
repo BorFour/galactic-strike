@@ -18,7 +18,7 @@ clientSetupGame = function (){
 
         console.log('@Client received | beginMatch');
 
-        game.state.start('PlayGame');
+        game.state.start('Play');
         GALACTIC_STRIKE.charactersBuffer = {};
 
     });

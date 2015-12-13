@@ -42,13 +42,13 @@ var DEFINITION = {
     height : 800
 }
 
-GALACTIC_STRIKE.PlayGame = function(game){};
+GALACTIC_STRIKE.Play = function(game){};
 
 /**
  * Load all the assets (images and sound) for this game
  */
 
-GALACTIC_STRIKE.PlayGame.prototype = {
+GALACTIC_STRIKE.Play.prototype = {
 	preload: function(){
 
         //load_assets();

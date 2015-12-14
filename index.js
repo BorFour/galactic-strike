@@ -338,7 +338,7 @@ io.on('connection', function (socket) {
 
 
 var puerto = 8080;
-var ip = '192.168.1.35';
+var ip = '127.0.0.1';
 
 //http.listen(puerto, function(){
 //  console.log('listening on ' + ip + ':' + puerto);

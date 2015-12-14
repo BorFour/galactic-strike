@@ -13,13 +13,13 @@ var zz = [];
 
 play_songs = function () {
     GALACTIC_STRIKE.songs = [];
-    GALACTIC_STRIKE.songs.push(game.add.audio('guiles', 0.7, true));
-    GALACTIC_STRIKE.songs.push(game.add.audio('checker', 0.7, true));
-    GALACTIC_STRIKE.songs.push(game.add.audio('muteCity', 0.7, true));
-    GALACTIC_STRIKE.songs.push(game.add.audio('dreamLand', 0.7, true));
-    GALACTIC_STRIKE.songs.push(game.add.audio('witch', 0.7, true));
-    GALACTIC_STRIKE.songs.push(game.add.audio('pingasDreamLand', 0.7, true));
-    GALACTIC_STRIKE.readTeamAnthem = game.add.audio('sovietAnthem', 0.85, true);
+    GALACTIC_STRIKE.songs.push(game.add.audio('guiles', 0.45, true));
+    GALACTIC_STRIKE.songs.push(game.add.audio('checker', 0.45, true));
+    GALACTIC_STRIKE.songs.push(game.add.audio('muteCity', 0.45, true));
+    GALACTIC_STRIKE.songs.push(game.add.audio('dreamLand', 0.45, true));
+    //GALACTIC_STRIKE.songs.push(game.add.audio('witch', 0.45, true));
+    GALACTIC_STRIKE.songs.push(game.add.audio('pingasDreamLand', 0.45, true));
+    GALACTIC_STRIKE.readTeamAnthem = game.add.audio('sovietAnthem', 0.55, true);
     //    GALACTIC_STRIKE.songs.push(game.add.audio('dedede'));
     GALACTIC_STRIKE.currentSong = GALACTIC_STRIKE.songs[Math.floor(Math.random() * GALACTIC_STRIKE.songs.length)];
     GALACTIC_STRIKE.currentSong.play();
@@ -32,9 +32,23 @@ play_songs = function () {
  * Load all the assets (images and sound) for this game
  */
 
-// No sé muy bien dónde iría esto, pero de momento aquí
-
 load_assets = function () {
+
+    //MUSIC
+    ///////////////////////
+    game.load.audio('guiles', '../assets/sound/guiles_theme.mp3');
+    game.load.audio('checker', '../assets/sound/checker_knights.mp3');
+    game.load.audio('muteCity', '../assets/sound/mute_city.mp3');
+    game.load.audio('dreamLand', '../assets/sound/dream_land.mp3');
+    //game.load.audio('witch', '../assets/sound/witch_doctor.mp3');
+    game.load.audio('jump', ['../assets/jump.ogg', '../assets/jump.mp3']);
+    game.load.audio('pingas', '../assets/sound/pingas.mp3');
+    game.load.audio('pingasDreamLand', '../assets/sound/pingas_dreamland.mp3');
+    game.load.audio('sovietAnthem', '../assets/sound/soviet_anthem.mp3');
+    //    game.load.audio('dedede', '../assets/sound/king_dedede.mp3');
+    /*
+     * http://downloads.khinsider.com/game-soundtracks/album/super-smash-bros.-melee-original-sound-version
+     */
 
     //BACKGROUNDS
     ///////////////////////
@@ -74,7 +88,7 @@ load_assets = function () {
     game.load.image("sun", "../assets/planets/sun.png");
     game.load.image("planet_blue", "../assets/planets/planet_blue.png");
     game.load.image("planet_red", "../assets/planets/planet_red.png");
-    game.load.image("giantplanet", "../assets/planets/giantplanet.png");
+    //game.load.image("giantplanet", "../assets/planets/giantplanet.png");
     game.load.image("giant_moon", "../assets/planets/giantmoon.png");
 
     //BUTTONS
@@ -133,22 +147,8 @@ GALACTIC_STRIKE.Loader.prototype = {
         game.load.setPreloadSprite(progressBar);
 
         console.log("Preload Loader");
-        game.load.audio('guiles', '../assets/sound/guiles_theme.mp3');
-        game.load.audio('checker', '../assets/sound/checker_knights.mp3');
-        /*
-         * http://downloads.khinsider.com/game-soundtracks/album/super-smash-bros.-melee-original-sound-version
-         */
-        game.load.audio('muteCity', '../assets/sound/mute_city.mp3');
-        game.load.audio('dreamLand', '../assets/sound/dream_land.mp3');
-        game.load.audio('witch', '../assets/sound/witch_doctor.mp3');
-        game.load.audio('jump', ['../assets/jump.ogg', '../assets/jump.mp3']);
-        game.load.audio('pingas', '../assets/sound/pingas.mp3');
-        game.load.audio('pingasDreamLand', '../assets/sound/pingas_dreamland.mp3');
-        game.load.audio('sovietAnthem', '../assets/sound/soviet_anthem.mp3');
 
-        //    game.load.audio('dedede', '../assets/sound/king_dedede.mp3');
-
-        // Loads assets
+        // Loads images and music
         load_assets();
 
     },
@@ -163,18 +163,14 @@ GALACTIC_STRIKE.Loader.prototype = {
 
         server_connection();
 
-        /////////////////////
         // FONDO DE ESTRELLAS
         /////////////////////
-
-
-
         starfield = game.add.sprite(0, 0, 'starBackground');
         starfield.height = game.world.height;
         starfield.width = game.world.width;
 
         if (game.renderType === Phaser.WEBGL) {
-            max = 200;
+            max = 20;
         }
 
         var sprites = game.add.spriteBatch();
@@ -193,26 +189,28 @@ GALACTIC_STRIKE.Loader.prototype = {
 
             stars.push(star);
         }
-        /////////////////////
+
         // TWEEN GALACTIC STRIKE + MENU OPTIONS
         /////////////////////
-        var nameLabel = game.add.text(game.world.centerX, -50, 'GALACTIC STRIKE!', {
-            font: '70px Geo   ',
+        var nameLabel = game.add.text(game.world.centerX, game.world.height, 'G A L A C T I C   S T R I K E !', {
+            font: '120px Impact',
             fill: '#ffffff'
         });
         nameLabel.anchor.setTo(0.5, 0.5);
 
         game.add.tween(nameLabel).to({
-            y: 80
-        }, 1000).easing(Phaser.Easing.Bounce.Out).start();
+            y: game.world.height/3
+        }, 1500).easing(Phaser.Easing.Bounce.Out).start();
         //game.add.tween(nameLabel).to({angle: -5}, 500).to({angle: 5}, 300).loop().start();
+        game.add.tween(nameLabel).to({angle: 360}, 1500, Phaser.Easing.Linear.None, true, 0, true);
 
         // Explain how to start the game
-        var startLabel = game.add.text(game.world.centerX - 300, game.world.height - 80,
+        var startLabel = game.add.text(game.world.centerX, game.world.height - 100,
             'press SPACEBAR or touch/click anywhere to START', {
                 font: '25px Arial',
                 fill: '#ffffff'
             });
+        startLabel.anchor.set(0.5);
 
         var spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
         // When the 'upKey' is pressed, it will call the 'start' function once

@@ -1,38 +1,25 @@
 var game;
 
-var starfield;
-
-
-
-var planets;
-
-
-var planetCollisionGroup;
-
-var orb;
-
-var jumpForce = 150;
-
-
 var debug = true; // Para el debug que se muestra por la consola
 var gameDebug = true; // Para el debug que se muestra por pantalla
 var useGamepad = false; // true para usar el gamepad, false para usar el teclado (WASD)
 var randomPlanets = false;
 
+
+var starfield;
+var planets;
+var planetCollisionGroup;
+var orb;
+
+var jumpForce = 150;
+
 // a force reducer to let the simulation run smoothly
-
 var forceReducer = 0.015;
-
 // graphic object where to draw planet gravity area
 
 var gravityGraphics;
 
-////////////////////
-// CLIENT CONNECTION
-//
-
 var socket;
-
 
 var inputChanged = true;
 var charactersList;
@@ -44,17 +31,8 @@ var DEFINITION = {
 
 GALACTIC_STRIKE.Play = function (game) {};
 
-/**
- * Load all the assets (images and sound) for this game
- */
-
 GALACTIC_STRIKE.Play.prototype = {
-    preload: function () {
-
-        //load_assets();
-
-
-    },
+    preload: function () {},
     create: function () {
 
         if (!game.spacePhysics) {
@@ -72,57 +50,17 @@ GALACTIC_STRIKE.Play.prototype = {
         charactersList = {};
 
 
-        // adding graphic objects
-
+        // Adding graphic objects
         gravityGraphics = game.add.graphics(0, 0);
         gravityGraphics.lineStyle(2, 0xffffff, 0.5);
 
         //  Phaser will automatically pause if the browser tab the game is in loses focus. You can disable that here:
         this.stage.disableVisibilityChange = true;
 
-        // stage setup
-
-
-
-        /*
-        starfield = game.add.sprite(0, 0, 'spaceBackground');
-        starfield.x = 0;
-        starfield.y = 0;
-        starfield.height = game.world.height;
-        starfield.width = game.world.width;
-        */
-        //game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
-
-
-
-
-        //game.physics.box2d.friction = 5000;
-
-        //        var planet = new Star(680, 700, 400, 250, "planet", game);
-        //        var bigPlanet = new Star(1070, 850, 400, 250, "bigplanet", game);
-
-        /*COMENTADO DURANTE PRUEBAS STAGES.JSON
-        var giantPlanet = new Star(800, 900, 600, 750, "giantplanet");
-        planets.push(giantPlanet), game);
-        giantPlanet.body.setCircle(525);
-
-        console.log("Planets: " + planets)
-
-        */
         orb = game.add.sprite(600, 450, 'moon');
         orb.anchor.setTo(0.5);
         orb.pivot.x = 100;
 
-        //        var elementoPrueba = new Element(game, game.world.randomX, game.world.randomY, 'deathstar');
-        //        game.physics.box2d.enable(elementoPrueba);
-
-
-        // Mira cómo instancio a la poción
-        // la variable 'items' se encuentra en 'items.json', donde estarán definidos todos los objetos del juego
-
-        //        var objetoPrueba = new Item(game, game.world.randomX, game.world.randomY, items['potion']);
-        //        game.physics.box2d.enable(objetoPrueba);
-        //        game.spacePhysics.addDynamic(objetoPrueba);
 
         GALACTIC_STRIKE.room.map = new Stage(game, stages['map2']);
         //        game.physics.box2d.enable(objetoPrueba);
@@ -181,21 +119,6 @@ GALACTIC_STRIKE.Play.prototype = {
 
         GALACTIC_STRIKE.player.movePlayer();
 
-        //        game.camera.setBoundsToWorld();
-        //        if(GALACTIC_STRIKE.room.updateCounter >= (GALACTIC_STRIKE.room.players.length))
-        //        {
-        //        if(GALACTIC_STRIKE.player.character) GALACTIC_STRIKE.player.character.updateOnline();
-        //        GALACTIC_STRIKE.room.updateCounter = 0;
-        //        }
-        //        else
-        //        {
-        //            GALACTIC_STRIKE.room.updateCounter++;
-        //        }
-        //        game.spacePhysics.update();
-        //        if(!GALACTIC_STRIKE.room.gameOver) GALACTIC_STRIKE.room.gameOver = GALACTIC_STRIKE.room.gameMode.update();
-        //        orb.rotation += 0.05;
-        //        if(GALACTIC_STRIKE.endGame) this.quitGame();
-
     },
     render: function () {
 
@@ -209,11 +132,11 @@ GALACTIC_STRIKE.Play.prototype = {
                 game.debug.text('My ID: ' + GALACTIC_STRIKE.player.id, 32, 160);
                 game.debug.text('Zoom (toggle with \'Z\') :' + GALACTIC_STRIKE.zoomed, 32, 192);
                 game.debug.text('Mute (toggle with \'M\') :' + game.sound.mute, 32, 224);
-                game.debug.text("Controls in atmosphere : move with : [A D]" + "\t", 32, 256);
-                game.debug.text("Jump with : [Spacebar]", 32, 288);
-                game.debug.text("Controls in space : rotate with : [A D]" + "\t", 32, 320);
-                game.debug.text("Thrust with [SPACEBAR W] and reverse with [S]", 32, 352);
-                game.debug.text("Attack with Arrow keys!!", 32, 384);
+                //  game.debug.text("Controls in atmosphere : move with : [A D]" + "\t", 32, 256);
+                //  game.debug.text("Jump with : [Spacebar]", 32, 288);
+                //  game.debug.text("Controls in space : rotate with : [A D]" + "\t", 32, 320);
+                //  game.debug.text("Thrust with [SPACEBAR W] and reverse with [S]", 32, 352);
+                //  game.debug.text("Attack with Arrow keys!!", 32, 384);
                 //                game.debug.spriteCoords(GALACTIC_STRIKE.player.character, 32, 256,'rgba(0,255,255,1)');
                 //                game.debug.bodyInfo(GALACTIC_STRIKE.player.character, 32, 308,'rgba(0,255,255,1)');
                 //                game.debug.text('Body angle: ' + GALACTIC_STRIKE.player.character.body.angle, 32, 192);

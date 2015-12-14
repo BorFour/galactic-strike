@@ -228,7 +228,7 @@ clientSetupGame = function () {
             // When the character's health drops below zero, the character dies.
             if (GALACTIC_STRIKE.room.characters[input.target].health <= 0) {
 
-                if (input.target === GALACTIC_STRIKE.player.id) {
+                if (input.target === GALACTIC_STRIKE.player.id && !GALACTIC_STRIKE.room.gameOver) {
                     console.log("Pingas");
                     game.camera.unfollow();
                     GALACTIC_STRIKE.zoomed = true;

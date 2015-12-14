@@ -220,7 +220,7 @@ clientSetupGame = function () {
 
         console.log('@Client received | hit');
 
-        if (GALACTIC_STRIKE.room.characters[input.target]) {
+        if (GALACTIC_STRIKE.room.characters[input.target] && GALACTIC_STRIKE.room.characters[input.target].health) {
 
             // The hit's damage is applied to the character's health
             GALACTIC_STRIKE.room.characters[input.target].health -= input.damage;

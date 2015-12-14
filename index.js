@@ -96,6 +96,7 @@ io.on('connection', function (socket) {
                 team : -1
             };
             room.host = input.id;
+            room.currentStage = 0;
             socket.emit('roomCreated', output);
 
         }
@@ -110,6 +111,7 @@ io.on('connection', function (socket) {
         output.id = input.id;
         output.name = input.name;
         output.host = room.host;
+        output.stage = room.currentStage;
 
         console.log('@Server <-      \t| joinRoom');
 
@@ -164,6 +166,33 @@ io.on('connection', function (socket) {
         {
             io.to('Room1').emit('changeTeam', output);
             console.log('@Server ->      \t| changeTeam');
+        }
+
+
+    });
+
+    socket.on('changeStage', function (input) {
+
+
+        var output = {};
+        output.id = input.id;
+        output.stage = input.stage;
+
+        console.log('@Server <-      \t| changeStage');
+
+        if(input.id !== room.host)
+        {
+
+        }
+        else if  (room.state !== 'lobby')
+        {
+
+        }
+        else
+        {
+            room.currentStage = input.stage;
+            io.to('Room1').emit('changeStage', output);
+            console.log('@Server ->      \t| changeStage');
         }
 
 
@@ -239,6 +268,7 @@ io.on('connection', function (socket) {
 
         var output = {};
         output.id = input.id;
+        output.stage = input.stage;
 
         console.log('@Server <-      \t| beginMatch');
 
@@ -337,11 +367,11 @@ io.on('connection', function (socket) {
     });
 
 
-var puerto = 3000;
-var ip = '150.244.67.21';
+var puerto = 8080;
+//var ip = '150.244.67.21';
 
 http.listen(puerto, function(){
-  console.log('listening on ' + ip + ':' + puerto);
+  console.log('listening on ' + puerto);
 });
 
 // Cloud 9

@@ -12,7 +12,7 @@ GALACTIC_STRIKE.Lobby = function () {
 GALACTIC_STRIKE.Lobby.prototype = {
     preload: function () {
         var buttonBegin;
-        var buttonDisband;
+        var textStage;
     },
     create: function () {
 
@@ -26,11 +26,17 @@ GALACTIC_STRIKE.Lobby.prototype = {
         bmpText = game.add.text(game.world.centerX, game.world.centerY, "Esto es el lobby", style);
         bmpText.anchor.set(0.5);
 
+        textStage = game.add.text(game.world.centerX, game.world.centerY + 100, Object.keys(stages)[(GALACTIC_STRIKE.room.currentStage ? GALACTIC_STRIKE.room.currentStage : 0)], style);
+        textStage.anchor.set(0.5);
+
         // Only the lobby's host can start the game
 
         if (GALACTIC_STRIKE.player.id === GALACTIC_STRIKE.room.host) {
             buttonBegin = game.add.button(game.world.centerX, game.world.centerY + 250, 'buttonEnter', this.beginMatch, this, 0, 0, 0, 0);
             buttonBegin.anchor.set(0.5);
+            GALACTIC_STRIKE.room.currentStage = 0;
+            textStage.inputEnabled = true;
+            textStage.events.onInputDown.add(this.nextStage, this);
         }
 
         // Everytime a user clicks the red button, the client requests to join the red team
@@ -114,9 +120,21 @@ GALACTIC_STRIKE.Lobby.prototype = {
             /*&& GALACTIC_STRIKE.room.teams[0].players.length > 0
             && GALACTIC_STRIKE.room.teams[1].players.length > 0*/
         ) socket.emit('beginMatch', {
-            id: GALACTIC_STRIKE.player.id
+            id: GALACTIC_STRIKE.player.id,
+            stage: Object.keys(stages)[GALACTIC_STRIKE.room.currentStage]
         });
         else console.log(GALACTIC_STRIKE.room.unasigned);
+    },
+    nextStage: function () {
+
+
+        GALACTIC_STRIKE.room.currentStage = (GALACTIC_STRIKE.room.currentStage + 1) % (Object.keys(stages).length);
+        textStage.text = Object.keys(stages)[GALACTIC_STRIKE.room.currentStage];
+        socket.emit('changeStage', {
+            id: GALACTIC_STRIKE.player.id,
+            stage: GALACTIC_STRIKE.room.currentStage
+        });
+
     },
     render: function () {
 

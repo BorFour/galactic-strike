@@ -18,6 +18,8 @@ clientSetupRoom = function () {
     });
 
 
+
+
     socket.on('joinRoom', function (input) {
 
         var style = {font: "20px Arial", fill: "#ffffff", align: "center"};
@@ -43,6 +45,7 @@ clientSetupRoom = function () {
                 }
             }
 
+            GALACTIC_STRIKE.room.currentStage = input.stage;
             game.state.start('Lobby');
 
         }
@@ -57,9 +60,20 @@ clientSetupRoom = function () {
     socket.on('changeTeam', function (input) {
 
 //        if(GALACTIC_STRIKE.player.id === input.id) return;
-
+        console.log('@Client received | changeTeam');
         GALACTIC_STRIKE.room.players[input.id].joinTeam(GALACTIC_STRIKE.room.teams[input.team]);
         console.log(GALACTIC_STRIKE.room.teams[input.team]);
+
+    });
+
+   socket.on('changeStage', function (input) {
+
+       if(GALACTIC_STRIKE.player.id === input.id) return;
+
+        console.log('@Client received | changeStage');
+        console.log(input.stage)
+        GALACTIC_STRIKE.room.currentStage = input.stage;
+        textStage.text = Object.keys(stages)[GALACTIC_STRIKE.room.currentStage];
 
     });
 

@@ -61,8 +61,8 @@ GALACTIC_STRIKE.Play.prototype = {
         orb.anchor.setTo(0.5);
         orb.pivot.x = 100;
 
-
-        GALACTIC_STRIKE.room.map = new Stage(game, stages['map2']);
+        console.log(GALACTIC_STRIKE.room.currentStageName);
+        GALACTIC_STRIKE.room.map = new Stage(game, stages[GALACTIC_STRIKE.room.currentStageName]);
         //        game.physics.box2d.enable(objetoPrueba);
         //        game.spacePhysics.addDynamic(objetoPrueba);
 

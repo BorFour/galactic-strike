@@ -19,6 +19,8 @@ clientSetupGame = function () {
 
         game.state.start('Play');
         GALACTIC_STRIKE.charactersBuffer = {};
+        console.log(input.stage)
+        GALACTIC_STRIKE.room.currentStageName = input.stage;
 
     });
 

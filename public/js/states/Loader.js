@@ -171,7 +171,7 @@ GALACTIC_STRIKE.Loader.prototype = {
         starfield.width = game.world.width;
 
         if (game.renderType === Phaser.WEBGL) {
-            max = 20;
+            max = 200;
         }
 
         var sprites = game.add.spriteBatch();
@@ -193,18 +193,25 @@ GALACTIC_STRIKE.Loader.prototype = {
 
         // TWEEN GALACTIC STRIKE + MENU OPTIONS
         /////////////////////
-        var nameLabel = game.add.text(game.world.centerX, game.world.height, 'G A L A C T I C   S T R I K E !', {
+        var nameLabel = [];
+        nameLabel.push(game.add.text(game.world.centerX-300, game.world.height, 'G A L A C T I C  ', {
             font: '120px Impact',
             fill: '#ffffff'
-        });
-        nameLabel.anchor.setTo(0.5, 0.5);
+        }));
+        nameLabel.push(game.add.text(game.world.centerX+300, game.world.height, ' S T R I K E !', {
+            font: '120px Impact',
+            fill: '#ffffff'
+        }));
 
-        game.add.tween(nameLabel).to({
-            y: game.world.height/3
-        }, 1500).easing(Phaser.Easing.Bounce.Out).start();
-        //game.add.tween(nameLabel).to({angle: -5}, 500).to({angle: 5}, 300).loop().start();
-        game.add.tween(nameLabel).to({angle: 360}, 1500, Phaser.Easing.Linear.None, true, 0, true);
-
+        for (var i in nameLabel)
+        {
+            nameLabel[i].anchor.setTo(0.5, 0.5);
+            game.add.tween(nameLabel[i]).to({
+                y: game.world.height/3
+            }, 3000).easing(Phaser.Easing.Bounce.Out).start();
+            //game.add.tween(nameLabel).to({angle: -5}, 500).to({angle: 5}, 300).loop().start();
+            game.add.tween(nameLabel[i]).to({angle: 360}, 1300, Phaser.Easing.Linear.None, true, 0, true);
+        }
         // Explain how to start the game
         var startLabel = game.add.text(game.world.centerX, game.world.height - 100,
             'press SPACEBAR or touch/click anywhere to START', {

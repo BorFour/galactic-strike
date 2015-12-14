@@ -28,6 +28,7 @@ GALACTIC_STRIKE.MainMenu.prototype = {
         var controlsText =
             'Controls in atmosphere : move with : [A D]\n' +
             'Controls in space : rotate with : [A D]\n' +
+            'Controls while dead : move camera with : [W A S D]\n' +
             'Jump with : [Spacebar] (Hold to use jetpack)\n' +
             'Thrust with : [SPACEBAR / W] and reverse with [S]\n' +
             'Attack with : [Arrow Keys]\n' +

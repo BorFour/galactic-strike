@@ -1,4 +1,3 @@
-
 /**
  * Client handlers for the events that may happen during a match.
  * @private
@@ -32,8 +31,7 @@ clientSetupGame = function () {
 
         console.log('@Client received | userJoinedGame');
 
-        if (GALACTIC_STRIKE.createGameReady)
-        {
+        if (GALACTIC_STRIKE.createGameReady) {
             // Uses the red character asset if the player is the red team, blue in other case.
             var asset = (GALACTIC_STRIKE.room.players[input.id].team === GALACTIC_STRIKE.room.teams[0] ? 'playerRed' : 'playerBlue');
             // Creates the character according to the information received in input.
@@ -53,9 +51,7 @@ clientSetupGame = function () {
                 logMsg += GALACTIC_STRIKE.room.characters[c] + " ";
             }
             console.log("Clients: " + logMsg);
-        }
-        else
-        {
+        } else {
             GALACTIC_STRIKE.charactersBuffer[input.id] = input;
         }
 
@@ -72,8 +68,7 @@ clientSetupGame = function () {
         console.log('@Client received | finishRound');
 
         // For every character in the room, destroy him.
-        for (var c in GALACTIC_STRIKE.room.characters)
-        {
+        for (var c in GALACTIC_STRIKE.room.characters) {
             if (GALACTIC_STRIKE.room.characters[c]) {
                 GALACTIC_STRIKE.room.characters[c].simpleDie();
             }
@@ -108,8 +103,7 @@ clientSetupGame = function () {
     socket.on('userLeftGame', function (input) {
 
         console.log('@Client received | userLeftGame');
-        if (GALACTIC_STRIKE.room.characters[input.id] && GALACTIC_STRIKE.room.characters[input.id].alive)
-        {
+        if (GALACTIC_STRIKE.room.characters[input.id] && GALACTIC_STRIKE.room.characters[input.id].alive) {
             GALACTIC_STRIKE.room.characters[input.id].die();
             // The game mode state might change after a user leaves
             GALACTIC_STRIKE.room.gameMode.update();
@@ -128,8 +122,7 @@ clientSetupGame = function () {
 
         console.log('@Client received | respawn');
 
-        if (GALACTIC_STRIKE.createGameReady)
-        {
+        if (GALACTIC_STRIKE.createGameReady) {
             // Uses the red character asset if the player is the red team, blue in other case.
             var asset = (GALACTIC_STRIKE.room.players[input.id].team === GALACTIC_STRIKE.room.teams[0] ? 'playerRed' : 'playerBlue');
             // Creates the character according to the information received in input.
@@ -137,8 +130,7 @@ clientSetupGame = function () {
             // Assigns the character to its player
             GALACTIC_STRIKE.room.players[input.id].character = GALACTIC_STRIKE.room.characters[input.id];
 
-            if (input.id === GALACTIC_STRIKE.player.id)
-            {
+            if (input.id === GALACTIC_STRIKE.player.id) {
                 GALACTIC_STRIKE.player.characterSetup();
                 game.time.events.add(2000, function () {
                     GALACTIC_STRIKE.room.roundFinished = false;
@@ -147,14 +139,11 @@ clientSetupGame = function () {
 
             // Logs all the characters created at this moment.
             var logMsg = "";
-            for (var c in GALACTIC_STRIKE.room.characters)
-            {
+            for (var c in GALACTIC_STRIKE.room.characters) {
                 logMsg += GALACTIC_STRIKE.room.characters[c] + " ";
             }
             console.log("Clients: " + logMsg);
-        }
-        else
-        {
+        } else {
             // This should never happen
             GALACTIC_STRIKE.charactersBuffer[input.id] = input;
         }
@@ -182,31 +171,21 @@ clientSetupGame = function () {
             GALACTIC_STRIKE.room.characters[input.id].body.angularVelocity = input.angularVelocity;
             GALACTIC_STRIKE.room.characters[input.id].orientation = input.orientation;
             GALACTIC_STRIKE.room.characters[input.id].jumpAnimation = input.jumpAnimation;
-        }
-        else {
+        } else {
             // The character hasn't been created yet
             return;
         }
 
-        if (GALACTIC_STRIKE.room.characters[input.id].jumpAnimation)
-        {
-            if (GALACTIC_STRIKE.room.characters[input.id].orientation === GALACTIC_STRIKE.room.characters[input.id].LEFT)
-            {
+        if (GALACTIC_STRIKE.room.characters[input.id].jumpAnimation) {
+            if (GALACTIC_STRIKE.room.characters[input.id].orientation === GALACTIC_STRIKE.room.characters[input.id].LEFT) {
                 GALACTIC_STRIKE.room.characters[input.id].animations.play('jumpL');
-            }
-            else
-            {
+            } else {
                 GALACTIC_STRIKE.room.characters[input.id].animations.play('jumpR');
             }
-        }
-        else
-        {
-            if (GALACTIC_STRIKE.room.characters[input.id].orientation === GALACTIC_STRIKE.room.characters[input.id].LEFT)
-            {
+        } else {
+            if (GALACTIC_STRIKE.room.characters[input.id].orientation === GALACTIC_STRIKE.room.characters[input.id].LEFT) {
                 GALACTIC_STRIKE.room.characters[input.id].animations.play('left');
-            }
-            else
-            {
+            } else {
                 GALACTIC_STRIKE.room.characters[input.id].animations.play('right');
             }
         }
@@ -247,13 +226,29 @@ clientSetupGame = function () {
             GALACTIC_STRIKE.room.characters[input.target].health -= input.damage;
 
             // When the character's health drops below zero, the character dies.
-            if (GALACTIC_STRIKE.room.characters[input.target].health <= 0)
-            {
+            if (GALACTIC_STRIKE.room.characters[input.target].health <= 0) {
+
+                if (input.target === GALACTIC_STRIKE.player.id) {
+                    console.log("Pingas");
+                    game.camera.unfollow();
+                    GALACTIC_STRIKE.zoomed = true;
+                    GALACTIC_STRIKE.zooming = true;
+                    var tween = game.add.tween(game.world.scale).to({
+                        x: 0.5,
+                        y: 0.5
+                    }, 350, Phaser.Easing.Linear.None, true);
+                    tween.onComplete.add( function () {
+
+                        GALACTIC_STRIKE.room.map.zoomOut();
+                        GALACTIC_STRIKE.zooming = false;
+
+                    });
+                    tween.start();
+                }
+
                 GALACTIC_STRIKE.room.characters[input.target].die();
                 GALACTIC_STRIKE.room.gameMode.update();
-            }
-            else
-            {
+            } else {
                 // This character is damage immune for a short period of time
                 GALACTIC_STRIKE.room.characters[input.target].hitImmune = true;
                 game.time.events.add(GALACTIC_STRIKE.room.characters[input.target].hitImmuneTime, function () {

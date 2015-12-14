@@ -174,6 +174,7 @@ GALACTIC_STRIKE.Play.prototype = {
             }
             console.log("Clients: " + logMsg);
         }
+        GALACTIC_STRIKE.zoomed = false;
 
     },
     update: function () {
@@ -287,7 +288,7 @@ function spacePhysicsTimer() {
 
     game.spacePhysics.update();
 
-    if (GALACTIC_STRIKE.player.character && !GALACTIC_STRIKE.room.gameOver) {
+    if (GALACTIC_STRIKE.player.character && GALACTIC_STRIKE.player.character.alive && !GALACTIC_STRIKE.room.gameOver) {
         if (GALACTIC_STRIKE.zoomed && GALACTIC_STRIKE.player.character.inAtmosphere()) {
             //          game.camera.follow(null);
             GALACTIC_STRIKE.zoomed = false;
@@ -301,6 +302,7 @@ function spacePhysicsTimer() {
                 GALACTIC_STRIKE.room.map.zoomIn();
                 GALACTIC_STRIKE.zooming = false;
             }, this);
+            tween.start();
 
         } else if (!GALACTIC_STRIKE.zoomed && !GALACTIC_STRIKE.player.character.inAtmosphere()) {
             //          game.camera.follow(null);
@@ -317,6 +319,7 @@ function spacePhysicsTimer() {
                 GALACTIC_STRIKE.zooming = false;
 
             }, this);
+            tween.start();
 
             //          GALACTIC_STRIKE.player.character.flightMode();
         }

@@ -183,26 +183,6 @@ Character.prototype.flightMode = function () {
 
 }
 
-Character.prototype.die = function () {
-
-    if (!this.alive) return;
-
-    this.alive = false;
-    emitter = game.add.emitter(0, 0, 100);
-    emitter.makeParticles('pokeball');
-    emitter.x = this.x;
-    emitter.y = this.y;
-    emitter.start(true, 4000, null, 10);
-    game.time.events.add(2000, function () {
-        if (emitter) emitter.destroy();
-    }, this);
-    this.wheels[0].destroy();
-    this.wheels[1].destroy();
-    this.body.destroy();
-    this.kill();
-    console.log(game.spacePhysics);
-}
-
 Character.prototype.setGrounded = function () {
     if (this.groundedTimer) {
         game.time.events.remove(this.groundedTimer);

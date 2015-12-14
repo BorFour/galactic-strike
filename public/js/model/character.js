@@ -136,6 +136,8 @@ function Character(x, y, angle, game, player, asset) {
     this.addChild(text);
     text.anchor.set(0.5);
 
+    this.dieSound = game.add.audio('dieSound', 0.63, true);
+
 
 };
 
@@ -152,6 +154,7 @@ Character.prototype.die = function () {
     if (!this.alive) return;
 
     this.alive = false;
+    this.dieSound.play();
 //    var emitter = game.add.emitter(0, 0, 100);
 //    emitter.makeParticles('pokeball');
 //    emitter.x = this.x;

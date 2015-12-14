@@ -43,6 +43,7 @@ load_assets = function () {
     //game.load.audio('witch', '../assets/sound/witch_doctor.mp3');
     game.load.audio('jump', ['../assets/jump.ogg', '../assets/jump.mp3']);
     game.load.audio('pingas', '../assets/sound/pingas.mp3');
+    game.load.audio('dieSound', '../assets/sound/pingas_death.mp3');
     game.load.audio('pingasDreamLand', '../assets/sound/pingas_dreamland.mp3');
     game.load.audio('sovietAnthem', '../assets/sound/soviet_anthem.mp3');
     //    game.load.audio('dedede', '../assets/sound/king_dedede.mp3');

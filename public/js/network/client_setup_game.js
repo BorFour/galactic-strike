@@ -247,6 +247,7 @@ clientSetupGame = function () {
                 }
 
                 GALACTIC_STRIKE.room.characters[input.target].die();
+                delete GALACTIC_STRIKE.room.characters[input.target];
                 GALACTIC_STRIKE.room.gameMode.update();
             } else {
                 // This character is damage immune for a short period of time

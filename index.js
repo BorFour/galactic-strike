@@ -337,20 +337,20 @@ io.on('connection', function (socket) {
     });
 
 
-var puerto = 8080;
-var ip = '127.0.0.1';
+var puerto = 3000;
+var ip = '150.244.67.21';
 
-//http.listen(puerto, function(){
-//  console.log('listening on ' + ip + ':' + puerto);
-//});
+http.listen(puerto, function(){
+  console.log('listening on ' + ip + ':' + puerto);
+});
 
 // Cloud 9
 /*
 https://galacticstrikesocketio-borfour-1.c9users.io/
 */
 
-http.listen(puerto, ip, function(){
-  console.log('listening on ' + ip + ':' + puerto);
-});
+//http.listen(puerto, ip, function(){
+//  console.log('listening on ' + ip + ':' + puerto);
+//});
 
 

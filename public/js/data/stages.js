@@ -1,35 +1,6 @@
 var stages =
 {
     'map1' : {
-        width : 2400,
-        height : 2400,
-        backgroundImage : 'fondo_estrellas',
-        planets : [
-            {
-                asset : 'bigplanet',
-                x : 2000,
-                y : 2000,
-                gravity : 700,
-                gravityForce : 550
-            },
-            {
-                asset : 'bigplanet',
-                x : 400,
-                y : 400,
-                gravity : 700,
-                gravityForce : 550
-            },
-            {
-                asset : 'sun',
-                x : 1200,
-                y : 1200,
-                gravity : 1500,
-                gravityForce : 250,
-                collisionRadius : 164
-            }
-        ]
-    },
-    'map2' : {
         width : 4400,
         height : 4400,
         backgroundImage : 'background_map2',
@@ -68,7 +39,7 @@ var stages =
             }*/
         ]
     },
-    'map3' : {
+    'map2' : {
         width : 6000,
         height : 2000,
         backgroundImage : 'fondo_estrellas',
@@ -127,6 +98,35 @@ var stages =
                 y : 1000,
                 gravityRadius : 1000,
                 gravityForce : 1200,
+                collisionRadius : 164
+            }
+        ]
+    },
+    'map3' : {
+        width : 2400,
+        height : 2400,
+        backgroundImage : 'fondo_estrellas',
+        planets : [
+            {
+                asset : 'bigplanet',
+                x : 2000,
+                y : 2000,
+                gravity : 700,
+                gravityForce : 550
+            },
+            {
+                asset : 'bigplanet',
+                x : 400,
+                y : 400,
+                gravity : 700,
+                gravityForce : 550
+            },
+            {
+                asset : 'sun',
+                x : 1200,
+                y : 1200,
+                gravity : 1500,
+                gravityForce : 250,
                 collisionRadius : 164
             }
         ]

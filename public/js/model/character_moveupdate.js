@@ -33,8 +33,8 @@ Character.prototype.updateOnline = function () {
 
 Character.prototype.moveGrounded = function (direction) {
 
-    var moveForce1 = 250;
     this.motorEnabled = true;
+    this.body.linearDamping = 0.3;
 
     this.body.angularDamping = 0.15;
     switch (direction) {
@@ -78,6 +78,7 @@ Character.prototype.moveGrounded = function (direction) {
 
 Character.prototype.moveInOrbit = function (direction) {
 
+    this.body.linearDamping = 0.3;
     this.body.angularDamping = 0.15;
     switch (direction) {
         case 'left':
@@ -91,7 +92,7 @@ Character.prototype.moveInOrbit = function (direction) {
             this.orientation = this.RIGHT;
             break;
         case 'jetpack':
-            this.body.thrust(700);
+            this.body.thrust(970);
             if (this.orientation === this.LEFT) this.animations.play('jumpL');
             if (this.orientation === this.RIGHT) this.animations.play('jumpR');
             this.jumpAnimation = true;
@@ -115,24 +116,28 @@ Character.prototype.moveInOrbit = function (direction) {
 
 Character.prototype.moveSpace = function (direction) {
 
+
     switch (direction) {
         case 'left':
-            this.body.rotateLeft(100);
+            this.body.rotateLeft(150);
             this.animations.play('left');
             this.orientation = this.LEFT;
             this.body.angularDamping = 0.15;
+            this.body.linearDamping = 0.3;
             break;
         case 'right':
-            this.body.rotateRight(100);
+            this.body.rotateRight(150);
             this.animations.play('right');
             this.orientation = this.RIGHT;
             this.body.angularDamping = 0.15;
+            this.body.linearDamping = 0.3;
             break;
         case 'up':
             this.body.thrust(250);
             if (this.orientation === this.LEFT) this.animations.play('jumpL');
             if (this.orientation === this.RIGHT) this.animations.play('jumpR');
             this.body.angularDamping = 10;
+            this.body.linearDamping = 0.3;
             this.jumpAnimation = true;
             break;
         case 'down':
@@ -140,6 +145,7 @@ Character.prototype.moveSpace = function (direction) {
             if (this.orientation === this.LEFT) this.animations.play('jumpL');
             if (this.orientation === this.RIGHT) this.animations.play('jumpR');
             this.body.angularDamping = 10;
+            this.body.linearDamping = 0.73;
             this.jumpAnimation = true;
             break;
         case 'rotateL':
@@ -151,7 +157,8 @@ Character.prototype.moveSpace = function (direction) {
         case 'still':
             if (this.orientation === this.LEFT) this.animations.play('left');
             if (this.orientation === this.RIGHT) this.animations.play('right');
-            this.body.angularDamping = 0.15;
+            this.body.angularDamping = 0.35;
+            this.body.linearDamping = 0.73;
             this.jumpAnimation = false;
             //            this.animations.play('left');
             break;

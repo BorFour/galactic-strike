@@ -20,6 +20,7 @@ var forceReducer = 0.015;
 var gravityGraphics;
 
 var socket;
+var text;
 
 var inputChanged = true;
 var charactersList;
@@ -113,6 +114,22 @@ GALACTIC_STRIKE.Play.prototype = {
             console.log("Clients: " + logMsg);
         }
         GALACTIC_STRIKE.zoomed = false;
+
+//        this.hud = new HUD(game);
+//           var style = {
+//            font: "bold 32px Arial"
+//        };
+
+            text = game.add.text(game.world.centerX, 250, '  dynamic shadows  ');
+            text.anchor.set(0.5);
+            text.align = 'center';
+
+            text.font = 'Arial Black';
+            text.fontSize = 70;
+            text.fontWeight = 'bold';
+            text.fill = '#ec008c';
+
+            text.setShadow(0, 0, 'rgba(0, 0, 0, 0.5)', 0);
 
     },
     update: function () {

@@ -111,8 +111,8 @@ var stages =
                 asset : 'giantplanet',
                 x : 1500,
                 y : 1500,
-                gravityRadius : 1125,
-                gravityForce : 750,
+                gravityRadius : 1114,
+                gravityForce : 600,
                 collisionRadius : 532
             },
             {

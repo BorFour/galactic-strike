@@ -115,26 +115,13 @@ GALACTIC_STRIKE.Play.prototype = {
         }
         GALACTIC_STRIKE.zoomed = false;
 
-//        this.hud = new HUD(game);
-//           var style = {
-//            font: "bold 32px Arial"
-//        };
-
-            text = game.add.text(game.world.centerX, 250, '  dynamic shadows  ');
-            text.anchor.set(0.5);
-            text.align = 'center';
-
-            text.font = 'Arial Black';
-            text.fontSize = 70;
-            text.fontWeight = 'bold';
-            text.fill = '#ec008c';
-
-            text.setShadow(0, 0, 'rgba(0, 0, 0, 0.5)', 0);
+        GALACTIC_STRIKE.hud = new HUD(game);
 
     },
     update: function () {
 
         GALACTIC_STRIKE.player.movePlayer();
+        GALACTIC_STRIKE.hud.updateText();
 
     },
     render: function () {
@@ -180,7 +167,7 @@ GALACTIC_STRIKE.Play.prototype = {
                         GALACTIC_STRIKE.room.gameMode.scores[GALACTIC_STRIKE.room.teams[1]], 640, i * 32);
         i++;
 
-        game.debug.text("Events : " + game.time.events.length, 640, i * 32);
+//        game.debug.text("Events : " + game.time.events.length, 640, i * 32);
 
 
     },
@@ -243,6 +230,7 @@ function spacePhysicsTimer() {
             GALACTIC_STRIKE.zooming = true;
             GALACTIC_STRIKE.room.map.zoomIn();
             game.world.scale.set(1);
+            GALACTIC_STRIKE.hud.scaleSet(1);
 
 //            game.camera.focusOn(GALACTIC_STRIKE.player.character);
 //            var tween = game.add.tween(game.world.scale).to({
@@ -269,6 +257,7 @@ function spacePhysicsTimer() {
             GALACTIC_STRIKE.zooming = true;
             GALACTIC_STRIKE.room.map.zoomOut();
             game.world.scale.set(0.5);
+            GALACTIC_STRIKE.hud.scaleSet(2);
 ////            game.camera.follow(null);
 ////            game.camera.target = null
 //            GALACTIC_STRIKE.zoomed = true;

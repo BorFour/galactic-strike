@@ -46,6 +46,12 @@ GALACTIC_STRIKE.MainMenu.prototype = {
             fill: '#ffffff'
         });
 
+        var textBoxSupport = game.add.text(game.world.centerX,700 ,"ONLY SUPPORTED IN GOOGLE CHROME", {
+            font: '55px Arial',
+            fill: '#ffffff'
+        });
+        textBoxSupport.anchor.set(0.5);
+
     },
     createRoom: function () {
 

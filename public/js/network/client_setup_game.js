@@ -179,7 +179,7 @@ clientSetupGame = function () {
         }
 
         if (input.attack) {
-            console.log("Attack id: " + input.attack_id);
+            console.log("Attack id: " + input.attack.id);
             GALACTIC_STRIKE.room.characters[input.id].attacks(input.attack.id, input.attack.space);
         }
 
@@ -237,23 +237,14 @@ clientSetupGame = function () {
             // When the character's health drops below zero, the character dies.
             if (GALACTIC_STRIKE.room.characters[input.target].health <= 0) {
 
-                if (input.target === GALACTIC_STRIKE.player.id && !GALACTIC_STRIKE.room.gameOver) {
-                    console.log("Pingas");
-                    game.camera.unfollow();
-                    GALACTIC_STRIKE.zoomed = true;
-                    GALACTIC_STRIKE.zooming = true;
-                    var tween = game.add.tween(game.world.scale).to({
-                        x: 0.5,
-                        y: 0.5
-                    }, 350, Phaser.Easing.Linear.None, true);
-                    tween.onComplete.add( function () {
+               if (GALACTIC_STRIKE.zoomed) {
 
-                        GALACTIC_STRIKE.room.map.zoomOut();
-                        GALACTIC_STRIKE.zooming = false;
-
-                    });
-                    tween.start();
-                }
+                GALACTIC_STRIKE.zoomed = false;
+                GALACTIC_STRIKE.zooming = true;
+                GALACTIC_STRIKE.room.map.zoomIn();
+                game.world.scale.set(1);
+                GALACTIC_STRIKE.hud.scaleSet(1);
+               }
 
                 GALACTIC_STRIKE.room.characters[input.target].die();
                 delete GALACTIC_STRIKE.room.characters[input.target];

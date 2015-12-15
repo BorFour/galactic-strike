@@ -103,31 +103,25 @@ var stages =
         ]
     },
     'map3' : {
-        width : 2400,
-        height : 2400,
-        backgroundImage : 'fondo_estrellas',
+        width : 2500,
+        height : 2500,
+        backgroundImage : 'background_map2',
         planets : [
             {
-                asset : 'bigplanet',
-                x : 2000,
-                y : 2000,
-                gravity : 700,
-                gravityForce : 550
+                asset : 'giantplanet',
+                x : 1250,
+                y : 1250,
+                gravityRadius : 1100,
+                gravityForce : 550,
+                collisionRadius : 537
             },
             {
-                asset : 'bigplanet',
-                x : 400,
-                y : 400,
-                gravity : 700,
-                gravityForce : 550
-            },
-            {
-                asset : 'sun',
-                x : 1200,
-                y : 1200,
-                gravity : 1500,
+                asset : 'giantplanet',
+                x : 1250,
+                y : 1250,
+                gravityRadius : 1400,
                 gravityForce : 250,
-                collisionRadius : 164
+                collisionRadius : 537
             }
         ]
     }

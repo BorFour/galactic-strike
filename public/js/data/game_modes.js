@@ -85,10 +85,8 @@ var gameModes =
             GALACTIC_STRIKE.room.gameOver = true;
             if (GALACTIC_STRIKE.zoomed)
             {
-                game.camera.follow(null);
-                game.add.tween(game.world.scale).to( {x: 1, y:1}, 350, Phaser.Easing.Quadratic.InOut, true);
+                game.world.scale(1, 1);
                 GALACTIC_STRIKE.zoomed = false;
-                game.camera.follow(GALACTIC_STRIKE.player.character,  Phaser.Camera.FOLLOW_TOPDOWN_TIGHT);
             }
 
             var nameLabel = game.add.text(game.world.centerX, game.world.centerY/3, (winner + ' wins!'),{ font: '70px Geo   ', fill: '#ffffff' });

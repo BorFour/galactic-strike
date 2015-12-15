@@ -12,16 +12,3 @@ function Element(game, x, y, asset) {
 //Inheritance
 Element.prototype = Object.create(Phaser.Sprite.prototype);
 Element.prototype.constructor = Element;
-
-Element.prototype.update = function () {
-
-    var data = {
-        x: this.x,
-        y: this.y,
-        angle: this.angle,
-        velocityX: this.body.velocity.x,
-        velocityY: this.body.velocity.y
-    }
-
-    socket.emit('updateElement', data);
-}

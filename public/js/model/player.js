@@ -274,18 +274,6 @@ Player.prototype.characterSetup = function () {
     //            game.input.keyboard.removeKeyCapture(Phaser.Keyboard.Z);
 
 
-
-    var muteKey = game.input.keyboard.addKey(Phaser.Keyboard.M);
-    muteKey.onDown.add(function () {
-        if (!game.sound.mute) {
-            game.sound.mute = true;
-        } else {
-            game.sound.mute = false;
-        }
-    }, this);
-    game.input.keyboard.removeKeyCapture(Phaser.Keyboard.M);
-
-
     //    var finishRoundKey = game.input.keyboard.addKey(Phaser.Keyboard.F);
     //    finishRoundKey.onDown.add(function () {
     //

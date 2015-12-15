@@ -23,123 +23,123 @@ Character.prototype.jump = function () {
 }
 
 Character.prototype.attack0 = function () {
-//
-//    if (this.attackCooldown && this.alive) {
-//        this.attackSound.play();
-//        this.attackCooldown = false;
-//        this.cucumber = new Item(game, this.body.x + Math.sin(this.body.rotation) * 80, this.body.y - Math.cos(this.body.rotation) * 80, items['spikeball']);
-//        //        console.log(this.cucumber)
-//        this.cucumber.owner = this;
-//        //        this.bullets.push(bullet);
-//        //        var fn = cucumber.collide;
-//        //        cucumber.body.mass = 0.1;
-//        //        cucumber.body.bullet = true;
-//        //        for (c in GALACTIC_STRIKE.room.characters){
-//        //            cucumber.body.setBodyContactCallback(GALACTIC_STRIKE.room.characters[c], fn, this);
-//        //        }
-//
-//        // bodyA, bodyB, maxForce, maxTorque, correctionFactor, offsetX, offsetY, offsetAngle
-//        this.cucumber.damage = 65;
-//        game.physics.box2d.motorJoint(this, this.cucumber, 80, 50, 0.25, this.orientation * 80, 50, 4.5);
-//
-//        //        cucumber.body.rotation = this.body.rotation; // Este ángulo va en grados
-//        //        cucumber.body.angularVelocity = 20;
-//        this.cucumber.body.thrust(1000);
-//
-//        for (var c in GALACTIC_STRIKE.room.characters) {
-//            this.cucumber.body.setBodyContactCallback(GALACTIC_STRIKE.room.characters[c], touchSpikeballEnemy, this);
-//        }
-//
-//        game.time.events.add(this.attackCooldownTime, function () {
-//            this.cucumber.destroy();
-//            this.attackCooldown = true;
-//        }, this)
-//
-//        return true;
-//    } else {
-//        return false;
-//    }
 
-    return true;
+    if (this.attackCooldown && this.alive) {
+        this.attackSound.play();
+        this.attackCooldown = false;
+        this.cucumber = new Item(game, this.body.x + Math.sin(this.body.rotation) * 80, this.body.y - Math.cos(this.body.rotation) * 80, items['spikeball']);
+        //        console.log(this.cucumber)
+        this.cucumber.owner = this;
+        //        this.bullets.push(bullet);
+        //        var fn = cucumber.collide;
+        //        cucumber.body.mass = 0.1;
+        //        cucumber.body.bullet = true;
+        //        for (c in GALACTIC_STRIKE.room.characters){
+        //            cucumber.body.setBodyContactCallback(GALACTIC_STRIKE.room.characters[c], fn, this);
+        //        }
+
+        // bodyA, bodyB, maxForce, maxTorque, correctionFactor, offsetX, offsetY, offsetAngle
+        this.cucumber.damage = 65;
+        game.physics.box2d.motorJoint(this, this.cucumber, 80, 50, 0.25, this.orientation * 80, 50, 4.5);
+
+        //        cucumber.body.rotation = this.body.rotation; // Este ángulo va en grados
+        //        cucumber.body.angularVelocity = 20;
+        this.cucumber.body.thrust(1000);
+
+        for (var c in GALACTIC_STRIKE.room.characters) {
+            this.cucumber.body.setBodyContactCallback(GALACTIC_STRIKE.room.characters[c], touchSpikeballEnemy, this);
+        }
+
+        game.time.events.add(this.attackCooldownTime, function () {
+            this.cucumber.die();
+            this.attackCooldown = true;
+        }, this)
+
+        return true;
+    } else {
+        return false;
+    }
+
+//    return true;
 }
 
 Character.prototype.attack1 = function () {
-//    if (this.attackCooldown && this.alive) {
-//        this.attackSound.play();
-//        this.attackCooldown = false;
-//        this.cucumber2 = new Item(game, this.x + Math.cos(this.body.rotation) * 80 * this.orientation, this.y + Math.sin(this.body.rotation) * 80 * this.orientation, items['spikeball']);
-//        //        console.log(this.cucumber2)
-//        this.cucumber2.owner = this;
-//        //        this.bullets.push(bullet);
-//        //        var fn = cucumber.collide;
-//        //        cucumber.body.mass = 0.1;
-//        //        cucumber.body.bullet = true;
-//        //        for (c in GALACTIC_STRIKE.room.characters){
-//        //            cucumber.body.setBodyContactCallback(GALACTIC_STRIKE.room.characters[c], fn, this);
-//        //        }
-//
-//        //        game.physics.box2d.motorJoint(spriteA, spriteB, 800, 500, 0.25, -100, 200, 45);
-//        this.cucumber2.damage = 35;
-//        //        game.physics.box2d.motorJoint(this, this.cucumber2, 80*this.orientation, 0, 0.25, 120, 0, 4.5);
-//        game.physics.box2d.motorJoint(this, this.cucumber2, 80, 50, 0.25, this.orientation * 120, 0, 4.5);
-//        //        cucumber.body.rotation = this.body.rotation; // Este ángulo va en grados
-//        //        cucumber.body.angularVelocity = 20;
-//        this.cucumber2.body.thrust(1000);
-//
-//        for (var c in GALACTIC_STRIKE.room.characters) {
-//            this.cucumber2.body.setBodyContactCallback(GALACTIC_STRIKE.room.characters[c], touchSpikeballEnemy, this);
-//        }
-//        game.time.events.add(this.attack2CooldownTime, function () {
-//            this.cucumber2.destroy();
-//            this.attackCooldown = true;
-//        }, this)
-//
-//        return true;
-//    } else {
-//        return false;
-//    }
+    if (this.attackCooldown && this.alive) {
+        this.attackSound.play();
+        this.attackCooldown = false;
+        this.cucumber2 = new Item(game, this.x + Math.cos(this.body.rotation) * 80 * this.orientation, this.y + Math.sin(this.body.rotation) * 80 * this.orientation, items['spikeball']);
+        //        console.log(this.cucumber2)
+        this.cucumber2.owner = this;
+        //        this.bullets.push(bullet);
+        //        var fn = cucumber.collide;
+        //        cucumber.body.mass = 0.1;
+        //        cucumber.body.bullet = true;
+        //        for (c in GALACTIC_STRIKE.room.characters){
+        //            cucumber.body.setBodyContactCallback(GALACTIC_STRIKE.room.characters[c], fn, this);
+        //        }
 
-     return true;
+        //        game.physics.box2d.motorJoint(spriteA, spriteB, 800, 500, 0.25, -100, 200, 45);
+        this.cucumber2.damage = 35;
+        //        game.physics.box2d.motorJoint(this, this.cucumber2, 80*this.orientation, 0, 0.25, 120, 0, 4.5);
+        game.physics.box2d.motorJoint(this, this.cucumber2, 80, 50, 0.25, this.orientation * 120, 0, 4.5);
+        //        cucumber.body.rotation = this.body.rotation; // Este ángulo va en grados
+        //        cucumber.body.angularVelocity = 20;
+        this.cucumber2.body.thrust(1000);
+
+        for (var c in GALACTIC_STRIKE.room.characters) {
+            this.cucumber2.body.setBodyContactCallback(GALACTIC_STRIKE.room.characters[c], touchSpikeballEnemy, this);
+        }
+        game.time.events.add(this.attack2CooldownTime, function () {
+            this.cucumber2.die();
+            this.attackCooldown = true;
+        }, this)
+
+        return true;
+    } else {
+        return false;
+    }
+
+//     return true;
 }
 
 Character.prototype.attack2 = function () {
-//    if (this.attackCooldown && this.alive) {
-//        this.attackSound.play();
-//        this.attackCooldown = false;
-//        this.cucumber3 = new Item(game, this.x + Math.cos(this.body.rotation) * 80 * this.orientation,
-//            this.y + Math.sin(this.body.rotation) * 80 * this.orientation, items['hammer']);
-//        //        console.log(this.cucumber2)
-//        this.cucumber3.owner = this;
-//        //        this.bullets.push(bullet);
-//        //        var fn = cucumber.collide;
-//        //        cucumber.body.mass = 0.1;
-//        //        cucumber.body.bullet = true;
-//        //        for (c in GALACTIC_STRIKE.room.characters){
-//        //            cucumber.body.setBodyContactCallback(GALACTIC_STRIKE.room.characters[c], fn, this);
-//        //        }
-//
-//        //        game.physics.box2d.motorJoint(spriteA, spriteB, 800, 500, 0.25, -100, 200, 45);
-//        this.cucumber3.damage = 25;
-//        //        game.physics.box2d.motorJoint(this, this.cucumber2, 80*this.orientation, 0, 0.25, 120, 0, 4.5);
-//        game.physics.box2d.motorJoint(this, this.cucumber3, 80, 50, 0.25, this.orientation * 120, 0, 4.5);
-//        //        cucumber.body.rotation = this.body.rotation; // Este ángulo va en grados
-//        //        cucumber.body.angularVelocity = 20;
-//        this.cucumber3.body.thrust(1000);
-//
-//        for (var c in GALACTIC_STRIKE.room.characters) {
-//            this.cucumber3.body.setBodyContactCallback(GALACTIC_STRIKE.room.characters[c], touchSpikeballEnemy, this);
-//        }
-//        game.time.events.add(this.attack3CooldownTime, function () {
-//            this.cucumber3.destroy();
-//            this.attackCooldown = true;
-//        }, this)
-//
-//        return true;
-//    } else {
-//        return false;
-//    }
+    if (this.attackCooldown && this.alive) {
+        this.attackSound.play();
+        this.attackCooldown = false;
+        this.cucumber3 = new Item(game, this.x + Math.cos(this.body.rotation) * 80 * this.orientation,
+            this.y + Math.sin(this.body.rotation) * 80 * this.orientation, items['hammer']);
+        //        console.log(this.cucumber2)
+        this.cucumber3.owner = this;
+        //        this.bullets.push(bullet);
+        //        var fn = cucumber.collide;
+        //        cucumber.body.mass = 0.1;
+        //        cucumber.body.bullet = true;
+        //        for (c in GALACTIC_STRIKE.room.characters){
+        //            cucumber.body.setBodyContactCallback(GALACTIC_STRIKE.room.characters[c], fn, this);
+        //        }
 
-    return true;
+        //        game.physics.box2d.motorJoint(spriteA, spriteB, 800, 500, 0.25, -100, 200, 45);
+        this.cucumber3.damage = 25;
+        //        game.physics.box2d.motorJoint(this, this.cucumber2, 80*this.orientation, 0, 0.25, 120, 0, 4.5);
+        game.physics.box2d.motorJoint(this, this.cucumber3, 80, 50, 0.25, this.orientation * 120, 0, 4.5);
+        //        cucumber.body.rotation = this.body.rotation; // Este ángulo va en grados
+        //        cucumber.body.angularVelocity = 20;
+        this.cucumber3.body.thrust(1000);
+
+        for (var c in GALACTIC_STRIKE.room.characters) {
+            this.cucumber3.body.setBodyContactCallback(GALACTIC_STRIKE.room.characters[c], touchSpikeballEnemy, this);
+        }
+        game.time.events.add(this.attack3CooldownTime, function () {
+            this.cucumber3.die();
+            this.attackCooldown = true;
+        }, this)
+
+        return true;
+    } else {
+        return false;
+    }
+
+//    return true;
 }
 
 Character.prototype.attack3 = function () {

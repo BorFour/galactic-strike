@@ -227,7 +227,7 @@ GALACTIC_STRIKE.Loader.prototype = {
         game.input.onTap.add(this.startGame, this);
         game.input.addPointer();
 
-        game.input.onDown.add(go_fullscreen, this);
+//        game.input.onDown.add(go_fullscreen, this);
 
 
     },

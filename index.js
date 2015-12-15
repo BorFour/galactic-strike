@@ -379,11 +379,10 @@ http.listen(puerto, function(){
 
 // Cloud 9
 /*
-https://galacticstrikesocketio-borfour-1.c9users.io/
+http.listen(process.env.PORT, process.env.IP, function(){
+  console.log('listening on *:' + process.env.PORT);
+});
+
+LINK:   https://galacticstrikesocketio-borfour-1.c9users.io/
 */
-
-//http.listen(puerto, ip, function(){
-//  console.log('listening on ' + ip + ':' + puerto);
-//});
-
 

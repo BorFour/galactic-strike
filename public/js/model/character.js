@@ -68,8 +68,26 @@ function Character(x, y, angle, game, player, asset) {
     this.body.setPolygon(truckVertices);
     this.body.mass = 1;
     this.body.angularDamping = 0.15;
-    this.body.linearDamping = 0.4 // 0.94;
+    this.body.linearDamping = 0.3 // 0.94;
         //    this.body.friction = 0.001;
+
+//    // Atributes while grounded
+//    this.angularDampingGrounded = 0.15;
+//    this.speedGrounded = 30;
+//
+//    // Atributes while not grounded in orbit
+//    this.angularDampingOrbit = 0.15;
+//    this.forceOrbit = 700;
+//    this.angularSpeedOrbit = 150;
+//
+//    // Atributes in space
+//    this.angularDampingSpaceRotating = 0.15;
+//    this.angularDampingSpaceMoving = 10;
+//    this.angularDampingSpaceStill = 0.15;
+//    this.rotateSpace = 100;
+//    this.angularVelocitySpace = 0.15;
+//    this.angularSpeedSpace = 150;
+//    this.forceSpace = 250;
 
 
 
@@ -137,7 +155,7 @@ function Character(x, y, angle, game, player, asset) {
     this.addChild(text);
     text.anchor.set(0.5);
 
-
+    console.log(this);
 
 
 };

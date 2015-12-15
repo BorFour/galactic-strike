@@ -155,6 +155,17 @@ GALACTIC_STRIKE.Loader.prototype = {
     },
     create: function () {
 
+        var muteKey = game.input.keyboard.addKey(Phaser.Keyboard.M);
+        muteKey.onDown.add(function () {
+            if (!game.sound.mute) {
+                game.sound.mute = true;
+            } else {
+                game.sound.mute = false;
+            }
+        }, this);
+        game.input.keyboard.removeKeyCapture(Phaser.Keyboard.M);
+
+
         var currentLocation = window.location.search;
         var formName = currentLocation.replace("?name=", "");
         GALACTIC_STRIKE.player = new Player(formName ? formName : "Default");

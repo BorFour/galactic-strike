@@ -13,3 +13,5 @@ var GALACTIC_STRIKE = {
     AVAILABLE_GAMEMODES : ['deathmatch'],
 
 };
+
+ var muteKey;

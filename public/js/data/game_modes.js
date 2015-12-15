@@ -85,7 +85,7 @@ var gameModes =
             GALACTIC_STRIKE.room.gameOver = true;
             if (GALACTIC_STRIKE.zoomed)
             {
-                game.world.scale(1, 1);
+                game.world.scale.set(1);
                 GALACTIC_STRIKE.zoomed = false;
             }
 

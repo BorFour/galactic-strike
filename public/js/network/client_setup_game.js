@@ -178,6 +178,11 @@ clientSetupGame = function () {
             return;
         }
 
+        if (input.attack) {
+            console.log("Attack id: " + input.attack_id);
+            GALACTIC_STRIKE.room.characters[input.id].attacks(input.attack.id, input.attack.space);
+        }
+
         if (GALACTIC_STRIKE.room.characters[input.id].jumpAnimation) {
             if (GALACTIC_STRIKE.room.characters[input.id].orientation === GALACTIC_STRIKE.room.characters[input.id].LEFT) {
                 GALACTIC_STRIKE.room.characters[input.id].animations.play('jumpL');
@@ -199,19 +204,21 @@ clientSetupGame = function () {
      * @event 'attack'
      */
 
-    socket.on('attack', function (input) {
+    // DEPRECATED
 
-        if (input.id === GALACTIC_STRIKE.player.id) {
-            return;
-        }
-        console.log('@Client received | attack');
-
-        if (GALACTIC_STRIKE.room.characters[input.id]) {
-            console.log("Attack id: " + input.attack_id);
-            GALACTIC_STRIKE.room.characters[input.id].attacks(input.attack_id, input.space);
-        }
-
-    });
+//    socket.on('attack', function (input) {
+//
+//        if (input.id === GALACTIC_STRIKE.player.id) {
+//            return;
+//        }
+//        console.log('@Client received | attack');
+//
+//        if (GALACTIC_STRIKE.room.characters[input.id]) {
+//            console.log("Attack id: " + input.attack_id);
+//            GALACTIC_STRIKE.room.characters[input.id].attacks(input.attack_id, input.space);
+//        }
+//
+//    });
 
     /**
      * When a character has been hit, his properties must be updated

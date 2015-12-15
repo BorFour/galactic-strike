@@ -16,6 +16,11 @@ Character.prototype.updateOnline = function () {
         jumpAnimation: this.jumpAnimation
     }
 
+    if(this.currentAttack) {
+        data.attack = this.currentAttack;
+        this.currentAttack = null;
+    }
+
     socket.emit('update', data);
     //    console.log('@Client sent | update');
 

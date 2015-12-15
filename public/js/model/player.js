@@ -44,14 +44,12 @@ Player.prototype.movePlayer = function () {
     if (!this.character || !this.character.alive) {
         if (this.controller.leftDown()) {
             game.camera.x -= 5;
-        }
-        else if (this.controller.rightDown()) {
+        } else if (this.controller.rightDown()) {
             game.camera.x += 5;
         }
         if (this.controller.upDown()) {
             game.camera.y -= 5;
-        }
-        else if (this.controller.downDown()) {
+        } else if (this.controller.downDown()) {
             game.camera.y += 5;
         }
         return;
@@ -101,16 +99,76 @@ Player.prototype.movePlayer = function () {
             this.character.moveSpace('rotateR');
         }
     }
+
+    if (this.attack0Key.isDown) {
+        if (this.character.inAtmosphere()) {
+            if (this.character.attack0()) {
+                GALACTIC_STRIKE.player.character.currentAttack = {
+                    id: 0,
+                    space: false
+                };
+            }
+        } else if (this.character.attack0()) {
+            GALACTIC_STRIKE.player.character.currentAttack = {
+                id: 0,
+                space: true
+            };
+        }
+    } else if (this.attack1Key.isDown) {
+        if (this.character.inAtmosphere()) {
+            if (this.character.attack1()) {
+                GALACTIC_STRIKE.player.character.currentAttack = {
+                    id: 1,
+                    space: false
+                };
+            }
+        } else if (this.character.attackSpace1()) {
+            GALACTIC_STRIKE.player.character.currentAttack = {
+                id: 1,
+                space: true
+            };
+        }
+    } else if (this.attack2Key.isDown) {
+        if (this.character.inAtmosphere()) {
+            if (this.character.attack2()) {
+                GALACTIC_STRIKE.player.character.currentAttack = {
+                    id: 2,
+                    space: false
+                };
+            }
+        } else if (this.character.attack2()) {
+            GALACTIC_STRIKE.player.character.currentAttack = {
+                id: 2,
+                space: true
+            };
+        }
+    }
+    //    else if (attack3Key.isDown) {
+    //         if (this.character.inAtmosphere()) {
+    //            if (this.character.attack0()) {
+    //                GALACTIC_STRIKE.player.character.currentAttack = {
+    //                    id: 3,
+    //                    space: false
+    //                };
+    //            }
+    //        } else if (this.character.attack0()) {
+    //                GALACTIC_STRIKE.player.character.currentAttack = {
+    //                    id: 3,
+    //                    space: true
+    //                };
+    //            }
+    //    }
+
     //comprobamos si el jugador sigue en el mundo
-//    if (!this.character.inWorld && this.character.alive) {
-//        this.character.simpleDie();
-//        var output = {
-//            id: -1,
-//            target: this.id,
-//            damage: 100
-//        };
-//        socket.emit('hit', output);
-//    }
+    //    if (!this.character.inWorld && this.character.alive) {
+    //        this.character.simpleDie();
+    //        var output = {
+    //            id: -1,
+    //            target: this.id,
+    //            damage: 100
+    //        };
+    //        socket.emit('hit', output);
+    //    }
 }
 
 Player.prototype.characterSetup = function () {
@@ -124,80 +182,66 @@ Player.prototype.characterSetup = function () {
     game.camera.follow(this.character, Phaser.Camera.FOLLOW_TOPDOWN_TIGHT);
 
 
-    var attack0Key = game.input.keyboard.addKey(Phaser.Keyboard.UP);
-    attack0Key.onDown.add(function () {
-        if (this.character.inAtmosphere()) {
-            if (this.character.attack0()) {
-                var output = {
-                    id: GALACTIC_STRIKE.player.id,
-                    attack_id: 0,
-                    space: false
-                };
-                socket.emit('attack', output);
-            }
-        } else {
-            if (this.character.attack0()) {
-                var output = {
-                    id: GALACTIC_STRIKE.player.id,
-                    attack_id: 0,
-                    space: true
-                };
-                socket.emit('attack', output);
-            }
-        }
-    }, this);
-    game.input.keyboard.removeKeyCapture(Phaser.Keyboard.UP);
+    this.attack0Key = game.input.keyboard.addKey(Phaser.Keyboard.UP);
+    //    attack0Key.onDown.add(function () {
+    //        if (this.character.inAtmosphere()) {
+    //            if (this.character.attack0()) {
+    //                GALACTIC_STRIKE.player.character.currentAttack = {
+    //                    id: 0,
+    //                    space: false
+    //                };
+    //            }
+    //        } else if (this.character.attack0()) {
+    //                GALACTIC_STRIKE.player.character.currentAttack = {
+    //                    id: 0,
+    //                    space: true
+    //                };
+    //            }
+    //    }, this);
+    //    game.input.keyboard.removeKeyCapture(Phaser.Keyboard.UP);
 
 
 
-    var attack1Key = game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
-    attack1Key.onDown.add(function () {
-        if (this.character.inAtmosphere()) {
-            if (this.character.attack1()) {
-                var output = {
-                    id: GALACTIC_STRIKE.player.id,
-                    attack_id: 1,
-                    space: false
-                };
-                socket.emit('attack', output);
-            }
-        } else {
-            if (this.character.attackSpace1()) {
-                var output = {
-                    id: GALACTIC_STRIKE.player.id,
-                    attack_id: 1,
-                    space: true
-                };
-                socket.emit('attack', output);
-            }
-        }
-    }, this);
-    game.input.keyboard.removeKeyCapture(Phaser.Keyboard.DOWN);
+    this.attack1Key = game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
+    //    attack1Key.onDown.add(function () {
+    //        if (this.character.inAtmosphere()) {
+    //            if (this.character.attack1()) {
+    //                GALACTIC_STRIKE.player.character.currentAttack = {
+    //                    id: 1,
+    //                    space: false
+    //                };
+    //            }
+    //        } else {
+    //            if (this.character.attackSpace1()) {
+    //                GALACTIC_STRIKE.player.character.currentAttack = {
+    //                    id: 1,
+    //                    space: true
+    //                };
+    //            }
+    //        }
+    //    }, this);
+    //    game.input.keyboard.removeKeyCapture(Phaser.Keyboard.DOWN);
 
 
-    var attack2Key = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
-    attack2Key.onDown.add(function () {
-        if (this.character.inAtmosphere()) {
-            if (this.character.attack2()) {
-                var output = {
-                    id: GALACTIC_STRIKE.player.id,
-                    attack_id: 2,
-                    space: false
-                };
-                socket.emit('attack', output);
-            }
-        } else {
-            if (this.character.attack2()) {
-                var output = {
-                    id: GALACTIC_STRIKE.player.id,
-                    attack_id: 2,
-                    space: true
-                };
-                socket.emit('attack', output);
-            }
-        }
-    }, this);
-    game.input.keyboard.removeKeyCapture(Phaser.Keyboard.LEFT);
+    this.attack2Key = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
+    //    attack2Key.onDown.add(function () {
+    //        if (this.character.inAtmosphere()) {
+    //            if (this.character.attack2()) {
+    //                GALACTIC_STRIKE.player.character.currentAttack = {
+    //                    id: 2,
+    //                    space: false
+    //                };
+    //            }
+    //        } else {
+    //            if (this.character.attack2()) {
+    //                GALACTIC_STRIKE.player.character.currentAttack = {
+    //                    id: 2,
+    //                    space: true
+    //                };
+    //            }
+    //        }
+    //    }, this);
+    //    game.input.keyboard.removeKeyCapture(Phaser.Keyboard.LEFT);
 
     //            var attack3Key = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
     //            attack3Key.onDown.add(function(){
@@ -242,22 +286,22 @@ Player.prototype.characterSetup = function () {
     game.input.keyboard.removeKeyCapture(Phaser.Keyboard.M);
 
 
-//    var finishRoundKey = game.input.keyboard.addKey(Phaser.Keyboard.F);
-//    finishRoundKey.onDown.add(function () {
-//
-//        if (GALACTIC_STRIKE.room.host !== GALACTIC_STRIKE.player.id || GALACTIC_STRIKE.room.roundFinished) {
-//            return;
-//        }
-//
-//        GALACTIC_STRIKE.room.roundFinished = true;
-//
-//        console.log('@Client sent | finishRound');
-//        socket.emit('finishRound', {
-//            id: GALACTIC_STRIKE.player.id
-//        });
-//
-//    }, this);
-//    game.input.keyboard.removeKeyCapture(Phaser.Keyboard.F);
+    //    var finishRoundKey = game.input.keyboard.addKey(Phaser.Keyboard.F);
+    //    finishRoundKey.onDown.add(function () {
+    //
+    //        if (GALACTIC_STRIKE.room.host !== GALACTIC_STRIKE.player.id || GALACTIC_STRIKE.room.roundFinished) {
+    //            return;
+    //        }
+    //
+    //        GALACTIC_STRIKE.room.roundFinished = true;
+    //
+    //        console.log('@Client sent | finishRound');
+    //        socket.emit('finishRound', {
+    //            id: GALACTIC_STRIKE.player.id
+    //        });
+    //
+    //    }, this);
+    //    game.input.keyboard.removeKeyCapture(Phaser.Keyboard.F);
 
 
     //            var respawnKey = game.input.keyboard.addKey(Phaser.Keyboard.R);

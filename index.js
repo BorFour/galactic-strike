@@ -57,13 +57,13 @@ io.on('connection', function (socket) {
 
     });
 
-    socket.on('attack', function (input) {
-
-        socket.broadcast.to('Room1').emit('attack', input);
-    //        console.log('@Server sent | update');
-
-    });
-
+//    socket.on('attack', function (input) {
+//
+//        socket.broadcast.to('Room1').emit('attack', input);
+//    //        console.log('@Server sent | update');
+//
+//    });
+//
     socket.on('hit', function (input) {
 
         console.log('@Server <-      \t| hit');

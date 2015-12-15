@@ -13,10 +13,10 @@ var zz = [];
 
 play_songs = function () {
     GALACTIC_STRIKE.songs = [];
-    GALACTIC_STRIKE.songs.push(game.add.audio('guiles', 0.45, true));
-    GALACTIC_STRIKE.songs.push(game.add.audio('checker', 0.45, true));
-    GALACTIC_STRIKE.songs.push(game.add.audio('muteCity', 0.45, true));
-    GALACTIC_STRIKE.songs.push(game.add.audio('dreamLand', 0.45, true));
+//    GALACTIC_STRIKE.songs.push(game.add.audio('guiles', 0.45, true));
+//    GALACTIC_STRIKE.songs.push(game.add.audio('checker', 0.45, true));
+//    GALACTIC_STRIKE.songs.push(game.add.audio('muteCity', 0.45, true));
+//    GALACTIC_STRIKE.songs.push(game.add.audio('dreamLand', 0.45, true));
     //GALACTIC_STRIKE.songs.push(game.add.audio('witch', 0.45, true));
     GALACTIC_STRIKE.songs.push(game.add.audio('pingasDreamLand', 0.45, true));
     GALACTIC_STRIKE.readTeamAnthem = game.add.audio('sovietAnthem', 0.55, true);
@@ -227,6 +227,8 @@ GALACTIC_STRIKE.Loader.prototype = {
         game.input.onTap.add(this.startGame, this);
         game.input.addPointer();
 
+        game.input.onDown.add(go_fullscreen, this);
+
 
     },
     update: function () {
@@ -257,3 +259,8 @@ GALACTIC_STRIKE.Loader.prototype = {
         this.state.start('MainMenu');
     }
 };
+
+function go_fullscreen(){
+  game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
+  game.scale.startFullScreen();
+}

@@ -237,11 +237,14 @@ clientSetupGame = function () {
             // When the character's health drops below zero, the character dies.
             if (GALACTIC_STRIKE.room.characters[input.target].health <= 0) {
 
-                zoomInGame();
-
                 GALACTIC_STRIKE.room.characters[input.target].die();
                 delete GALACTIC_STRIKE.room.characters[input.target];
                 GALACTIC_STRIKE.room.gameMode.update();
+                if(input.target === GALACTIC_STRIKE.player.id) {
+                    zoomOutGame();
+                    game.camera.follow(null);
+                }
+
             } else {
                 // This character is damage immune for a short period of time
                 GALACTIC_STRIKE.room.characters[input.target].hitImmune = true;

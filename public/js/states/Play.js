@@ -224,72 +224,9 @@ function spacePhysicsTimer() {
 
     if (GALACTIC_STRIKE.player.character && GALACTIC_STRIKE.player.character.alive && !GALACTIC_STRIKE.room.gameOver) {
         if (GALACTIC_STRIKE.player.character.inAtmosphere()) {
-            //          game.camera.follow(null);
-
-            zoomInGame();
-
-
-//            game.camera.focusOn(GALACTIC_STRIKE.player.character);
-//            var tween = game.add.tween(game.world.scale).to({
-//                x: 1,
-//                y: 1
-//            }, 350, Phaser.Easing.Linear.None, true);
-//            tween.onComplete.add(function () {
-//                game.camera.follow(GALACTIC_STRIKE.player.character, Phaser.Camera.FOLLOW_TOPDOWN_TIGHT);
-//                GALACTIC_STRIKE.room.map.zoomIn();
-//                GALACTIC_STRIKE.zooming = false;
-//            }, this);
-//
-//            var tween2 = game.add.tween(game.camera.focusOnXY).to({
-//                    x : game.world.centerX,
-//                    y : game.world.centerY
-//            }, 350, Phaser.Easing.Linear.None, true);
-//
-//            tween.start();
-//            tween2.start();
-
+          zoomInGame();
         } else {
-
-                zoomOutGame();
-
-////            game.camera.follow(null);
-////            game.camera.target = null
-//            GALACTIC_STRIKE.zoomed = true;
-//            GALACTIC_STRIKE.zooming = true;
-//            game.camera.focusOn(GALACTIC_STRIKE.player.character);
-////            game.camera.focusOnXY(GALACTIC_STRIKE.player.character.x, GALACTIC_STRIKE.player.character.y);
-//
-//            var tween = game.add.tween(game.world.scale).to({
-//                x: 0.5,
-//                y: 0.5
-//            }, 350, Phaser.Easing.Linear.None, true);
-//
-//            tween.onComplete.add(function () {
-//
-//                game.camera.follow(GALACTIC_STRIKE.player.character, Phaser.Camera.FOLLOW_TOPDOWN_TIGHT);
-//                GALACTIC_STRIKE.room.map.zoomOut();
-//                GALACTIC_STRIKE.zooming = false;
-//
-//            }, this);
-//
-//            var tween2 = game.add.tween(game.camera.focusOnXY).to({
-//                    x : game.world.centerX,
-//                    y : game.world.centerY
-//            }, 350, Phaser.Easing.Linear.None, true);
-//
-//            tween.onComplete.add(function () {
-//
-//                game.camera.follow(GALACTIC_STRIKE.player.character, Phaser.Camera.FOLLOW_TOPDOWN_TIGHT);
-//                GALACTIC_STRIKE.room.map.zoomOut();
-//                GALACTIC_STRIKE.zooming = false;
-//
-//            }, this);
-//
-//            tween.start();
-//            tween2.start();
-
-            //          GALACTIC_STRIKE.player.character.flightMode();
-
+          zoomOutGame();
         }
     }
 

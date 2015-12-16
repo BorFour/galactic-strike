@@ -108,7 +108,7 @@ var gameModes =
 
             GALACTIC_STRIKE.room.gameOver = true;
 
-            zoomInGame();
+
 
             var nameLabel = game.add.text(game.world.centerX, game.world.centerY/3, (winner + ' wins!'),{ font: '70px Geo   ', fill: '#ffffff' });
             nameLabel.anchor.setTo(0.5, 0.5);
@@ -118,11 +118,14 @@ var gameModes =
             buttonQuit.scale.set(0.25);
 
 //            game.camera.follow(null);
+            game.camera.reset();
+            zoomInGame();
             if(GALACTIC_STRIKE.player.character) {
-                game.camera.reset();
                 game.camera.focusOn(GALACTIC_STRIKE.player.character);
+                var toButton = game.add.tween(game.camera).to({x : buttonQuit.x  - game.camera.width/2, y : buttonQuit.y - game.camera.height/2}, 350, Phaser.Easing.Quadratic.InOut, true);
+            } else {
+                game.camera.focusOn(buttonQuit);
             }
-            var toButton = game.add.tween(game.camera).to({x : buttonQuit.x  - game.camera.width/2, y : buttonQuit.y - game.camera.height/2}, 350, Phaser.Easing.Quadratic.InOut, true);
 
 
 

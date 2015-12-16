@@ -240,12 +240,14 @@ clientSetupGame = function () {
 
                 GALACTIC_STRIKE.room.characters[input.target].die();
                 delete GALACTIC_STRIKE.room.characters[input.target];
-                GALACTIC_STRIKE.room.gameMode.update();
+
                 if(input.target == GALACTIC_STRIKE.player.id) {
                     game.camera.follow(null);
-                    game.camera.reset();
+//                    game.camera.reset();
                     zoomOutGame();
                 }
+
+                GALACTIC_STRIKE.room.gameMode.update();
 
             } else {
                 // This character is damage immune for a short period of time

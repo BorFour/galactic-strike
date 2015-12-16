@@ -44,7 +44,7 @@ Player.prototype.setKeyFunction = function (key, fn) {
 Player.prototype.movePlayer = function () {
     var moveForce = 0.515;
 
-    if (!this.character || !this.character.alive) {
+    if (!GALACTIC_STRIKE.room.gameOver && (!this.character || !this.character.alive)) {
         if (this.controller.leftDown()) {
             game.camera.x -= 5;
         } else if (this.controller.rightDown()) {

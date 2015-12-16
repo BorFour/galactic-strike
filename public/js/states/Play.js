@@ -159,7 +159,7 @@ GALACTIC_STRIKE.Play.prototype = {
 
         if (gameDebug) {
             var i = 1;
-            var offsetDebug = 650;
+            var offsetDebug = 750;
 /*            game.debug.text("Event cooldown: " + game.time.events.duration, 32, offsetDebug + 32*i);
             i++;
             if (GALACTIC_STRIKE.player.character) {

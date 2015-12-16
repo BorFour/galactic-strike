@@ -122,7 +122,6 @@ GALACTIC_STRIKE.Play.prototype = {
 
         GALACTIC_STRIKE.player.movePlayer();
         GALACTIC_STRIKE.hud.updateText();
-        GALACTIC_STRIKE.room.gameMode['showWinner'](GALACTIC_STRIKE.room.teams[0]);
 
     },
     render: function () {
@@ -255,9 +254,8 @@ function updateOnlineTimer() {
 
 function zoomInGame () {
 
-     if (GALACTIC_STRIKE.zoomed && !GALACTIC_STRIKE.room.gameOver) {
+     if (GALACTIC_STRIKE.zoomed) {
         GALACTIC_STRIKE.zoomed = false;
-        GALACTIC_STRIKE.zooming = true;
         GALACTIC_STRIKE.room.map.zoomIn();
         game.world.scale.set(1);
         GALACTIC_STRIKE.hud.scaleSet(1);
@@ -266,9 +264,8 @@ function zoomInGame () {
 
 function zoomOutGame () {
 
-    if (!GALACTIC_STRIKE.zoomed && !GALACTIC_STRIKE.room.gameOver) {
+    if (!GALACTIC_STRIKE.zoomed) {
         GALACTIC_STRIKE.zoomed = true;
-        GALACTIC_STRIKE.zooming = true;
         GALACTIC_STRIKE.room.map.zoomOut();
         game.world.scale.set(0.5);
         GALACTIC_STRIKE.hud.scaleSet(2);

@@ -93,8 +93,10 @@ var gameModes =
             buttonQuit.anchor.set(0.5);
             buttonQuit.scale.set(0.25);
 
-            game.camera.follow(null);
-            var toButton = game.add.tween(game.camera.focusOnXY).to({x : buttonQuit.x  - game.camera.width/2, y : buttonQuit.y - game.camera.height/2}, 350, Phaser.Easing.Quadratic.InOut, true);
+//            game.camera.follow(null);
+            game.camera.reset();
+            game.camera.focusOn(GALACTIC_STRIKE.player.character);
+            var toButton = game.add.tween(game.camera).to({x : buttonQuit.x  - game.camera.width/2, y : buttonQuit.y - game.camera.height/2}, 350, Phaser.Easing.Quadratic.InOut, true);
 
             game.time.events.add(26000, quitGameGM, this);
 

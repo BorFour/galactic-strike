@@ -8,6 +8,9 @@ Player = function (nickname) {
     this.keyFns = [] // Probablemente prescindible
 };
 
+Player.prototype.toString = function () {
+    return this.nickname;
+}
 
 Player.prototype.leaveTeam = function () {
 

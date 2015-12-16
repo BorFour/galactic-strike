@@ -223,14 +223,11 @@ function spacePhysicsTimer() {
     game.spacePhysics.update();
 
     if (GALACTIC_STRIKE.player.character && GALACTIC_STRIKE.player.character.alive && !GALACTIC_STRIKE.room.gameOver) {
-        if (GALACTIC_STRIKE.zoomed && GALACTIC_STRIKE.player.character.inAtmosphere()) {
+        if (GALACTIC_STRIKE.player.character.inAtmosphere()) {
             //          game.camera.follow(null);
 
-            GALACTIC_STRIKE.zoomed = false;
-            GALACTIC_STRIKE.zooming = true;
-            GALACTIC_STRIKE.room.map.zoomIn();
-            game.world.scale.set(1);
-            GALACTIC_STRIKE.hud.scaleSet(1);
+            zoomInGame();
+
 
 //            game.camera.focusOn(GALACTIC_STRIKE.player.character);
 //            var tween = game.add.tween(game.world.scale).to({
@@ -251,13 +248,10 @@ function spacePhysicsTimer() {
 //            tween.start();
 //            tween2.start();
 
-        } else if (!GALACTIC_STRIKE.zoomed && !GALACTIC_STRIKE.player.character.inAtmosphere()) {
+        } else {
 
-            GALACTIC_STRIKE.zoomed = true;
-            GALACTIC_STRIKE.zooming = true;
-            GALACTIC_STRIKE.room.map.zoomOut();
-            game.world.scale.set(0.5);
-            GALACTIC_STRIKE.hud.scaleSet(2);
+                zoomOutGame();
+
 ////            game.camera.follow(null);
 ////            game.camera.target = null
 //            GALACTIC_STRIKE.zoomed = true;
@@ -310,6 +304,28 @@ function updateOnlineTimer() {
     }
     game.time.events.add(4 * (Object.keys(GALACTIC_STRIKE.room.players).length), updateOnlineTimer, this);
 
+}
+
+function zoomInGame () {
+
+     if (GALACTIC_STRIKE.zoomed) {
+        GALACTIC_STRIKE.zoomed = false;
+        GALACTIC_STRIKE.zooming = true;
+        GALACTIC_STRIKE.room.map.zoomIn();
+        game.world.scale.set(1);
+        GALACTIC_STRIKE.hud.scaleSet(1);
+    }
+}
+
+function zoomOutGame () {
+
+    if (!GALACTIC_STRIKE.zoomed) {
+        GALACTIC_STRIKE.zoomed = true;
+        GALACTIC_STRIKE.zooming = true;
+        GALACTIC_STRIKE.room.map.zoomOut();
+        game.world.scale.set(0.5);
+        GALACTIC_STRIKE.hud.scaleSet(2);
+    }
 }
 
 

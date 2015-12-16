@@ -237,14 +237,7 @@ clientSetupGame = function () {
             // When the character's health drops below zero, the character dies.
             if (GALACTIC_STRIKE.room.characters[input.target].health <= 0) {
 
-               if (GALACTIC_STRIKE.zoomed) {
-
-                GALACTIC_STRIKE.zoomed = false;
-                GALACTIC_STRIKE.zooming = true;
-                GALACTIC_STRIKE.room.map.zoomIn();
-                game.world.scale.set(1);
-                GALACTIC_STRIKE.hud.scaleSet(1);
-               }
+                zoomInGame();
 
                 GALACTIC_STRIKE.room.characters[input.target].die();
                 delete GALACTIC_STRIKE.room.characters[input.target];

@@ -4,13 +4,17 @@ function HUD (game) {
 
     var style = {
         font: "bold 32px Arial",
-        fill: "#fff",
+        fill: "#272",
     };
-
 
     var style2 = {
         font: "bold 26px Arial",
-        fill: "#fff",
+        fill: "#f03",
+    };
+
+    var style3 = {
+        font: "bold 26px Arial",
+        fill: "#44f",
     };
 
     this.score = game.add.text(game.camera.x + game.camera.width/2, game.camera.y + game.camera.height/2 - 350, "Esto es la puntuación", style);
@@ -19,13 +23,11 @@ function HUD (game) {
     this.teamRed = game.add.text(game.camera.x + game.camera.width/2 - 500, game.camera.y + game.camera.height/2 - 350, "Esto es el equipo rojo", style2);
     this.teamRed.anchor.set(0.5);
     this.teamRed.fixedToCamera = true;
-    this.teamBlue = game.add.text(game.camera.x + game.camera.width/2 + 500, game.camera.y + game.camera.height/2 - 350, "Esto es el equipo azul", style2);
+    this.teamBlue = game.add.text(game.camera.x + game.camera.width/2 + 500, game.camera.y + game.camera.height/2 - 350, "Esto es el equipo azul", style3);
     this.teamBlue.anchor.set(0.5);
     this.teamBlue.fixedToCamera = true;
 
 };
-
-
 
 HUD.prototype.updateText = function () {
 

@@ -18,6 +18,8 @@ clientSetupMenu = function () {
     socket.on('userLeft', function (input) {
 
         console.log('@Client received | userLeft');
+
+
         if (GALACTIC_STRIKE.room.characters[input.id] && GALACTIC_STRIKE.room.characters[input.id].alive)
         {
             GALACTIC_STRIKE.room.characters[input.id].die();
@@ -25,6 +27,19 @@ clientSetupMenu = function () {
                 GALACTIC_STRIKE.room.gameMode.update();
             }
             delete GALACTIC_STRIKE.room.characters[input.id];
+        }
+
+        if (GALACTIC_STRIKE.room.players[input.id]) {
+
+            GALACTIC_STRIKE.room.unasigned.removePlayer(GALACTIC_STRIKE.room.players[input.id]);
+
+            for (var t in GALACTIC_STRIKE.room.teams){
+                console.log("T :" + t);
+                GALACTIC_STRIKE.room.teams[t].removePlayer(GALACTIC_STRIKE.room.players[input.id]);
+            }
+
+            GALACTIC_STRIKE.room.players[input.id] = null;
+            delete GALACTIC_STRIKE.room.players[input.id];
         }
 
     });

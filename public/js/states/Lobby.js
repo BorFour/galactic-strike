@@ -116,14 +116,25 @@ GALACTIC_STRIKE.Lobby.prototype = {
 
         // Begins the match if every player has a team assigned
 
-        if (GALACTIC_STRIKE.room.unasigned.players.length === 0
+//        if (GALACTIC_STRIKE.room.unasigned.players.length === 0
             /*&& GALACTIC_STRIKE.room.teams[0].players.length > 0
             && GALACTIC_STRIKE.room.teams[1].players.length > 0*/
-        ) socket.emit('beginMatch', {
-            id: GALACTIC_STRIKE.player.id,
-            stage: Object.keys(stages)[GALACTIC_STRIKE.room.currentStage]
-        });
-        else console.log(GALACTIC_STRIKE.room.unasigned);
+//        )
+        GALACTIC_STRIKE.kickedPlayers = 0;
+        GALACTIC_STRIKE.playersToKick = GALACTIC_STRIKE.room.unasigned.players.length;
+        for(var p in GALACTIC_STRIKE.room.unasigned.players) {
+            socket.emit('kickPlayer', {
+                id: GALACTIC_STRIKE.room.unasigned.players[p].id
+            });
+        }
+
+        if (GALACTIC_STRIKE.kickedPlayers < GALACTIC_STRIKE.playersToKick) {
+            socket.emit('beginMatch', {
+                id: GALACTIC_STRIKE.player.id,
+                stage: Object.keys(stages)[GALACTIC_STRIKE.room.currentStage]
+            });
+        }
+//        else console.log(GALACTIC_STRIKE.room.unasigned);
     },
     nextStage: function () {
 

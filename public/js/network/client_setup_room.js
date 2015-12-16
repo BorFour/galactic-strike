@@ -17,9 +17,6 @@ clientSetupRoom = function () {
 
     });
 
-
-
-
     socket.on('joinRoom', function (input) {
 
         var style = {font: "20px Arial", fill: "#ffffff", align: "center"};
@@ -76,6 +73,38 @@ clientSetupRoom = function () {
         textStage.text = Object.keys(stages)[GALACTIC_STRIKE.room.currentStage];
 
     });
+
+
+
+    socket.on('kickPlayer', function (input) {
+
+        console.log('@Client received | kickPlayer');
+        console.log(input);
+        console.log(GALACTIC_STRIKE.player.id);
+        if(input.id == GALACTIC_STRIKE.player.id) {
+
+            console.log('@Client sent | kickedPlayer');
+            socket.emit('kickedPlayer', {id : input.id});
+            window.close();
+        }
+
+    });
+
+    socket.on('kickedPlayer', function (input) {
+
+       if(GALACTIC_STRIKE.room.host === GALACTIC_STRIKE.player.id) {
+           GALACTIC_STRIKE.kickedPlayers++;
+           if (GALACTIC_STRIKE.kickedPlayers < GALACTIC_STRIKE.playersToKick) {
+                socket.emit('beginMatch', {
+                    id: GALACTIC_STRIKE.player.id,
+                    stage: Object.keys(stages)[GALACTIC_STRIKE.room.currentStage]
+                });
+            }
+       }
+
+    });
+
+
 
 
 }

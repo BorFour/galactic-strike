@@ -201,14 +201,38 @@ io.on('connection', function (socket) {
 
     });
 
+    socket.on('kickPlayer', function (input) {
+
+        var output = {};
+        output.id = input.id;
+        console.log('@Server <-      \t| kickPlayer');
+
+//        socket.leave('Room1');
+        delete room.players[input.id];
+        io.to('Room1').emit('kickPlayer', output);
+        console.log('@Server ->      \t| kickPlayer');
+
+    });
+
+    socket.on('kickedPlayer',function (input) {
+
+        console.log('@Server <-      \t| kickedPlayer');
+        io.to('Room1').emit('kickedPlayer', {});
+        socket.leave('Room1');
+        console.log('@Server ->      \t| kickedPlayer');
+
+    });
+
     socket.on('leaveRoom', function (input) {
 
         var output = {};
         output.id = input.id;
+        console.log('@Server <-      \t| leaveRoom');
 
         socket.leave('Room1');
         delete room.players[input.id];
         io.to('Room1').emit('userLeftRoom', output);
+        console.log('@Server ->      \t| userLeftRoom');
 
     });
 

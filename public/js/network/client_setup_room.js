@@ -104,7 +104,16 @@ clientSetupRoom = function () {
 
     });
 
+    socket.on('lobbyMessage', function (input) {
 
+        console.log('Nuevo mensaje');
+        console.log(input);
+        for(var i = 0; i < GALACTIC_STRIKE.room.chatText.length - 1; i++) {
+            GALACTIC_STRIKE.room.chatText[i].text = GALACTIC_STRIKE.room.chatText[i+1].text;
+        }
+        GALACTIC_STRIKE.room.chatText[GALACTIC_STRIKE.room.chatText.length - 1].text = "[" + input.nick + "]: " + input.msg;
+
+    });
 
 
 }

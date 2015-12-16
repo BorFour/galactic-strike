@@ -108,6 +108,14 @@ io.on('connection', function (socket) {
     });
 
 
+   socket.on('lobbyMessage', function (input) {
+
+        console.log('@Server <-      \t| lobbyMessage');
+        console.log(input);
+        io.to('Room1').emit('lobbyMessage', input);
+
+    });
+
     socket.on('joinRoom', function (input) {
 
         var output = {};

@@ -106,6 +106,7 @@ load_assets = function () {
     game.load.image('redTeam', '../assets/lobby/red_team.jpg');
     game.load.image('blueTeam', '../assets/lobby/blue_team.jpg');
     game.load.image('star', '../assets/estrella.png');
+    game.load.image('textBox', '../assets/textbox.gif');
 
 }
 
@@ -164,7 +165,7 @@ GALACTIC_STRIKE.Loader.prototype = {
 
         var currentLocation = window.location.search;
         var formName = currentLocation.replace("?name=", "");
-        GALACTIC_STRIKE.player = new Player(formName ? decodeURIComponent(formName) : "Default");
+        GALACTIC_STRIKE.player = new Player(formName ? decodeURIComponent(formName).substring(0, GALACTIC_STRIKE.maxCharactersName) : "Default");
 
         //plays some songs
         play_songs();

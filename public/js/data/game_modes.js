@@ -30,6 +30,10 @@ var gameModes =
 
             var teams_alive = 0;
             var winner = null;
+            var teamsConnected = this.teamPlayersConnected();
+
+            if(teamsConnected.length == 1) return teamsConnected[0];
+
             for(var i = 0; i < this.room.teams.length; i++)
             {
                 if(this.room.teams[i].alive())
@@ -48,6 +52,7 @@ var gameModes =
 
             var maxScore = Number.MIN_VALUE;
             var maxTeams = null;
+
             for (var t in this.teams){
                 if(this.scores[t] === maxScore){
                     maxTeams.push(this.teams[t]);
@@ -61,9 +66,28 @@ var gameModes =
             return maxTeams;
 
         },
+        'teamPlayersConnected' : function () {
+            var teams_connected = [];
+            var winner = null;
+            for(var i = 0; i < this.room.teams.length; i++)
+            {
+                var teamConnected = false;
+                for(var p in this.room.teams[i].players)
+                {
+                    if(this.room.teams[i].players[p]) teamConnected = true;
+                    console.log(this.room.teams[i].players[p]);
+                }
+                if(teamConnected) teams_connected.push(this.room.teams[i]);
+            }
+            console.log(teams_connected)
+            return teams_connected;
+        },
         'isOverGame' : function (){
 
 //                return true;
+
+            if(this.teamPlayersConnected().length == 1) return true;
+
             for(var t in this.scores){
                 if(this.scores[t] >= this.winScore) return true;
             }
@@ -94,8 +118,10 @@ var gameModes =
             buttonQuit.scale.set(0.25);
 
 //            game.camera.follow(null);
-            game.camera.reset();
-            game.camera.focusOn(GALACTIC_STRIKE.player.character);
+            if(GALACTIC_STRIKE.player.character) {
+                game.camera.reset();
+                game.camera.focusOn(GALACTIC_STRIKE.player.character);
+            }
             var toButton = game.add.tween(game.camera).to({x : buttonQuit.x  - game.camera.width/2, y : buttonQuit.y - game.camera.height/2}, 350, Phaser.Easing.Quadratic.InOut, true);
 
 

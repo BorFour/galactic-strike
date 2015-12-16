@@ -11,6 +11,7 @@ var GALACTIC_STRIKE = {
     },
     zoomed : false,
     AVAILABLE_GAMEMODES : ['deathmatch'],
+    maxCharactersName : 15
 
 };
 

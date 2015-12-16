@@ -193,8 +193,8 @@ GALACTIC_STRIKE.Play.prototype = {
             //             game.debug.box2dWorld();
             //             game.debug.cameraInfo(game.camera, 300, 32);
 
-        }
-        var i = 1;
+//        }
+//        var i = 1;
         // Cuando recorres así una tabla asociativa, en
         // var c se almacena el valor de las CLAVES
         // Para acceder a los valores, hay que indexar la

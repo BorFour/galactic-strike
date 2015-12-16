@@ -24,6 +24,20 @@ GALACTIC_STRIKE.Lobby.prototype = {
             boundsAlignH: "center",
             boundsAlignV: "middle"
         };
+
+        var style2 = {
+            font: "bold 16px Arial",
+            fill: "#fff",
+            boundsAlignH: "center",
+            boundsAlignV: "middle"
+        };
+
+        var style3 = {
+            font: "bold 16px Arial",
+            fill: "#000",
+            boundsAlignH: "center",
+            boundsAlignV: "middle"
+        };
         bmpText = game.add.text(game.world.centerX, game.world.centerY, "Esto es el lobby", style);
         bmpText.anchor.set(0.5);
 
@@ -73,6 +87,7 @@ GALACTIC_STRIKE.Lobby.prototype = {
         GALACTIC_STRIKE.room.textRed = [];
         GALACTIC_STRIKE.room.textBlue = [];
         GALACTIC_STRIKE.room.textUnasigned = [];
+        GALACTIC_STRIKE.room.chatText = [];
 
         // Initialization of the textBox for the slots (max 4 players per team)
 
@@ -92,6 +107,13 @@ GALACTIC_STRIKE.Lobby.prototype = {
             GALACTIC_STRIKE.room.textUnasigned[i] = game.add.text(game.world.centerX, game.world.centerY - 250 + i * 50, "[     ]", style);
             GALACTIC_STRIKE.room.textUnasigned[i].anchor.set(0.5);
         }
+
+
+        for (var i = 0; i < 8; i++) {
+            GALACTIC_STRIKE.room.chatText[i] = game.add.text(game.world.centerX + 460 , game.world.centerY  - 320 + i * 50, "____", style2);
+        }
+
+        GALACTIC_STRIKE.room.textBox = new TextField(game.world.centerX, game.world.centerY + 8 * 50, 40, 'textBox');//'textBox');
 
     },
     update: function () {

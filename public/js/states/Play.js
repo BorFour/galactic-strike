@@ -46,6 +46,27 @@ GALACTIC_STRIKE.Play.prototype = {
             }
         }, this);
 
+        var upSound = game.input.keyboard.addKey(Phaser.Keyboard.K);
+        upSound.onDown.add(function () {
+            if (game.sound.mute) {
+                game.sound.mute = false;
+            }
+            if (game.sound.volume < 1) {
+                game.sound.volume += 0.2;
+            }
+        }, this);
+
+        var downSound = game.input.keyboard.addKey(Phaser.Keyboard.J);
+        downSound.onDown.add(function () {
+            if (!game.sound.mute) {
+                game.sound.volume -= 0.2;
+            }
+            if (game.sound.volume < 0.2){
+                game.sound.volume = 0;
+                game.sound.mute = true;
+            }
+        }, this);
+
         if (!game.spacePhysics) {
             // Inicializamos el motor de físicas
             game.spacePhysics = new SpacePhysics(game)
@@ -138,8 +159,8 @@ GALACTIC_STRIKE.Play.prototype = {
 
         if (gameDebug) {
             var i = 1;
-            var offsetDebug = 550;
-            game.debug.text("Event cooldown: " + game.time.events.duration, 32, offsetDebug + 32*i);
+            var offsetDebug = 650;
+/*            game.debug.text("Event cooldown: " + game.time.events.duration, 32, offsetDebug + 32*i);
             i++;
             if (GALACTIC_STRIKE.player.character) {
                 game.debug.text("Planet touched: " +
@@ -152,8 +173,11 @@ GALACTIC_STRIKE.Play.prototype = {
                 game.debug.text('My ID: ' + GALACTIC_STRIKE.player.id, 32, offsetDebug + 32*i);
                 i++;
                 game.debug.text('Zoom (toggle with \'Z\') :' + GALACTIC_STRIKE.zoomed, 32, offsetDebug + 32*i);
+*/
                 i++;
                 game.debug.text('Mute (toggle with \'M\') :' + game.sound.mute, 32, offsetDebug + 32*i);
+                i++;
+                game.debug.text('Volume (+Up \'K\' , -Down \'J\') :' + game.sound.volume.toPrecision(2)*100 + '%', 32, offsetDebug + 32*i);
                 i++;
                 //  game.debug.text("Controls in atmosphere : move with : [A D]" + "\t", 32, 256);
                 //  game.debug.text("Jump with : [Spacebar]", 32, 288);

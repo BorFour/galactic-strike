@@ -229,7 +229,8 @@ clientSetupGame = function () {
 
         console.log('@Client received | hit');
 
-        if (GALACTIC_STRIKE.room.characters[input.target] && GALACTIC_STRIKE.room.characters[input.target].health) {
+        if (GALACTIC_STRIKE.room.characters[input.target] &&
+            GALACTIC_STRIKE.room.characters[input.target].alive) {
 
             // The hit's damage is applied to the character's health
             GALACTIC_STRIKE.room.characters[input.target].health -= input.damage;
@@ -247,10 +248,10 @@ clientSetupGame = function () {
 
             } else {
                 // This character is damage immune for a short period of time
-                GALACTIC_STRIKE.room.characters[input.target].hitImmune = true;
-                game.time.events.add(GALACTIC_STRIKE.room.characters[input.target].hitImmuneTime, function () {
-                    GALACTIC_STRIKE.room.characters[input.target].hitImmune = false;
-                }, this);
+//                GALACTIC_STRIKE.room.characters[input.target].hitImmune = true;
+//                game.time.events.add(GALACTIC_STRIKE.room.characters[input.target].hitImmuneTime, function () {
+//                    GALACTIC_STRIKE.room.characters[input.target].hitImmune = false;
+//                }, this);
             }
         }
 

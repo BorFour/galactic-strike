@@ -185,6 +185,7 @@ Character.prototype.die = function () {
     this.wheels[0].destroy();
     this.wheels[1].destroy();
     this.body.destroy();
+    this.destroy();
     this.kill();
 }
 
@@ -195,6 +196,7 @@ Character.prototype.simpleDie = function () {
     this.wheels[0].destroy();
     this.wheels[1].destroy();
     this.body.destroy();
+    this.destroy();
     this.kill();
 }
 

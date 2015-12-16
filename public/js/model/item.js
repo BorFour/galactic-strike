@@ -28,5 +28,6 @@ Item.prototype.use = function () {
 
 Item.prototype.die = function () {
     this.body.destroy();
+    this.destroy();
     this.kill();
 }

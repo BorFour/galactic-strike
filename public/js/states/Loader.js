@@ -164,7 +164,7 @@ GALACTIC_STRIKE.Loader.prototype = {
 
         var currentLocation = window.location.search;
         var formName = currentLocation.replace("?name=", "");
-        GALACTIC_STRIKE.player = new Player(formName ? formName : "Default");
+        GALACTIC_STRIKE.player = new Player(formName ? decodeURIComponent(formName) : "Default");
 
         //plays some songs
         play_songs();

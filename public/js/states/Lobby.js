@@ -27,9 +27,8 @@ GALACTIC_STRIKE.Lobby.prototype = {
         bmpText = game.add.text(game.world.centerX, game.world.centerY, "Esto es el lobby", style);
         bmpText.anchor.set(0.5);
 
-       buttonStage = game.add.button(game.world.centerX, game.world.centerY, 'changeMap', this.nextStage, this);
+
         textStage = game.add.text(game.world.centerX, game.world.centerY + 100, Object.keys(stages)[(GALACTIC_STRIKE.room.currentStage ? GALACTIC_STRIKE.room.currentStage : 0)], style);
-        buttonStage.anchor.set(0.5, 0.4);
         textStage.anchor.set(0.5);
 
         // Only the lobby's host can start the game
@@ -38,6 +37,8 @@ GALACTIC_STRIKE.Lobby.prototype = {
             buttonBegin = game.add.button(game.world.centerX, game.world.centerY + 250, 'buttonEnter', this.beginMatch, this, 0, 0, 0, 0);
             buttonBegin.anchor.set(0.5);
             GALACTIC_STRIKE.room.currentStage = 0;
+            buttonStage = game.add.button(game.world.centerX, game.world.centerY, 'changeMap', this.nextStage, this);
+            buttonStage.anchor.set(0.5, 0.4);
             //textStage.inputEnabled = true;
             //textStage.events.onInputDown.add(this.nextStage, this);
         }
@@ -131,7 +132,7 @@ GALACTIC_STRIKE.Lobby.prototype = {
             });
         }
 
-        if (GALACTIC_STRIKE.kickedPlayers < GALACTIC_STRIKE.playersToKick) {
+        if (GALACTIC_STRIKE.room.unasigned.players.length == 0) {
             socket.emit('beginMatch', {
                 id: GALACTIC_STRIKE.player.id,
                 stage: Object.keys(stages)[GALACTIC_STRIKE.room.currentStage]

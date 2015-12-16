@@ -54,13 +54,11 @@ Character.prototype.moveGrounded = function (direction) {
             this.motorSpeed = 0;
             this.animations.stop();
             this.jumpAnimation = false;
-            //            this.animations.play('left');
             break;
         case 'still':
             this.motorEnabled = false;
             this.animations.stop();
             this.jumpAnimation = false;
-            //            this.animations.play('left');
             //            this.animations.play('stop');
             break;
     }
@@ -103,7 +101,6 @@ Character.prototype.moveInOrbit = function (direction) {
             this.jumpAnimation = false;
             break;
         default:
-            //            this.animations.play('left');
             break;
     }
 
@@ -133,7 +130,7 @@ Character.prototype.moveSpace = function (direction) {
             this.body.linearDamping = 0.3;
             break;
         case 'up':
-            this.body.thrust(350);
+            this.body.thrust(315);
             if (this.orientation === this.LEFT) this.animations.play('jumpL');
             if (this.orientation === this.RIGHT) this.animations.play('jumpR');
             this.body.angularDamping = 10;
@@ -157,10 +154,9 @@ Character.prototype.moveSpace = function (direction) {
         case 'still':
             if (this.orientation === this.LEFT) this.animations.play('left');
             if (this.orientation === this.RIGHT) this.animations.play('right');
-            this.body.angularDamping = 0.35;
+            this.body.angularDamping = 10;
             this.body.linearDamping = 0.73;
             this.jumpAnimation = false;
-            //            this.animations.play('left');
             break;
     }
 

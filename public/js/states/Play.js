@@ -122,20 +122,30 @@ GALACTIC_STRIKE.Play.prototype = {
 
         GALACTIC_STRIKE.player.movePlayer();
         GALACTIC_STRIKE.hud.updateText();
+        GALACTIC_STRIKE.room.gameMode['showWinner'](GALACTIC_STRIKE.room.teams[0]);
 
     },
     render: function () {
 
         if (gameDebug) {
-            game.debug.text("Event cooldown: " + game.time.events.duration, 32, 32);
+            var i = 1;
+            var offsetDebug = 550;
+            game.debug.text("Event cooldown: " + game.time.events.duration, 32, offsetDebug + 32*i);
+            i++;
             if (GALACTIC_STRIKE.player.character) {
                 game.debug.text("Planet touched: " +
-                    (GALACTIC_STRIKE.player.character.planetTouched ? GALACTIC_STRIKE.player.character.planetTouched.sprite : GALACTIC_STRIKE.player.character.planetTouched), 32, 64);
-                game.debug.text("In atmosphere: " + GALACTIC_STRIKE.player.character.inAtmosphere(), 32, 96);
-                game.debug.text("Grounded: " + GALACTIC_STRIKE.player.character.isGrounded(), 32, 128);
-                game.debug.text('My ID: ' + GALACTIC_STRIKE.player.id, 32, 160);
-                game.debug.text('Zoom (toggle with \'Z\') :' + GALACTIC_STRIKE.zoomed, 32, 192);
-                game.debug.text('Mute (toggle with \'M\') :' + game.sound.mute, 32, 224);
+                    (GALACTIC_STRIKE.player.character.planetTouched ? GALACTIC_STRIKE.player.character.planetTouched.sprite : GALACTIC_STRIKE.player.character.planetTouched), 32, offsetDebug + 32*i);
+                i++;
+                game.debug.text("In atmosphere: " + GALACTIC_STRIKE.player.character.inAtmosphere(), 32, offsetDebug + 32*i);
+                i++;
+                game.debug.text("Grounded: " + GALACTIC_STRIKE.player.character.isGrounded(), 32, offsetDebug + 32*i);
+                i++;
+                game.debug.text('My ID: ' + GALACTIC_STRIKE.player.id, 32, offsetDebug + 32*i);
+                i++;
+                game.debug.text('Zoom (toggle with \'Z\') :' + GALACTIC_STRIKE.zoomed, 32, offsetDebug + 32*i);
+                i++;
+                game.debug.text('Mute (toggle with \'M\') :' + game.sound.mute, 32, offsetDebug + 32*i);
+                i++;
                 //  game.debug.text("Controls in atmosphere : move with : [A D]" + "\t", 32, 256);
                 //  game.debug.text("Jump with : [Spacebar]", 32, 288);
                 //  game.debug.text("Controls in space : rotate with : [A D]" + "\t", 32, 320);
@@ -156,16 +166,16 @@ GALACTIC_STRIKE.Play.prototype = {
         // var c se almacena el valor de las CLAVES
         // Para acceder a los valores, hay que indexar la
         // lista con la propia clave 'c'
-        for (var c in GALACTIC_STRIKE.room.characters) {
-            game.debug.text(GALACTIC_STRIKE.room.characters[c], 640, i * 32);
-            ++i;
-        }
-        game.debug.text(GALACTIC_STRIKE.room.teams[0] + " : " +
-                        GALACTIC_STRIKE.room.gameMode.scores[GALACTIC_STRIKE.room.teams[0]] +
-                        " " +
-                        GALACTIC_STRIKE.room.teams[1] + " : " +
-                        GALACTIC_STRIKE.room.gameMode.scores[GALACTIC_STRIKE.room.teams[1]], 640, i * 32);
-        i++;
+//        for (var c in GALACTIC_STRIKE.room.characters) {
+//            game.debug.text(GALACTIC_STRIKE.room.characters[c], 640, i * 32);
+//            ++i;
+//        }
+//        game.debug.text(GALACTIC_STRIKE.room.teams[0] + " : " +
+//                        GALACTIC_STRIKE.room.gameMode.scores[GALACTIC_STRIKE.room.teams[0]] +
+//                        " " +
+//                        GALACTIC_STRIKE.room.teams[1] + " : " +
+//                        GALACTIC_STRIKE.room.gameMode.scores[GALACTIC_STRIKE.room.teams[1]], 640, i * 32);
+//        i++;
 
 //        game.debug.text("Events : " + game.time.events.length, 640, i * 32);
 
@@ -245,7 +255,7 @@ function updateOnlineTimer() {
 
 function zoomInGame () {
 
-     if (GALACTIC_STRIKE.zoomed) {
+     if (GALACTIC_STRIKE.zoomed && !GALACTIC_STRIKE.room.gameOver) {
         GALACTIC_STRIKE.zoomed = false;
         GALACTIC_STRIKE.zooming = true;
         GALACTIC_STRIKE.room.map.zoomIn();
@@ -256,7 +266,7 @@ function zoomInGame () {
 
 function zoomOutGame () {
 
-    if (!GALACTIC_STRIKE.zoomed) {
+    if (!GALACTIC_STRIKE.zoomed && !GALACTIC_STRIKE.room.gameOver) {
         GALACTIC_STRIKE.zoomed = true;
         GALACTIC_STRIKE.zooming = true;
         GALACTIC_STRIKE.room.map.zoomOut();

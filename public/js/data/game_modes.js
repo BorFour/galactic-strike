@@ -18,7 +18,7 @@ var gameModes =
         },
         'startRound' : function () {
 
-                if (GALACTIC_STRIKE.room.host !== GALACTIC_STRIKE.player.id || GALACTIC_STRIKE.room.roundFinished) { return; }
+                if (GALACTIC_STRIKE.room.host != GALACTIC_STRIKE.player.id || GALACTIC_STRIKE.room.roundFinished) { return; }
 
                 GALACTIC_STRIKE.room.roundFinished = true;
 
@@ -83,11 +83,8 @@ var gameModes =
         'showWinner' : function (winner) {
 
             GALACTIC_STRIKE.room.gameOver = true;
-            if (GALACTIC_STRIKE.zoomed)
-            {
-                game.world.scale.set(1);
-                GALACTIC_STRIKE.zoomed = false;
-            }
+
+            zoomInGame();
 
             var nameLabel = game.add.text(game.world.centerX, game.world.centerY/3, (winner + ' wins!'),{ font: '70px Geo   ', fill: '#ffffff' });
             nameLabel.anchor.setTo(0.5, 0.5);
@@ -97,12 +94,12 @@ var gameModes =
             buttonQuit.scale.set(0.25);
 
             game.camera.follow(null);
-            var toButton = game.add.tween(game.camera).to({x : buttonQuit.x  - game.camera.width/2, y : buttonQuit.y - game.camera.height/2}, 350, Phaser.Easing.Quadratic.InOut, true);
+            var toButton = game.add.tween(game.camera.focusOnXY).to({x : buttonQuit.x  - game.camera.width/2, y : buttonQuit.y - game.camera.height/2}, 350, Phaser.Easing.Quadratic.InOut, true);
 
             game.time.events.add(26000, quitGameGM, this);
 
             GALACTIC_STRIKE.currentSong.stop();
-            GALACTIC_STRIKE.readTeamAnthem.play();
+            GALACTIC_STRIKE.redTeamAnthem.play();
             //winner.playAnthem();
 
             game.add.tween(nameLabel).to({y: game.world.centerY - 200}, 1000).easing(Phaser.Easing.Bounce.Out).start();

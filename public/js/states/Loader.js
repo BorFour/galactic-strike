@@ -19,7 +19,7 @@ play_songs = function () {
 //    GALACTIC_STRIKE.songs.push(game.add.audio('dreamLand', 0.45, true));
     //GALACTIC_STRIKE.songs.push(game.add.audio('witch', 0.45, true));
     GALACTIC_STRIKE.songs.push(game.add.audio('pingasDreamLand', 0.45, true));
-    GALACTIC_STRIKE.readTeamAnthem = game.add.audio('sovietAnthem', 0.55, true);
+    GALACTIC_STRIKE.redTeamAnthem = game.add.audio('sovietAnthem', 0.55, true);
     //    GALACTIC_STRIKE.songs.push(game.add.audio('dedede'));
     GALACTIC_STRIKE.currentSong = GALACTIC_STRIKE.songs[Math.floor(Math.random() * GALACTIC_STRIKE.songs.length)];
     GALACTIC_STRIKE.currentSong.play();
@@ -164,7 +164,7 @@ GALACTIC_STRIKE.Loader.prototype = {
                 game.sound.mute = false;
             }
         }, this);
-        game.input.keyboard.removeKeyCapture(Phaser.Keyboard.M);
+//        game.input.keyboard.removeKeyCapture(Phaser.Keyboard.M);
 
 
         var currentLocation = window.location.search;

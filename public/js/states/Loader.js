@@ -97,6 +97,7 @@ load_assets = function () {
     game.load.image('buttonEnter', '../assets/buttons/enterRoom.png');
     game.load.image('buttonCreate', '../assets/buttons/createRoom.png');
     game.load.image("exitButton", "../assets/buttons/boton_exit.png");
+    game.load.image("changeMap", "../assets/buttons/change_map.png");
 
     //OTHER
     ///////////////////////

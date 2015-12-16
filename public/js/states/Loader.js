@@ -18,8 +18,9 @@ play_songs = function () {
 //    GALACTIC_STRIKE.songs.push(game.add.audio('muteCity', 0.45, true));
 //    GALACTIC_STRIKE.songs.push(game.add.audio('dreamLand', 0.45, true));
     //GALACTIC_STRIKE.songs.push(game.add.audio('witch', 0.45, true));
-    GALACTIC_STRIKE.songs.push(game.add.audio('pingasDreamLand', 0.45, true));
-    GALACTIC_STRIKE.redTeamAnthem = game.add.audio('sovietAnthem', 0.55, true);
+    GALACTIC_STRIKE.songs.push(game.add.audio('pingasDreamLand', 0.30, true));
+    GALACTIC_STRIKE.redTeamAnthem = game.add.audio('sovietAnthem', 0.70, true);
+    GALACTIC_STRIKE.blueTeamAnthem = game.add.audio('starsAndStripes', 0.70, true);
     //    GALACTIC_STRIKE.songs.push(game.add.audio('dedede'));
     GALACTIC_STRIKE.currentSong = GALACTIC_STRIKE.songs[Math.floor(Math.random() * GALACTIC_STRIKE.songs.length)];
     GALACTIC_STRIKE.currentSong.play();
@@ -46,6 +47,7 @@ load_assets = function () {
     game.load.audio('dieSound', '../assets/sound/pingas_death.mp3');
     game.load.audio('pingasDreamLand', '../assets/sound/pingas_dreamland.mp3');
     game.load.audio('sovietAnthem', '../assets/sound/soviet_anthem.mp3');
+    game.load.audio('starsAndStripes', '../assets/sound/stars_and_stripes.mp3');
     //    game.load.audio('dedede', '../assets/sound/king_dedede.mp3');
     /*
      * http://downloads.khinsider.com/game-soundtracks/album/super-smash-bros.-melee-original-sound-version
@@ -156,14 +158,7 @@ GALACTIC_STRIKE.Loader.prototype = {
     },
     create: function () {
 
-        var muteKey = game.input.keyboard.addKey(Phaser.Keyboard.M);
-        muteKey.onDown.add(function () {
-            if (!game.sound.mute) {
-                game.sound.mute = true;
-            } else {
-                game.sound.mute = false;
-            }
-        }, this);
+
 //        game.input.keyboard.removeKeyCapture(Phaser.Keyboard.M);
 
 

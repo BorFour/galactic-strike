@@ -36,6 +36,16 @@ GALACTIC_STRIKE.Play.prototype = {
     preload: function () {},
     create: function () {
 
+
+        var muteKey = game.input.keyboard.addKey(Phaser.Keyboard.M);
+        muteKey.onDown.add(function () {
+            if (!game.sound.mute) {
+                game.sound.mute = true;
+            } else {
+                game.sound.mute = false;
+            }
+        }, this);
+
         if (!game.spacePhysics) {
             // Inicializamos el motor de físicas
             game.spacePhysics = new SpacePhysics(game)

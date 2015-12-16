@@ -46,8 +46,8 @@ function Character(x, y, angle, game, player, asset) {
 
     // Sounds
 
-    this.attackSound = game.add.audio('pingas', 1, false);
-    this.dieSound = game.add.audio('dieSound', 0.63, false);
+    this.attackSound = game.add.audio('pingas', 0.6, false);
+    this.dieSound = game.add.audio('dieSound', 0.7, false);
 
     var PTM = 50;
     var driveJoints = [];

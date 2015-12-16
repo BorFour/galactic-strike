@@ -98,11 +98,23 @@ var gameModes =
             game.camera.focusOn(GALACTIC_STRIKE.player.character);
             var toButton = game.add.tween(game.camera).to({x : buttonQuit.x  - game.camera.width/2, y : buttonQuit.y - game.camera.height/2}, 350, Phaser.Easing.Quadratic.InOut, true);
 
-            game.time.events.add(26000, quitGameGM, this);
+
 
             GALACTIC_STRIKE.currentSong.stop();
-            GALACTIC_STRIKE.redTeamAnthem.play();
-            //winner.playAnthem();
+
+            switch(winner.color) {
+                case 1:
+                    GALACTIC_STRIKE.redTeamAnthem.play();
+                    game.time.events.add(26000, quitGameGM, this);
+                    break;
+                case 2:
+                    GALACTIC_STRIKE.blueTeamAnthem.play();
+                    game.time.events.add(30900, quitGameGM, this);
+                    break;
+            }
+
+//            GALACTIC_STRIKE.room.teams[0].anthem.play();
+//            winner.anthem.play();
 
             game.add.tween(nameLabel).to({y: game.world.centerY - 200}, 1000).easing(Phaser.Easing.Bounce.Out).start();
             toButton.start();
@@ -113,7 +125,7 @@ var gameModes =
             console.log("Deathmatch update");
             var wr = this.winnerRound();
             if(wr)
-            {1
+            {
                 this.scores[wr] += 1;
                 console.log(wr.name + ' won this round.' + this.scores[wr] + ' points');
                 if(this.isOverGame())

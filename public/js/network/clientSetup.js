@@ -20,7 +20,7 @@ clientSetupMenu = function () {
         console.log('@Client received | userLeft');
 
 
-        if (GALACTIC_STRIKE.room.characters[input.id] && GALACTIC_STRIKE.room.characters[input.id].alive)
+        if (GALACTIC_STRIKE.room && GALACTIC_STRIKE.room.characters[input.id] && GALACTIC_STRIKE.room.characters[input.id].alive)
         {
             GALACTIC_STRIKE.room.characters[input.id].die();
 

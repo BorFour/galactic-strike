@@ -1,7 +1,7 @@
 function Star(x, y, gravityRadius, gravityForce, asset, collisionRadius, game) {
 
     Element.call(this, game, x, y, asset);
-    game.add.existing(this);
+//    game.add.existing(this);
 
     //      this.sprite = game.add.sprite(x, y, asset);
     this.anchor.setTo(0.5, 0.5)

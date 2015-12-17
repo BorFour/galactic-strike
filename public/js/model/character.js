@@ -41,7 +41,7 @@ function Character(x, y, angle, game, player, asset) {
     this.attack2CooldownTime = 600;
     this.attack3CooldownTime = 2000;
     this.fireCooldownTime = 250;
-    this.hitImmuneTime = 330; //After being attacked, the character cannot be hurted for this time
+    this.hitImmuneTime = 550; //After being attacked, the character cannot be hurted for this time
 
 
     // Sounds

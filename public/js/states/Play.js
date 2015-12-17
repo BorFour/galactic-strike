@@ -254,7 +254,8 @@ function touchSpikeballEnemy(body1, body2, fixture1, fixture2, begin) {
             };
 
             console.log(output);
-            socket.emit('hit', output);
+//            socket.emit('hit', output);
+            GALACTIC_STRIKE.player.character.currentHit = output;
             console.log("Hit");
         }
 

@@ -18,6 +18,7 @@ Character.prototype.updateOnline = function () {
 
     if(this.currentAttack) {
         data.attack = this.currentAttack;
+        data.hit = this.currentHit;
         this.currentAttack = null;
     }
 

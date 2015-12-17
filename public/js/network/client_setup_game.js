@@ -168,42 +168,85 @@ clientSetupGame = function () {
 
         if (!GALACTIC_STRIKE.room.roundReady) {return;}
 
-        if (input.id == GALACTIC_STRIKE.player.id)
-            return;
+//        if (input.id != GALACTIC_STRIKE.player.id)
+//            return;
 
         // All the properties stored in input are copied into input.id's character
-        if (GALACTIC_STRIKE.room.characters[input.id] && GALACTIC_STRIKE.room.characters[input.id].alive) {
-            GALACTIC_STRIKE.room.characters[input.id].body.x = input.x;
-            GALACTIC_STRIKE.room.characters[input.id].body.y = input.y;
-            GALACTIC_STRIKE.room.characters[input.id].body.angle = input.angle;
-            GALACTIC_STRIKE.room.characters[input.id].body.velocity.x = input.velocityX;
-            GALACTIC_STRIKE.room.characters[input.id].body.velocity.y = input.velocityY;
-            GALACTIC_STRIKE.room.characters[input.id].body.angularVelocity = input.angularVelocity;
-            GALACTIC_STRIKE.room.characters[input.id].orientation = input.orientation;
-            GALACTIC_STRIKE.room.characters[input.id].jumpAnimation = input.jumpAnimation;
-        } else {
-            // The character hasn't been created yet
-            return;
+        if (input.id != GALACTIC_STRIKE.player.id) {
+
+            if (GALACTIC_STRIKE.room.characters[input.id] && GALACTIC_STRIKE.room.characters[input.id].alive) {
+                GALACTIC_STRIKE.room.characters[input.id].body.x = input.x;
+                GALACTIC_STRIKE.room.characters[input.id].body.y = input.y;
+                GALACTIC_STRIKE.room.characters[input.id].body.angle = input.angle;
+                GALACTIC_STRIKE.room.characters[input.id].body.velocity.x = input.velocityX;
+                GALACTIC_STRIKE.room.characters[input.id].body.velocity.y = input.velocityY;
+                GALACTIC_STRIKE.room.characters[input.id].body.angularVelocity = input.angularVelocity;
+                GALACTIC_STRIKE.room.characters[input.id].orientation = input.orientation;
+                GALACTIC_STRIKE.room.characters[input.id].jumpAnimation = input.jumpAnimation;
+            } else {
+                // The character hasn't been created yet
+                return;
+            }
+
+            if (GALACTIC_STRIKE.room.characters[input.id].jumpAnimation) {
+                if (GALACTIC_STRIKE.room.characters[input.id].orientation == GALACTIC_STRIKE.room.characters[input.id].LEFT) {
+                    GALACTIC_STRIKE.room.characters[input.id].animations.play('jumpL');
+                } else {
+                    GALACTIC_STRIKE.room.characters[input.id].animations.play('jumpR');
+                }
+            } else {
+                if (GALACTIC_STRIKE.room.characters[input.id].orientation == GALACTIC_STRIKE.room.characters[input.id].LEFT) {
+                    GALACTIC_STRIKE.room.characters[input.id].animations.play('left');
+                } else {
+                    GALACTIC_STRIKE.room.characters[input.id].animations.play('right');
+                }
+            }
+
+            if (input.attack) {
+                if (!GALACTIC_STRIKE.room.roundReady) {return;}
+                console.log("Attack in update handler");
+                console.log(input.attack);
+                GALACTIC_STRIKE.room.characters[input.id].attacks(input.attack.id, input.attack.space);
+            }
+
         }
 
-        if (input.attack) {
-            console.log("Attack id: " + input.attack.id);
-            GALACTIC_STRIKE.room.characters[input.id].attacks(input.attack.id, input.attack.space);
+
+        if (input.hit) {
+
+            if (!GALACTIC_STRIKE.room.roundReady) {return;}
+            if (GALACTIC_STRIKE.room.characters[input.hit.target] &&
+            GALACTIC_STRIKE.room.characters[input.hit.target].alive) {
+
+            console.log("Hit in update handler");
+            console.log(input.hit);
+            // The hit's damage is applied to the character's health
+            GALACTIC_STRIKE.room.characters[input.hit.target].health -= input.hit.damage;
+
+            // When the character's health drops below zero, the character dies.
+            if (GALACTIC_STRIKE.room.characters[input.hit.target].health <= 0) {
+
+                GALACTIC_STRIKE.room.characters[input.hit.target].die();
+                delete GALACTIC_STRIKE.room.characters[input.hit.target];
+
+                if(input.hit.target == GALACTIC_STRIKE.player.id) {
+                    game.camera.follow(null);
+//                    game.camera.reset();
+                    zoomOutGame();
+                }
+
+                if(!GALACTIC_STRIKE.room.gameOver) GALACTIC_STRIKE.room.gameMode.update();
+
+            } //else {
+                // This character is damage immune for a short period of time
+//                GALACTIC_STRIKE.room.characters[input.hit.target].hitImmune = true;
+//                game.time.events.add(GALACTIC_STRIKE.room.characters[input.hit.target].hitImmuneTime, function () {
+//                    GALACTIC_STRIKE.room.characters[input.hit.target].hitImmune = false;
+//                    }, this);
+//                }
+            }
         }
 
-        if (GALACTIC_STRIKE.room.characters[input.id].jumpAnimation) {
-            if (GALACTIC_STRIKE.room.characters[input.id].orientation == GALACTIC_STRIKE.room.characters[input.id].LEFT) {
-                GALACTIC_STRIKE.room.characters[input.id].animations.play('jumpL');
-            } else {
-                GALACTIC_STRIKE.room.characters[input.id].animations.play('jumpR');
-            }
-        } else {
-            if (GALACTIC_STRIKE.room.characters[input.id].orientation == GALACTIC_STRIKE.room.characters[input.id].LEFT) {
-                GALACTIC_STRIKE.room.characters[input.id].animations.play('left');
-            } else {
-                GALACTIC_STRIKE.room.characters[input.id].animations.play('right');
-            }
-        }
 
     });
 
@@ -233,40 +276,15 @@ clientSetupGame = function () {
      * @event 'hit'
      */
 
-    socket.on('hit', function (input) {
+        // DEPRECATED
 
-        console.log('@Client received | hit');
-        if (!GALACTIC_STRIKE.room.roundReady) {return;}
-
-        if (GALACTIC_STRIKE.room.characters[input.target] &&
-            GALACTIC_STRIKE.room.characters[input.target].alive) {
-
-            // The hit's damage is applied to the character's health
-            GALACTIC_STRIKE.room.characters[input.target].health -= input.damage;
-
-            // When the character's health drops below zero, the character dies.
-            if (GALACTIC_STRIKE.room.characters[input.target].health <= 0) {
-
-                GALACTIC_STRIKE.room.characters[input.target].die();
-                delete GALACTIC_STRIKE.room.characters[input.target];
-
-                if(input.target == GALACTIC_STRIKE.player.id) {
-                    game.camera.follow(null);
-//                    game.camera.reset();
-                    zoomOutGame();
-                }
-
-                GALACTIC_STRIKE.room.gameMode.update();
-
-            } else {
-                // This character is damage immune for a short period of time
-                GALACTIC_STRIKE.room.characters[input.target].hitImmune = true;
-                game.time.events.add(GALACTIC_STRIKE.room.characters[input.target].hitImmuneTime, function () {
-                    GALACTIC_STRIKE.room.characters[input.target].hitImmune = false;
-                }, this);
-            }
-        }
-
-    });
+//    socket.on('hit', function (input) {
+//
+//        console.log('@Client received | hit');
+//        if (!GALACTIC_STRIKE.room.roundReady) {return;}
+//
+//
+//
+//    });
 
 }

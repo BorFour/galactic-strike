@@ -37,10 +37,10 @@ load_assets = function () {
 
     //MUSIC
     ///////////////////////
-    game.load.audio('guiles', '../assets/sound/guiles_theme.mp3');
-    game.load.audio('checker', '../assets/sound/checker_knights.mp3');
-    game.load.audio('muteCity', '../assets/sound/mute_city.mp3');
-    game.load.audio('dreamLand', '../assets/sound/dream_land.mp3');
+//    game.load.audio('guiles', '../assets/sound/guiles_theme.mp3');
+//    game.load.audio('checker', '../assets/sound/checker_knights.mp3');
+//    game.load.audio('muteCity', '../assets/sound/mute_city.mp3');
+//    game.load.audio('dreamLand', '../assets/sound/dream_land.mp3');
     //game.load.audio('witch', '../assets/sound/witch_doctor.mp3');
     game.load.audio('jump', ['../assets/jump.ogg', '../assets/jump.mp3']);
     game.load.audio('pingas', '../assets/sound/pingas.mp3');

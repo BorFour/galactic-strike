@@ -1,7 +1,7 @@
 function Character(x, y, angle, game, player, asset) {
 
     Element.call(this, game, x, y, asset);
-    game.add.existing(this);
+//    game.add.existing(this);
 
     this.rotation = angle;
 
@@ -186,7 +186,7 @@ Character.prototype.die = function () {
     this.wheels[1].destroy();
     this.body.destroy();
     this.destroy();
-    this.kill();
+//    this.kill();
 }
 
 Character.prototype.simpleDie = function () {
@@ -197,7 +197,7 @@ Character.prototype.simpleDie = function () {
     this.wheels[1].destroy();
     this.body.destroy();
     this.destroy();
-    this.kill();
+//    this.kill();
 }
 
 Character.prototype.inWorldCustom = function () {

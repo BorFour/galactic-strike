@@ -40,7 +40,7 @@ Character.prototype.attack0 = function () {
 
         // bodyA, bodyB, maxForce, maxTorque, correctionFactor, offsetX, offsetY, offsetAngle
         this.cucumber.damage = 65;
-        game.physics.box2d.motorJoint(this, this.cucumber, 80, 50, 0.25, this.orientation * 80, 50, 4.5);
+        this.attackJoint = game.physics.box2d.motorJoint(this, this.cucumber, 80, 50, 0.25, this.orientation * 80, 50, 4.5);
 
         //        cucumber.body.rotation = this.body.rotation; // Este ángulo va en grados
         //        cucumber.body.angularVelocity = 20;
@@ -52,6 +52,7 @@ Character.prototype.attack0 = function () {
 
         game.time.events.add(this.attackCooldownTime, function () {
             this.cucumber.die();
+            game.physics.box2d.world.DestroyJoint(this.attackJoint);
             this.attackCooldown = true;
         }, this)
 
@@ -81,7 +82,7 @@ Character.prototype.attack1 = function () {
         //        game.physics.box2d.motorJoint(spriteA, spriteB, 800, 500, 0.25, -100, 200, 45);
         this.cucumber2.damage = 35;
         //        game.physics.box2d.motorJoint(this, this.cucumber2, 80*this.orientation, 0, 0.25, 120, 0, 4.5);
-        game.physics.box2d.motorJoint(this, this.cucumber2, 80, 50, 0.25, this.orientation * 120, 0, 4.5);
+        this.attackJoint = game.physics.box2d.motorJoint(this, this.cucumber2, 80, 50, 0.25, this.orientation * 120, 0, 4.5);
         //        cucumber.body.rotation = this.body.rotation; // Este ángulo va en grados
         //        cucumber.body.angularVelocity = 20;
         this.cucumber2.body.thrust(1000);
@@ -91,6 +92,7 @@ Character.prototype.attack1 = function () {
         }
         game.time.events.add(this.attack2CooldownTime, function () {
             this.cucumber2.die();
+            game.physics.box2d.world.DestroyJoint(this.attackJoint);
             this.attackCooldown = true;
         }, this)
 
@@ -121,7 +123,7 @@ Character.prototype.attack2 = function () {
         //        game.physics.box2d.motorJoint(spriteA, spriteB, 800, 500, 0.25, -100, 200, 45);
         this.cucumber3.damage = 25;
         //        game.physics.box2d.motorJoint(this, this.cucumber2, 80*this.orientation, 0, 0.25, 120, 0, 4.5);
-        game.physics.box2d.motorJoint(this, this.cucumber3, 80, 50, 0.25, this.orientation * 120, 0, 4.5);
+        this.attackJoint = game.physics.box2d.motorJoint(this, this.cucumber3, 80, 50, 0.25, this.orientation * 120, 0, 4.5);
         //        cucumber.body.rotation = this.body.rotation; // Este ángulo va en grados
         //        cucumber.body.angularVelocity = 20;
         this.cucumber3.body.thrust(1000);
@@ -131,6 +133,7 @@ Character.prototype.attack2 = function () {
         }
         game.time.events.add(this.attack3CooldownTime, function () {
             this.cucumber3.die();
+            game.physics.box2d.world.DestroyJoint(this.attackJoint);
             this.attackCooldown = true;
         }, this)
 

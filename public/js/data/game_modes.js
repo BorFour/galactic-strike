@@ -153,6 +153,10 @@ var gameModes =
         'update' : function (){
 
             console.log("Deathmatch update");
+            if(!GALACTIC_STRIKE.room.roundReady) {
+                console.log("Trying to update gameMode when new round is not ready");
+                return;
+            }
             var wr = this.winnerRound();
             if(wr)
             {

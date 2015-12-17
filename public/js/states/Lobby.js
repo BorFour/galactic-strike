@@ -38,20 +38,20 @@ GALACTIC_STRIKE.Lobby.prototype = {
             boundsAlignH: "center",
             boundsAlignV: "middle"
         };
-        bmpText = game.add.text(game.world.centerX, game.world.centerY, "Esto es el lobby", style);
-        bmpText.anchor.set(0.5);
+        bmpText = game.add.text(game.world.centerX-250, 100, "Esto es el lobby", style);
+        bmpText.anchor.set(0.5, 0.1);
 
 
-        textStage = game.add.text(game.world.centerX, game.world.centerY + 100, Object.keys(stages)[(GALACTIC_STRIKE.room.currentStage ? GALACTIC_STRIKE.room.currentStage : 0)], style);
+        textStage = game.add.text(game.world.centerX-250, game.world.centerY + 100, Object.keys(stages)[(GALACTIC_STRIKE.room.currentStage ? GALACTIC_STRIKE.room.currentStage : 0)], style);
         textStage.anchor.set(0.5);
 
         // Only the lobby's host can start the game
 
         if (GALACTIC_STRIKE.player.id === GALACTIC_STRIKE.room.host) {
-            buttonBegin = game.add.button(game.world.centerX, game.world.centerY + 250, 'buttonEnter', this.beginMatch, this, 0, 0, 0, 0);
+            buttonBegin = game.add.button(game.world.centerX-250, game.world.centerY + 250, 'buttonEnter', this.beginMatch, this, 0, 0, 0, 0);
             buttonBegin.anchor.set(0.5);
             GALACTIC_STRIKE.room.currentStage = 0;
-            buttonStage = game.add.button(game.world.centerX, game.world.centerY, 'changeMap', this.nextStage, this);
+            buttonStage = game.add.button(game.world.centerX-250, game.world.centerY, 'changeMap', this.nextStage, this);
             buttonStage.anchor.set(0.5, 0.4);
             //textStage.inputEnabled = true;
             //textStage.events.onInputDown.add(this.nextStage, this);
@@ -60,7 +60,7 @@ GALACTIC_STRIKE.Lobby.prototype = {
         // Everytime a user clicks the red button, the client requests to join the red team
 
 
-        buttonRed = game.add.button(game.world.centerX - 440, game.world.centerY - 300, 'redTeam', function () {
+        buttonRed = game.add.button(game.world.centerX - 690, game.world.centerY - 300, 'redTeam', function () {
 
             socket.emit('changeTeam', {
                 id: GALACTIC_STRIKE.player.id,
@@ -72,7 +72,7 @@ GALACTIC_STRIKE.Lobby.prototype = {
 
         // Everytime a user clicks the blue button, the client requests to join the blue team
 
-        buttonBlue = game.add.button(game.world.centerX + 200, game.world.centerY - 300, 'blueTeam', function () {
+        buttonBlue = game.add.button(game.world.centerX -50, game.world.centerY - 300, 'blueTeam', function () {
 
             socket.emit('changeTeam', {
                 id: GALACTIC_STRIKE.player.id,
@@ -92,28 +92,28 @@ GALACTIC_STRIKE.Lobby.prototype = {
         // Initialization of the textBox for the slots (max 4 players per team)
 
         for (var i = 0; i < 4; i++) {
-            GALACTIC_STRIKE.room.textRed[i] = game.add.text(game.world.centerX - 350, game.world.centerY + i * 50, "[     ]", style);
+            GALACTIC_STRIKE.room.textRed[i] = game.add.text(game.world.centerX - 600, game.world.centerY + i * 50, "[     ]", style);
             GALACTIC_STRIKE.room.textRed[i].anchor.set(0.5);
 
         }
 
         for (var i = 0; i < 4; i++) {
-            GALACTIC_STRIKE.room.textBlue[i] = game.add.text(game.world.centerX + 300, game.world.centerY + i * 50, "[     ]", style);
+            GALACTIC_STRIKE.room.textBlue[i] = game.add.text(game.world.centerX + 50, game.world.centerY + i * 50, "[     ]", style);
             GALACTIC_STRIKE.room.textBlue[i].anchor.set(0.5);
         }
 
 
         for (var i = 0; i < 4; i++) {
-            GALACTIC_STRIKE.room.textUnasigned[i] = game.add.text(game.world.centerX, game.world.centerY - 250 + i * 50, "[     ]", style);
+            GALACTIC_STRIKE.room.textUnasigned[i] = game.add.text(game.world.centerX-250, game.world.centerY - 250 + i * 50, "[     ]", style);
             GALACTIC_STRIKE.room.textUnasigned[i].anchor.set(0.5);
         }
 
 
         for (var i = 0; i < 8; i++) {
-            GALACTIC_STRIKE.room.chatText[i] = game.add.text(game.world.centerX + 460 , game.world.centerY  - 320 + i * 50, "____", style2);
+            GALACTIC_STRIKE.room.chatText[i] = game.add.text(game.world.centerX + 450 , game.world.centerY  - 320 + i * 50, "____", style2);
         }
 
-        GALACTIC_STRIKE.room.textBox = new TextField(game.world.centerX, game.world.centerY + 8 * 50, 40, 'textBox');//'textBox');
+        GALACTIC_STRIKE.room.textBox = new TextField(game.world.centerX-350, game.world.centerY + 8 * 50, 40, 'textBox');//'textBox');
 
     },
     update: function () {

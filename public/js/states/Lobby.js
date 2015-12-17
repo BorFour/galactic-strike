@@ -110,12 +110,13 @@ GALACTIC_STRIKE.Lobby.prototype = {
 
 
         for (var i = 0; i < 8; i++) {
-            GALACTIC_STRIKE.room.chatText[i] = game.add.text(game.world.centerX + 450 , game.world.centerY  - 320 + i * 50, "____", style2);
+            GALACTIC_STRIKE.room.chatText[i] = game.add.text(game.world.centerX + 275 , game.world.centerY  - 320 + i * 50, "____", style2);
         }
 
-        GALACTIC_STRIKE.room.textBox = new TextField(game.world.centerX-350, game.world.centerY + 8 * 50, 40, 'textBox');//'textBox');
+        GALACTIC_STRIKE.room.textBox = new TextField(game.world.centerX-550, game.world.centerY + 8 * 50, 40, 'textBox');//'textBox');
 
     },
+
     update: function () {
 
         // Shows the player's team

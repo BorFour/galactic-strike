@@ -108,7 +108,7 @@ clientSetupGame = function () {
         if (GALACTIC_STRIKE.room.characters[input.id] && GALACTIC_STRIKE.room.characters[input.id].alive) {
             GALACTIC_STRIKE.room.characters[input.id].die();
             // The game mode state might change after a user leaves
-            GALACTIC_STRIKE.room.gameMode.update();
+            if(!GALACTIC_STRIKE.room.gameOver) GALACTIC_STRIKE.room.gameMode.update();
         }
         delete GALACTIC_STRIKE.room.characters[input.id];
         delete GALACTIC_STRIKE.room.players[input.id];

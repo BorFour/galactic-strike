@@ -33,7 +33,7 @@ io.on('connection', function (socket) {
         };
         console.log('@Server <-      \t| login');
         socket.join('General');
-
+        socket.timestamp = timestamp;
         players[currId] = input;
         socket.game_id = currId;
         currId++;

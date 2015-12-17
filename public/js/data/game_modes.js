@@ -17,6 +17,7 @@ var gameModes =
 
         },
         'startRound' : function () {
+                GALACTIC_STRIKE.room.roundReady = false;
 
                 if (GALACTIC_STRIKE.room.host != GALACTIC_STRIKE.player.id || GALACTIC_STRIKE.room.roundFinished) { return; }
 

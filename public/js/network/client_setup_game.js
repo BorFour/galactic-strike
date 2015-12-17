@@ -150,6 +150,12 @@ clientSetupGame = function () {
             GALACTIC_STRIKE.charactersBuffer[input.id] = input;
         }
 
+        var arePlayersReady = true;
+        for (var p in GALACTIC_STRIKE.room.players){
+            arePlayersReady = arePlayersReady && GALACTIC_STRIKE.room.players[p].character;
+        }
+        GALACTIC_STRIKE.room.roundReady = arePlayersReady;
+
     });
 
 
@@ -160,11 +166,13 @@ clientSetupGame = function () {
 
     socket.on('update', function (input) {
 
-        if (input.id === GALACTIC_STRIKE.player.id)
+        if (!GALACTIC_STRIKE.room.roundReady) {return;}
+
+        if (input.id == GALACTIC_STRIKE.player.id)
             return;
 
         // All the properties stored in input are copied into input.id's character
-        if (GALACTIC_STRIKE.room.characters[input.id]) {
+        if (GALACTIC_STRIKE.room.characters[input.id] && GALACTIC_STRIKE.room.characters[input.id].alive) {
             GALACTIC_STRIKE.room.characters[input.id].body.x = input.x;
             GALACTIC_STRIKE.room.characters[input.id].body.y = input.y;
             GALACTIC_STRIKE.room.characters[input.id].body.angle = input.angle;
@@ -184,13 +192,13 @@ clientSetupGame = function () {
         }
 
         if (GALACTIC_STRIKE.room.characters[input.id].jumpAnimation) {
-            if (GALACTIC_STRIKE.room.characters[input.id].orientation === GALACTIC_STRIKE.room.characters[input.id].LEFT) {
+            if (GALACTIC_STRIKE.room.characters[input.id].orientation == GALACTIC_STRIKE.room.characters[input.id].LEFT) {
                 GALACTIC_STRIKE.room.characters[input.id].animations.play('jumpL');
             } else {
                 GALACTIC_STRIKE.room.characters[input.id].animations.play('jumpR');
             }
         } else {
-            if (GALACTIC_STRIKE.room.characters[input.id].orientation === GALACTIC_STRIKE.room.characters[input.id].LEFT) {
+            if (GALACTIC_STRIKE.room.characters[input.id].orientation == GALACTIC_STRIKE.room.characters[input.id].LEFT) {
                 GALACTIC_STRIKE.room.characters[input.id].animations.play('left');
             } else {
                 GALACTIC_STRIKE.room.characters[input.id].animations.play('right');
@@ -228,6 +236,7 @@ clientSetupGame = function () {
     socket.on('hit', function (input) {
 
         console.log('@Client received | hit');
+        if (!GALACTIC_STRIKE.room.roundReady) {return;}
 
         if (GALACTIC_STRIKE.room.characters[input.target] &&
             GALACTIC_STRIKE.room.characters[input.target].alive) {

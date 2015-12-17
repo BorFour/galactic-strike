@@ -402,7 +402,7 @@ io.on('connection', function (socket) {
     });
 
 
-var puerto = 3000;
+var puerto = 8080;
 //var ip = '150.244.67.21';
 
 http.listen(puerto, function(){

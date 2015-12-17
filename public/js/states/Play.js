@@ -147,6 +147,7 @@ GALACTIC_STRIKE.Play.prototype = {
         GALACTIC_STRIKE.zoomed = false;
 
         GALACTIC_STRIKE.hud = new HUD(game);
+        GALACTIC_STRIKE.room.roundReady = true;
 
     },
     update: function () {
@@ -282,7 +283,7 @@ function updateOnlineTimer() {
     if (GALACTIC_STRIKE.player.character) {
         GALACTIC_STRIKE.player.character.updateOnline();
     }
-    game.time.events.add(4 * (Object.keys(GALACTIC_STRIKE.room.players).length), updateOnlineTimer, this);
+    game.time.events.add(20 * (Object.keys(GALACTIC_STRIKE.room.players).length), updateOnlineTimer, this);
 
 }
 

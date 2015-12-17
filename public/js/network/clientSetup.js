@@ -23,9 +23,7 @@ clientSetupMenu = function () {
         if (GALACTIC_STRIKE.room.characters[input.id] && GALACTIC_STRIKE.room.characters[input.id].alive)
         {
             GALACTIC_STRIKE.room.characters[input.id].die();
-            if (GALACTIC_STRIKE.room && GALACTIC_STRIKE.room.gameMode) {
-                GALACTIC_STRIKE.room.gameMode.update();
-            }
+
             delete GALACTIC_STRIKE.room.characters[input.id];
         }
 
@@ -40,6 +38,10 @@ clientSetupMenu = function () {
 
             GALACTIC_STRIKE.room.players[input.id] = null;
             delete GALACTIC_STRIKE.room.players[input.id];
+        }
+
+        if (GALACTIC_STRIKE.room && GALACTIC_STRIKE.room.gameMode) {
+            GALACTIC_STRIKE.room.gameMode.update();
         }
 
     });

@@ -150,6 +150,12 @@ clientSetupGame = function () {
             GALACTIC_STRIKE.charactersBuffer[input.id] = input;
         }
 
+        var arePlayersReady = true;
+        for (var p in GALACTIC_STRIKE.room.players){
+            arePlayersReady = arePlayersReady && GALACTIC_STRIKE.room.players[p].character;
+        }
+        GALACTIC_STRIKE.room.roundReady = arePlayersReady;
+
     });
 
 
@@ -159,6 +165,8 @@ clientSetupGame = function () {
      */
 
     socket.on('update', function (input) {
+
+        if (!GALACTIC_STRIKE.room.roundReady) {return;}
 
         if (input.id === GALACTIC_STRIKE.player.id)
             return;
@@ -228,6 +236,7 @@ clientSetupGame = function () {
     socket.on('hit', function (input) {
 
         console.log('@Client received | hit');
+        if (!GALACTIC_STRIKE.room.roundReady) {return;}
 
         if (GALACTIC_STRIKE.room.characters[input.target] &&
             GALACTIC_STRIKE.room.characters[input.target].alive) {

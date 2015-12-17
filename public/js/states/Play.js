@@ -147,6 +147,7 @@ GALACTIC_STRIKE.Play.prototype = {
         GALACTIC_STRIKE.zoomed = false;
 
         GALACTIC_STRIKE.hud = new HUD(game);
+        GALACTIC_STRIKE.room.roundReady = true;
 
     },
     update: function () {

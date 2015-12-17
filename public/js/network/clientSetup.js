@@ -40,7 +40,7 @@ clientSetupMenu = function () {
             delete GALACTIC_STRIKE.room.players[input.id];
         }
 
-        if (GALACTIC_STRIKE.room && GALACTIC_STRIKE.room.gameMode) {
+        if (GALACTIC_STRIKE.room && GALACTIC_STRIKE.room.gameMode && !GALACTIC_STRIKE.room.gameOver) {
             GALACTIC_STRIKE.room.gameMode.update();
         }
 

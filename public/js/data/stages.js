@@ -84,7 +84,7 @@ var stages = {
                 gravityRadius: 400,
                 gravityForce: 500,
                 //collisionRadius : 375
-            }/*,
+            },
             {
                 asset: 'sun',
                 x: 3000,
@@ -92,7 +92,7 @@ var stages = {
                 gravityRadius: 1000,
                 gravityForce: 1200,
                 collisionRadius: 164
-            }*/
+            }
         ]
     },
     'map3':

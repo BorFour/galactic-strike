@@ -7,4 +7,4 @@ function Element(game, x, y, asset)
 }
 //Inheritance
 Element.prototype = Object.create(Phaser.Sprite.prototype);
-Element.prototype.constructor = Element;
+Element.prototype.constructor = Phaser.Sprite;

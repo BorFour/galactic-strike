@@ -6,7 +6,7 @@ function Character(x, y, angle, game, player, asset)
 {
 
     Element.call(this, game, x, y, asset);
-    //    game.add.existing(this);
+    //game.add.existing(this);
 
     this.rotation = angle;
 
@@ -190,7 +190,7 @@ Character.prototype.die = function ()
     //    }, this);
     this.wheels[0].destroy();
     this.wheels[1].destroy();
-    this.body.destroy();
+    //this.body.destroy();
     this.destroy();
 
 }
@@ -206,7 +206,7 @@ Character.prototype.simpleDie = function ()
     this.alive = false;
     this.wheels[0].destroy();
     this.wheels[1].destroy();
-    this.body.destroy();
+    //this.body.destroy();
     this.destroy();
 
 }

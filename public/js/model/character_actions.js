@@ -56,8 +56,9 @@ Character.prototype.attack0 = function ()
         // After this.attackCooldownTime, the spikeball is destroyed and the attack cooldown is restored
         game.time.events.add(this.attack0CooldownTime, function ()
         {
-            this.spikeball.die();
-            game.physics.box2d.world.DestroyJoint(this.attackJoint);
+            if(this.spikeball) this.spikeball.die();
+            if(this.attackJoint) game.physics.box2d.world.DestroyJoint(this.attackJoint);
+            this.attackJoint = null;
             this.attackCooldown = true;
         }, this)
 
@@ -100,8 +101,9 @@ Character.prototype.attack1 = function ()
         // After this.attack2CooldownTime, the spikeball is destroyed and the attack cooldown is restored
         game.time.events.add(this.attack1CooldownTime, function ()
         {
-            this.spikeball.die();
-            game.physics.box2d.world.DestroyJoint(this.attackJoint);
+            if(this.spikeball) this.spikeball.die();
+            if(this.attackJoint) game.physics.box2d.world.DestroyJoint(this.attackJoint);
+            this.attackJoint = null;
             this.attackCooldown = true;
         }, this)
 
@@ -143,8 +145,9 @@ Character.prototype.attack2 = function ()
         // After this.attack3CooldownTime, the spikeball is destroyed and the attack cooldown is restored
         game.time.events.add(this.attack2CooldownTime, function ()
         {
-            this.spikeball.die();
-            game.physics.box2d.world.DestroyJoint(this.attackJoint);
+            if(this.spikeball) this.spikeball.die();
+            if(this.attackJoint) game.physics.box2d.world.DestroyJoint(this.attackJoint);
+            this.attackJoint = null;
             this.attackCooldown = true;
         }, this)
 
@@ -186,7 +189,9 @@ Character.prototype.attack3 = function ()
         }
         game.time.events.add(this.attack3CooldownTime, function ()
         {
-            this.spikeball.destroy();
+            if(this.spikeball) this.spikeball.die();
+            if(this.attackJoint) game.physics.box2d.world.DestroyJoint(this.attackJoint);
+            this.attackJoint = null;
             this.attackCooldown = true;
         }, this)
 

@@ -190,6 +190,7 @@ Character.prototype.die = function ()
     //    }, this);
     this.wheels[0].destroy();
     this.wheels[1].destroy();
+    if(this.spikeball) this.spikeball.die();
     //this.body.destroy();
     this.destroy();
 
@@ -206,6 +207,7 @@ Character.prototype.simpleDie = function ()
     this.alive = false;
     this.wheels[0].destroy();
     this.wheels[1].destroy();
+    if(this.spikeball) this.spikeball.die();
     //this.body.destroy();
     this.destroy();
 

@@ -29,7 +29,7 @@ clientSetupMenu = function ()
             delete GALACTIC_STRIKE.room.characters[input.id];
         }
 
-        if (GALACTIC_STRIKE.room.players[input.id])
+        if (GALACTIC_STRIKE.room && GALACTIC_STRIKE.room.players[input.id])
         {
 
             GALACTIC_STRIKE.room.unasigned.removePlayer(GALACTIC_STRIKE.room.players[input.id]);

@@ -62,6 +62,7 @@ GALACTIC_STRIKE.MainMenu.prototype = {
     {
 
         // The client emits the 'createRoom' event
+        console.log('@Client ->      \t| createRoom');
         socket.emit('createRoom',
         {
             id: GALACTIC_STRIKE.player.id,
@@ -75,6 +76,7 @@ GALACTIC_STRIKE.MainMenu.prototype = {
 
         // The client emits the 'joinRoom' event
         // The client emits the 'joinRoom' event
+        console.log('@Client ->      \t| joinRoom');
         socket.emit('joinRoom',
         {
             id: GALACTIC_STRIKE.player.id,

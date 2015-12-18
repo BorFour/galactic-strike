@@ -1,6 +1,6 @@
 var quitGameGM = function ()
 {
-    window.close();
+    location.reload();
 }
 
 var gameModes = {

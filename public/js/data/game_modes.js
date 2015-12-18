@@ -21,12 +21,10 @@ var gameModes = {
         {
             GALACTIC_STRIKE.room.roundReady = false;
 
-            if (GALACTIC_STRIKE.room.host != GALACTIC_STRIKE.player.id || GALACTIC_STRIKE.room.roundFinished)
+            if (GALACTIC_STRIKE.room.host != GALACTIC_STRIKE.player.id)
             {
                 return;
             }
-
-            GALACTIC_STRIKE.room.roundFinished = true;
 
             console.log('@Client ->      \t| finishRound');
             socket.emit('finishRound',

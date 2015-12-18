@@ -17,7 +17,7 @@ clientSetupGame = function ()
     socket.on('beginMatch', function (input)
     {
 
-        console.log('@Client received | beginMatch');
+        console.log('@Client <-      \t| beginMatch');
 
         game.state.start('Play');
         GALACTIC_STRIKE.charactersBuffer = {};
@@ -34,7 +34,7 @@ clientSetupGame = function ()
     socket.on('userJoinedGame', function (input)
     {
 
-        console.log('@Client received | userJoinedGame');
+        console.log('@Client <-      \t| userJoinedGame');
 
         if (GALACTIC_STRIKE.createGameReady)
         {
@@ -76,7 +76,7 @@ clientSetupGame = function ()
     socket.on('finishRound', function (input)
     {
 
-        console.log('@Client received | finishRound');
+        console.log('@Client <-      \t| finishRound');
 
         // For every character in the room, destroy him.
         for (var c in GALACTIC_STRIKE.room.characters)
@@ -103,6 +103,7 @@ clientSetupGame = function ()
             orientation: 0
         }
 
+        console.log('@Client ->      \t| respawn');
         socket.emit('respawn', data);
         console.log(data);
 
@@ -116,7 +117,8 @@ clientSetupGame = function ()
     socket.on('userLeftGame', function (input)
     {
 
-        console.log('@Client received | userLeftGame');
+        console.log('@Client <-      \t| userLeftGame');
+
         if (GALACTIC_STRIKE.room.characters[input.id] && GALACTIC_STRIKE.room.characters[input.id].alive)
         {
             GALACTIC_STRIKE.room.characters[input.id].die();
@@ -136,7 +138,7 @@ clientSetupGame = function ()
     socket.on('respawn', function (input)
     {
 
-        console.log('@Client received | respawn');
+        console.log('@Client <-      \t| respawn');
 
         if (GALACTIC_STRIKE.createGameReady)
         {
@@ -147,13 +149,10 @@ clientSetupGame = function ()
             // Assigns the character to its player
             GALACTIC_STRIKE.room.players[input.id].character = GALACTIC_STRIKE.room.characters[input.id];
 
-            if (input.id === GALACTIC_STRIKE.player.id)
+            if (input.id == GALACTIC_STRIKE.player.id)
             {
+                console.log("I'm respawing");
                 GALACTIC_STRIKE.player.characterSetup();
-                game.time.events.add(2000, function ()
-                {
-                    GALACTIC_STRIKE.room.roundFinished = false;
-                }, this);
             }
 
             // Logs all the characters created at this moment.
@@ -262,8 +261,6 @@ clientSetupGame = function ()
      * @event 'attack'
      */
 
-    // DEPRECATED
-
     socket.on('attack', function (input)
     {
 
@@ -276,11 +273,10 @@ clientSetupGame = function ()
             return;
         }
 
-        console.log('@Client received | attack');
+        console.log('@Client <-      \t| attack');
 
         if (GALACTIC_STRIKE.room.characters[input.id])
         {
-            console.log("Attack in update handler");
             console.log(input);
             GALACTIC_STRIKE.room.characters[input.id].attacks(input.attack_id, input.space);
         }
@@ -297,7 +293,7 @@ clientSetupGame = function ()
     socket.on('hit', function (input)
     {
 
-        console.log('@Client received | hit');
+        console.log('@Client <-      \t| hit');
         if (!GALACTIC_STRIKE.room.roundReady)
         {
             return;

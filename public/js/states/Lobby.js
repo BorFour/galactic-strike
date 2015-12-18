@@ -60,7 +60,7 @@ GALACTIC_STRIKE.Lobby.prototype = {
         // Everytime a user clicks the red button, the client requests to join the red team
         buttonRed = game.add.button(game.world.centerX - 690, game.world.centerY - 300, 'redTeam', function ()
         {
-
+            console.log('@Client ->      \t| changeTeam');
             socket.emit('changeTeam',
             {
                 id: GALACTIC_STRIKE.player.id,
@@ -73,7 +73,7 @@ GALACTIC_STRIKE.Lobby.prototype = {
         // Everytime a user clicks the blue button, the client requests to join the blue team
         buttonBlue = game.add.button(game.world.centerX - 50, game.world.centerY - 300, 'blueTeam', function ()
         {
-
+            console.log('@Client ->      \t| changeTeam');
             socket.emit('changeTeam',
             {
                 id: GALACTIC_STRIKE.player.id,
@@ -155,6 +155,7 @@ GALACTIC_STRIKE.Lobby.prototype = {
 
         for (var p in GALACTIC_STRIKE.room.unasigned.players)
         {
+            console.log('@Client ->      \t| kickPlayer');
             socket.emit('kickPlayer',
             {
                 id: GALACTIC_STRIKE.room.unasigned.players[p].id
@@ -163,6 +164,7 @@ GALACTIC_STRIKE.Lobby.prototype = {
 
         if (GALACTIC_STRIKE.room.unasigned.players.length == 0)
         {
+            console.log('@Client ->      \t| beginMatch');
             socket.emit('beginMatch',
             {
                 id: GALACTIC_STRIKE.player.id,
@@ -176,6 +178,7 @@ GALACTIC_STRIKE.Lobby.prototype = {
 
         GALACTIC_STRIKE.room.currentStage = (GALACTIC_STRIKE.room.currentStage + 1) % (Object.keys(stages).length);
         textStage.text = Object.keys(stages)[GALACTIC_STRIKE.room.currentStage];
+        console.log('@Client ->      \t| changeStage');
         socket.emit('changeStage',
         {
             id: GALACTIC_STRIKE.player.id,

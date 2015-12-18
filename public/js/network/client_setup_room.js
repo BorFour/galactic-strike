@@ -5,7 +5,7 @@ clientSetupRoom = function ()
     socket.on('roomCreated', function (input)
     {
 
-        console.log('@Client received | roomCreated');
+        console.log('@Client <-      \t| roomCreated');
 
         GALACTIC_STRIKE.room = new Room("Default room name", GALACTIC_STRIKE.player.id, 8);
         GALACTIC_STRIKE.room.addTeam("Red Team");
@@ -27,7 +27,7 @@ clientSetupRoom = function ()
             align: "center"
         };
 
-        console.log('@Client received | joinRoom');
+        console.log('@Client <-      \t| joinRoom');
         if (input.id === GALACTIC_STRIKE.player.id)
         {
             GALACTIC_STRIKE.room = new Room("Default room name", input.host, 8);
@@ -64,7 +64,7 @@ clientSetupRoom = function ()
     {
 
         //        if(GALACTIC_STRIKE.player.id === input.id) return;
-        console.log('@Client received | changeTeam');
+        console.log('@Client <-      \t| changeTeam');
         GALACTIC_STRIKE.room.players[input.id].joinTeam(GALACTIC_STRIKE.room.teams[input.team]);
         console.log(GALACTIC_STRIKE.room.teams[input.team]);
 
@@ -75,7 +75,7 @@ clientSetupRoom = function ()
 
         if (GALACTIC_STRIKE.player.id === input.id) return;
 
-        console.log('@Client received | changeStage');
+        console.log('@Client <-      \t| changeStage');
         console.log(input.stage)
         GALACTIC_STRIKE.room.currentStage = input.stage;
         textStage.text = Object.keys(stages)[GALACTIC_STRIKE.room.currentStage];
@@ -87,13 +87,13 @@ clientSetupRoom = function ()
     socket.on('kickPlayer', function (input)
     {
 
-        console.log('@Client received | kickPlayer');
+        console.log('@Client <-      \t| kickPlayer');
         console.log(input);
         console.log(GALACTIC_STRIKE.player.id);
         if (input.id == GALACTIC_STRIKE.player.id)
         {
 
-            console.log('@Client sent | kickedPlayer');
+            console.log('@Client ->      \t| kickedPlayer');
             socket.emit('kickedPlayer',
             {
                 id: input.id
@@ -105,7 +105,7 @@ clientSetupRoom = function ()
 
     socket.on('kickedPlayer', function (input)
     {
-
+        console.log('@Client <-      \t| kickedPlayer');
         if (GALACTIC_STRIKE.room.host === GALACTIC_STRIKE.player.id)
         {
             GALACTIC_STRIKE.kickedPlayers++;
@@ -123,8 +123,7 @@ clientSetupRoom = function ()
 
     socket.on('lobbyMessage', function (input)
     {
-
-        console.log('Nuevo mensaje');
+        console.log('@Client <-      \t| lobbyMessage');
         console.log(input);
         for (var i = 0; i < GALACTIC_STRIKE.room.chatText.length - 1; i++)
         {

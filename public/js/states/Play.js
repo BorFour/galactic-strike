@@ -107,6 +107,9 @@ GALACTIC_STRIKE.Play.prototype = {
             {
                 logMsg += GALACTIC_STRIKE.room.characters[c] + " ";
             }
+
+            GALACTIC_STRIKE.charactersBuffer[c] = null;
+
             console.log("Clients: " + logMsg);
         }
         GALACTIC_STRIKE.zoomed = false;

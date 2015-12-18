@@ -222,6 +222,7 @@ Player.prototype.characterSetup = function ()
     this.attack0Key = game.input.keyboard.addKey(Phaser.Keyboard.UP);
     this.attack0Key.onDown.add(function ()
     {
+        if (!this.character || !this.character.alive) { return; }
         if (this.character.inAtmosphere())
         {
             if (this.character.attack0())
@@ -250,6 +251,7 @@ Player.prototype.characterSetup = function ()
     this.attack1Key = game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
     this.attack1Key.onDown.add(function ()
     {
+        if (!this.character || !this.character.alive) { return; }
         if (this.character.inAtmosphere())
         {
             if (this.character.attack1())
@@ -282,6 +284,7 @@ Player.prototype.characterSetup = function ()
     this.attack2Key = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
     this.attack2Key.onDown.add(function ()
     {
+        if (!this.character || !this.character.alive) { return; }
         if (this.character.inAtmosphere())
         {
             if (this.character.attack2())
@@ -312,6 +315,7 @@ Player.prototype.characterSetup = function ()
     this.attack3Key = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
     this.attack3Key.onDown.add(function ()
     {
+        if (!this.character || !this.character.alive) { return; }
         if (this.character.inAtmosphere())
         {
             if (this.character.attack3())

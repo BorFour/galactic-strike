@@ -203,7 +203,7 @@ var gameModes = {
             var wr = this.winnerRound();
             if (wr)
             {
-                this.scores[wr] + = 1;
+                this.scores[wr] += 1;
                 console.log(wr.name + ' won this round.' + this.scores[wr] + ' points');
                 if (this.isOverGame())
                 {

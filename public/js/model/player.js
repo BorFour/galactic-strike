@@ -221,7 +221,7 @@ Player.prototype.characterSetup = function () {
                     socket.emit('attack', output);
                 }
             } else {
-                if (this.character.attackSpace1()) {
+                if (this.character.attack1()) {
 
                     var output = {
                         id : GALACTIC_STRIKE.player.id,
@@ -260,15 +260,29 @@ Player.prototype.characterSetup = function () {
         }, this);
     game.input.keyboard.removeKeyCapture(Phaser.Keyboard.LEFT);
 
-    //            var attack3Key = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
-    //            attack3Key.onDown.add(function(){
-    //                    if(this.character.attack3())
-    //                    {
-    //                        var output = {id:GALACTIC_STRIKE.player.id, attack_id:3};
-    //                        socket.emit('attack', output);
-    //                    }
-    //                }, this);
-    //            game.input.keyboard.removeKeyCapture(Phaser.Keyboard.RIGHT);
+    this.attack3Key = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
+    this.attack3Key.onDown.add(function () {
+           if (this.character.inAtmosphere()) {
+            if (this.character.attack3()) {
+                var output = {
+                    id : GALACTIC_STRIKE.player.id,
+                    attack_id: 3,
+                    space: false
+                };
+                socket.emit('attack', output);
+            }
+        } else {
+            if (this.character.attack3()) {
+                var output = {
+                    id : GALACTIC_STRIKE.player.id,
+                    attack_id: 3,
+                    space: true
+                };
+                socket.emit('attack', output);
+            }
+        }
+    }, this);
+    game.input.keyboard.removeKeyCapture(Phaser.Keyboard.RIGHT);
 
 
     //

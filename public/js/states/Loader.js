@@ -17,15 +17,15 @@ play_songs = function () {
 //    GALACTIC_STRIKE.songs.push(game.add.audio('checker', 0.45, true));
 //    GALACTIC_STRIKE.songs.push(game.add.audio('muteCity', 0.45, true));
 //    GALACTIC_STRIKE.songs.push(game.add.audio('dreamLand', 0.45, true));
-    //GALACTIC_STRIKE.songs.push(game.add.audio('witch', 0.45, true));
+//    GALACTIC_STRIKE.songs.push(game.add.audio('witch', 0.45, true));
+//    GALACTIC_STRIKE.songs.push(game.add.audio('dedede'));
     GALACTIC_STRIKE.songs.push(game.add.audio('pingasDreamLand', 0.30, true));
-    GALACTIC_STRIKE.redTeamAnthem = game.add.audio('sovietAnthem', 0.70, true);
-    GALACTIC_STRIKE.blueTeamAnthem = game.add.audio('starsAndStripes', 0.70, true);
-    //    GALACTIC_STRIKE.songs.push(game.add.audio('dedede'));
+    GALACTIC_STRIKE.redTeamAnthem = game.add.audio('sovietAnthem', 0.80, true);
+    GALACTIC_STRIKE.blueTeamAnthem = game.add.audio('starsAndStripes', 0.80, true);
     GALACTIC_STRIKE.currentSong = GALACTIC_STRIKE.songs[Math.floor(Math.random() * GALACTIC_STRIKE.songs.length)];
     GALACTIC_STRIKE.currentSong.play();
 
-    // De momento va así para que podamos probar sin que la música dé por culo
+    game.sound.volume = 0.2;
     game.sound.mute = true;
 }
 
@@ -37,21 +37,26 @@ load_assets = function () {
 
     //MUSIC
     ///////////////////////
-//    game.load.audio('guiles', '../assets/sound/guiles_theme.mp3');
-//    game.load.audio('checker', '../assets/sound/checker_knights.mp3');
-//    game.load.audio('muteCity', '../assets/sound/mute_city.mp3');
-//    game.load.audio('dreamLand', '../assets/sound/dream_land.mp3');
-    //game.load.audio('witch', '../assets/sound/witch_doctor.mp3');
-    game.load.audio('jump', ['../assets/jump.ogg', '../assets/jump.mp3']);
-    game.load.audio('pingas', '../assets/sound/pingas.mp3');
-    game.load.audio('dieSound', '../assets/sound/pingas_death.mp3');
-    game.load.audio('pingasDreamLand', '../assets/sound/pingas_dreamland.mp3');
-    game.load.audio('sovietAnthem', '../assets/sound/soviet_anthem.mp3');
-    game.load.audio('starsAndStripes', '../assets/sound/stars_and_stripes.mp3');
+//    game.load.audio('guiles', '../assets/sound/songs/guiles_theme.mp3');
+//    game.load.audio('checker', '../assets/sound/songs/checker_knights.mp3');
+//    game.load.audio('muteCity', '../assets/sound/songs/mute_city.mp3');
+//    game.load.audio('dreamLand', '../assets/sound/songs/dream_land.mp3');
+    //game.load.audio('witch', '../assets/sound/songs/witch_doctor.mp3');
+
+    game.load.audio('pingasDreamLand', '../assets/sound/songs/pingas_dreamland.mp3');
+    game.load.audio('sovietAnthem', '../assets/sound/songs/soviet_anthem.mp3');
+    game.load.audio('starsAndStripes', '../assets/sound/songs/stars_and_stripes.mp3');
     //    game.load.audio('dedede', '../assets/sound/king_dedede.mp3');
     /*
      * http://downloads.khinsider.com/game-soundtracks/album/super-smash-bros.-melee-original-sound-version
      */
+
+    //GAME SOUND
+    ///////////////////////
+    game.load.audio('pingas', '../assets/sound/pingas.mp3');
+    game.load.audio('dieSound', '../assets/sound/pingas_death.mp3');
+    game.load.audio('hitSound', '../assets/sound/pingas_hit.mp3');
+    game.load.audio('jetpackSound', '../assets/sound/pingas_jetpack.mp3');
 
     //BACKGROUNDS
     ///////////////////////

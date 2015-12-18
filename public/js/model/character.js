@@ -11,7 +11,17 @@ function Character(x, y, angle, game, player, asset) {
     this.game.spacePhysics.addDynamic(this);
     this.game.physics.box2d.enable(this);
     this.body.dynamic = true;
-    //    this.body.angle = angle;
+    this.body.immovable = false;
+    this.body.static = false;
+    this.body.collideWorldBounds = true;
+
+
+    //Attributes
+
+    this.jumpForce = 550;
+    this.health = 100;
+    this.items = [];
+    this.bullets = [];
 
     // States
     this.RIGHT = 1;
@@ -22,24 +32,16 @@ function Character(x, y, angle, game, player, asset) {
 
     // Cooldowns
     this.jumpCooldown = true;
+    this.hitImmune = false;
     this.attackCooldown = true;
     this.fireCooldown = true;
-    this.hitImmune = false;
 
-
-    this.jumpForce = 550;
-    this.health = 100;
-    this.items = [];
-    this.bullets = [];
-
-    this.currentSpeed = 0;
-    this.fireRate = 100;
-    this.nextFire = 0;
-    this.alive = true;
+    // Cooldown times
     this.jumpCooldownTime = 350;
-    this.attackCooldownTime = 1000;
-    this.attack2CooldownTime = 600;
-    this.attack3CooldownTime = 2000;
+    this.attack0CooldownTime = 700;
+    this.attack1CooldownTime = 330;
+    this.attack2CooldownTime = 1500;
+    this.attack3CooldownTime = 500;
     this.fireCooldownTime = 250;
     this.hitImmuneTime = 550; //After being attacked, the character cannot be hurted for this time
 
@@ -48,6 +50,8 @@ function Character(x, y, angle, game, player, asset) {
 
     this.attackSound = game.add.audio('pingas', 0.6, false);
     this.dieSound = game.add.audio('dieSound', 0.7, false);
+    this.hitSound = game.add.audio('hitSound', 0.8, false);
+    this.jetpackSound = game.add.audio('jetpackSound', 0.5, false);
 
     var PTM = 50;
     var driveJoints = [];
@@ -68,8 +72,7 @@ function Character(x, y, angle, game, player, asset) {
     this.body.setPolygon(truckVertices);
     this.body.mass = 1;
     this.body.angularDamping = 0.15;
-    this.body.linearDamping = 0.3 // 0.94;
-        //    this.body.friction = 0.001;
+    this.body.linearDamping = 0.3;
 
 //    // Atributes while grounded
 //    this.angularDampingGrounded = 0.15;
@@ -90,7 +93,6 @@ function Character(x, y, angle, game, player, asset) {
 //    this.forceSpace = 250;
 
 
-
     this.driveJoints = [];
     this.wheels = [];
 
@@ -107,6 +109,7 @@ function Character(x, y, angle, game, player, asset) {
     game.add.existing(this.wheels[1]);
 
 
+    // Bodies of the wheels
     this.wheels[0].body = new Phaser.Physics.Box2D.Body(this.game, null, this.x + -0.22 * PTM, this.y + 0.6 * -PTM);
     this.wheels[0].body.sprite = this.wheels[0];
     this.wheels[1].body = new Phaser.Physics.Box2D.Body(this.game, null, this.x + 0.22 * PTM, this.y + 0.6 * -PTM);
@@ -115,6 +118,8 @@ function Character(x, y, angle, game, player, asset) {
     this.wheels[1].body.setCircle(0.2 * PTM);
     this.wheels[0].body.collideWorldBounds = true;
     this.wheels[1].body.collideWorldBounds = true;
+    this.wheels[0].body.friction = 0.8;
+    this.wheels[1].body.friction = 0.8;
     this.motorEnabled = false;
     this.motorSpeed = 30;
 
@@ -123,28 +128,23 @@ function Character(x, y, angle, game, player, asset) {
     var motorTorque = 2;
     var rideHeight = 0.5;
 
-    // Make wheel joints
-    // bodyA, bodyB, ax, ay, bx, by, axisX, axisY, frequency, damping, motorSpeed, motorTorque, motorEnabled
-    this.driveJoints[0] = game.physics.box2d.wheelJoint(this.body, this.wheels[0].body, -0.65 * PTM, rideHeight * PTM, 0, 0, 0, 1, frequency, damping, 0, motorTorque, true); // rear
-    this.driveJoints[1] = game.physics.box2d.wheelJoint(this.body, this.wheels[1].body, 0.65 * PTM, rideHeight * PTM, 0, 0, 0, 1, frequency, damping, 0, motorTorque, true); // front
+    // Joints between de wheels and the main body
+    this.driveJoints[0] = game.physics.box2d.wheelJoint(this.body, this.wheels[0].body, -0.65 * PTM, rideHeight * PTM, 0, 0, 0, 1, frequency, damping, 0, motorTorque, true);
+    this.driveJoints[1] = game.physics.box2d.wheelJoint(this.body, this.wheels[1].body, 0.65 * PTM, rideHeight * PTM, 0, 0, 0, 1, frequency, damping, 0, motorTorque, true);
 
 
+    // This is for the collision callback
     this.wheels[0].body.mainSprite = this;
     this.wheels[1].body.mainSprite = this;
-    this.wheels[0].body.friction = 0.8;
-    this.wheels[1].body.friction = 0.8;
-
     this.body.mainSprite = this;
 
 
+    // Spritesheet animations
     this.animations.add('left', [0]);
     this.animations.add('right', [1]);
     this.animations.add('jumpL', [4]);
     this.animations.add('jumpR', [5]);
 
-    this.body.immovable = false;
-    this.body.static = false;
-    this.body.collideWorldBounds = true;
 
     //Display player name
 

@@ -95,6 +95,7 @@ Character.prototype.moveInOrbit = function (direction) {
             if (this.orientation === this.LEFT) this.animations.play('jumpL');
             if (this.orientation === this.RIGHT) this.animations.play('jumpR');
             this.jumpAnimation = true;
+            if(!this.jetpackSound.isPlaying) this.jetpackSound.play();
             break;
         case 'still':
             if (this.orientation === this.LEFT) this.animations.play('left');

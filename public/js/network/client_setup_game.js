@@ -335,7 +335,7 @@ clientSetupGame = function ()
                 GALACTIC_STRIKE.room.characters[input.target].hitImmune = true;
                 game.time.events.add(GALACTIC_STRIKE.room.characters[input.target].hitImmuneTime, function ()
                 {
-                    GALACTIC_STRIKE.room.characters[input.target].hitImmune = false;
+                    if(GALACTIC_STRIKE.room.characters[input.target]) { GALACTIC_STRIKE.room.characters[input.target].hitImmune = false; }
                 }, this);
             }
         }

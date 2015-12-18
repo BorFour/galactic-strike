@@ -57,6 +57,7 @@ GALACTIC_STRIKE.Play.prototype = {
             game.physics.p2.updateBoundsCollisionGroup();
             game.physics.p2.restitution = 0.8;
             game.physics.p2.defaultRestitution = 0.8;
+            game.physics.p2.gravityScale = 0;
 
 //            game.physics.p2.friction = 50;
         }
@@ -92,7 +93,7 @@ GALACTIC_STRIKE.Play.prototype = {
         GALACTIC_STRIKE.room.gameMode.init();
         GALACTIC_STRIKE.room.gameOver = false;
 
-//        spacePhysicsTimer();
+        spacePhysicsTimer();
         updateOnlineTimer();
         GALACTIC_STRIKE.createGameReady = true;
 

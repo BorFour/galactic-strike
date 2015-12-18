@@ -15,7 +15,7 @@ function Star(x, y, gravityRadius, gravityForce, asset, collisionRadius, game)
     //        this.planetGroup.add(planet);
     game.spacePhysics.addPlanet(this);
 //    this.game.physics.box2d.enable(this);
-    this.game.physics.p2.enable(this);
+    this.game.physics.p2.enable(this, true);
     this.body.static = true;
 
     // look how I create a circular body

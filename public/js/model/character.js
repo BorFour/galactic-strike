@@ -14,7 +14,7 @@ function Character(x, y, angle, game, player, asset)
     this.game = game;
     this.debug = true;
 
-    CG_wheel = game.physics.p2.createCollisionGroup(); //COLLISION GROUP
+//    this.CG_character = game.physics.p2.createCollisionGroup(); //COLLISION GROUP
 
     game.physics.p2.updateBoundsCollisionGroup(); //UPDATE COLLISION BOUND FOR GROUPS
 
@@ -23,11 +23,12 @@ function Character(x, y, angle, game, player, asset)
     this.game.physics.p2.enable([this], this.debug);
     this.body.clearShapes();
     this.body.loadPolygon('robotnikShape', "robotnik");
+//    this.body.anchor.setTo(0.5, 0.25);
     this.body.dynamic = true;
     this.body.immovable = false;
     this.body.static = false;
     this.body.collideWorldBounds = true;
-    this.body.setCollisionGroup(CG_wheel);
+    this.body.setCollisionGroup(GALACTIC_STRIKE.room.map.CG_planets);
 
 
     //Attributes
@@ -128,8 +129,7 @@ function Character(x, y, angle, game, player, asset)
     // Bodies of the wheels
 
     this.game.physics.p2.enable([this.wheels[0], this.wheels[1]] , this.debug, true);
-    this.wheels[0].body.setCollisionGroup(CG_wheel);
-    this.wheels[1].body.setCollisionGroup(CG_wheel);
+
 //    this.wheels[0].body = new Phaser.Physics.Box2D.Body(this.game, null, this.x + -0.22 * PTM, this.y + 0.6 * -PTM, 1);
 //    this.wheels[0].body = new Phaser.Physics.P2.Body(this.game, this.wheels[0], this.x + -0.22 * PTM, this.y + 0.6 * -PTM, 1);
 //    this.wheels[0].body.sprite = this.wheels[0];
@@ -161,20 +161,22 @@ function Character(x, y, angle, game, player, asset)
 
     this.constraint = game.physics.p2.createPrismaticConstraint(this, this.wheels[0], false,[30,0],[0,0],[0,1]);
 
-        //SET LIMITS
-         this.constraint.lowerLimitEnabled= this.constraint.upperLimitEnabled = true;
-         this.constraint.upperLimit = -1;
-         this.constraint.lowerLimit = -8;
+    //SET LIMITS
+     this.constraint.lowerLimitEnabled= this.constraint.upperLimitEnabled = true;
+     this.constraint.upperLimit = -1;
+     this.constraint.lowerLimit = -5;
     this.constraint_1 = game.physics.p2.createPrismaticConstraint(this, this.wheels[1], false,[-30,0],[0,0],[0,1]);
 
-        //SET LIMITS
-         this.constraint_1.lowerLimitEnabled= this.constraint_1.upperLimitEnabled = true;
-         this.constraint_1.upperLimit = -1;
-         this.constraint_1.lowerLimit = -8;
+    //SET LIMITS
+     this.constraint_1.lowerLimitEnabled= this.constraint_1.upperLimitEnabled = true;
+     this.constraint_1.upperLimit = -1;
+     this.constraint_1.lowerLimit = -5;
 
-
-
-
+    this.wheels[0].body.setCollisionGroup(GALACTIC_STRIKE.room.map.CG_planets);
+    this.wheels[1].body.setCollisionGroup(GALACTIC_STRIKE.room.map.CG_planets);
+    this.body.collides([GALACTIC_STRIKE.room.map.CG_planets, GALACTIC_STRIKE.room.map.CG_planets]);
+    this.wheels[0].body.collides([GALACTIC_STRIKE.room.map.CG_planets, GALACTIC_STRIKE.room.map.CG_planets]);
+    this.wheels[1].body.collides([GALACTIC_STRIKE.room.map.CG_planets, GALACTIC_STRIKE.room.map.CG_planets]);
 
 
 

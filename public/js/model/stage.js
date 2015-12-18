@@ -24,12 +24,17 @@ Stage = function (game, conf)
     //game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
 
     this.planets = [];
+    this.CG_planets = game.physics.p2.createCollisionGroup();
 
     for (var p in conf.planets)
     {
         console.log(conf.planets[p]);
-        this.planets.push(new Star(conf.planets[p].x, conf.planets[p].y, conf.planets[p].gravityRadius,
-            conf.planets[p].gravityForce, conf.planets[p].asset, conf.planets[p].collisionRadius, game));
+        var s = new Star(conf.planets[p].x, conf.planets[p].y, conf.planets[p].gravityRadius,
+            conf.planets[p].gravityForce, conf.planets[p].asset, conf.planets[p].collisionRadius, game);
+
+        this.planets.push(s);
+        s.body.setCollisionGroup(this.CG_planets);
+        s.body.collides([this.CG_planets, this.CG_planets]);
     }
 };
 

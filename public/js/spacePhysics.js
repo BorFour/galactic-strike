@@ -16,7 +16,7 @@ function SpacePhysics(game)
 
     // a force reducer to let the simulation run smoothly
 
-    this.forceReducer = 0.115;
+    this.forceReducer = 0.00315;
 
     // graphic object where to draw planet gravity area
 
@@ -75,15 +75,14 @@ SpacePhysics.prototype.update = function ()
         for (var j = 0; j < this.planetGroup.length; j++)
         {
             var p = this.planetGroup[j];
-            x = c.x;
-            y = c.y;
             if (Phaser.Math.distance(c.x, c.y, p.x, p.y) < p.width / 2 + p.gravityRadius / 2)
             {
 
                 // calculating angle between the planet and the crate
-//                var angle = Phaser.Math.angleBetween(c.x, c.y, p.x, p.y);
+                var angle = Phaser.Math.angleBetween(c.x, c.y, p.x, p.y);
                 // add gravity force to the crate in the direction of planet center
-                c.body.applyForce(p.x, p.y, p.gravityForce * this.forceReducer);
+                c.body.applyImpulse([- p.gravityForce * Math.cos(angle) * this.forceReducer,
+-                    p.gravityForce * Math.sin(angle) * this.forceReducer], 0, 0);
                 atmosphere.push(p);
             }
         }

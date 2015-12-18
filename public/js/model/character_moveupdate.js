@@ -124,46 +124,46 @@ Character.prototype.moveSpace = function (direction)
     switch (direction)
     {
     case 'left':
-        this.body.rotateLeft(150);
+        this.body.rotateLeft(50);
         this.animations.play('left');
         this.orientation = this.LEFT;
-//        this.body.angularDamping = 0.15;
-//        this.body.linearDamping = 0.3;
+        this.body.angularDamping = 0.15;
+        this.body.damping = 0.3;
         break;
     case 'right':
-        this.body.rotateRight(150);
+        this.body.rotateRight(50);
         this.animations.play('right');
         this.orientation = this.RIGHT;
-//        this.body.angularDamping = 0.15;
-//        this.body.linearDamping = 0.3;
+        this.body.angularDamping = 0.15;
+        this.body.damping = 0.3;
         break;
     case 'up':
-        this.body.thrust(315);
+        this.body.thrust(500);
         if (this.orientation === this.LEFT) this.animations.play('jumpL');
         if (this.orientation === this.RIGHT) this.animations.play('jumpR');
-//        this.body.angularDamping = 10;
-//        this.body.linearDamping = 0.3;
+        this.body.angularDamping = 0.7;
+        this.body.damping = 0.3;
         this.jumpAnimation = true;
         break;
     case 'down':
-        this.body.reverse(250);
+        this.body.reverse(300);
         if (this.orientation === this.LEFT) this.animations.play('jumpL');
         if (this.orientation === this.RIGHT) this.animations.play('jumpR');
-//        this.body.angularDamping = 10;
-//        this.body.linearDamping = 0.73;
+        this.body.angularDamping = 0.7;
+        this.body.damping = 0.73;
         this.jumpAnimation = true;
         break;
     case 'rotateL':
-        this.body.angularVelocity -= 0.15;
+//        this.body.angularVelocity -= 0.05;
         break;
     case 'rotateR':
-        this.body.angularVelocity += 0.15;
+//        this.body.angularVelocity += 0.05;
         break;
     case 'still':
         if (this.orientation === this.LEFT) this.animations.play('left');
         if (this.orientation === this.RIGHT) this.animations.play('right');
-//        this.body.angularDamping = 10;
-//        this.body.linearDamping = 0.73;
+        this.body.angularDamping = 0.7;
+        this.body.damping = 0.73;
         this.jumpAnimation = false;
         break;
     }

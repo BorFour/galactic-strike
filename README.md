@@ -1,11 +1,50 @@
-# README #
+# GALACTIC STRIKE #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+Juego 2D de peleas en el espacio on-line hecho en JavaScript y NodeJS, con Phaser, Box2D y Socket.io.
 
-Cómo ejecutarlo: después de desplegar (Deployment instructions) el servidor, abrir un explorador y poner el siguiente enlace:
-localhost:3000
+#### Version 
 
-# ¿Cómo carajos se usa el Git? (Para tontos) desde Brackets con Git #
+Última actualización : 18/12/2015
+
+#### Documentación
+
+La documentación sobre este proyecto se encuentra en el directorio /docs
+
+* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+
+# Despliegue
+
+### ¿Cómo desplegar el servidor?
+
+El servidor de juego es un servidor HTTP, que además conecta a los clientes del juego mediante gracias al framework Socket.io v1.3.7.
+
+* Instalar NodeJS (la última versión probada es la v5.3.0).
+* Situarse en este mismo directorio en la terminal (cmd en Windows).
+* Ejecutar el siguiente comando en Windows
+
+> node index.js 
+
+* O éste (si no funciona en Linux)
+
+> nodejs index.js 
+
+
+### ¿Cómo acceder al juego?
+
+Una vez desplegado el servidor:
+
+* Abrir el navegador Google Chrome
+* Acceder al localhost en el puerto que se indica al ejecutar el servidor, que por defecto es el 8080:
+> localhost:8080
+
+
+* En index.html, introducir el nickname del jugador y presionar Enter.
+* El navegador intentará lanzar una ventana emergente con el juego, por lo que se han de permitir los pop-ups en esta página.
+* La ventana se lanzará, cargando los recursos y mostrando la pantalla principal del juego.
+
+# Desarrollo
+
+## ¿Cómo carajos se usa el Git? (Para tontos) desde Brackets con Git #
 
 ### ¿Cómo subir al repositorio los cambios que has hecho? ###
 * Checkbox a la izquierda de [Commit]
@@ -26,33 +65,8 @@ localhost:3000
 ### Links interesantes ###
 * https://help.github.com/articles/changing-a-remote-s-url/
 
-### What is this repository for? ###
-
-* Quick summary
-Juego plataformero 2D de peleas en el espacio on-line hecho en JavaScript
-* Version 8/11/2015
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
-
-### How do I get set up? ###
-
-* Summary of set up
-* Configuration
-* Dependencies
-Express, engine.io, eureca.io, ...
-* Database configuration
-* How to run tests
-// TODO
-De momento no hay tests
-* Deployment instructions ->
-node index.js
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
 
 ### Who do I talk to? ###
 
-* Repo owner or admin
-* Other community or team contact
+* borja.fourquet@estudiante.uam.es
+* eduardo.radio@estudiante.uam.es

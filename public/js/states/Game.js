@@ -6,15 +6,10 @@ var game;
  * @property undefined
  */
 
-begin_game = function () {
+begin_game = function ()
+{
 
-    // Phaser game resolution
-    var RESOLUTION = {
-        WIDTH: 1600,
-        HEIGHT: 900
-    }
-
-    game = new Phaser.Game(RESOLUTION.WIDTH, RESOLUTION.HEIGHT, Phaser.AUTO, '');
+    game = new Phaser.Game(GALACTIC_STRIKE.RESOLUTION.WIDTH, GALACTIC_STRIKE.RESOLUTION.HEIGHT, Phaser.AUTO, '');
 
     //	Add the states your game has.
     game.state.add('Boot', GALACTIC_STRIKE.Boot);

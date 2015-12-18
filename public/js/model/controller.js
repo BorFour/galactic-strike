@@ -3,9 +3,16 @@ Controller = {};
 Controller.KEYBOARD = 0;
 Controller.GAMEPAD = 1;
 
-Controller = function (input) {
+// TODO
 
-    if (input === Controller.KEYBOARD) {
+Controller = function (input)
+{
+
+    this.KEYBOARD = 0;
+    this.GAMEPAD = 1;
+
+    if (input === Controller.KEYBOARD)
+    {
         this.leftKey = game.input.keyboard.addKey(Phaser.Keyboard.A);
         this.rightKey = game.input.keyboard.addKey(Phaser.Keyboard.D);
         this.upKey = game.input.keyboard.addKey(Phaser.Keyboard.W);
@@ -14,87 +21,121 @@ Controller = function (input) {
         this.rotateRKey = game.input.keyboard.addKey(Phaser.Keyboard.E);
         this.jumpKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
         this.gamepad = false;
-    } else {
+    }
+    else
+    {
         this.gamepad = game.input.gamepad.pad1;
     }
 
 };
 
-Controller.prototype.leftDown = function (player) {
+Controller.prototype.leftDown = function (player)
+{
 
-    if (this.gamepad) {
+    if (this.gamepad)
+    {
         //
-    } else {
+    }
+    else
+    {
         return this.leftKey.isDown;
     }
 
 }
 
-Controller.prototype.rightDown = function (player) {
+Controller.prototype.rightDown = function (player)
+{
 
-    if (this.gamepad) {
+    if (this.gamepad)
+    {
         //
-    } else {
+    }
+    else
+    {
         return this.rightKey.isDown;
     }
 
 }
 
-Controller.prototype.upDown = function (player) {
+Controller.prototype.upDown = function (player)
+{
 
-    if (this.gamepad) {
+    if (this.gamepad)
+    {
         //
-    } else {
+    }
+    else
+    {
         return this.upKey.isDown;
     }
 
 }
 
-Controller.prototype.downDown = function (player) {
+Controller.prototype.downDown = function (player)
+{
 
-    if (this.gamepad) {
+    if (this.gamepad)
+    {
         //
-    } else {
+    }
+    else
+    {
         return this.downKey.isDown;
     }
 
 }
 
-Controller.prototype.rotateLDown = function (player) {
+Controller.prototype.rotateLDown = function (player)
+{
 
-    if (this.gamepad) {
+    if (this.gamepad)
+    {
         //
-    } else {
+    }
+    else
+    {
         return this.rotateLKey.isDown;
     }
 
 }
 
-Controller.prototype.rotateRDown = function (player) {
+Controller.prototype.rotateRDown = function (player)
+{
 
-    if (this.gamepad) {
+    if (this.gamepad)
+    {
         //
-    } else {
+    }
+    else
+    {
         return this.rotateRKey.isDown;
     }
 
 }
 
-Controller.prototype.jumpDown = function (player) {
+Controller.prototype.jumpDown = function (player)
+{
 
-    if (this.gamepad) {
+    if (this.gamepad)
+    {
         //
-    } else {
+    }
+    else
+    {
         return this.jumpKey.isDown;
     }
 
 }
 
-Controller.prototype.attackDown = function (player) {
+Controller.prototype.attackDown = function (player)
+{
 
-    if (this.gamepad) {
+    if (this.gamepad)
+    {
         //
-    } else {
+    }
+    else
+    {
         return this.attackKey.isDown;
     }
 

@@ -1,7 +1,12 @@
-function Character(x, y, angle, game, player, asset) {
+// Inheritance
+Character.prototype = Object.create(Element.prototype);
+Character.prototype.constructor = Element;
+
+function Character(x, y, angle, game, player, asset)
+{
 
     Element.call(this, game, x, y, asset);
-//    game.add.existing(this);
+    //    game.add.existing(this);
 
     this.rotation = angle;
 
@@ -74,31 +79,34 @@ function Character(x, y, angle, game, player, asset) {
     this.body.angularDamping = 0.15;
     this.body.linearDamping = 0.3;
 
-//    // Atributes while grounded
-//    this.angularDampingGrounded = 0.15;
-//    this.speedGrounded = 30;
-//
-//    // Atributes while not grounded in orbit
-//    this.angularDampingOrbit = 0.15;
-//    this.forceOrbit = 700;
-//    this.angularSpeedOrbit = 150;
-//
-//    // Atributes in space
-//    this.angularDampingSpaceRotating = 0.15;
-//    this.angularDampingSpaceMoving = 10;
-//    this.angularDampingSpaceStill = 0.15;
-//    this.rotateSpace = 100;
-//    this.angularVelocitySpace = 0.15;
-//    this.angularSpeedSpace = 150;
-//    this.forceSpace = 250;
+    //    // Atributes while grounded
+    //    this.angularDampingGrounded = 0.15;
+    //    this.speedGrounded = 30;
+    //
+    //    // Atributes while not grounded in orbit
+    //    this.angularDampingOrbit = 0.15;
+    //    this.forceOrbit = 700;
+    //    this.angularSpeedOrbit = 150;
+    //
+    //    // Atributes in space
+    //    this.angularDampingSpaceRotating = 0.15;
+    //    this.angularDampingSpaceMoving = 10;
+    //    this.angularDampingSpaceStill = 0.15;
+    //    this.rotateSpace = 100;
+    //    this.angularVelocitySpace = 0.15;
+    //    this.angularSpeedSpace = 150;
+    //    this.forceSpace = 250;
 
 
     this.driveJoints = [];
     this.wheels = [];
 
-    if (asset === 'playerRed') {
+    if (asset === 'playerRed')
+    {
         this.wheel = 'wheel_red';
-    } else {
+    }
+    else
+    {
         this.wheel = 'wheel_blue';
     }
     this.wheels[0] = new Phaser.Sprite(game, this.x + -0.22 * PTM, this.y + 0.6 * -PTM, this.wheel);
@@ -148,7 +156,8 @@ function Character(x, y, angle, game, player, asset) {
 
     //Display player name
 
-    var text = game.add.text(0, -56, player.nickname, {
+    var text = game.add.text(0, -56, player.nickname,
+    {
         font: "16px Arial",
         fill: "#ffffff"
     });
@@ -160,36 +169,38 @@ function Character(x, y, angle, game, player, asset) {
 
 };
 
-// Herencia
-Character.prototype = Object.create(Element.prototype);
-Character.prototype.constructor = Element;
-
 /**
  * This method is called when a character is killed or his owner disconnects
  */
 
-Character.prototype.die = function () {
+Character.prototype.die = function ()
+{
 
     if (!this.alive) return;
 
     this.alive = false;
     this.dieSound.play();
-//    var emitter = game.add.emitter(0, 0, 100);
-//    emitter.makeParticles('pokeball');
-//    emitter.x = this.x;
-//    emitter.y = this.y;
-//    emitter.start(true, 2000, null, 10);
-//    game.time.events.add(2000, function () {
-//        if (emitter) emitter.destroy();
-//    }, this);
+    //    var emitter = game.add.emitter(0, 0, 100);
+    //    emitter.makeParticles('pokeball');
+    //    emitter.x = this.x;
+    //    emitter.y = this.y;
+    //    emitter.start(true, 2000, null, 10);
+    //    game.time.events.add(2000, function () {
+    //        if (emitter) emitter.destroy();
+    //    }, this);
     this.wheels[0].destroy();
     this.wheels[1].destroy();
     this.body.destroy();
     this.destroy();
-//    this.kill();
+
 }
 
-Character.prototype.simpleDie = function () {
+/**
+ * This method kills the character without particles
+ */
+
+Character.prototype.simpleDie = function ()
+{
 
     if (!this.alive) return;
     this.alive = false;
@@ -197,10 +208,15 @@ Character.prototype.simpleDie = function () {
     this.wheels[1].destroy();
     this.body.destroy();
     this.destroy();
-//    this.kill();
+
 }
 
-Character.prototype.inWorldCustom = function () {
+/**
+ * Checks if the character is in the world. Not used
+ */
+
+Character.prototype.inWorldCustom = function ()
+{
 
     return this.x >= 0 &&
         this.y >= 0 &&
@@ -209,40 +225,12 @@ Character.prototype.inWorldCustom = function () {
 
 }
 
-Character.prototype.setGrounded = function () {
-    if (this.groundedTimer) {
-        game.time.events.remove(this.groundedTimer);
-        this.groundedTimer = null;
-    }
-
-    this.grounded = true;
-    this.groundedTimer = game.time.events.add(50, function () {
-        this.grounded = false;
-    }, this);
-
-}
-
-// PREDICATES
-
 /**
- * Predicate: is the character within any atmosphere?
- * @returns {Boolean} False if the list of atmospheres is empty, True IOC
+ * Overriding toString method
+ * @returns {String} The character as a string
  */
 
-Character.prototype.inAtmosphere = function () {
-    return this.atmosphere.length > 0;
-}
-
-/**
- * Predicate: is the character touching any planet?
- * @returns {Boolean} True if it is currently touching a planet, False if not
- */
-
-Character.prototype.isGrounded = function () {
-    return this.grounded;
-}
-
-
-Character.prototype.toString = function () {
+Character.prototype.toString = function ()
+{
     return "Player : " + this.player.nickname + " | HP : " + (this.health > 0 ? this.health : 'dead');
 }

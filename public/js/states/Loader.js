@@ -1,4 +1,5 @@
-GALACTIC_STRIKE.Loader = function (game) {
+GALACTIC_STRIKE.Loader = function (game)
+{
     this.ready = false;
 };
 
@@ -11,14 +12,15 @@ var xx = [];
 var yy = [];
 var zz = [];
 
-play_songs = function () {
+play_songs = function ()
+{
     GALACTIC_STRIKE.songs = [];
-//    GALACTIC_STRIKE.songs.push(game.add.audio('guiles', 0.45, true));
-//    GALACTIC_STRIKE.songs.push(game.add.audio('checker', 0.45, true));
-//    GALACTIC_STRIKE.songs.push(game.add.audio('muteCity', 0.45, true));
-//    GALACTIC_STRIKE.songs.push(game.add.audio('dreamLand', 0.45, true));
-//    GALACTIC_STRIKE.songs.push(game.add.audio('witch', 0.45, true));
-//    GALACTIC_STRIKE.songs.push(game.add.audio('dedede'));
+    //    GALACTIC_STRIKE.songs.push(game.add.audio('guiles', 0.45, true));
+    //    GALACTIC_STRIKE.songs.push(game.add.audio('checker', 0.45, true));
+    //    GALACTIC_STRIKE.songs.push(game.add.audio('muteCity', 0.45, true));
+    //    GALACTIC_STRIKE.songs.push(game.add.audio('dreamLand', 0.45, true));
+    //    GALACTIC_STRIKE.songs.push(game.add.audio('witch', 0.45, true));
+    //    GALACTIC_STRIKE.songs.push(game.add.audio('dedede'));
     GALACTIC_STRIKE.songs.push(game.add.audio('pingasDreamLand', 0.30, true));
     GALACTIC_STRIKE.redTeamAnthem = game.add.audio('sovietAnthem', 0.80, true);
     GALACTIC_STRIKE.blueTeamAnthem = game.add.audio('starsAndStripes', 0.80, true);
@@ -33,23 +35,24 @@ play_songs = function () {
  * Load all the assets (images and sound) for this game
  */
 
-load_assets = function () {
+load_assets = function ()
+{
 
     //MUSIC
     ///////////////////////
-//    game.load.audio('guiles', '../assets/sound/songs/guiles_theme.mp3');
-//    game.load.audio('checker', '../assets/sound/songs/checker_knights.mp3');
-//    game.load.audio('muteCity', '../assets/sound/songs/mute_city.mp3');
-//    game.load.audio('dreamLand', '../assets/sound/songs/dream_land.mp3');
-    //game.load.audio('witch', '../assets/sound/songs/witch_doctor.mp3');
 
     game.load.audio('pingasDreamLand', '../assets/sound/songs/pingas_dreamland.mp3');
     game.load.audio('sovietAnthem', '../assets/sound/songs/soviet_anthem.mp3');
     game.load.audio('starsAndStripes', '../assets/sound/songs/stars_and_stripes.mp3');
-    //    game.load.audio('dedede', '../assets/sound/king_dedede.mp3');
     /*
      * http://downloads.khinsider.com/game-soundtracks/album/super-smash-bros.-melee-original-sound-version
      */
+    //    game.load.audio('guiles', '../assets/sound/songs/guiles_theme.mp3');
+    //    game.load.audio('checker', '../assets/sound/songs/checker_knights.mp3');
+    //    game.load.audio('muteCity', '../assets/sound/songs/mute_city.mp3');
+    //    game.load.audio('dreamLand', '../assets/sound/songs/dream_land.mp3');
+    //    game.load.audio('witch', '../assets/sound/songs/witch_doctor.mp3');
+    //    game.load.audio('dedede', '../assets/sound/king_dedede.mp3');
 
     //GAME SOUND
     ///////////////////////
@@ -85,14 +88,9 @@ load_assets = function () {
     game.load.spritesheet("playerBlue", "../assets/spritesIndividuales/robotnik/robotnik_blue_turbo.png", 48, 87); //rueda: 26_23  | robotnik: 49_43
     game.load.image("wheel_red", "../assets/spritesIndividuales/robotnik/wheel_red.png");
     game.load.image("wheel_blue", "../assets/spritesIndividuales/robotnik/wheel_blue.png");
-    //game.load.spritesheet("player_jump", "assets/jump_fly_land.png", 52, 75);
-    //game.load.spritesheet("player", "../assets/ironman_45_75.png", 45, 75);
 
     //PLANETS
     ///////////////////////
-    //game.load.spritesheet("deathstar", "../assets/planets/deathstar.gif", 64, 64);
-    //game.load.image("planet", "../assets/planets/planet1.png");
-    //game.load.image("bigplanet", "../assets/planets/bigplanet.png");
     game.load.image("sun", "../assets/planets/sun.png");
     game.load.image("planet_blue", "../assets/planets/planet_blue.png");
     game.load.image("planet_red", "../assets/planets/planet_red.png");
@@ -115,37 +113,33 @@ load_assets = function () {
 
 }
 
-server_connection = function () {
+server_connection = function ()
+{
 
-    // Crea la conexión con el servidor
+    // Creates the connection with the server
     socket = io();
     console.log(io)
-    console.log(socket)
-    if (socket) {
-        console.log("@Socket.io | Cliente conectado");
+    if (socket)
+    {
+        console.log(socket)
+        console.log("@Socket.io | Client connected");
     }
 
+    // All the handlers for the network events are initialized in this function
     clientSetup();
 
-    var data = {
-        x: game.world.randomX,
-        y: game.world.randomY,
-        angle: 0,
-        velocityX: 0,
-        velocityY: 0,
-        orientation: 0
-    }
-
-    socket.emit('login', data);
-    console.log('@Client sent | login');
+    socket.emit('login',
+    {});
+    console.log('@Client ->      \t| login');
 
 }
 
 GALACTIC_STRIKE.Loader.prototype = {
-
-    preload: function () {
+    preload: function ()
+    {
         // Add a 'loading...' label on the screen
-        var loadingLabel = game.add.text(game.world.centerX, 150, 'loading...', {
+        var loadingLabel = game.add.text(game.world.centerX, 150, 'loading...',
+        {
             font: '30px Arial',
             fill: '#ffffff'
         });
@@ -162,10 +156,11 @@ GALACTIC_STRIKE.Loader.prototype = {
         load_assets();
 
     },
-    create: function () {
+    create: function ()
+    {
 
 
-//        game.input.keyboard.removeKeyCapture(Phaser.Keyboard.M);
+        //        game.input.keyboard.removeKeyCapture(Phaser.Keyboard.M);
 
 
         var currentLocation = window.location.search;
@@ -183,7 +178,8 @@ GALACTIC_STRIKE.Loader.prototype = {
         starfield.height = game.world.height;
         starfield.width = game.world.width;
 
-        if (game.renderType === Phaser.WEBGL) {
+        if (game.renderType === Phaser.WEBGL)
+        {
             max = 200;
         }
 
@@ -191,7 +187,8 @@ GALACTIC_STRIKE.Loader.prototype = {
 
         stars = [];
 
-        for (var i = 0; i < max; i++) {
+        for (var i = 0; i < max; i++)
+        {
             xx[i] = Math.floor(Math.random() * 800) - 400;
             yy[i] = Math.floor(Math.random() * 600) - 300;
             zz[i] = Math.floor(Math.random() * 1700) - 100;
@@ -207,11 +204,13 @@ GALACTIC_STRIKE.Loader.prototype = {
         // TWEEN GALACTIC STRIKE + MENU OPTIONS
         /////////////////////
         var nameLabel = [];
-        nameLabel.push(game.add.text(game.world.centerX-300, game.world.height, 'G A L A C T I C  ', {
+        nameLabel.push(game.add.text(game.world.centerX - 300, game.world.height, 'G A L A C T I C  ',
+        {
             font: '120px Impact',
             fill: '#ffffff'
         }));
-        nameLabel.push(game.add.text(game.world.centerX+300, game.world.height, ' S T R I K E !', {
+        nameLabel.push(game.add.text(game.world.centerX + 300, game.world.height, ' S T R I K E !',
+        {
             font: '120px Impact',
             fill: '#ffffff'
         }));
@@ -219,15 +218,20 @@ GALACTIC_STRIKE.Loader.prototype = {
         for (var i in nameLabel)
         {
             nameLabel[i].anchor.setTo(0.5, 0.5);
-            game.add.tween(nameLabel[i]).to({
-                y: game.world.height/3
+            game.add.tween(nameLabel[i]).to(
+            {
+                y: game.world.height / 3
             }, 3000).easing(Phaser.Easing.Bounce.Out).start();
             //game.add.tween(nameLabel).to({angle: -5}, 500).to({angle: 5}, 300).loop().start();
-            game.add.tween(nameLabel[i]).to({angle: 360}, 1300, Phaser.Easing.Linear.None, true, 0, true);
+            game.add.tween(nameLabel[i]).to(
+            {
+                angle: 360
+            }, 1300, Phaser.Easing.Linear.None, true, 0, true);
         }
         // Explain how to start the game
         var startLabel = game.add.text(game.world.centerX, game.world.height - 100,
-            'press SPACEBAR or touch/click anywhere to START', {
+            'press SPACEBAR or touch/click anywhere to START',
+            {
                 font: '25px Arial',
                 fill: '#ffffff'
             });
@@ -240,20 +244,23 @@ GALACTIC_STRIKE.Loader.prototype = {
         game.input.onTap.add(this.startGame, this);
         game.input.addPointer();
 
-//        game.input.onDown.add(go_fullscreen, this);
+        //        game.input.onDown.add(go_fullscreen, this);
 
 
     },
-    update: function () {
+    update: function ()
+    {
 
-        for (var i = 0; i < max; i++) {
+        for (var i = 0; i < max; i++)
+        {
             stars[i].perspective = distance / (distance - zz[i]);
             stars[i].x = game.world.centerX + xx[i] * stars[i].perspective;
             stars[i].y = game.world.centerY + yy[i] * stars[i].perspective;
 
             zz[i] += speed;
 
-            if (zz[i] > 290) {
+            if (zz[i] > 290)
+            {
                 zz[i] -= 600;
             }
 
@@ -265,15 +272,18 @@ GALACTIC_STRIKE.Loader.prototype = {
         if (game.input.pointer1.active) this.startGame();
 
     },
-    render: function () {
-        game.debug.pointer(game.input.pointer1);
+    render: function ()
+    {
+        //        game.debug.pointer(game.input.pointer1);
     },
-    startGame: function () {
+    startGame: function ()
+    {
         this.state.start('MainMenu');
     }
 };
 
-function go_fullscreen(){
-  game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
-  game.scale.startFullScreen();
+function go_fullscreen()
+{
+    game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
+    game.scale.startFullScreen();
 }

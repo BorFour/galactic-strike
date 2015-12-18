@@ -77,6 +77,56 @@ playGame.prototype = {
 	},
   	create: function(){
 
+
+    //
+    //            var zoomKey = game.input.keyboard.addKey(Phaser.Keyboard.Z);
+    //            zoomKey.onDown.add(function(){
+    //                if (!GALACTIC_STRIKE.zoomed){
+    //                    game.camera.follow(null);
+    //                    game.add.tween(game.world.scale).to( {x: 0.5, y:0.5}, 350, Phaser.Easing.Quadratic.InOut, true);
+    //                    GALACTIC_STRIKE.zoomed = true;
+    //                    game.camera.follow(this.character, Phaser.Camera.FOLLOW_TOPDOWN_TIGHT);
+    //
+    //                }
+    //                else{
+    //                    game.camera.follow(null);
+    //                    game.add.tween(game.world.scale).to( {x: 1, y:1}, 350, Phaser.Easing.Quadratic.InOut, true);
+    //                    GALACTIC_STRIKE.zoomed = false;
+    //                    game.camera.follow(this.character,  Phaser.Camera.FOLLOW_TOPDOWN_TIGHT);
+    //                }
+    //            }, this);
+    //            game.input.keyboard.removeKeyCapture(Phaser.Keyboard.Z);
+
+
+    //    var finishRoundKey = game.input.keyboard.addKey(Phaser.Keyboard.F);
+    //    finishRoundKey.onDown.add(function () {
+    //
+    //        if (GALACTIC_STRIKE.room.host !== GALACTIC_STRIKE.player.id || GALACTIC_STRIKE.room.roundFinished) {
+    //            return;
+    //        }
+    //
+    //        GALACTIC_STRIKE.room.roundFinished = true;
+    //
+    //        console.log('@Client sent | finishRound');
+    //        socket.emit('finishRound', {
+    //            id: GALACTIC_STRIKE.player.id
+    //        });
+    //
+    //    }, this);
+    //    game.input.keyboard.removeKeyCapture(Phaser.Keyboard.F);
+
+
+    //            var respawnKey = game.input.keyboard.addKey(Phaser.Keyboard.R);
+    //            respawnKey.onDown.add(function(){
+    //                console.log("DIE")
+    //                GALACTIC_STRIKE.player.character.die();
+    //                GALACTIC_STRIKE.room.characters[GALACTIC_STRIKE.player.id] = new Character(game.world.randomX, game.world.randomY, game, GALACTIC_STRIKE.player.id, 'player');
+    //                GALACTIC_STRIKE.player.character = GALACTIC_STRIKE.room.characters[GALACTIC_STRIKE.player.id];
+    //                GALACTIC_STRIKE.player.characterSetup();
+    //            }, this);
+    //            game.input.keyboard.removeKeyCapture(Phaser.Keyboard.R);
+
+
   		// adding groupswddddddddd
 
         // Llamamos a la conexión del cliente

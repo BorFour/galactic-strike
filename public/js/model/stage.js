@@ -1,4 +1,5 @@
-Stage = function (game, conf) {
+Stage = function (game, conf)
+{
 
     // Stage viene en un .JSON
     // Aquí, en el constructor, se lee el fichero y se guardan individualmente las variables
@@ -24,35 +25,41 @@ Stage = function (game, conf) {
 
     this.planets = [];
 
-    for (var p in conf.planets) {
+    for (var p in conf.planets)
+    {
         console.log(conf.planets[p]);
         this.planets.push(new Star(conf.planets[p].x, conf.planets[p].y, conf.planets[p].gravityRadius,
             conf.planets[p].gravityForce, conf.planets[p].asset, conf.planets[p].collisionRadius, game));
     }
 };
 
-Stage.prototype.zoomIn = function () {
+Stage.prototype.zoomIn = function ()
+{
     game.camera.bounds.setTo(0, 0, this.width, this.height);
     game.physics.setBoundsToWorld();
     this.zoomedOut = false;
 }
 
-Stage.prototype.zoomOut = function () {
+Stage.prototype.zoomOut = function ()
+{
     game.camera.bounds.setTo(0, 0, this.width / 2, this.height / 2);
     game.physics.setBoundsToWorld();
     this.zoomedOut = true;
 }
 
-Stage.prototype.inWorld = function (element) {
+Stage.prototype.inWorld = function (element)
+{
     return game.getBounds().intersect(element);
 }
 
 
-Stage.prototype.spawnPositionTeam = function (team) {
+Stage.prototype.spawnPositionTeam = function (team)
+{
 
     var angle = Math.random() * 360 - 180;
 
-    console.log({
+    console.log(
+    {
         angle: angle,
         x: this.planets[team].x,
         y: this.planets[team].y,
@@ -68,13 +75,15 @@ Stage.prototype.spawnPositionTeam = function (team) {
 }
 
 
-Stage.prototype.spawnPositionRandomPlanet = function () {
+Stage.prototype.spawnPositionRandomPlanet = function ()
+{
 
     var dataGen = new Phaser.RandomDataGenerator(Math.random());
     var angle = Math.random() * 360 - 180;
     var planet = this.planets[Math.floor(Math.random * this.planets.length)];
 
-    console.log({
+    console.log(
+    {
         angle: angle,
         x: planet.x,
         y: planet.y,
@@ -89,16 +98,17 @@ Stage.prototype.spawnPositionRandomPlanet = function () {
 
 }
 
-Stage.prototype.createObjects = function(){
+Stage.prototype.createObjects = function ()
+{
     //        var elementoPrueba = new Element(game, game.world.randomX, game.world.randomY, 'deathstar');
-        //        game.physics.box2d.enable(elementoPrueba);
+    //        game.physics.box2d.enable(elementoPrueba);
 
 
-        // Mira cómo instancio a la poción
-        // la variable 'items' se encuentra en 'items.json', donde estarán definidos todos los objetos del juego
+    // Mira cómo instancio a la poción
+    // la variable 'items' se encuentra en 'items.json', donde estarán definidos todos los objetos del juego
 
-        //        var objetoPrueba = new Item(game, game.world.randomX, game.world.randomY, items['potion']);
-        //        game.physics.box2d.enable(objetoPrueba);
-        //        game.spacePhysics.addDynamic(objetoPrueba);
+    //        var objetoPrueba = new Item(game, game.world.randomX, game.world.randomY, items['potion']);
+    //        game.physics.box2d.enable(objetoPrueba);
+    //        game.spacePhysics.addDynamic(objetoPrueba);
 
 }

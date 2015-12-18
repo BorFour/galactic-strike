@@ -4,7 +4,8 @@
  * @date 07/11/2015
  */
 
-function SpacePhysics(game) {
+function SpacePhysics(game)
+{
 
     this.game = game;
 
@@ -23,7 +24,8 @@ function SpacePhysics(game) {
 
 }
 
-SpacePhysics.prototype.consoleLog = function () {
+SpacePhysics.prototype.consoleLog = function ()
+{
 
     console.log("@Physics: " + dynamicGroup);
 
@@ -34,7 +36,8 @@ SpacePhysics.prototype.consoleLog = function () {
  * @param {Element} sprite element with a body
  */
 
-SpacePhysics.prototype.addPlanet = function (planet) {
+SpacePhysics.prototype.addPlanet = function (planet)
+{
 
     this.planetGroup.push(planet);
     return planet;
@@ -46,7 +49,8 @@ SpacePhysics.prototype.addPlanet = function (planet) {
  * @param {Element} sprite element with a body
  */
 
-SpacePhysics.prototype.addDynamic = function (sprite) {
+SpacePhysics.prototype.addDynamic = function (sprite)
+{
 
     this.dynamicGroup.push(sprite)
 
@@ -56,20 +60,25 @@ SpacePhysics.prototype.addDynamic = function (sprite) {
  * This function is called in the game loop. It applies the gravitational field of each planet to each dynamic element
  */
 
-SpacePhysics.prototype.update = function () {
+SpacePhysics.prototype.update = function ()
+{
 
-    for (var i = 0; i < this.dynamicGroup.length; i++) {
+    for (var i = 0; i < this.dynamicGroup.length; i++)
+    {
         var c = this.dynamicGroup[i];
         var atmosphere = [];
 
-        if (c.body.static) {
+        if (c.body.static)
+        {
             continue;
         }
-        for (var j = 0; j < this.planetGroup.length; j++) {
+        for (var j = 0; j < this.planetGroup.length; j++)
+        {
             var p = this.planetGroup[j];
             x = c.x;
             y = c.y;
-            if (Phaser.Math.distance(c.x, c.y, p.x, p.y) < p.width / 2 + p.gravityRadius / 2) {
+            if (Phaser.Math.distance(c.x, c.y, p.x, p.y) < p.width / 2 + p.gravityRadius / 2)
+            {
                 // calculating angle between the planet and the crate
                 var angle = Phaser.Math.angleBetween(c.x, c.y, p.x, p.y);
                 // add gravity force to the crate in the direction of planet center

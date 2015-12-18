@@ -1,21 +1,23 @@
-
 var networkDebug = true;
 
 
-clientSetupMenu = function () {
+clientSetupMenu = function ()
+{
 
-    socket.on('ID', function (input) {
+    socket.on('ID', function (input)
+    {
 
         GALACTIC_STRIKE.player.id = input.id;
         GALACTIC_STRIKE.player.nickname += input.id;
         GALACTIC_STRIKE.serverTimestamp = input.timestamp;
-//        GALACTIC_STRIKE.player.character = GALACTIC_STRIKE.room.characters[GALACTIC_STRIKE.player.id];
-//        myCharacterSetup(GALACTIC_STRIKE.player.character);
+        //        GALACTIC_STRIKE.player.character = GALACTIC_STRIKE.room.characters[GALACTIC_STRIKE.player.id];
+        //        myCharacterSetup(GALACTIC_STRIKE.player.character);
 
     });
 
 
-    socket.on('userLeft', function (input) {
+    socket.on('userLeft', function (input)
+    {
 
         console.log('@Client received | userLeft');
 
@@ -27,11 +29,13 @@ clientSetupMenu = function () {
             delete GALACTIC_STRIKE.room.characters[input.id];
         }
 
-        if (GALACTIC_STRIKE.room.players[input.id]) {
+        if (GALACTIC_STRIKE.room.players[input.id])
+        {
 
             GALACTIC_STRIKE.room.unasigned.removePlayer(GALACTIC_STRIKE.room.players[input.id]);
 
-            for (var t in GALACTIC_STRIKE.room.teams){
+            for (var t in GALACTIC_STRIKE.room.teams)
+            {
                 console.log("T :" + t);
                 GALACTIC_STRIKE.room.teams[t].removePlayer(GALACTIC_STRIKE.room.players[input.id]);
             }
@@ -40,16 +44,23 @@ clientSetupMenu = function () {
             delete GALACTIC_STRIKE.room.players[input.id];
         }
 
-        if (GALACTIC_STRIKE.room && GALACTIC_STRIKE.room.gameMode && !GALACTIC_STRIKE.room.gameOver) {
+        if (GALACTIC_STRIKE.room && GALACTIC_STRIKE.room.gameMode && !GALACTIC_STRIKE.room.gameOver)
+        {
             GALACTIC_STRIKE.room.gameMode.update();
         }
 
     });
 
 
-    socket.on('roomIngame', function (input) {
+    socket.on('roomIngame', function (input)
+    {
 
-        var style = {font: "bold 32px Arial", fill: "#fff", boundsAlignH: "center", boundsAlignV: "middle"};
+        var style = {
+            font: "bold 32px Arial",
+            fill: "#fff",
+            boundsAlignH: "center",
+            boundsAlignV: "middle"
+        };
         if (!this.menuText)
         {
             this.menuText = game.add.text(game.world.centerX, game.world.centerY, "Partida en curso", style);
@@ -58,7 +69,8 @@ clientSetupMenu = function () {
 
     });
 
-    socket.on('obsoletClient', function (input) {
+    socket.on('obsoletClient', function (input)
+    {
 
         window.close();
 
@@ -70,12 +82,11 @@ clientSetupMenu = function () {
  * Set up for the events that can be received from the server
  */
 
-function clientSetup() {
+function clientSetup()
+{
 
     clientSetupMenu();
     clientSetupRoom();
     clientSetupGame();
 
 }
-
-

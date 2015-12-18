@@ -6,7 +6,8 @@ function Item(game, x, y, conf)
 {
 
     Element.call(this, game, x, y, conf.asset);
-    game.physics.box2d.enable(this);
+//    game.physics.box2d.enable(this);
+    game.physics.p2.enable(this, false);
     //    game.spacePhysics.addDynamic(this);
     this.use = conf.use;
     this.owner = null;

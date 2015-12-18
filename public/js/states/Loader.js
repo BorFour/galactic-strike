@@ -104,6 +104,11 @@ load_assets = function ()
     game.load.image("exitButton", "../assets/buttons/boton_exit.png");
     game.load.image("changeMap", "../assets/buttons/change_map.png");
 
+    //PHYSICS
+    ///////////////////////
+    game.load.physics('robotnikShape', 'assets/physics/robotnik_shape.json');
+
+
     //OTHER
     ///////////////////////
     game.load.image('redTeam', '../assets/lobby/red_team.jpg');

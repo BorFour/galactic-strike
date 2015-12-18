@@ -127,30 +127,30 @@ Character.prototype.moveSpace = function (direction)
         this.body.rotateLeft(150);
         this.animations.play('left');
         this.orientation = this.LEFT;
-        this.body.angularDamping = 0.15;
-        this.body.linearDamping = 0.3;
+//        this.body.angularDamping = 0.15;
+//        this.body.linearDamping = 0.3;
         break;
     case 'right':
         this.body.rotateRight(150);
         this.animations.play('right');
         this.orientation = this.RIGHT;
-        this.body.angularDamping = 0.15;
-        this.body.linearDamping = 0.3;
+//        this.body.angularDamping = 0.15;
+//        this.body.linearDamping = 0.3;
         break;
     case 'up':
         this.body.thrust(315);
         if (this.orientation === this.LEFT) this.animations.play('jumpL');
         if (this.orientation === this.RIGHT) this.animations.play('jumpR');
-        this.body.angularDamping = 10;
-        this.body.linearDamping = 0.3;
+//        this.body.angularDamping = 10;
+//        this.body.linearDamping = 0.3;
         this.jumpAnimation = true;
         break;
     case 'down':
         this.body.reverse(250);
         if (this.orientation === this.LEFT) this.animations.play('jumpL');
         if (this.orientation === this.RIGHT) this.animations.play('jumpR');
-        this.body.angularDamping = 10;
-        this.body.linearDamping = 0.73;
+//        this.body.angularDamping = 10;
+//        this.body.linearDamping = 0.73;
         this.jumpAnimation = true;
         break;
     case 'rotateL':
@@ -162,8 +162,8 @@ Character.prototype.moveSpace = function (direction)
     case 'still':
         if (this.orientation === this.LEFT) this.animations.play('left');
         if (this.orientation === this.RIGHT) this.animations.play('right');
-        this.body.angularDamping = 10;
-        this.body.linearDamping = 0.73;
+//        this.body.angularDamping = 10;
+//        this.body.linearDamping = 0.73;
         this.jumpAnimation = false;
         break;
     }
@@ -186,17 +186,19 @@ Character.prototype.flightMode = function ()
     this.wheels[1].anchor.set(0.5);
     game.add.existing(this.wheels[1]);
 
-    this.wheels[0].body = new Phaser.Physics.Box2D.Body(this.game, null, this.x + -0.22 * PTM, this.y + 0.6 * -PTM);
+//    this.wheels[0].body = new Phaser.Physics.Box2D.Body(this.game, null, this.x + -0.22 * PTM, this.y + 0.6 * -PTM);
+    game.physics.p2.enable(this.wheels[0], false);
     this.wheels[0].body.sprite = this.wheels[0];
-    this.wheels[1].body = new Phaser.Physics.Box2D.Body(this.game, null, this.x + 0.22 * PTM, this.y + 0.6 * -PTM);
+//    this.wheels[1].body = new Phaser.Physics.Box2D.Body(this.game, null, this.x + 0.22 * PTM, this.y + 0.6 * -PTM);
+    game.physics.p2.enable(this.wheels[1], false);
     this.wheels[1].body.sprite = this.wheels[1];
     this.wheels[0].body.setCircle(0.2 * PTM);
     this.wheels[1].body.setCircle(0.2 * PTM);
     this.wheels[0].body.setCircle(0.2 * PTM);
     this.wheels[1].body.setCircle(0.2 * PTM);
 
-    this.driveJoints[0] = game.physics.box2d.wheelJoint(this.body, this.wheels[0].body, -3, 8, 0, 0, 0, 1, 0, 0, 0, 0, true); // rear
-    this.driveJoints[1] = game.physics.box2d.wheelJoint(this.body, this.wheels[1].body, 3, 8, 0, 0, 0, 1, 0, 0, 0, 0, true); // front
+//    this.driveJoints[0] = game.physics.box2d.wheelJoint(this.body, this.wheels[0].body, -3, 8, 0, 0, 0, 1, 0, 0, 0, 0, true); // rear
+//    this.driveJoints[1] = game.physics.box2d.wheelJoint(this.body, this.wheels[1].body, 3, 8, 0, 0, 0, 1, 0, 0, 0, 0, true); // front
 
 }
 
@@ -227,7 +229,8 @@ Character.prototype.setGrounded = function ()
 
 Character.prototype.inAtmosphere = function ()
 {
-    return this.atmosphere.length > 0;
+    return false;
+//    return this.atmosphere.length > 0;
 }
 
 /**

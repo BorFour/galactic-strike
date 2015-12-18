@@ -48,10 +48,17 @@ GALACTIC_STRIKE.Play.prototype = {
 
         if (!game.spacePhysics)
         {
+
             game.spacePhysics = new SpacePhysics(game)
             game.spacePhysics.debug = true;
-            game.physics.startSystem(Phaser.Physics.BOX2D);
-            game.physics.box2d.friction = 50;
+
+            game.physics.startSystem(Phaser.Physics.P2JS);
+            game.physics.p2.setImpactEvents(true);
+            game.physics.p2.updateBoundsCollisionGroup();
+            game.physics.p2.restitution = 0.8;
+            game.physics.p2.defaultRestitution = 0.8;
+
+//            game.physics.p2.friction = 50;
         }
 
         //        planetCollisionGroup =  game.physics.box2d.createCollisionGroup();
@@ -85,7 +92,7 @@ GALACTIC_STRIKE.Play.prototype = {
         GALACTIC_STRIKE.room.gameMode.init();
         GALACTIC_STRIKE.room.gameOver = false;
 
-        spacePhysicsTimer();
+//        spacePhysicsTimer();
         updateOnlineTimer();
         GALACTIC_STRIKE.createGameReady = true;
 

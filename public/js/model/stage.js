@@ -18,9 +18,9 @@ Stage = function (game, conf)
 
     game.world.setBounds(0, 0, conf.width, conf.height);
     //SPACE BACKGROUND
-    var starfield = game.add.sprite(0, 0, conf.backgroundImage);
-    starfield.height = game.world.height;
-    starfield.width = game.world.width;
+//    var starfield = game.add.sprite(0, 0, conf.backgroundImage);
+//    starfield.height = game.world.height;
+//    starfield.width = game.world.width;
     //game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
 
     this.planets = [];
@@ -67,8 +67,8 @@ Stage.prototype.spawnPositionTeam = function (team)
     });
 
     return {
-        x: this.planets[team].x + this.planets[team].collisionRadius * Math.sin(angle),
-        y: this.planets[team].y + this.planets[team].collisionRadius * Math.cos(angle),
+        x: this.planets[team].x + (this.planets[team].collisionRadius + 50) * Math.sin(angle),
+        y: this.planets[team].y + (this.planets[team].collisionRadius + 50) * Math.cos(angle),
         angle: angle
     };
 

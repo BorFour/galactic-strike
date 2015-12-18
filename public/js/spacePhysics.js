@@ -79,11 +79,11 @@ SpacePhysics.prototype.update = function ()
             y = c.y;
             if (Phaser.Math.distance(c.x, c.y, p.x, p.y) < p.width / 2 + p.gravityRadius / 2)
             {
+
                 // calculating angle between the planet and the crate
-                var angle = Phaser.Math.angleBetween(c.x, c.y, p.x, p.y);
+//                var angle = Phaser.Math.angleBetween(c.x, c.y, p.x, p.y);
                 // add gravity force to the crate in the direction of planet center
-                c.body.applyForce(p.gravityForce * Math.cos(angle) * this.forceReducer,
-                    p.gravityForce * Math.sin(angle) * this.forceReducer);
+                c.body.applyForce(p.x, p.y, p.gravityForce * this.forceReducer);
                 atmosphere.push(p);
             }
         }

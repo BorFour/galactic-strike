@@ -347,9 +347,9 @@ Player.prototype.characterSetup = function ()
     for (var i = 0; i < GALACTIC_STRIKE.room.map.planets.length; i++)
     {
         //                myCharacter.body.setBodyContactCallback(planets[i], touchPlanetCallback, this);
-        this.character.body.setBodyPresolveCallback(GALACTIC_STRIKE.room.map.planets[i], touchPlanetCallback, this);
-        this.character.wheels[0].body.setBodyPresolveCallback(GALACTIC_STRIKE.room.map.planets[i], touchPlanetCallback, this);
-        this.character.wheels[1].body.setBodyPresolveCallback(GALACTIC_STRIKE.room.map.planets[i], touchPlanetCallback, this);
+        this.character.body.collides(GALACTIC_STRIKE.room.map.planets[i], touchPlanetCallback, this);
+        this.character.wheels[0].body.collides(GALACTIC_STRIKE.room.map.planets[i], touchPlanetCallback, this);
+        this.character.wheels[1].body.collides(GALACTIC_STRIKE.room.map.planets[i], touchPlanetCallback, this);
 
     }
 

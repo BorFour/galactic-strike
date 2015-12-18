@@ -12,13 +12,22 @@ function Character(x, y, angle, game, player, asset)
 
     this.player = player;
     this.game = game;
+    this.debug = true;
+
+    CG_wheel = game.physics.p2.createCollisionGroup(); //COLLISION GROUP
+
+    game.physics.p2.updateBoundsCollisionGroup(); //UPDATE COLLISION BOUND FOR GROUPS
 
     this.game.spacePhysics.addDynamic(this);
-    this.game.physics.box2d.enable(this);
+//    this.game.physics.box2d.enable(this);
+    this.game.physics.p2.enable([this], this.debug);
+    this.body.clearShapes();
+    this.body.loadPolygon('robotnikShape', "robotnik");
     this.body.dynamic = true;
     this.body.immovable = false;
     this.body.static = false;
     this.body.collideWorldBounds = true;
+    this.body.setCollisionGroup(CG_wheel);
 
 
     //Attributes
@@ -72,9 +81,9 @@ function Character(x, y, angle, game, player, asset)
     this.atmosphere = [];
     this.grounded = false;
 
-    var truckVertices = [-10, -30, 10, -30, 20, 0, -20, 0];
+//    var truckVertices = [-10, -30, 10, -30, 20, 0, -20, 0];
 
-    this.body.setPolygon(truckVertices);
+//    this.body.setPolygon(truckVertices);
     this.body.mass = 1;
     this.body.angularDamping = 0.15;
     this.body.linearDamping = 0.3;
@@ -116,20 +125,25 @@ function Character(x, y, angle, game, player, asset)
     this.wheels[1].anchor.set(0.5);
     game.add.existing(this.wheels[1]);
 
-
     // Bodies of the wheels
-    this.wheels[0].body = new Phaser.Physics.Box2D.Body(this.game, null, this.x + -0.22 * PTM, this.y + 0.6 * -PTM);
-    this.wheels[0].body.sprite = this.wheels[0];
-    this.wheels[1].body = new Phaser.Physics.Box2D.Body(this.game, null, this.x + 0.22 * PTM, this.y + 0.6 * -PTM);
-    this.wheels[1].body.sprite = this.wheels[1];
+
+    this.game.physics.p2.enable([this.wheels[0], this.wheels[1]] , this.debug, true);
+    this.wheels[0].body.setCollisionGroup(CG_wheel);
+    this.wheels[1].body.setCollisionGroup(CG_wheel);
+//    this.wheels[0].body = new Phaser.Physics.Box2D.Body(this.game, null, this.x + -0.22 * PTM, this.y + 0.6 * -PTM, 1);
+//    this.wheels[0].body = new Phaser.Physics.P2.Body(this.game, this.wheels[0], this.x + -0.22 * PTM, this.y + 0.6 * -PTM, 1);
+//    this.wheels[0].body.sprite = this.wheels[0];
+//    this.wheels[1].body = new Phaser.Physics.Box2D.Body(this.game, null, this.x + 0.22 * PTM, this.y + 0.6 * -PTM);
+//    this.wheels[1].body.sprite = this.wheels[1];
+//    this.wheels[1].body = new Phaser.Physics.P2.Body(this.game, this.wheels[1], this.x + -0.22 * PTM, this.y + 0.6 * -PTM, 1);
     this.wheels[0].body.setCircle(0.2 * PTM);
     this.wheels[1].body.setCircle(0.2 * PTM);
-    this.wheels[0].body.collideWorldBounds = true;
-    this.wheels[1].body.collideWorldBounds = true;
-    this.wheels[0].body.friction = 0.8;
-    this.wheels[1].body.friction = 0.8;
-    this.motorEnabled = false;
-    this.motorSpeed = 30;
+//    this.wheels[0].body.collideWorldBounds = true;
+//    this.wheels[1].body.collideWorldBounds = true;
+//    this.wheels[0].body.friction = 0.8;
+//    this.wheels[1].body.friction = 0.8;
+//    this.motorEnabled = false;
+//    this.motorSpeed = 30;
 
     var frequency = 3.5;
     var damping = 0.5;
@@ -137,8 +151,31 @@ function Character(x, y, angle, game, player, asset)
     var rideHeight = 0.5;
 
     // Joints between de wheels and the main body
-    this.driveJoints[0] = game.physics.box2d.wheelJoint(this.body, this.wheels[0].body, -0.65 * PTM, rideHeight * PTM, 0, 0, 0, 1, frequency, damping, 0, motorTorque, true);
-    this.driveJoints[1] = game.physics.box2d.wheelJoint(this.body, this.wheels[1].body, 0.65 * PTM, rideHeight * PTM, 0, 0, 0, 1, frequency, damping, 0, motorTorque, true);
+//    this.driveJoints[0] = game.physics.box2d.wheelJoint(this.body, this.wheels[0].body, -0.65 * PTM, rideHeight * PTM, 0, 0, 0, 1, frequency, damping, 0, motorTorque, true);
+//    this.driveJoints[1] = game.physics.box2d.wheelJoint(this.body, this.wheels[1].body, 0.65 * PTM, rideHeight * PTM, 0, 0, 0, 1, frequency, damping, 0, motorTorque, true);
+
+    this.springs = [];
+    this.springs[0] = game.physics.p2.createSpring(this, this.wheels[0], 70, 150, 50,null,null,[30,0],null);
+    this.springs[1] = game.physics.p2.createSpring(this, this.wheels[1], 70, 150,50,null,null,[-30,0],null);
+
+
+    this.constraint = game.physics.p2.createPrismaticConstraint(this, this.wheels[0], false,[30,0],[0,0],[0,1]);
+
+        //SET LIMITS
+         this.constraint.lowerLimitEnabled= this.constraint.upperLimitEnabled = true;
+         this.constraint.upperLimit = -1;
+         this.constraint.lowerLimit = -8;
+    this.constraint_1 = game.physics.p2.createPrismaticConstraint(this, this.wheels[1], false,[-30,0],[0,0],[0,1]);
+
+        //SET LIMITS
+         this.constraint_1.lowerLimitEnabled= this.constraint_1.upperLimitEnabled = true;
+         this.constraint_1.upperLimit = -1;
+         this.constraint_1.lowerLimit = -8;
+
+
+
+
+
 
 
     // This is for the collision callback

@@ -56,6 +56,7 @@ Character.prototype.attack0 = function ()
         // After this.attackCooldownTime, the spikeball is destroyed and the attack cooldown is restored
         game.time.events.add(this.attack0CooldownTime, function ()
         {
+            console.log("Destroying attack");
             if(this.spikeball) this.spikeball.die();
             if(this.attackJoint) game.physics.box2d.world.DestroyJoint(this.attackJoint);
             this.attackJoint = null;
@@ -101,6 +102,7 @@ Character.prototype.attack1 = function ()
         // After this.attack2CooldownTime, the spikeball is destroyed and the attack cooldown is restored
         game.time.events.add(this.attack1CooldownTime, function ()
         {
+            console.log("Destroying attack");
             if(this.spikeball) this.spikeball.die();
             if(this.attackJoint) game.physics.box2d.world.DestroyJoint(this.attackJoint);
             this.attackJoint = null;
@@ -145,6 +147,7 @@ Character.prototype.attack2 = function ()
         // After this.attack3CooldownTime, the spikeball is destroyed and the attack cooldown is restored
         game.time.events.add(this.attack2CooldownTime, function ()
         {
+            console.log("Destroying attack");
             if(this.spikeball) this.spikeball.die();
             if(this.attackJoint) game.physics.box2d.world.DestroyJoint(this.attackJoint);
             this.attackJoint = null;
@@ -189,6 +192,7 @@ Character.prototype.attack3 = function ()
         }
         game.time.events.add(this.attack3CooldownTime, function ()
         {
+            console.log("Destroying attack");
             if(this.spikeball) this.spikeball.die();
             if(this.attackJoint) game.physics.box2d.world.DestroyJoint(this.attackJoint);
             this.attackJoint = null;

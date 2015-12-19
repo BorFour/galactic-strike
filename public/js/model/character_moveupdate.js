@@ -42,15 +42,15 @@ Character.prototype.moveGrounded = function (direction)
     {
     case 'left':
         this.animations.play('left');
-        this.wheels[0].body.angularVelocity = -50;
-        this.wheels[1].body.angularVelocity = -50;
+        this.wheels[0].body.angularVelocity = -40;
+        this.wheels[1].body.angularVelocity = -40;
         this.orientation = this.LEFT;
         this.jumpAnimation = false;
         break;
     case 'right':
         this.animations.play('right');
-        this.wheels[0].body.angularVelocity = 50;
-        this.wheels[1].body.angularVelocity = 50;
+        this.wheels[0].body.angularVelocity = 30;
+        this.wheels[1].body.angularVelocity = 30;
         this.orientation = this.RIGHT;
         this.jumpAnimation = false;
         break;

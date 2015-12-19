@@ -30,6 +30,7 @@ function Star(x, y, gravityRadius, gravityForce, asset, collisionRadius, game)
         this.body.setCircle(this.width / 2);
         gravityGraphics.drawCircle(this.x, this.y, this.width/2 + this.gravityRadius);
     }
+    this.body.setMaterial(game.spacePhysics.planetMaterial);
     console.log("@Star: " + "planet created -> \n" + this);
 
 }

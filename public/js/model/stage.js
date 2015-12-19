@@ -16,12 +16,12 @@ Stage = function (game, conf)
     this.height = conf.height;
     this.zoomedOut = false;
 
-//    game.world.setBounds(0, 0, conf.width, conf.height);
+    //    game.world.setBounds(0, 0, conf.width, conf.height);
 
     //SPACE BACKGROUND
-//    var starfield = game.add.sprite(0, 0, conf.backgroundImage);
-//    starfield.height = game.world.height;
-//    starfield.width = game.world.width;
+    //    var starfield = game.add.sprite(0, 0, conf.backgroundImage);
+    //    starfield.height = game.world.height;
+    //    starfield.width = game.world.width;
     //game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
 
     this.planets = [];
@@ -34,7 +34,10 @@ Stage = function (game, conf)
 
         this.planets.push(s);
         s.body.setCollisionGroup(game.spacePhysics.CG_planets);
-        s.body.collides(game.spacePhysics.CG_characters); // [game.spacePhysics.GC_planets,]
+        for (var t in GALACTIC_STRIKE.room.teams)
+        {
+            s.body.collides(game.spacePhysics.CG_teams[t]);
+        }
     }
 };
 

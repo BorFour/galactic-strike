@@ -89,12 +89,12 @@ Character.prototype.moveInOrbit = function (direction)
     {
     case 'left':
         this.animations.play('left');
-        this.body.rotateLeft(50);
+        this.body.rotateLeft(75);
         this.orientation = this.LEFT;
         break;
     case 'right':
         this.animations.play('right');
-        this.body.rotateRight(50);
+        this.body.rotateRight(75);
         this.orientation = this.RIGHT;
         break;
     case 'jetpack':
@@ -127,14 +127,14 @@ Character.prototype.moveSpace = function (direction)
     switch (direction)
     {
     case 'left':
-        this.body.rotateLeft(50);
+        this.body.rotateLeft(75);
         this.animations.play('left');
         this.orientation = this.LEFT;
         this.body.angularDamping = 0.15;
         this.body.damping = 0.3;
         break;
     case 'right':
-        this.body.rotateRight(50);
+        this.body.rotateRight(75);
         this.animations.play('right');
         this.orientation = this.RIGHT;
         this.body.angularDamping = 0.15;
@@ -246,7 +246,7 @@ Character.prototype.isGrounded = function ()
 {
 
     for (var i = 0; i < this.atmosphere.length; i++){
-        if (Phaser.Math.distance(this.x, this.y, this.atmosphere[i].x, this.atmosphere[i].y) <= this.atmosphere[i].width / 2 + 35) return true;
+        if (Phaser.Math.distance(this.x, this.y, this.atmosphere[i].x, this.atmosphere[i].y) <= this.atmosphere[i].width / 2 + 25) return true;
     }
     return false;
 

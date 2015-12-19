@@ -19,7 +19,6 @@ function Character(x, y, angle, game, player, asset)
     game.physics.p2.updateBoundsCollisionGroup(); //UPDATE COLLISION BOUND FOR GROUPS
 
     this.game.spacePhysics.addDynamic(this);
-//    this.game.physics.box2d.enable(this);
     this.game.physics.p2.enable([this], this.debug);
     this.body.clearShapes();
     this.anchor.setTo(0.5, 0.25);
@@ -27,7 +26,7 @@ function Character(x, y, angle, game, player, asset)
     this.body.dynamic = true;
     this.body.immovable = false;
     this.body.static = false;
-//    this.body.setCollisionGroup(game.spacePhysics.CG_characters);
+    this.body.setCollisionGroup(game.spacePhysics.CG_characters);
     this.body.collideWorldBounds = true;
 
 

@@ -28,7 +28,7 @@ function Star(x, y, gravityRadius, gravityForce, asset, collisionRadius, game)
     {
         this.collisionRadius = this.width/2;
         this.body.setCircle(this.width / 2);
-        gravityGraphics.drawCircle(this.x, this.y, this.width + this.gravityRadius);
+        gravityGraphics.drawCircle(this.x, this.y, this.width/2 + this.gravityRadius);
     }
     console.log("@Star: " + "planet created -> \n" + this);
 

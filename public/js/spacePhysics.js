@@ -75,7 +75,7 @@ SpacePhysics.prototype.update = function ()
         for (var j = 0; j < this.planetGroup.length; j++)
         {
             var p = this.planetGroup[j];
-            if (Phaser.Math.distance(c.x, c.y, p.x, p.y) < p.width / 2 + p.gravityRadius/3)
+            if (Phaser.Math.distance(c.x, c.y, p.x, p.y) < (p.collisionRadius + p.gravityRadius)/2)
             {
 
                 // calculating angle between the planet and the crate

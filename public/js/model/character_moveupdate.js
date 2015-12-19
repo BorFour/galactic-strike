@@ -246,7 +246,7 @@ Character.prototype.isGrounded = function ()
 {
 
     for (var i = 0; i < this.atmosphere.length; i++){
-        if (Phaser.Math.distance(this.x, this.y, this.atmosphere[i].x, this.atmosphere[i].y) <= this.atmosphere[i].width / 2 + 10) return true;
+        if (Phaser.Math.distance(this.x, this.y, this.atmosphere[i].x, this.atmosphere[i].y) <= this.atmosphere[i].width / 2 + 15) return true;
     }
     return false;
 

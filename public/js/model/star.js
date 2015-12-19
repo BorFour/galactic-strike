@@ -26,6 +26,7 @@ function Star(x, y, gravityRadius, gravityForce, asset, collisionRadius, game)
     }
     else
     {
+        this.collisionRadius = this.width/2;
         this.body.setCircle(this.width / 2);
         gravityGraphics.drawCircle(this.x, this.y, this.width + this.gravityRadius);
     }

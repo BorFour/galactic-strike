@@ -136,6 +136,8 @@ GALACTIC_STRIKE.Play.prototype = {
     render: function ()
     {
 
+
+
         var i = 1;
         var offsetDebug = 750;
         game.debug.text('Mute (toggle with \'M\') :' + game.sound.mute, 32, offsetDebug + 32 * i);
@@ -143,6 +145,14 @@ GALACTIC_STRIKE.Play.prototype = {
         game.debug.text('Volume (+Up \'K\' , -Down \'J\') :' + game.sound.volume.toPrecision(2) * 100 + '%', 32, offsetDebug + 32 * i);
 
         if(GALACTIC_STRIKE.player.character) {
+            var point = new Phaser.Point(GALACTIC_STRIKE.player.character.x, GALACTIC_STRIKE.player.character.y);
+            game.debug.geom( point, 'rgba(255,255,255,1)' ) ;
+
+            for (var i = 0; i < GALACTIC_STRIKE.room.map.planets.length; i++){
+                var point = new Phaser.Point(GALACTIC_STRIKE.room.map.planets.x, GALACTIC_STRIKE.room.map.planets.y);
+                game.debug.geom( point, 'rgba(255,0,255,1)' ) ;
+            }
+
             var j = 1;
             game.debug.text('Grounded: ' + GALACTIC_STRIKE.player.character.isGrounded(), 32, offsetDebug - 32 * j);
             j++;

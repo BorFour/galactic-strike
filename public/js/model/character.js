@@ -22,8 +22,8 @@ function Character(x, y, angle, game, player, asset)
 //    this.game.physics.box2d.enable(this);
     this.game.physics.p2.enable([this], this.debug);
     this.body.clearShapes();
+    this.anchor.setTo(0.5, 0.25);
     this.body.loadPolygon('robotnikShape', "robotnik");
-//    this.body.anchor.setTo(0.5, 0.25);
     this.body.dynamic = true;
     this.body.immovable = false;
     this.body.static = false;
@@ -163,13 +163,13 @@ function Character(x, y, angle, game, player, asset)
 
     //SET LIMITS
      this.constraint.lowerLimitEnabled= this.constraint.upperLimitEnabled = true;
-     this.constraint.upperLimit = 0;
+     this.constraint.upperLimit = -0.7;
      this.constraint.lowerLimit = -1;
     this.constraint_1 = game.physics.p2.createPrismaticConstraint(this, this.wheels[1], false,[-30,0],[0,0],[0,1]);
 
     //SET LIMITS
      this.constraint_1.lowerLimitEnabled= this.constraint_1.upperLimitEnabled = true;
-     this.constraint_1.upperLimit = 0;
+     this.constraint_1.upperLimit = -0.7;
      this.constraint_1.lowerLimit = -1;
 
     this.wheels[0].body.setCollisionGroup(GALACTIC_STRIKE.room.map.CG_characters);
@@ -207,6 +207,8 @@ function Character(x, y, angle, game, player, asset)
     });
     this.addChild(text);
     text.anchor.set(0.5);
+
+
 
     console.log(this);
 

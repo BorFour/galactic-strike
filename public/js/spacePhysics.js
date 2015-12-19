@@ -41,6 +41,17 @@ function SpacePhysics(game)
     this.contactMaterial.frictionRelaxation = 3;     // Relaxation of the resulting FrictionEquation that this ContactMaterial generate.
     this.contactMaterial.surfaceVelocity = 0;        // Will add surface velocity to this material. If bodyA rests on top if bodyB, and the surface velocity is positive, bodyA will slide to the right.
 
+
+
+
+
+    this.CG_planets = game.physics.p2.createCollisionGroup();
+    this.CG_characters = game.physics.p2.createCollisionGroup();
+    this.CG_suns = game.physics.p2.createCollisionGroup();
+    this.CG_attacks = game.physics.p2.createCollisionGroup();
+    this.CG_wormholes = game.physics.p2.createCollisionGroup();
+
+
 }
 
 SpacePhysics.prototype.consoleLog = function ()

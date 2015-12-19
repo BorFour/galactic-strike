@@ -24,8 +24,6 @@ Stage = function (game, conf)
     //game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
 
     this.planets = [];
-    this.CG_planets = game.physics.p2.createCollisionGroup();
-    this.CG_characters = game.physics.p2.createCollisionGroup();
 
     for (var p in conf.planets)
     {
@@ -34,8 +32,8 @@ Stage = function (game, conf)
             conf.planets[p].gravityForce, conf.planets[p].asset, conf.planets[p].collisionRadius, game);
 
         this.planets.push(s);
-        s.body.setCollisionGroup(this.CG_planets);
-        s.body.collides([this.CG_planets, this.CG_characters]);
+        s.body.setCollisionGroup(game.spacePhysics.CG_planets);
+        s.body.collides(game.spacePhysics.CG_characters); // [game.spacePhysics.GC_planets,]
     }
 };
 

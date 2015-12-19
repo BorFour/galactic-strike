@@ -28,7 +28,7 @@ function Character(x, y, angle, game, player, asset)
     this.body.immovable = false;
     this.body.static = false;
     this.body.collideWorldBounds = true;
-    this.body.setCollisionGroup(GALACTIC_STRIKE.room.map.CG_characters);
+    this.body.setCollisionGroup(game.spacePhysics.CG_characters);
 
 
     //Attributes
@@ -172,12 +172,12 @@ function Character(x, y, angle, game, player, asset)
      this.constraint_1.upperLimit = -0.7;
      this.constraint_1.lowerLimit = -1;
 
-    this.wheels[0].body.setCollisionGroup(GALACTIC_STRIKE.room.map.CG_characters);
-    this.wheels[1].body.setCollisionGroup(GALACTIC_STRIKE.room.map.CG_characters);
+    this.wheels[0].body.setCollisionGroup(game.spacePhysics.CG_characters);
+    this.wheels[1].body.setCollisionGroup(game.spacePhysics.CG_characters);
 
-    this.body.collides(GALACTIC_STRIKE.room.map.CG_planets, touchPlanetCallback, this);
-    this.wheels[0].body.collides(GALACTIC_STRIKE.room.map.CG_planets, touchPlanetCallback, this);
-    this.wheels[1].body.collides(GALACTIC_STRIKE.room.map.CG_planets, touchPlanetCallback, this);
+    this.body.collides(game.spacePhysics.CG_planets, touchPlanetCallback, this);
+    this.wheels[0].body.collides(game.spacePhysics.CG_planets, touchPlanetCallback, this);
+    this.wheels[1].body.collides(game.spacePhysics.CG_planets, touchPlanetCallback, this);
 
 //    this.body.onEndContact.add(untouchPlanetCallback, this);
 //    this.wheels[0].body.onEndContact.add(untouchPlanetCallback, this.wheels[0]);

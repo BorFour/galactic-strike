@@ -25,6 +25,7 @@ Stage = function (game, conf)
 
     this.planets = [];
     this.CG_planets = game.physics.p2.createCollisionGroup();
+    this.CG_characters = game.physics.p2.createCollisionGroup();
 
     for (var p in conf.planets)
     {
@@ -34,7 +35,7 @@ Stage = function (game, conf)
 
         this.planets.push(s);
         s.body.setCollisionGroup(this.CG_planets);
-        s.body.collides([this.CG_planets, this.CG_planets]);
+        s.body.collides([this.CG_planets, this.CG_characters]);
     }
 };
 

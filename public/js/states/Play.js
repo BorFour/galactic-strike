@@ -55,8 +55,8 @@ GALACTIC_STRIKE.Play.prototype = {
             game.physics.startSystem(Phaser.Physics.P2JS);
             game.physics.p2.setImpactEvents(true);
             game.physics.p2.updateBoundsCollisionGroup();
-            game.physics.p2.restitution = 0.8;
-            game.physics.p2.defaultRestitution = 0.8;
+            game.physics.p2.restitution = 0.1;
+            game.physics.p2.friction = 0.5;
             game.physics.p2.gravityScale = 0;
 
 //            game.physics.p2.friction = 50;
@@ -142,6 +142,18 @@ GALACTIC_STRIKE.Play.prototype = {
         i++;
         game.debug.text('Volume (+Up \'K\' , -Down \'J\') :' + game.sound.volume.toPrecision(2) * 100 + '%', 32, offsetDebug + 32 * i);
 
+        if(GALACTIC_STRIKE.player.character) {
+            var j = 1;
+            game.debug.text('Grounded: ' + GALACTIC_STRIKE.player.character.isGrounded(), 32, offsetDebug - 32 * j);
+            j++;
+            game.debug.text('Sprite : ' + GALACTIC_STRIKE.player.character.grounded +
+                            ', wheels[0] : ' + GALACTIC_STRIKE.player.character.wheels[0].grounded +
+                            ', wheels[1] : ' + GALACTIC_STRIKE.player.character.wheels[1].grounded , 32, offsetDebug - 32 * j);
+            j++;
+            game.debug.text('In atmosphere: ' + GALACTIC_STRIKE.player.character.inAtmosphere(), 32, offsetDebug - 32 * j);
+          j++;
+            game.debug.text('Atmosphere: ' + GALACTIC_STRIKE.player.character.atmosphere, 32, offsetDebug - 32 * j);
+        }
         //            game.debug.box2dWorld();
         //            game.debug.cameraInfo(game.camera, 300, 32);
 
@@ -163,9 +175,40 @@ function touchPlanetCallback(body1, body2, fixture1, fixture2, begin)
 {
 
     body1.mainSprite.planetTouched = body2;
-    body1.mainSprite.setGrounded();
+    body1.mainSprite.grounded = true;
+//    body1.mainSprite.planetSpring = game.physics.p2.createSpring(body1.mainSprite, body2.sprite, 0.01, 0.01, 0);
 
 }
+
+function untouchPlanetCallback(target)
+{
+
+//    setUngrounded(target);
+
+}
+
+/**
+ * Sets the grounded attribute of the character to true and tries to set it false after a period of time
+ */
+
+function setUngrounded(target)
+{
+    this.body.mainSprite.grounded = false;
+//    if (this.body.groundedTimer)
+//    {
+//        game.time.events.remove(target.groundedTimer);
+//        targthis.bodyet.groundedTimer = null;
+//    }
+//
+//    this.body.groundedTimer = game.time.events.add(100, function ()
+//    {
+//        this.body.grounded = false;
+//
+////        this.body.mainSprite.planetTouched = null;
+//    }, this);
+
+}
+
 
 function touchSpikeballEnemy(body1, body2, fixture1, fixture2, begin)
 {

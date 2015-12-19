@@ -11,10 +11,19 @@ Character.prototype.jump = function ()
 
     if (this.planetTouched != null && this.jumpCooldown)
     {
+//        game.physics.p2.removeSpring(this.planetSpring);
+        this.grounded = false;
 
         this.jumpCooldown = false;
-        var angle = Phaser.Math.angleBetween(this.x, this.y, this.planetTouched.x, this.planetTouched.y);
-        this.body.applyForce(-Math.cos(angle) * this.jumpForce, -Math.sin(angle) * this.jumpForce);
+//        var angle = Phaser.Math.angleBetween(this.x, this.y, this.planetTouched.x, this.planetTouched.y);
+//        this.body.applyForce(-Math.cos(angle) * this.jumpForce, -Math.sin(angle) * this.jumpForce);
+
+                // calculating angle between the planet and the crate
+         var angle = Phaser.Math.angleBetween(this.x, this.y, this.planetTouched.x, this.planetTouched.y);
+        // add gravity force to the crate in the direction of planet center
+        this.body.applyImpulse([this.jumpForce * Math.cos(angle),
+-                     - this.jumpForce * Math.sin(angle)], 0, 0);
+
         //        console.log("jump from (" + this.planetTouched.x + "," + this.planetTouched.y + ")");
         this.planetTouched = null;
         //      this.jumpSound.play();

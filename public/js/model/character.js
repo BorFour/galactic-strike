@@ -28,12 +28,12 @@ function Character(x, y, angle, game, player, asset)
     this.body.immovable = false;
     this.body.static = false;
     this.body.collideWorldBounds = true;
-    this.body.setCollisionGroup(GALACTIC_STRIKE.room.map.CG_planets);
+    this.body.setCollisionGroup(GALACTIC_STRIKE.room.map.CG_characters);
 
 
     //Attributes
 
-    this.jumpForce = 550;
+    this.jumpForce = 50;
     this.health = 100;
     this.items = [];
     this.bullets = [];
@@ -119,10 +119,10 @@ function Character(x, y, angle, game, player, asset)
     {
         this.wheel = 'wheel_blue';
     }
-    this.wheels[0] = new Phaser.Sprite(game, this.x + -0.22 * PTM, this.y + 0.6 * -PTM, this.wheel);
+    this.wheels[0] = new Phaser.Sprite(game, this.x + -0.22 * PTM, this.y + 0.3 * -PTM, this.wheel);
     this.wheels[0].anchor.set(0.5);
     game.add.existing(this.wheels[0]);
-    this.wheels[1] = new Phaser.Sprite(game, this.x + 0.22 * PTM, this.y + 0.6 * -PTM, this.wheel);
+    this.wheels[1] = new Phaser.Sprite(game, this.x + 0.22 * PTM, this.y + 0.3 * -PTM, this.wheel);
     this.wheels[1].anchor.set(0.5);
     game.add.existing(this.wheels[1]);
 
@@ -163,20 +163,25 @@ function Character(x, y, angle, game, player, asset)
 
     //SET LIMITS
      this.constraint.lowerLimitEnabled= this.constraint.upperLimitEnabled = true;
-     this.constraint.upperLimit = -1;
-     this.constraint.lowerLimit = -5;
+     this.constraint.upperLimit = 0;
+     this.constraint.lowerLimit = -1;
     this.constraint_1 = game.physics.p2.createPrismaticConstraint(this, this.wheels[1], false,[-30,0],[0,0],[0,1]);
 
     //SET LIMITS
      this.constraint_1.lowerLimitEnabled= this.constraint_1.upperLimitEnabled = true;
-     this.constraint_1.upperLimit = -1;
-     this.constraint_1.lowerLimit = -5;
+     this.constraint_1.upperLimit = 0;
+     this.constraint_1.lowerLimit = -1;
 
-    this.wheels[0].body.setCollisionGroup(GALACTIC_STRIKE.room.map.CG_planets);
-    this.wheels[1].body.setCollisionGroup(GALACTIC_STRIKE.room.map.CG_planets);
-    this.body.collides([GALACTIC_STRIKE.room.map.CG_planets, GALACTIC_STRIKE.room.map.CG_planets]);
-    this.wheels[0].body.collides([GALACTIC_STRIKE.room.map.CG_planets, GALACTIC_STRIKE.room.map.CG_planets]);
-    this.wheels[1].body.collides([GALACTIC_STRIKE.room.map.CG_planets, GALACTIC_STRIKE.room.map.CG_planets]);
+    this.wheels[0].body.setCollisionGroup(GALACTIC_STRIKE.room.map.CG_characters);
+    this.wheels[1].body.setCollisionGroup(GALACTIC_STRIKE.room.map.CG_characters);
+
+    this.body.collides(GALACTIC_STRIKE.room.map.CG_planets, touchPlanetCallback, this);
+    this.wheels[0].body.collides(GALACTIC_STRIKE.room.map.CG_planets, touchPlanetCallback, this);
+    this.wheels[1].body.collides(GALACTIC_STRIKE.room.map.CG_planets, touchPlanetCallback, this);
+
+//    this.body.onEndContact.add(untouchPlanetCallback, this);
+//    this.wheels[0].body.onEndContact.add(untouchPlanetCallback, this.wheels[0]);
+//    this.wheels[1].body.onEndContact.add(untouchPlanetCallback, this.wheels[1]);
 
 
 

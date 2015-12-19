@@ -109,6 +109,7 @@ Player.prototype.movePlayer = function ()
     }
     else
     {
+        if (this.character.planetSpring) game.physics.p2.removeSpring(this.character.planetSpring);
         if (this.controller.leftDown())
         {
             this.character.moveSpace('left');

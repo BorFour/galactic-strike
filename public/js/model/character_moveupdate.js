@@ -35,25 +35,28 @@ Character.prototype.moveGrounded = function (direction)
 {
 
     this.motorEnabled = true;
-    this.body.linearDamping = 0.3;
+    this.body.damping = 0.3;
 
     this.body.angularDamping = 0.15;
     switch (direction)
     {
     case 'left':
         this.animations.play('left');
-        this.motorSpeed = -30;
+        this.wheels[0].body.angularVelocity = -50;
+        this.wheels[1].body.angularVelocity = -50;
         this.orientation = this.LEFT;
         this.jumpAnimation = false;
         break;
     case 'right':
         this.animations.play('right');
-        this.motorSpeed = 30;
+        this.wheels[0].body.angularVelocity = 50;
+        this.wheels[1].body.angularVelocity = 50;
         this.orientation = this.RIGHT;
         this.jumpAnimation = false;
         break;
     case 'down':
-        this.motorSpeed = 0;
+        this.wheels[0].body.angularVelocity = 0;
+        this.wheels[1].body.angularVelocity = 0;
         this.animations.stop();
         this.jumpAnimation = false;
         break;
@@ -67,8 +70,8 @@ Character.prototype.moveGrounded = function (direction)
 
     for (var i = 0; i < 2; i++)
     {
-        this.driveJoints[i].EnableMotor(this.motorEnabled);
-        this.driveJoints[i].SetMotorSpeed(this.motorSpeed);
+//        this.driveJoints[i].EnableMotor(this.motorEnabled);
+//        this.driveJoints[i].SetMotorSpeed(this.motorSpeed);
     }
 }
 
@@ -80,18 +83,18 @@ Character.prototype.moveGrounded = function (direction)
 Character.prototype.moveInOrbit = function (direction)
 {
 
-    this.body.linearDamping = 0.3;
+    this.body.damping = 0.3;
     this.body.angularDamping = 0.15;
     switch (direction)
     {
     case 'left':
         this.animations.play('left');
-        this.body.rotateLeft(150);
+        this.body.rotateLeft(50);
         this.orientation = this.LEFT;
         break;
     case 'right':
         this.animations.play('right');
-        this.body.rotateRight(150);
+        this.body.rotateRight(50);
         this.orientation = this.RIGHT;
         break;
     case 'jetpack':
@@ -215,12 +218,13 @@ Character.prototype.setGrounded = function ()
     }
 
     this.grounded = true;
-    this.groundedTimer = game.time.events.add(100, function ()
+    this.groundedTimer = game.time.events.add(500, function ()
     {
         this.grounded = false;
     }, this);
 
 }
+
 
 /**
  * Predicate: is the character within any atmosphere?
@@ -229,8 +233,8 @@ Character.prototype.setGrounded = function ()
 
 Character.prototype.inAtmosphere = function ()
 {
-    return false;
-//    return this.atmosphere.length > 0;
+//    return false;
+    return this.atmosphere.length > 0;
 }
 
 /**
@@ -240,5 +244,16 @@ Character.prototype.inAtmosphere = function ()
 
 Character.prototype.isGrounded = function ()
 {
-    return this.grounded;
+
+    for (var i = 0; i < this.atmosphere.length; i++){
+        if (Phaser.Math.distance(this.x, this.y, this.atmosphere[i].x, this.atmosphere[i].y) <= this.atmosphere[i].width / 2 + 10) return true;
+    }
+    return false;
+
+//    return this.grounded || this.wheels[0].grounded || this.wheels[1].grounded;
 }
+
+
+
+
+

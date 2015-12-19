@@ -46,10 +46,10 @@ function SpacePhysics(game)
     this.contactMaterialWheelPlanet.friction = 8;
     this.contactMaterialWheelPlanet.restitution = 0.1;
     //this.contactMaterialWheelPlanet.stiffness = 1e7;
-    this.contactMaterialWheelPlanet.relaxation = 1;
+    this.contactMaterialWheelPlanet.relaxation = 2;
     //this.contactMaterialWheelPlanet.frictionStiffness = 1e7;
-    this.contactMaterialWheelPlanet.frictionRelaxation = 1;
-    this.contactMaterialWheelPlanet.surfaceVelocity = 3;
+    //this.contactMaterialWheelPlanet.frictionRelaxation = 1;
+    //this.contactMaterialWheelPlanet.surfaceVelocity = 3;
 
 
     this.CG_planets = game.physics.p2.createCollisionGroup();

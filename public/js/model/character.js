@@ -27,8 +27,9 @@ function Character(x, y, angle, game, player, asset)
     this.body.dynamic = true;
     this.body.immovable = false;
     this.body.static = false;
+//    this.body.setCollisionGroup(game.spacePhysics.CG_characters);
     this.body.collideWorldBounds = true;
-    this.body.setCollisionGroup(game.spacePhysics.CG_characters);
+
 
 
     //Attributes

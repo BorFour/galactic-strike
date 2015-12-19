@@ -57,6 +57,8 @@ function SpacePhysics(game)
     this.CG_suns = game.physics.p2.createCollisionGroup();
     this.CG_attacks = game.physics.p2.createCollisionGroup();
     this.CG_wormholes = game.physics.p2.createCollisionGroup();
+    game.physics.p2.updateBoundsCollisionGroup();
+
 
 }
 

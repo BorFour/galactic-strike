@@ -16,7 +16,8 @@ Stage = function (game, conf)
     this.height = conf.height;
     this.zoomedOut = false;
 
-    game.world.setBounds(0, 0, conf.width, conf.height);
+//    game.world.setBounds(0, 0, conf.width, conf.height);
+
     //SPACE BACKGROUND
 //    var starfield = game.add.sprite(0, 0, conf.backgroundImage);
 //    starfield.height = game.world.height;

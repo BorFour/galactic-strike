@@ -57,11 +57,13 @@ Character.prototype.moveGrounded = function (direction)
     case 'down':
         this.wheels[0].body.angularVelocity = 0;
         this.wheels[1].body.angularVelocity = 0;
+        this.orientation === this.LEFT ? this.animations.play('left') : this.animations.play('right');
         this.animations.stop();
         this.jumpAnimation = false;
         break;
     case 'still':
         this.motorEnabled = false;
+        this.orientation === this.LEFT ? this.animations.play('left') : this.animations.play('right');
         this.animations.stop();
         this.jumpAnimation = false;
         //            this.animations.play('stop');
@@ -89,16 +91,16 @@ Character.prototype.moveInOrbit = function (direction)
     {
     case 'left':
         this.animations.play('left');
-        this.body.rotateLeft(75);
+        this.body.rotateLeft(100);
         this.orientation = this.LEFT;
         break;
     case 'right':
         this.animations.play('right');
-        this.body.rotateRight(75);
+        this.body.rotateRight(100);
         this.orientation = this.RIGHT;
         break;
     case 'jetpack':
-        this.body.thrust(970);
+        this.body.thrust(1270);
         if (this.orientation === this.LEFT) this.animations.play('jumpL');
         if (this.orientation === this.RIGHT) this.animations.play('jumpR');
         this.jumpAnimation = true;
@@ -246,7 +248,7 @@ Character.prototype.isGrounded = function ()
 {
 
     for (var i = 0; i < this.atmosphere.length; i++){
-        if (Phaser.Math.distance(this.x, this.y, this.atmosphere[i].x, this.atmosphere[i].y) <= this.atmosphere[i].width / 2 + 25) return true;
+        if (Phaser.Math.distance(this.x, this.y, this.atmosphere[i].x, this.atmosphere[i].y) <= this.atmosphere[i].width / 2 + 30) return true;
     }
     return false;
 

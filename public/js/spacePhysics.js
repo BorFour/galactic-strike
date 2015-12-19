@@ -22,6 +22,11 @@ function SpacePhysics(game)
 
     this.debug = false;
 
+    this.worldMaterial = game.physics.p2.createMaterial('worldMaterial');
+
+    //  4 trues = the 4 faces of the world in left, right, top, bottom order
+    game.physics.p2.setWorldMaterial(this.worldMaterial, true, true, true, true);
+
 }
 
 SpacePhysics.prototype.consoleLog = function ()

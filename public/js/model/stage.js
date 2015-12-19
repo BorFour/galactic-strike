@@ -42,14 +42,12 @@ Stage = function (game, conf)
 Stage.prototype.zoomIn = function ()
 {
     game.camera.bounds.setTo(0, 0, this.width, this.height);
-    game.physics.setBoundsToWorld();
     this.zoomedOut = false;
 }
 
 Stage.prototype.zoomOut = function ()
 {
     game.camera.bounds.setTo(0, 0, this.width / 2, this.height / 2);
-    game.physics.setBoundsToWorld();
     this.zoomedOut = true;
 }
 

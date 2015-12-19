@@ -48,10 +48,6 @@ GALACTIC_STRIKE.Play.prototype = {
 
         if (!game.spacePhysics)
         {
-
-            game.spacePhysics = new SpacePhysics(game)
-            game.spacePhysics.debug = true;
-
             game.physics.startSystem(Phaser.Physics.P2JS);
             game.physics.p2.setImpactEvents(true);
             game.physics.p2.updateBoundsCollisionGroup();
@@ -59,6 +55,8 @@ GALACTIC_STRIKE.Play.prototype = {
             game.physics.p2.friction = 0.5;
             game.physics.p2.gravityScale = 0;
 
+            game.spacePhysics = new SpacePhysics(game)
+            game.spacePhysics.debug = true;
             //            game.physics.p2.friction = 50;
         }
 

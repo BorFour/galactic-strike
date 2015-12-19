@@ -27,6 +27,20 @@ function SpacePhysics(game)
     //  4 trues = the 4 faces of the world in left, right, top, bottom order
     game.physics.p2.setWorldMaterial(this.worldMaterial, true, true, true, true);
 
+    this.spriteMaterial = game.physics.p2.createMaterial('spriteMaterial');
+
+    this.spriteMaterial = game.physics.p2.createMaterial('planetMaterial');
+
+    this.contactMaterial = game.physics.p2.createContactMaterial(this.spriteMaterial, this.worldMaterial);
+
+    this.contactMaterial.friction = 0.3;     // Friction to use in the contact of these two materials.
+    this.contactMaterial.restitution = 1.0;  // Restitution (i.e. how bouncy it is!) to use in the contact of these two materials.
+    this.contactMaterial.stiffness = 1e7;    // Stiffness of the resulting ContactEquation that this ContactMaterial generate.
+    this.contactMaterial.relaxation = 3;     // Relaxation of the resulting ContactEquation that this ContactMaterial generate.
+    this.contactMaterial.frictionStiffness = 1e7;    // Stiffness of the resulting FrictionEquation that this ContactMaterial generate.
+    this.contactMaterial.frictionRelaxation = 3;     // Relaxation of the resulting FrictionEquation that this ContactMaterial generate.
+    this.contactMaterial.surfaceVelocity = 0;        // Will add surface velocity to this material. If bodyA rests on top if bodyB, and the surface velocity is positive, bodyA will slide to the right.
+
 }
 
 SpacePhysics.prototype.consoleLog = function ()

@@ -208,8 +208,9 @@ function Character(x, y, angle, game, player, asset)
     this.addChild(text);
     text.anchor.set(0.5);
 
-    this.body.setMaterial(game.spacePhysics.spriteMaterial);
-
+ this.body.setMaterial(game.spacePhysics.spriteMaterial);
+ this.wheels[0].body.setMaterial(game.spacePhysics.wheelMaterial);
+ this.wheels[1].body.setMaterial(game.spacePhysics.wheelMaterial);
     console.log(this);
 
 

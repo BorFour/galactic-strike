@@ -256,6 +256,7 @@ Character.prototype.die = function ()
     this.wheels[1].kill();
 //    if (this.spikeball) this.spikeball.die();
     //this.body.destroy();
+
     this.kill();
 
 }
@@ -297,6 +298,7 @@ Character.prototype.simpleDie = function ()
     this.wheels[1].kill();
 //    if (this.spikeball) this.spikeball.die();
     //this.body.destroy();
+    this.health = 0;
     this.kill();
 
 }

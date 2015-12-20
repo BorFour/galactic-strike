@@ -311,7 +311,6 @@ clientSetupGame = function ()
             // When the character's health drops below zero, the character dies.
             if (GALACTIC_STRIKE.room.characters[input.target].health <= 0)
             {
-                GALACTIC_STRIKE.room.characters[input.target].health = 0;
                 GALACTIC_STRIKE.room.characters[input.target].die();
 //                delete GALACTIC_STRIKE.room.characters[input.target];
 

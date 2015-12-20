@@ -61,7 +61,13 @@ Character.prototype.attack0 = function ()
 
         this.spikeball.body.thrust(1000);
 
-
+        for (var t in GALACTIC_STRIKE.room.teams)
+        {
+            if (t !== this.player.team.color-1)
+            {
+                this.spikeball.body.collides(game.spacePhysics.CG_teams[t], touchSpikeballEnemy, this);
+            }
+        }
 
         // After this.attackCooldownTime, the spikeball is destroyed and the attack cooldown is restored
         game.time.events.add(this.attack0CooldownTime, function ()
@@ -108,7 +114,7 @@ Character.prototype.attack1 = function ()
         {
             if (t !== this.player.team.color-1)
             {
-                collides(game.spacePhysics.CG_teams[t], touchSpikeballEnemy, this);
+                this.spikeball.body.collides(game.spacePhysics.CG_teams[t], touchSpikeballEnemy, this);
             }
         }
 
@@ -201,6 +207,7 @@ Character.prototype.attack3 = function ()
         this.spikeballs[3].owner = this;
         this.spikeballs[3].damage = 15;
         this.spikeballs[3].body.rotation = this.body.rotation;
+        this.spikeballs[3].body.collideWorldBounds = false;
 
         this.spikeballs[3].body.setCollisionGroup(game.spacePhysics.CG_attacks);
         // bodyA, bodyB, maxForce, maxTorque, correctionFactor, offsetX, offsetY, offsetAngle

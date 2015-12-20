@@ -16,7 +16,7 @@ function SpacePhysics(game)
 
     // a force reducer to let the simulation run smoothly
 
-    this.forceReducer = 0.0085;
+    this.forceReducer = 0.0115;
 
     // graphic object where to draw planet gravity area
 
@@ -112,7 +112,7 @@ SpacePhysics.prototype.update = function ()
         var c = this.dynamicGroup[i];
         var atmosphere = [];
 
-        if (c.body.static)
+        if (!c.alive || c.body.static)
         {
             continue;
         }

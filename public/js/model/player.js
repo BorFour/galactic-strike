@@ -65,6 +65,8 @@ Player.prototype.movePlayer = function ()
         return;
     }
 
+    this.character.boost = this.controller.boostDown();
+
     if (this.character.isGrounded())
     {
         if (this.controller.jumpDown())
@@ -345,14 +347,14 @@ Player.prototype.characterSetup = function ()
     game.input.keyboard.removeKeyCapture(Phaser.Keyboard.RIGHT);
 
 
-    for (var i = 0; i < GALACTIC_STRIKE.room.map.planets.length; i++)
-    {
+//    for (var i = 0; i < GALACTIC_STRIKE.room.map.planets.length; i++)
+//    {
         //                myCharacter.body.setBodyContactCallback(planets[i], touchPlanetCallback, this);
-        this.character.body.collides(GALACTIC_STRIKE.room.map.planets[i], touchPlanetCallback, this);
-        this.character.wheels[0].body.collides(GALACTIC_STRIKE.room.map.planets[i], touchPlanetCallback, this);
-        this.character.wheels[1].body.collides(GALACTIC_STRIKE.room.map.planets[i], touchPlanetCallback, this);
+//        this.character.body.collides(GALACTIC_STRIKE.room.map.planets[i], touchPlanetCallback, this);
+//        this.character.wheels[0].body.collides(GALACTIC_STRIKE.room.map.planets[i], touchPlanetCallback, this);
+//        this.character.wheels[1].body.collides(GALACTIC_STRIKE.room.map.planets[i], touchPlanetCallback, this);
 
-    }
+//    }
 
     //            character.body.setColissionCategory(GALACTIC_STRIKE.COLLISION_CATEGORY.PLAYER);
 }

@@ -33,10 +33,11 @@ function Character(x, y, angle, game, player, asset)
 
     //Attributes
 
-    this.jumpForce = 50;
+    this.jumpForce = 75;
     this.health = 100;
     this.items = [];
     this.bullets = [];
+    this.spikeballs = [];
 
     // States
     this.RIGHT = 1;
@@ -179,6 +180,11 @@ function Character(x, y, angle, game, player, asset)
     this.wheels[0].body.collides(game.spacePhysics.CG_planets, touchPlanetCallback, this);
     this.wheels[1].body.collides(game.spacePhysics.CG_planets, touchPlanetCallback, this);
 
+    this.body.collides(game.spacePhysics.CG_attacks);
+    this.wheels[0].body.collides(game.spacePhysics.CG_attacks);
+    this.wheels[1].body.collides(game.spacePhysics.CG_attacks);
+
+
     for (var t in game.spacePhysics.CG_teams)
     {
         if (game.spacePhysics.CG_teams[t] === game.spacePhysics.CG_teams[this.player.team.color - 1])
@@ -237,7 +243,6 @@ Character.prototype.die = function ()
 
     if (!this.alive) return;
 
-    this.alive = false;
     this.dieSound.play();
     //    var emitter = game.add.emitter(0, 0, 100);
     //    emitter.makeParticles('pokeball');
@@ -247,11 +252,36 @@ Character.prototype.die = function ()
     //    game.time.events.add(2000, function () {
     //        if (emitter) emitter.destroy();
     //    }, this);
-    this.wheels[0].destroy();
-    this.wheels[1].destroy();
-    if (this.spikeball) this.spikeball.die();
+    this.wheels[0].kill();
+    this.wheels[1].kill();
+//    if (this.spikeball) this.spikeball.die();
     //this.body.destroy();
-    this.destroy();
+    this.kill();
+
+}
+
+Character.prototype.respawn = function (x, y, angle)
+{
+
+    if (this.alive) return;
+
+//    this.dieSound.play();
+    //    var emitter = game.add.emitter(0, 0, 100);
+    //    emitter.makeParticles('pokeball');
+    //    emitter.x = this.x;
+    //    emitter.y = this.y;
+    //    emitter.start(true, 2000, null, 10);
+    //    game.time.events.add(2000, function () {
+    //        if (emitter) emitter.destroy();
+    //    }, this);
+
+//    this.reset(x, y);
+//    this.revive(100);
+//    this.body.rotation = angle;
+//    this.wheels[0].revive();
+//    this.wheels[1].revive();
+//    if (this.spikeball) this.spikeball.die();
+    //this.body.destroy();
 
 }
 
@@ -263,12 +293,11 @@ Character.prototype.simpleDie = function ()
 {
 
     if (!this.alive) return;
-    this.alive = false;
-    this.wheels[0].destroy();
-    this.wheels[1].destroy();
-    if (this.spikeball) this.spikeball.die();
+    this.wheels[0].kill();
+    this.wheels[1].kill();
+//    if (this.spikeball) this.spikeball.die();
     //this.body.destroy();
-    this.destroy();
+    this.kill();
 
 }
 

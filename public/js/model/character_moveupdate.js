@@ -42,15 +42,15 @@ Character.prototype.moveGrounded = function (direction)
     {
     case 'left':
         this.animations.play('left');
-        this.wheels[0].body.angularVelocity = -35;
-        this.wheels[1].body.angularVelocity = -35;
+        this.wheels[0].body.angularVelocity = (this.boost ? -65 : -35);
+        this.wheels[1].body.angularVelocity = (this.boost ? -65 : -35);
         this.orientation = this.LEFT;
         this.jumpAnimation = false;
         break;
     case 'right':
         this.animations.play('right');
-        this.wheels[0].body.angularVelocity = 35;
-        this.wheels[1].body.angularVelocity = 35;
+        this.wheels[0].body.angularVelocity = (this.boost ? 65 : 35);
+        this.wheels[1].body.angularVelocity = (this.boost ? 65 : 35);
         this.orientation = this.RIGHT;
         this.jumpAnimation = false;
         break;
@@ -182,25 +182,28 @@ Character.prototype.moveSpace = function (direction)
 Character.prototype.flightMode = function ()
 {
 
-    var PTM = 50;
+//    this.springs[0].data.localA = [5, 10];
+//    this.springs[1].data.localA = [-5, 10];
 
-    this.wheels[0] = new Phaser.Sprite(game, this.x + -0.22 * 50, this.y + 0.6 * -50, this.wheel);
-    this.wheels[0].anchor.set(0.5);
-    game.add.existing(this.wheels[0]);
-    this.wheels[1] = new Phaser.Sprite(game, this.x + 0.22 * 50, this.y + 0.6 * -50, this.wheel);
-    this.wheels[1].anchor.set(0.5);
-    game.add.existing(this.wheels[1]);
-
-//    this.wheels[0].body = new Phaser.Physics.Box2D.Body(this.game, null, this.x + -0.22 * PTM, this.y + 0.6 * -PTM);
-    game.physics.p2.enable(this.wheels[0], false);
-    this.wheels[0].body.sprite = this.wheels[0];
-//    this.wheels[1].body = new Phaser.Physics.Box2D.Body(this.game, null, this.x + 0.22 * PTM, this.y + 0.6 * -PTM);
-    game.physics.p2.enable(this.wheels[1], false);
-    this.wheels[1].body.sprite = this.wheels[1];
-    this.wheels[0].body.setCircle(0.2 * PTM);
-    this.wheels[1].body.setCircle(0.2 * PTM);
-    this.wheels[0].body.setCircle(0.2 * PTM);
-    this.wheels[1].body.setCircle(0.2 * PTM);
+//    var PTM = 50;
+//
+//    this.wheels[0] = new Phaser.Sprite(game, this.x + -0.22 * 50, this.y + 0.6 * -50, this.wheel);
+//    this.wheels[0].anchor.set(0.5);
+//    game.add.existing(this.wheels[0]);
+//    this.wheels[1] = new Phaser.Sprite(game, this.x + 0.22 * 50, this.y + 0.6 * -50, this.wheel);
+//    this.wheels[1].anchor.set(0.5);
+//    game.add.existing(this.wheels[1]);
+//
+////    this.wheels[0].body = new Phaser.Physics.Box2D.Body(this.game, null, this.x + -0.22 * PTM, this.y + 0.6 * -PTM);
+//    game.physics.p2.enable(this.wheels[0], false);
+//    this.wheels[0].body.sprite = this.wheels[0];
+////    this.wheels[1].body = new Phaser.Physics.Box2D.Body(this.game, null, this.x + 0.22 * PTM, this.y + 0.6 * -PTM);
+//    game.physics.p2.enable(this.wheels[1], false);
+//    this.wheels[1].body.sprite = this.wheels[1];
+//    this.wheels[0].body.setCircle(0.2 * PTM);
+//    this.wheels[1].body.setCircle(0.2 * PTM);
+//    this.wheels[0].body.setCircle(0.2 * PTM);
+//    this.wheels[1].body.setCircle(0.2 * PTM);
 
 //    this.driveJoints[0] = game.physics.box2d.wheelJoint(this.body, this.wheels[0].body, -3, 8, 0, 0, 0, 1, 0, 0, 0, 0, true); // rear
 //    this.driveJoints[1] = game.physics.box2d.wheelJoint(this.body, this.wheels[1].body, 3, 8, 0, 0, 0, 1, 0, 0, 0, 0, true); // front

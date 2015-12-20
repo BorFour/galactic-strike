@@ -24,6 +24,9 @@ Character.prototype.jump = function ()
         this.body.applyImpulse([this.jumpForce * Math.cos(angle),
 -                     - this.jumpForce * Math.sin(angle)], 0, 0);
 
+        this.wheels[0].body.angularVelocity = 0;
+        this.wheels[1].body.angularVelocity = 0;
+
         //        console.log("jump from (" + this.planetTouched.x + "," + this.planetTouched.y + ")");
         this.planetTouched = null;
         //      this.jumpSound.play();
@@ -31,7 +34,7 @@ Character.prototype.jump = function ()
         {
             this.jumpCooldown = true;
         }, this);
-
+        this.flightMode();
     }
 
 }
@@ -51,16 +54,14 @@ Character.prototype.attack0 = function ()
         this.spikeball = new Item(game, this.body.x + Math.sin(this.body.rotation) * 80, this.body.y - Math.cos(this.body.rotation) * 80, items['spikeball']);
         this.spikeball.owner = this;
         this.spikeball.damage = 65;
-
+        this.spikeball.body.setCollisionGroup(game.spacePhysics.CG_attacks);
         // bodyA, bodyB, maxForce, maxTorque, correctionFactor, offsetX, offsetY, offsetAngle
 //        this.attackJoint = game.physics.box2d.motorJoint(this, this.spikeball, 80, 50, 0.25, this.orientation * 80, 50, 4.5);
 
+
         this.spikeball.body.thrust(1000);
 
-        for (var c in GALACTIC_STRIKE.room.characters)
-        {
-//            this.spikeball.body.setBodyContactCallback(GALACTIC_STRIKE.room.characters[c], touchSpikeballEnemy, this);
-        }
+
 
         // After this.attackCooldownTime, the spikeball is destroyed and the attack cooldown is restored
         game.time.events.add(this.attack0CooldownTime, function ()
@@ -99,14 +100,18 @@ Character.prototype.attack1 = function ()
         this.spikeball = new Item(game, this.x + Math.cos(this.body.rotation) * 80 * this.orientation, this.y + Math.sin(this.body.rotation) * 80 * this.orientation, items['spikeball']);
         this.spikeball.owner = this;
         this.spikeball.damage = 35;
+        this.spikeball.body.setCollisionGroup(game.spacePhysics.CG_attacks);
 
-//        this.attackJoint = game.physics.box2d.motorJoint(this, this.spikeball, 80, 50, 0.25, this.orientation * 120, 0, 4.5);
         this.spikeball.body.thrust(1000);
 
-        for (var c in GALACTIC_STRIKE.room.characters)
+        for (var t in GALACTIC_STRIKE.room.teams)
         {
-//            this.spikeball.body.setBodyContactCallback(GALACTIC_STRIKE.room.characters[c], touchSpikeballEnemy, this);
+            if (t !== this.player.team.color-1)
+            {
+                collides(game.spacePhysics.CG_teams[t], touchSpikeballEnemy, this);
+            }
         }
+
 
         // After this.attack2CooldownTime, the spikeball is destroyed and the attack cooldown is restored
         game.time.events.add(this.attack1CooldownTime, function ()
@@ -148,11 +153,16 @@ Character.prototype.attack2 = function ()
         this.spikeball.damage = 25;
 //        this.attackJoint = game.physics.box2d.motorJoint(this, this.spikeball, 80, 50, 0.25, this.orientation * 120, 0, 4.5);
         this.spikeball.body.thrust(1000);
+        this.spikeball.body.setCollisionGroup(game.spacePhysics.CG_attacks);
 
-        for (var c in GALACTIC_STRIKE.room.characters)
+        for (var t in GALACTIC_STRIKE.room.teams)
         {
-//            this.spikeball.body.setBodyContactCallback(GALACTIC_STRIKE.room.characters[c], touchSpikeballEnemy, this);
+            if (t !== this.player.team.color-1)
+            {
+                this.spikeball.body.collides(game.spacePhysics.CG_teams[t], touchSpikeballEnemy, this);
+            }
         }
+
         // After this.attack3CooldownTime, the spikeball is destroyed and the attack cooldown is restored
         game.time.events.add(this.attack2CooldownTime, function ()
         {
@@ -181,28 +191,34 @@ Character.prototype.attack2 = function ()
 
 Character.prototype.attack3 = function ()
 {
-
+    console.log("Attack3");
     if (this.attackCooldown && this.alive)
     {
 
         this.attackSound.play();
         this.attackCooldown = false;
-        this.spikeball = new Item(game, this.body.x + Math.sin(this.body.rotation) * 80, this.body.y - Math.cos(this.body.rotation) * 80, items['spaceAttack1']);
-        this.spikeball.body.rotation = this.body.rotation;
-        this.spikeball.owner = this;
-        this.spikeball.damage = 15;
+        this.spikeballs[3] = new Item(game, this.body.x + Math.sin(this.body.rotation) * 80, this.body.y - Math.cos(this.body.rotation) * 80, items['spaceAttack1']);
+        this.spikeballs[3].owner = this;
+        this.spikeballs[3].damage = 15;
+        this.spikeballs[3].body.rotation = this.body.rotation;
 
+        this.spikeballs[3].body.setCollisionGroup(game.spacePhysics.CG_attacks);
         // bodyA, bodyB, maxForce, maxTorque, correctionFactor, offsetX, offsetY, offsetAngle
-        this.spikeball.body.thrust(100000);
+        this.spikeballs[3].body.thrust(100000);
 
-        for (var c in GALACTIC_STRIKE.room.characters)
+        for (var t in game.spacePhysics.CG_teams)
         {
-//            this.spikeball.body.setBodyContactCallback(GALACTIC_STRIKE.room.characters[c], touchSpikeballEnemy, this);
+            console.log(game.spacePhysics.CG_teams[t]);
+//            if (t !== this.player.team.color-1)
+//            {
+                this.spikeballs[3].body.collides(game.spacePhysics.CG_teams[t], touchSpikeballEnemy, this);
+//            }
         }
+
         game.time.events.add(this.attack3CooldownTime, function ()
         {
             console.log("Destroying attack");
-            if(this.spikeball) this.spikeball.die();
+            if(this.spikeballs[3]) this.spikeballs[3].die();
 //            if(this.attackJoint) game.physics.box2d.world.DestroyJoint(this.attackJoint);
 //            this.attackJoint = null;
             this.attackCooldown = true;

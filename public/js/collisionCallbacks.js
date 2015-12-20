@@ -40,7 +40,7 @@ function setUngrounded(target)
 
 function touchSpikeballEnemy(body1, body2, fixture1, fixture2, begin)
 {
-
+    console.log("Spikeball callback");
     if (body1.sprite &&
         body2.sprite &&
         body1.sprite.owner !== body2.sprite &&
@@ -67,6 +67,7 @@ function touchSpikeballEnemy(body1, body2, fixture1, fixture2, begin)
             console.log(output);
         }
 
+        body1.sprite.destroy();
 
     }
 }

@@ -20,6 +20,7 @@ Controller = function (input)
         this.rotateLKey = game.input.keyboard.addKey(Phaser.Keyboard.Q);
         this.rotateRKey = game.input.keyboard.addKey(Phaser.Keyboard.E);
         this.jumpKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+        this.boostKey = game.input.keyboard.addKey(Phaser.Keyboard.SHIFT);
         this.gamepad = false;
     }
     else
@@ -123,6 +124,20 @@ Controller.prototype.jumpDown = function (player)
     else
     {
         return this.jumpKey.isDown;
+    }
+
+}
+
+Controller.prototype.boostDown = function (player)
+{
+
+    if (this.gamepad)
+    {
+        //
+    }
+    else
+    {
+        return this.boostKey.isDown;
     }
 
 }

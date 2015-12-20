@@ -192,6 +192,7 @@ var gameModes = {
         },
         update: function ()
         {
+            return;
             console.log("Deathmatch update");
             if (!GALACTIC_STRIKE.room.roundReady)
             {

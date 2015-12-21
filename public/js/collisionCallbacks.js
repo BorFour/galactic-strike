@@ -67,7 +67,8 @@ function touchSpikeballEnemy(body1, body2, fixture1, fixture2, begin)
             console.log(output);
         }
 
-        body1.sprite.destroy();
+        if(body1.sprite.contraint)  game.physics.p2.removeConstraint(body1.sprite.contraint);
+        body1.destroy();
 
     }
 }

@@ -320,9 +320,9 @@ clientSetupGame = function ()
 
                 if (input.target == GALACTIC_STRIKE.player.id)
                 {
-//                    game.camera.follow(null);
-//                    game.camera.reset();
-//                    zoomOutGame();
+                    game.camera.follow(null);
+                    game.camera.reset();
+                    zoomOutGame();
                 }
 
 //                if (!GALACTIC_STRIKE.room.gameOver)

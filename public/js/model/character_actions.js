@@ -154,9 +154,13 @@ Character.prototype.attack2 = function ()
 
         this.attackSound.play();
         this.attackCooldown = false;
-        this.spikeballs[2] = new Item(game, this.x + Math.cos(this.body.rotation) * 80 * this.orientation,
-            this.y + Math.sin(this.body.rotation) * 80 * this.orientation, items['hammer']);
-        this.spikeballs[2].rotation = this.rotation + Math.PI/2;
+        this.spikeballs[2] = new Item(game, this.body.x + Math.sin(this.body.rotation) * 80, this.body.y - Math.cos(this.body.rotation) * 80, items['hammer']);
+//        this.spikeballcontraint2 = game.physics.p2.createDistanceConstraint(this, this.spikeballs[2], 80);
+        this.spikeballs[2].contraint = game.physics.p2.createDistanceConstraint(this, this.spikeballs[2], 80);
+
+        this.spikeballs[2].body.rotation = this.rotation + this.orientation*Math.PI/2;
+        this.spikeballs[2].body.velocity.x = this.body.velocity.x;
+        this.spikeballs[2].body.velocity.y = this.body.velocity.y;
         this.spikeballs[2].owner = this;
         this.spikeballs[2].damage = 25;
 //        this.attackJoint = game.physics.box2d.motorJoint(this, this.spikeball, 80, 50, 0.25, this.orientation * 120, 0, 4.5);
@@ -176,7 +180,12 @@ Character.prototype.attack2 = function ()
         game.time.events.add(this.attack2CooldownTime, function ()
         {
             console.log("Destroying attack");
-            if(this.spikeballs[2]) this.spikeballs[2].die();
+
+            if(this.spikeballs[2]) {
+                game.physics.p2.removeConstraint(this.spikeballs[2].contraint);
+                this.spikeballs[2].die();
+            }
+
 //            if(this.attackJoint) game.physics.box2d.world.DestroyJoint(this.attackJoint);
 //            this.attackJoint = null;
             this.attackCooldown = true;

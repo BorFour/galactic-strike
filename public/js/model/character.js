@@ -12,7 +12,7 @@ function Character(x, y, angle, game, player, asset)
 
     this.player = player;
     this.game = game;
-    this.debug = true;
+    this.debug = false;
 
     //    this.CG_character = game.physics.p2.createCollisionGroup(); //COLLISION GROUP
 
@@ -29,7 +29,6 @@ function Character(x, y, angle, game, player, asset)
     this.body.static = false;
     this.body.setCollisionGroup(game.spacePhysics.CG_teams[this.player.team.color - 1]);
     this.body.collideWorldBounds = true;
-
 
     //Attributes
 
@@ -246,8 +245,7 @@ Character.prototype.die = function ()
     this.dieSound.play();
     //    var emitter = game.add.emitter(0, 0, 100);
     //    emitter.makeParticles('pokeball');
-    //    emitter.x = this.x;
-    //    emitter.y = this.y;
+    //    emitter.x = this.x;//    emitter.y = this.y;
     //    emitter.start(true, 2000, null, 10);
     //    game.time.events.add(2000, function () {
     //        if (emitter) emitter.destroy();
@@ -257,7 +255,15 @@ Character.prototype.die = function ()
     this.health = 0;
     this.wheels[0].destroy();
     this.wheels[1].destroy();
-//    if (this.spikeball) this.spikeball.die();
+    for (var a in this.spikeballs)
+    {
+        if (this.spikeballs[a])
+        {
+            this.spikeballs[a].die();
+            if (this.spikeballs[a].contraint) game.physics.p2.removeConstraint(this.spikeballs[a].contraint);
+        }
+    }
+    //    if (this.spikeball) this.spikeball.die();
     //this.body.destroy();
 
     this.destroy();
@@ -269,7 +275,7 @@ Character.prototype.respawn = function (x, y, angle)
 
     if (this.alive) return;
 
-//    this.dieSound.play();
+    //    this.dieSound.play();
     //    var emitter = game.add.emitter(0, 0, 100);
     //    emitter.makeParticles('pokeball');
     //    emitter.x = this.x;
@@ -279,7 +285,7 @@ Character.prototype.respawn = function (x, y, angle)
     //        if (emitter) emitter.destroy();
     //    }, this);
 
-//    this.revive(100);
+    //    this.revive(100);
     this.reset(x, y);
 
     this.body.rotation = angle;
@@ -311,10 +317,19 @@ Character.prototype.simpleDie = function ()
     game.physics.p2.removeConstraint(this.constraint_1)
     this.wheels[0].destroy();
     this.wheels[1].destroy();
-//    if (this.spikeball) this.spikeball.die();
+    for (var a in this.spikeballs)
+    {
+        if (this.spikeballs[a])
+        {
+            this.spikeballs[a].die();
+            if (this.spikeballs[a].contraint) game.physics.p2.removeConstraint(this.spikeballs[a].contraint);
+        }
+    }
+    //    if (this.spikeball) this.spikeball.die();
     //this.body.destroy();
     this.health = 0;
     this.destroy();
+
 
 }
 

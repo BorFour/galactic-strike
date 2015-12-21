@@ -18,7 +18,11 @@ Character.prototype.updateOnline = function ()
         velocityY: this.body.velocity.y,
         angularVelocity: this.body.angularVelocity,
         orientation: this.orientation,
-        jumpAnimation: this.jumpAnimation
+        jumpAnimation: this.jumpAnimation,
+        wheel0x : this.wheels[0].x,
+        wheel0y : this.wheels[0].y,
+        wheel1x : this.wheels[1].x,
+        wheel1y : this.wheels[1].y,
     }
 
     socket.emit('update', data);

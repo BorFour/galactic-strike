@@ -43,7 +43,7 @@ GALACTIC_STRIKE.Lobby.prototype = {
         this.bmpText.anchor.set(0.5, 0.1);
 
 
-        textStage = game.add.text(game.world.centerX - 250, game.world.centerY + 100, Object.keys(stages)[(GALACTIC_STRIKE.room.currentStage ? GALACTIC_STRIKE.room.currentStage : 0)], style);
+        textStage = game.add.text(game.world.centerX - 250, game.world.centerY + 100, Object.keys(stages)[(GALACTIC_STRIKE.room.currentStage ? GALACTIC_STRIKE.room.currentStage : 2)], style);
         textStage.anchor.set(0.5);
 
         // Only the lobby's host can start the game
@@ -52,7 +52,7 @@ GALACTIC_STRIKE.Lobby.prototype = {
         {
             buttonBegin = game.add.button(game.world.centerX - 250, game.world.centerY + 250, 'buttonEnter', this.beginMatch, this, 0, 0, 0, 0);
             buttonBegin.anchor.set(0.5);
-            GALACTIC_STRIKE.room.currentStage = 0;
+            GALACTIC_STRIKE.room.currentStage = 2;
             buttonStage = game.add.button(game.world.centerX - 250, game.world.centerY, 'changeMap', this.nextStage, this);
             buttonStage.anchor.set(0.5, 0.4);
         }

@@ -145,9 +145,9 @@ clientSetupGame = function ()
             // Uses the red character asset if the player is the red team, blue in other case.
             var asset = (GALACTIC_STRIKE.room.players[input.id].team === GALACTIC_STRIKE.room.teams[0] ? 'playerRed' : 'playerBlue');
             // Creates the character according to the information received in input.
-            GALACTIC_STRIKE.room.characters[input.id].respawn(input.x, input.y, input.angle);
+            GALACTIC_STRIKE.room.characters[input.id] = new Character(input.x, input.y, input.angle, game, GALACTIC_STRIKE.room.players[input.id], asset);
             // Assigns the character to its player
-//            GALACTIC_STRIKE.room.players[input.id].character = GALACTIC_STRIKE.room.characters[input.id];
+            GALACTIC_STRIKE.room.players[input.id].character = GALACTIC_STRIKE.room.characters[input.id];
 
             if (input.id == GALACTIC_STRIKE.player.id)
             {
@@ -312,7 +312,8 @@ clientSetupGame = function ()
             if (GALACTIC_STRIKE.room.characters[input.target].health <= 0)
             {
                 GALACTIC_STRIKE.room.characters[input.target].die();
-//                delete GALACTIC_STRIKE.room.characters[input.target];
+                delete GALACTIC_STRIKE.room.characters[input.target];
+                delete GALACTIC_STRIKE.room.players[input.target].character;
 
                 if (input.target == GALACTIC_STRIKE.player.id)
                 {
@@ -321,7 +322,8 @@ clientSetupGame = function ()
 //                    zoomOutGame();
                 }
 
-                if (!GALACTIC_STRIKE.room.gameOver) GALACTIC_STRIKE.room.gameMode.update();
+//                if (!GALACTIC_STRIKE.room.gameOver)
+                    GALACTIC_STRIKE.room.gameMode.update();
 
             }
             else

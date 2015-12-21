@@ -187,12 +187,11 @@ var gameModes = {
             {
                 y: game.world.centerY - 200
             }, 1000).easing(Phaser.Easing.Bounce.Out).start();
-            toButton.start();
+            if (toButton) toButton.start();
 
         },
         update: function ()
         {
-            return;
             console.log("Deathmatch update");
             if (!GALACTIC_STRIKE.room.roundReady)
             {

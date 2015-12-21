@@ -52,7 +52,7 @@ Team.prototype.alive = function ()
     for (var i = 0; i < this.players.length; i++)
     {
 
-        if (!this.players[i].character || this.players[i].character.alive) return true;
+        if (this.players[i].character && this.players[i].character.alive) return true;
 
     }
 

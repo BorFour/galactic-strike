@@ -65,84 +65,86 @@ Player.prototype.movePlayer = function ()
         return;
     }
 
-    this.character.boost = this.controller.boostDown();
+    if(this.character) {
+        this.character.boost = this.controller.boostDown();
 
-    if (this.character.isGrounded())
-    {
-        if (this.controller.jumpDown())
+        if (this.character.isGrounded())
         {
-            this.character.jump();
+            if (this.controller.jumpDown())
+            {
+                this.character.jump();
+            }
+            else if (this.controller.downDown())
+            {
+                this.character.moveGrounded('down');
+            }
+            else if (this.controller.leftDown())
+            {
+                this.character.moveGrounded('left');
+            }
+            else if (this.controller.rightDown())
+            {
+                this.character.moveGrounded('right');
+            }
+            else
+            {
+                this.character.moveGrounded('still');
+            }
         }
-        else if (this.controller.downDown())
+        else if (this.character.inAtmosphere())
         {
-            this.character.moveGrounded('down');
-        }
-        else if (this.controller.leftDown())
-        {
-            this.character.moveGrounded('left');
-        }
-        else if (this.controller.rightDown())
-        {
-            this.character.moveGrounded('right');
-        }
-        else
-        {
-            this.character.moveGrounded('still');
-        }
-    }
-    else if (this.character.inAtmosphere())
-    {
-        if (this.controller.leftDown())
-        {
-            this.character.moveInOrbit('left');
-        }
-        else if (this.controller.rightDown())
-        {
-            this.character.moveInOrbit('right');
-        }
-        if (this.controller.jumpDown() && this.character.jumpCooldown)
-        {
-            this.character.moveInOrbit('jetpack');
-        }
-        else
-        {
-            this.character.moveInOrbit('still');
-        }
-    }
-    else
-    {
-        if (this.character.planetSpring) game.physics.p2.removeSpring(this.character.planetSpring);
-        if (this.controller.leftDown())
-        {
-            this.character.moveSpace('left');
-        }
-        else if (this.controller.rightDown())
-        {
-            this.character.moveSpace('right');
+            if (this.controller.leftDown())
+            {
+                this.character.moveInOrbit('left');
+            }
+            else if (this.controller.rightDown())
+            {
+                this.character.moveInOrbit('right');
+            }
+            if (this.controller.jumpDown() && this.character.jumpCooldown)
+            {
+                this.character.moveInOrbit('jetpack');
+            }
+            else
+            {
+                this.character.moveInOrbit('still');
+            }
         }
         else
         {
-            this.character.moveSpace('still');
-        }
-        if (this.controller.upDown() || this.controller.jumpDown())
-        {
-            this.character.moveSpace('up');
-        }
-        else if (this.controller.downDown())
-        {
-            this.character.moveSpace('down');
-        }
-        else
-        {
-            this.character.moveSpace('still');
-        }
-        if (this.controller.rotateLDown())
-        {
-            this.character.moveSpace('rotateL');
-        }
-        else if (this.controller.rotateRDown())
-        {
-            this.character.moveSpace('rotateR');
+            if (this.character.planetSpring) game.physics.p2.removeSpring(this.character.planetSpring);
+            if (this.controller.leftDown())
+            {
+                this.character.moveSpace('left');
+            }
+            else if (this.controller.rightDown())
+            {
+                this.character.moveSpace('right');
+            }
+            else
+            {
+                this.character.moveSpace('still');
+            }
+            if (this.controller.upDown() || this.controller.jumpDown())
+            {
+                this.character.moveSpace('up');
+            }
+            else if (this.controller.downDown())
+            {
+                this.character.moveSpace('down');
+            }
+            else
+            {
+                this.character.moveSpace('still');
+            }
+            if (this.controller.rotateLDown())
+            {
+                this.character.moveSpace('rotateL');
+            }
+            else if (this.controller.rotateRDown())
+            {
+                this.character.moveSpace('rotateR');
+            }
         }
     }
 

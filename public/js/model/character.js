@@ -254,12 +254,13 @@ Character.prototype.die = function ()
     //    }, this);
     game.physics.p2.removeConstraint(this.constraint)
     game.physics.p2.removeConstraint(this.constraint_1)
-    this.wheels[0].kill();
-    this.wheels[1].kill();
+    this.health = 0;
+    this.wheels[0].destroy();
+    this.wheels[1].destroy();
 //    if (this.spikeball) this.spikeball.die();
     //this.body.destroy();
 
-    this.kill();
+    this.destroy();
 
 }
 
@@ -278,14 +279,24 @@ Character.prototype.respawn = function (x, y, angle)
     //        if (emitter) emitter.destroy();
     //    }, this);
 
-//    this.reset(x, y);
 //    this.revive(100);
-//    this.body.rotation = angle;
-//    this.wheels[0].revive();
-//    this.wheels[1].revive();
-//    if (this.spikeball) this.spikeball.die();
-    //this.body.destroy();
+    this.reset(x, y);
 
+    this.body.rotation = angle;
+    this.wheels[0].revive();
+    this.wheels[1].revive();
+    this.constraint = game.physics.p2.createPrismaticConstraint(this, this.wheels[0], false, [30, 0], [0, 0], [0, 1]);
+
+    //SET LIMITS
+    this.constraint.lowerLimitEnabled = this.constraint.upperLimitEnabled = true;
+    this.constraint.upperLimit = -0.7;
+    this.constraint.lowerLimit = -1;
+    this.constraint_1 = game.physics.p2.createPrismaticConstraint(this, this.wheels[1], false, [-30, 0], [0, 0], [0, 1]);
+
+    //SET LIMITS
+    this.constraint_1.lowerLimitEnabled = this.constraint_1.upperLimitEnabled = true;
+    this.constraint_1.upperLimit = -0.7;
+    this.constraint_1.lowerLimit = -1;
 }
 
 /**
@@ -298,12 +309,12 @@ Character.prototype.simpleDie = function ()
     if (!this.alive) return;
     game.physics.p2.removeConstraint(this.constraint)
     game.physics.p2.removeConstraint(this.constraint_1)
-    this.wheels[0].kill();
-    this.wheels[1].kill();
+    this.wheels[0].destroy();
+    this.wheels[1].destroy();
 //    if (this.spikeball) this.spikeball.die();
     //this.body.destroy();
     this.health = 0;
-    this.kill();
+    this.destroy();
 
 }
 

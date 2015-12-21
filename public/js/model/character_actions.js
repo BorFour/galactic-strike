@@ -60,7 +60,7 @@ Character.prototype.attack0 = function ()
 
 
         this.spikeballs[0].body.thrust(1000);
-
+        this.spikeballs[0].body.collides(game.spacePhysics.CG_planets);
         for (var t in GALACTIC_STRIKE.room.teams)
         {
             if (t !== this.player.team.color-1)
@@ -73,7 +73,7 @@ Character.prototype.attack0 = function ()
         game.time.events.add(this.attack0CooldownTime, function ()
         {
             console.log("Destroying attack");
-            if(this.spikeballs[0]) this.spikeballs[0].destroy();
+            if(this.spikeballs[0]) this.spikeballs[0].die();
 //            if(this.attackJoint) game.physics.box2d.world.DestroyJoint(this.attackJoint);
 //            this.attackJoint = null;
             this.attackCooldown = true;
@@ -109,6 +109,7 @@ Character.prototype.attack1 = function ()
         this.spikeballs[1].body.setCollisionGroup(game.spacePhysics.CG_attacks);
 
         this.spikeballs[1].body.thrust(1000);
+        this.spikeballs[1].body.collides(game.spacePhysics.CG_planets);
 
         for (var t in GALACTIC_STRIKE.room.teams)
         {
@@ -123,7 +124,7 @@ Character.prototype.attack1 = function ()
         game.time.events.add(this.attack1CooldownTime, function ()
         {
             console.log("Destroying attack");
-            if(this.spikeballs[1]) this.spikeballs[1].destroy();
+            if(this.spikeballs[1]) this.spikeballs[1].die();
 //            if(this.attackJoint) game.physics.box2d.world.DestroyJoint(this.attackJoint);
 //            this.attackJoint = null;
             this.attackCooldown = true;
@@ -160,6 +161,7 @@ Character.prototype.attack2 = function ()
 //        this.attackJoint = game.physics.box2d.motorJoint(this, this.spikeball, 80, 50, 0.25, this.orientation * 120, 0, 4.5);
         this.spikeballs[2].body.thrust(1000);
         this.spikeballs[2].body.setCollisionGroup(game.spacePhysics.CG_attacks);
+        this.spikeballs[2].body.collides(game.spacePhysics.CG_planets);
 
         for (var t in GALACTIC_STRIKE.room.teams)
         {
@@ -173,7 +175,7 @@ Character.prototype.attack2 = function ()
         game.time.events.add(this.attack2CooldownTime, function ()
         {
             console.log("Destroying attack");
-            if(this.spikeball) this.spikeball.die();
+            if(this.spikeballs[2]) this.spikeballs[2].die();
 //            if(this.attackJoint) game.physics.box2d.world.DestroyJoint(this.attackJoint);
 //            this.attackJoint = null;
             this.attackCooldown = true;
@@ -210,6 +212,7 @@ Character.prototype.attack3 = function ()
         this.spikeballs[3].body.collideWorldBounds = false;
 
         this.spikeballs[3].body.setCollisionGroup(game.spacePhysics.CG_attacks);
+        this.spikeballs[3].body.collides(game.spacePhysics.CG_planets);
         // bodyA, bodyB, maxForce, maxTorque, correctionFactor, offsetX, offsetY, offsetAngle
         this.spikeballs[3].body.thrust(100000);
 

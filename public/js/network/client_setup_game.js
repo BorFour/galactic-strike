@@ -84,6 +84,9 @@ clientSetupGame = function ()
             if (GALACTIC_STRIKE.room.characters[c])
             {
                 GALACTIC_STRIKE.room.characters[c].simpleDie();
+                delete GALACTIC_STRIKE.room.characters[c];
+                delete GALACTIC_STRIKE.room.players[c].character;
+
             }
         }
 

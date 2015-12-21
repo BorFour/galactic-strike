@@ -37,6 +37,7 @@ function Character(x, y, angle, game, player, asset)
     this.items = [];
     this.bullets = [];
     this.spikeballs = [];
+    this.mines = 5;
 
     // States
     this.RIGHT = 1;
@@ -49,6 +50,7 @@ function Character(x, y, angle, game, player, asset)
     this.jumpCooldown = true;
     this.hitImmune = false;
     this.attackCooldown = true;
+    this.minesCooldown = true;
     this.fireCooldown = true;
 
     // Cooldown times
@@ -57,6 +59,7 @@ function Character(x, y, angle, game, player, asset)
     this.attack1CooldownTime = 330;
     this.attack2CooldownTime = 1500;
     this.attack3CooldownTime = 500;
+    this.minesCooldownTime = 7000;
     this.fireCooldownTime = 250;
     this.hitImmuneTime = 550; //After being attacked, the character cannot be hurted for this time
 

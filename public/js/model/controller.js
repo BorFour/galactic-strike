@@ -11,7 +11,7 @@ Controller = function (input)
     this.KEYBOARD = 0;
     this.GAMEPAD = 1;
 
-    if (input === Controller.KEYBOARD)
+    if (input === this.KEYBOARD)
     {
         this.leftKey = game.input.keyboard.addKey(Phaser.Keyboard.A);
         this.rightKey = game.input.keyboard.addKey(Phaser.Keyboard.D);
@@ -25,6 +25,7 @@ Controller = function (input)
     }
     else
     {
+        game.input.gamepad.start();
         this.gamepad = game.input.gamepad.pad1;
     }
 
@@ -35,7 +36,7 @@ Controller.prototype.leftDown = function (player)
 
     if (this.gamepad)
     {
-        //
+        return this.gamepad.axis(4) === -1;;
     }
     else
     {
@@ -49,7 +50,7 @@ Controller.prototype.rightDown = function (player)
 
     if (this.gamepad)
     {
-        //
+        return this.gamepad.axis(4) === 1;
     }
     else
     {
@@ -63,7 +64,7 @@ Controller.prototype.upDown = function (player)
 
     if (this.gamepad)
     {
-        //
+       return this.gamepad.axis(5) === -1;
     }
     else
     {
@@ -77,7 +78,7 @@ Controller.prototype.downDown = function (player)
 
     if (this.gamepad)
     {
-        //
+        return this.gamepad.axis(5) === 1;
     }
     else
     {
@@ -119,7 +120,7 @@ Controller.prototype.jumpDown = function (player)
 
     if (this.gamepad)
     {
-        //
+        return this.gamepad.isDown(Phaser.Gamepad.XBOX360_A);
     }
     else
     {
@@ -133,7 +134,7 @@ Controller.prototype.boostDown = function (player)
 
     if (this.gamepad)
     {
-        //
+        return this.gamepad.isDown(Phaser.Gamepad.XBOX360_RIGHT_TRIGGER);
     }
     else
     {

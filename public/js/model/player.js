@@ -5,7 +5,7 @@ Player = function (nickname)
     this.team = null;
     this.isReady = false;
     this.character = null;
-    this.controller = new Controller(Controller.KEYBOARD);
+    this.controller = new Controller(1);
     this.keyFns = [] // Probablemente prescindible
 };
 
@@ -65,7 +65,8 @@ Player.prototype.movePlayer = function ()
         return;
     }
 
-    if(this.character) {
+    if (this.character)
+    {
         this.character.boost = this.controller.boostDown();
 
         if (this.character.isGrounded())
@@ -224,142 +225,60 @@ Player.prototype.characterSetup = function ()
 
     game.camera.follow(this.character, Phaser.Camera.FOLLOW_TOPDOWN_TIGHT);
 
-    this.attack0Key = game.input.keyboard.addKey(Phaser.Keyboard.UP);
-    this.attack0Key.onDown.add(function ()
-    {
-        if (!this.character || !this.character.alive) { return; }
-        if (this.character.inAtmosphere())
-        {
-            if (this.character.attack0())
-            {
-                var output = {
-                    id: GALACTIC_STRIKE.player.id,
-                    attack_id: 0,
-                    space: false
-                };
-                socket.emit('attack', output);
-            }
-        }
-        else if (this.character.attack0())
-        {
-            var output = {
-                id: GALACTIC_STRIKE.player.id,
-                attack_id: 0,
-                space: true
-            };
+    this.characterAttacksSetup();
 
-            socket.emit('attack', output);
-        }
-    }, this);
-    game.input.keyboard.removeKeyCapture(Phaser.Keyboard.UP);
+    //    for (var i = 0; i < GALACTIC_STRIKE.room.map.planets.length; i++)
+    //    {
+    //                myCharacter.body.setBodyContactCallback(planets[i], touchPlanetCallback, this);
+    //        this.character.body.collides(GALACTIC_STRIKE.room.map.planets[i], touchPlanetCallback, this);
+    //        this.character.wheels[0].body.collides(GALACTIC_STRIKE.room.map.planets[i], touchPlanetCallback, this);
+    //        this.character.wheels[1].body.collides(GALACTIC_STRIKE.room.map.planets[i], touchPlanetCallback, this);
 
-    this.attack1Key = game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
-    this.attack1Key.onDown.add(function ()
-    {
-        if (!this.character || !this.character.alive) { return; }
-        if (this.character.inAtmosphere())
-        {
-            if (this.character.attack1())
-            {
-                var output = {
-                    id: GALACTIC_STRIKE.player.id,
-                    attack_id: 1,
-                    space: false
-                };
-                socket.emit('attack', output);
-            }
-        }
-        else
-        {
-            if (this.character.attack1())
-            {
-
-                var output = {
-                    id: GALACTIC_STRIKE.player.id,
-                    attack_id: 1,
-                    space: true
-                };
-
-                socket.emit('attack', output);
-            }
-        }
-    }, this);
-    game.input.keyboard.removeKeyCapture(Phaser.Keyboard.DOWN);
-
-    this.attack2Key = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
-    this.attack2Key.onDown.add(function ()
-    {
-        if (!this.character || !this.character.alive) { return; }
-        if (this.character.inAtmosphere())
-        {
-            if (this.character.attack2())
-            {
-                var output = {
-                    id: GALACTIC_STRIKE.player.id,
-                    attack_id: 2,
-                    space: false
-                };
-                socket.emit('attack', output);
-            }
-        }
-        else
-        {
-            if (this.character.attack2())
-            {
-                var output = {
-                    id: GALACTIC_STRIKE.player.id,
-                    attack_id: 2,
-                    space: true
-                };
-                socket.emit('attack', output);
-            }
-        }
-    }, this);
-    game.input.keyboard.removeKeyCapture(Phaser.Keyboard.LEFT);
-
-    this.attack3Key = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
-    this.attack3Key.onDown.add(function ()
-    {
-        if (!this.character || !this.character.alive) { return; }
-        if (this.character.inAtmosphere())
-        {
-            if (this.character.attack3())
-            {
-                var output = {
-                    id: GALACTIC_STRIKE.player.id,
-                    attack_id: 3,
-                    space: false
-                };
-                socket.emit('attack', output);
-            }
-        }
-        else
-        {
-            if (this.character.attack3())
-            {
-                var output = {
-                    id: GALACTIC_STRIKE.player.id,
-                    attack_id: 3,
-                    space: true
-                };
-                socket.emit('attack', output);
-            }
-        }
-    }, this);
-    game.input.keyboard.removeKeyCapture(Phaser.Keyboard.RIGHT);
-
-
-//    for (var i = 0; i < GALACTIC_STRIKE.room.map.planets.length; i++)
-//    {
-        //                myCharacter.body.setBodyContactCallback(planets[i], touchPlanetCallback, this);
-//        this.character.body.collides(GALACTIC_STRIKE.room.map.planets[i], touchPlanetCallback, this);
-//        this.character.wheels[0].body.collides(GALACTIC_STRIKE.room.map.planets[i], touchPlanetCallback, this);
-//        this.character.wheels[1].body.collides(GALACTIC_STRIKE.room.map.planets[i], touchPlanetCallback, this);
-
-//    }
+    //    }
 
     //            character.body.setColissionCategory(GALACTIC_STRIKE.COLLISION_CATEGORY.PLAYER);
 }
+
+Player.prototype.characterAttacksSetup = function ()
+{
+
+    if (this.controller.gamepad)
+    {
+
+        this.attack0Button = this.controller.gamepad.getButton(Phaser.Gamepad.XBOX360_LEFT_TRIGGER);
+        console.log(this.attack0Button);
+        this.attack0Button.onDown.add(attack0Callback, this);
+        this.attack1Button = this.controller.gamepad.getButton(Phaser.Gamepad.XBOX360_Y);
+        this.attack1Button.onDown.add(attack1Callback, this);
+        this.attack2Button = this.controller.gamepad.getButton(Phaser.Gamepad.XBOX360_X);
+        this.attack2Button.onDown.add(attack2Callback, this);
+        this.attack3Button = this.controller.gamepad.getButton(Phaser.Gamepad.XBOX360_B);
+        this.attack3Button.onDown.add(attack3Callback, this);
+
+
+    }
+    else
+    {
+        this.attack0Key = game.input.keyboard.addKey(Phaser.Keyboard.UP);
+        this.attack0Key.onDown.add(attack0Callback, this);
+        game.input.keyboard.removeKeyCapture(Phaser.Keyboard.UP);
+
+        this.attack1Key = game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
+        this.attack1Key.onDown.add(attack1Callback, this);
+        game.input.keyboard.removeKeyCapture(Phaser.Keyboard.DOWN);
+
+        this.attack2Key = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
+        this.attack2Key.onDown.add(attack2Callback, this);
+        game.input.keyboard.removeKeyCapture(Phaser.Keyboard.LEFT);
+
+        this.attack3Key = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
+        this.attack3Key.onDown.add(attack3Callback, this);
+        game.input.keyboard.removeKeyCapture(Phaser.Keyboard.RIGHT);
+    }
+
+}
+
+
 
 Player.prototype.toString = function ()
 {

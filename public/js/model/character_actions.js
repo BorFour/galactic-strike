@@ -46,37 +46,39 @@ Character.prototype.jump = function ()
 Character.prototype.attack0 = function ()
 {
 
-    if (this.attackCooldown && this.alive)
+    if (this.minesCooldown && this.alive && this.mines > 0)
     {
 
-        this.attackSound.play();
-        this.attackCooldown = false;
-        this.spikeballs[0] = new Item(game, this.body.x + Math.sin(this.body.rotation) * 80, this.body.y - Math.cos(this.body.rotation) * 80, items[(this.player.team.color == 1 ? 'red_mine' : 'blue_mine')]);
-        this.spikeballs[0].owner = this;
-        this.spikeballs[0].damage = 65;
-        this.spikeballs[0].body.setCollisionGroup(game.spacePhysics.CG_attacks);
+//        this.attackSound.play();
+        this.minesCooldown = false;
+        this.mines--;
+        var mine = new Item(game, this.body.x , this.body.y , items[(this.player.team.color == 1 ? 'red_mine' : 'blue_mine')]);
+        mine.owner = this;
+        mine.damage = 15;
+        mine.body.setCollisionGroup(game.spacePhysics.CG_attacks);
+        mine.body.static = true;
         // bodyA, bodyB, maxForce, maxTorque, correctionFactor, offsetX, offsetY, offsetAngle
 //        this.attackJoint = game.physics.box2d.motorJoint(this, this.spikeball, 80, 50, 0.25, this.orientation * 80, 50, 4.5);
 
 
-        this.spikeballs[0].body.thrust(1000);
-        this.spikeballs[0].body.collides(game.spacePhysics.CG_planets);
-        for (var t in GALACTIC_STRIKE.room.teams)
+//        this.spikeballs[0].body.thrust(1000);
+        mine.body.collides(game.spacePhysics.CG_planets);
+        for (var t in game.spacePhysics.CG_teams)
         {
-            if (t !== this.player.team.color-1)
+            if (game.spacePhysics.CG_teams[t] !== game.spacePhysics.CG_teams[this.player.team.color-1])
             {
-                this.spikeballs[0].body.collides(game.spacePhysics.CG_teams[t], touchSpikeballEnemy, this);
+                mine.body.collides(game.spacePhysics.CG_teams[t], touchMineEnemy, this);
             }
         }
 
         // After this.attackCooldownTime, the spikeball is destroyed and the attack cooldown is restored
-        game.time.events.add(this.attack0CooldownTime, function ()
+        game.time.events.add(this.minesCooldownTime, function ()
         {
-            console.log("Destroying attack");
-            if(this.spikeballs[0]) this.spikeballs[0].die();
+//            console.log("Destroying attack");
+//            if(this.spikeballs[0]) this.spikeballs[0].die();
 //            if(this.attackJoint) game.physics.box2d.world.DestroyJoint(this.attackJoint);
 //            this.attackJoint = null;
-            this.attackCooldown = true;
+            this.minesCooldown = true;
         }, this)
 
         return true;

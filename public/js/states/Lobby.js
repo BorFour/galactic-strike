@@ -14,6 +14,7 @@ GALACTIC_STRIKE.Lobby.prototype = {
         var buttonBegin;
         var textStage;
         var buttonStage;
+        var buttonController;
     },
     create: function ()
     {
@@ -45,6 +46,11 @@ GALACTIC_STRIKE.Lobby.prototype = {
 
         textStage = game.add.text(game.world.centerX - 250, game.world.centerY + 100, Object.keys(stages)[(GALACTIC_STRIKE.room.currentStage ? GALACTIC_STRIKE.room.currentStage : 2)], style);
         textStage.anchor.set(0.5);
+
+        GALACTIC_STRIKE.controller = 'keyboard';
+
+        buttonController = game.add.button(game.world.centerX + 550, game.world.centerY - 350, 'keyboard', this.controllerCallback, this, 0, 0, 0, 0);
+
 
         // Only the lobby's host can start the game
 
@@ -185,5 +191,21 @@ GALACTIC_STRIKE.Lobby.prototype = {
             stage: GALACTIC_STRIKE.room.currentStage
         });
 
+    },
+    controllerCallback :  function()
+   {
+    if(GALACTIC_STRIKE.controller === 'keyboard')
+        {
+            GALACTIC_STRIKE.controller = 'gamepad';
+            buttonController.destroy();
+            buttonController = game.add.button(game.world.centerX + 550, game.world.centerY - 350, 'gamepad', this.controllerCallback, this, 0, 0, 0, 0);
+        }
+    else
+        {
+            GALACTIC_STRIKE.controller = 'keyboard';
+            buttonController.destroy();
+            buttonController = game.add.button(game.world.centerX + 550, game.world.centerY - 350, 'keyboard', this.controllerCallback, this, 0, 0, 0, 0);
+        }
     }
+
 };

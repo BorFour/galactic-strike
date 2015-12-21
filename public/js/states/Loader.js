@@ -93,7 +93,7 @@ load_assets = function ()
     ///////////////////////
     game.load.image("sun", "../assets/planets/sun.png");
     game.load.image("planet_blue", "../assets/planets/planet_blue.png");
-    game.load.image("planet_red", "../assets/planets/planet_red.png");
+    game.load.image("planet_red", "../assets/planets/planet_red.jpg");
     game.load.image("giantplanet", "../assets/planets/giantplanet.png");
     game.load.image("giant_moon", "../assets/planets/giantmoon.png");
 

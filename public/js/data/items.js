@@ -34,7 +34,17 @@ var items = {
     },
     'spikeball':
     {
-        asset: 'spikeball',
+        asset : 'spikeball',
+        use: null
+    },
+    'red_mine':
+    {
+        asset: 'red_mine',
+        use: null
+    },
+    'blue_mine':
+    {
+        asset: 'blue_mine',
         use: null
     },
     'misil':

@@ -76,11 +76,12 @@ load_assets = function ()
     game.load.image("bullet", "../assets/blue-bullet.gif");
     game.load.image("laser_bullet", "../assets/laser_bullet.jpg");
     game.load.image("cucumber", "../assets/cucumber.png");
-    game.load.image("spikeball", "../assets/spikeball.gif");
+    game.load.image("red_mine", "../assets//attacks/red_mine.png");
+    game.load.image("blue_mine", "../assets//attacks/blue_mine.png");
     game.load.image("misil", "../assets/misil.png");
     game.load.image("stick", "../assets/stick.gif");
-    game.load.image("hammer", "../assets/hammer.png");
-    game.load.image("spaceAttack1", "../assets/space_attack.png");
+    game.load.image("hammer", "../assets/attacks/hammer.png");
+    game.load.image("spaceAttack1", "../assets/attacks/space_attack.png");
 
     //PLAYERS
     ///////////////////////

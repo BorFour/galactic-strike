@@ -4,8 +4,14 @@ Item.prototype.constructor = Element;
 
 function Item(game, x, y, conf)
 {
+    if (conf.colors)
+    {
 
-    Element.call(this, game, x, y, conf.asset);
+    }
+    else
+    {
+        Element.call(this, game, x, y, conf.asset);
+    }
 //    game.physics.box2d.enable(this);
     game.physics.p2.enable(this, false);
     //    game.spacePhysics.addDynamic(this);

@@ -51,7 +51,7 @@ Character.prototype.attack0 = function ()
 
         this.attackSound.play();
         this.attackCooldown = false;
-        this.spikeballs[0] = new Item(game, this.body.x + Math.sin(this.body.rotation) * 80, this.body.y - Math.cos(this.body.rotation) * 80, items['spikeball']);
+        this.spikeballs[0] = new Item(game, this.body.x + Math.sin(this.body.rotation) * 80, this.body.y - Math.cos(this.body.rotation) * 80, items[(this.player.team.color == 1 ? 'red_mine' : 'blue_mine')]);
         this.spikeballs[0].owner = this;
         this.spikeballs[0].damage = 65;
         this.spikeballs[0].body.setCollisionGroup(game.spacePhysics.CG_attacks);
@@ -103,7 +103,7 @@ Character.prototype.attack1 = function ()
 
         this.attackSound.play();
         this.attackCooldown = false;
-        this.spikeballs[1] = new Item(game, this.x + Math.cos(this.body.rotation) * 80 * this.orientation, this.y + Math.sin(this.body.rotation) * 80 * this.orientation, items['spikeball']);
+        this.spikeballs[1] = new Item(game, this.x + Math.cos(this.body.rotation) * 80 * this.orientation, this.y + Math.sin(this.body.rotation) * 80 * this.orientation, items[(this.player.team.color == 1 ? 'red_mine' : 'blue_mine')]);
         this.spikeballs[1].owner = this;
         this.spikeballs[1].damage = 35;
         this.spikeballs[1].body.setCollisionGroup(game.spacePhysics.CG_attacks);
@@ -156,10 +156,11 @@ Character.prototype.attack2 = function ()
         this.attackCooldown = false;
         this.spikeballs[2] = new Item(game, this.x + Math.cos(this.body.rotation) * 80 * this.orientation,
             this.y + Math.sin(this.body.rotation) * 80 * this.orientation, items['hammer']);
+        this.spikeballs[2].rotation = this.rotation + Math.PI/2;
         this.spikeballs[2].owner = this;
         this.spikeballs[2].damage = 25;
 //        this.attackJoint = game.physics.box2d.motorJoint(this, this.spikeball, 80, 50, 0.25, this.orientation * 120, 0, 4.5);
-        this.spikeballs[2].body.thrust(1000);
+        this.spikeballs[2].body.thrust(32000);
         this.spikeballs[2].body.setCollisionGroup(game.spacePhysics.CG_attacks);
         this.spikeballs[2].body.collides(game.spacePhysics.CG_planets);
 

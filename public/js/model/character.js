@@ -12,7 +12,7 @@ function Character(x, y, angle, game, player, asset)
 
     this.player = player;
     this.game = game;
-    this.debug = false;
+    this.debug = true;
 
     //    this.CG_character = game.physics.p2.createCollisionGroup(); //COLLISION GROUP
 
@@ -22,7 +22,7 @@ function Character(x, y, angle, game, player, asset)
     this.game.spacePhysics.addDynamic(this);
     this.game.physics.p2.enable([this], this.debug);
     this.body.clearShapes();
-    this.anchor.setTo(0.5, 0.25);
+    this.anchor.setTo(0.5, 0.35);
     this.body.loadPolygon('robotnikShape', "robotnik");
     this.body.dynamic = true;
     this.body.immovable = false;

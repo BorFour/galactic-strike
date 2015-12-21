@@ -143,15 +143,15 @@ GALACTIC_STRIKE.Play.prototype = {
 
         if (GALACTIC_STRIKE.player.character)
         {
-            var point = new Phaser.Point(GALACTIC_STRIKE.player.character.x, GALACTIC_STRIKE.player.character.y);
-            game.debug.geom(point, 'rgba(255,255,255,1)');
+//            var point = new Phaser.Point(GALACTIC_STRIKE.player.character.x, GALACTIC_STRIKE.player.character.y);
+//            game.debug.geom(point, 'rgba(255,255,255,1)');
 
-            for (var i = 0; i < GALACTIC_STRIKE.room.map.planets.length; i++)
-            {
-                var point = new Phaser.Point(GALACTIC_STRIKE.room.map.planets[i].x, GALACTIC_STRIKE.room.map.planets[i].y);
-                game.debug.geom(point, 'rgba(255,0,255,1)');
-
-
+//            for (var i = 0; i < GALACTIC_STRIKE.room.map.planets.length; i++)
+//            {
+////                var point = new Phaser.Point(GALACTIC_STRIKE.room.map.planets[i].x, GALACTIC_STRIKE.room.map.planets[i].y);
+////                game.debug.geom(point, 'rgba(255,0,255,1)');
+//
+//            }
                 var j = 1;
                 game.debug.text('Grounded: ' + GALACTIC_STRIKE.player.character.isGrounded(), 32, offsetDebug - 32 * j);
                 j++;
@@ -176,7 +176,7 @@ GALACTIC_STRIKE.Play.prototype = {
                 }
 
 
-            }
+
             //            game.debug.box2dWorld();
             //            game.debug.cameraInfo(game.camera, 300, 32);
 
@@ -223,7 +223,7 @@ function updateOnlineTimer()
     {
         GALACTIC_STRIKE.player.character.updateOnline();
     }
-    game.time.events.add(20 * (Object.keys(GALACTIC_STRIKE.room.players).length), updateOnlineTimer, this);
+    game.time.events.add(8 * (Object.keys(GALACTIC_STRIKE.room.players).length), updateOnlineTimer, this);
 
 }
 

@@ -151,85 +151,85 @@ function Character(x, y, angle, game, player, asset)
     var motorTorque = 2;
     var rideHeight = 0.5;
 
-    // Joints between de wheels and the main body
+    // Joints between the wheels and the main body
     //    this.driveJoints[0] = game.physics.box2d.wheelJoint(this.body, this.wheels[0].body, -0.65 * PTM, rideHeight * PTM, 0, 0, 0, 1, frequency, damping, 0, motorTorque, true);
     //    this.driveJoints[1] = game.physics.box2d.wheelJoint(this.body, this.wheels[1].body, 0.65 * PTM, rideHeight * PTM, 0, 0, 0, 1, frequency, damping, 0, motorTorque, true);
 
-//    this.springs = [];
-//    this.springs[0] = game.physics.p2.createSpring(this, this.wheels[0], 70, 150, 50, null, null, [30, 0], null);
-//    this.springs[1] = game.physics.p2.createSpring(this, this.wheels[1], 70, 150, 50, null, null, [-30, 0], null);
-//
-//
-//    this.constraint = game.physics.p2.createPrismaticConstraint(this, this.wheels[0], false, [30, 0], [0, 0], [0, 1]);
-//
-//    //SET LIMITS
-//    this.constraint.lowerLimitEnabled = this.constraint.upperLimitEnabled = true;
-//    this.constraint.upperLimit = -0.7;
-//    this.constraint.lowerLimit = -1;
-//    this.constraint_1 = game.physics.p2.createPrismaticConstraint(this, this.wheels[1], false, [-30, 0], [0, 0], [0, 1]);
-//
-//    //SET LIMITS
-//    this.constraint_1.lowerLimitEnabled = this.constraint_1.upperLimitEnabled = true;
-//    this.constraint_1.upperLimit = -0.7;
-//    this.constraint_1.lowerLimit = -1;
-//
-//    this.wheels[0].body.setCollisionGroup(game.spacePhysics.CG_teams[this.player.team.color - 1]);
-//    this.wheels[1].body.setCollisionGroup(game.spacePhysics.CG_teams[this.player.team.color - 1]);
-//
-//    this.body.collides(game.spacePhysics.CG_planets, touchPlanetCallback, this);
-//    this.wheels[0].body.collides(game.spacePhysics.CG_planets, touchPlanetCallback, this);
-//    this.wheels[1].body.collides(game.spacePhysics.CG_planets, touchPlanetCallback, this);
-//
-//    this.body.collides(game.spacePhysics.CG_attacks);
-//    this.wheels[0].body.collides(game.spacePhysics.CG_attacks);
-//    this.wheels[1].body.collides(game.spacePhysics.CG_attacks);
-//
-//
-//    for (var t in game.spacePhysics.CG_teams)
-//    {
-//        if (game.spacePhysics.CG_teams[t] === game.spacePhysics.CG_teams[this.player.team.color - 1])
-//        {
-//            continue;
-//        }
-//        this.body.collides(game.spacePhysics.CG_teams[t]);
-//        this.wheels[0].body.collides(game.spacePhysics.CG_teams[t]);
-//        this.wheels[1].body.collides(game.spacePhysics.CG_teams[t]);
-//    }
-//
-//
-//    //    this.body.onEndContact.add(untouchPlanetCallback, this);
-//    //    this.wheels[0].body.onEndContact.add(untouchPlanetCallback, this.wheels[0]);
-//    //    this.wheels[1].body.onEndContact.add(untouchPlanetCallback, this.wheels[1]);
-//
-//
-//
-//    // This is for the collision callback
-//    this.wheels[0].body.mainSprite = this;
-//    this.wheels[1].body.mainSprite = this;
-//    this.body.mainSprite = this;
-//
-//
-//    // Spritesheet animations
-//    this.animations.add('left', [0]);
-//    this.animations.add('right', [1]);
-//    this.animations.add('jumpL', [4]);
-//    this.animations.add('jumpR', [5]);
-//
-//
-//    //Display player name
-//
-//    var text = game.add.text(0, -56, player.nickname,
-//    {
-//        font: "16px Arial",
-//        fill: "#ffffff"
-//    });
-//    this.addChild(text);
-//    text.anchor.set(0.5);
-//
-//    this.body.setMaterial(game.spacePhysics.spriteMaterial);
-//    this.wheels[0].body.setMaterial(game.spacePhysics.wheelMaterial);
-//    this.wheels[1].body.setMaterial(game.spacePhysics.wheelMaterial);
-//    console.log(this);
+    this.springs = [];
+    this.springs[0] = game.physics.p2.createSpring(this, this.wheels[0], 70, 150, 50, null, null, [30, 0], null);
+    this.springs[1] = game.physics.p2.createSpring(this, this.wheels[1], 70, 150, 50, null, null, [-30, 0], null);
+
+
+    this.constraint = game.physics.p2.createPrismaticConstraint(this, this.wheels[0], false, [30, 0], [0, 0], [0, 1]);
+
+    //SET LIMITS
+    this.constraint.lowerLimitEnabled = this.constraint.upperLimitEnabled = true;
+    this.constraint.upperLimit = -0.7;
+    this.constraint.lowerLimit = -1;
+    this.constraint_1 = game.physics.p2.createPrismaticConstraint(this, this.wheels[1], false, [-30, 0], [0, 0], [0, 1]);
+
+    //SET LIMITS
+    this.constraint_1.lowerLimitEnabled = this.constraint_1.upperLimitEnabled = true;
+    this.constraint_1.upperLimit = -0.7;
+    this.constraint_1.lowerLimit = -1;
+
+    this.wheels[0].body.setCollisionGroup(game.spacePhysics.CG_teams[this.player.team.color - 1]);
+    this.wheels[1].body.setCollisionGroup(game.spacePhysics.CG_teams[this.player.team.color - 1]);
+
+    this.body.collides(game.spacePhysics.CG_planets, touchPlanetCallback, this);
+    this.wheels[0].body.collides(game.spacePhysics.CG_planets, touchPlanetCallback, this);
+    this.wheels[1].body.collides(game.spacePhysics.CG_planets, touchPlanetCallback, this);
+
+    this.body.collides(game.spacePhysics.CG_attacks);
+    this.wheels[0].body.collides(game.spacePhysics.CG_attacks);
+    this.wheels[1].body.collides(game.spacePhysics.CG_attacks);
+
+
+    for (var t in game.spacePhysics.CG_teams)
+    {
+        if (game.spacePhysics.CG_teams[t] === game.spacePhysics.CG_teams[this.player.team.color - 1])
+        {
+            continue;
+        }
+        this.body.collides(game.spacePhysics.CG_teams[t]);
+        this.wheels[0].body.collides(game.spacePhysics.CG_teams[t]);
+        this.wheels[1].body.collides(game.spacePhysics.CG_teams[t]);
+    }
+
+
+    //    this.body.onEndContact.add(untouchPlanetCallback, this);
+    //    this.wheels[0].body.onEndContact.add(untouchPlanetCallback, this.wheels[0]);
+    //    this.wheels[1].body.onEndContact.add(untouchPlanetCallback, this.wheels[1]);
+
+
+
+    // This is for the collision callback
+    this.wheels[0].body.mainSprite = this;
+    this.wheels[1].body.mainSprite = this;
+    this.body.mainSprite = this;
+
+
+    // Spritesheet animations
+    this.animations.add('left', [0]);
+    this.animations.add('right', [1]);
+    this.animations.add('jumpL', [4]);
+    this.animations.add('jumpR', [5]);
+
+
+    //Display player name
+
+    var text = game.add.text(0, -56, player.nickname,
+    {
+        font: "16px Arial",
+        fill: "#ffffff"
+    });
+    this.addChild(text);
+    text.anchor.set(0.5);
+
+    this.body.setMaterial(game.spacePhysics.spriteMaterial);
+    this.wheels[0].body.setMaterial(game.spacePhysics.wheelMaterial);
+    this.wheels[1].body.setMaterial(game.spacePhysics.wheelMaterial);
+    console.log(this);
 
 
 };
@@ -252,6 +252,8 @@ Character.prototype.die = function ()
     //    game.time.events.add(2000, function () {
     //        if (emitter) emitter.destroy();
     //    }, this);
+    game.physics.p2.removeConstraint(this.constraint)
+    game.physics.p2.removeConstraint(this.constraint_1)
     this.wheels[0].kill();
     this.wheels[1].kill();
 //    if (this.spikeball) this.spikeball.die();
@@ -294,6 +296,8 @@ Character.prototype.simpleDie = function ()
 {
 
     if (!this.alive) return;
+    game.physics.p2.removeConstraint(this.constraint)
+    game.physics.p2.removeConstraint(this.constraint_1)
     this.wheels[0].kill();
     this.wheels[1].kill();
 //    if (this.spikeball) this.spikeball.die();

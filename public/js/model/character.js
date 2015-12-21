@@ -12,7 +12,7 @@ function Character(x, y, angle, game, player, asset)
 
     this.player = player;
     this.game = game;
-    this.debug = true;
+    this.debug = false;
 
     //    this.CG_character = game.physics.p2.createCollisionGroup(); //COLLISION GROUP
 

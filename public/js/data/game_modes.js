@@ -109,7 +109,7 @@ var gameModes = {
             return false;
 
         },
-        winScore: 2,
+        winScore: 3,
         showWinnerRound: function (winner)
         {
 

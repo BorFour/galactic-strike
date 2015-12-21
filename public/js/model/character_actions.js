@@ -107,7 +107,7 @@ Character.prototype.attack1 = function ()
         this.attackCooldown = false;
         this.spikeballs[1] = new Item(game, this.x + Math.cos(this.body.rotation) * 80 * this.orientation, this.y + Math.sin(this.body.rotation) * 80 * this.orientation, items[(this.player.team.color == 1 ? 'red_mine' : 'blue_mine')]);
         this.spikeballs[1].owner = this;
-        this.spikeballs[1].damage = 35;
+        this.spikeballs[1].damage = 10;
         this.spikeballs[1].body.setCollisionGroup(game.spacePhysics.CG_attacks);
 
         this.spikeballs[1].body.thrust(1000);

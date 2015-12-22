@@ -14,6 +14,45 @@ function untouchPlanetCallback(target)
 
 }
 
+function touchWormholeCallback(body1, body2, fixture1, fixture2, begin)
+{
+
+    console.log("Wormhole callback");
+    var nextWormhole = body2.sprite.nextWormholes[Math.floor(Math.random() * body2.sprite.nextWormholes.length)];
+
+    var nextPosition = GALACTIC_STRIKE.room.map.spawnPositionPlanet(nextWormhole);
+
+    body1.sprite.x = nextPosition.x;
+    body1.sprite.y = nextPosition.y;
+    body1.sprite.body.rotation = nextPosition.angle;
+
+
+}
+
+function touchWormholeCallback2(body1, body2, fixture1, fixture2, begin)
+{
+    if (!body2.sprite.wormholeCooldown) { return; }
+
+    body2.sprite.wormholeCooldown = false;
+    console.log("Wormhole callback");
+    var nextWormhole = body1.sprite.nextWormholes[Math.floor(Math.random() * body1.sprite.nextWormholes.length)];
+
+    var nextPosition = GALACTIC_STRIKE.room.map.spawnPositionPlanet(nextWormhole);
+
+    body2.x = nextPosition.x;
+    body2.y = nextPosition.y;
+    body2.rotation = nextPosition.angle;
+    body2.sprite.wheels[0].body.x = nextPosition.x;
+    body2.sprite.wheels[1].body.x = nextPosition.x;
+    body2.sprite.wheels[0].body.y = nextPosition.y;
+    body2.sprite.wheels[1].body.y = nextPosition.y;
+
+    game.time.events.add(body2.sprite.wormholeCooldownTime, function () {
+        body2.sprite.wormholeCooldown = true;
+    }, this);
+
+}
+
 /**
  * Sets the grounded attribute of the character to true and tries to set it false after a period of time
  */

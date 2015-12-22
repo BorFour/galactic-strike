@@ -29,6 +29,24 @@ var stages = {
                 gravityForce: 550,
                 collisionRadius: 164
             }
+        ],
+        wormholes : [
+            {
+                asset: 'wormhole_1',
+                x: 3200,
+                y: 2200,
+                gravityRadius: 0,
+                gravityForce: 850,
+                collisionRadius: 45
+            },
+            {
+                asset: 'wormhole_1',
+                x: 1200,
+                y: 2200,
+                gravityRadius: 0,
+                gravityForce: 850,
+                collisionRadius: 45
+            }
         ]
     },
     'map2':

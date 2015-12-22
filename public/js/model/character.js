@@ -52,6 +52,7 @@ function Character(x, y, angle, game, player, asset)
     this.attackCooldown = true;
     this.minesCooldown = true;
     this.fireCooldown = true;
+    this.wormholeCooldown = true;
 
     // Cooldown times
     this.jumpCooldownTime = 350;
@@ -60,6 +61,7 @@ function Character(x, y, angle, game, player, asset)
     this.attack2CooldownTime = 1500;
     this.attack3CooldownTime = 500;
     this.minesCooldownTime = 7000;
+    this.wormholeCooldownTime = 5000;
     this.fireCooldownTime = 250;
     this.hitImmuneTime = 550; //After being attacked, the character cannot be hurted for this time
 
@@ -181,6 +183,8 @@ function Character(x, y, angle, game, player, asset)
     this.body.collides(game.spacePhysics.CG_planets, touchPlanetCallback, this);
     this.wheels[0].body.collides(game.spacePhysics.CG_planets, touchPlanetCallback, this);
     this.wheels[1].body.collides(game.spacePhysics.CG_planets, touchPlanetCallback, this);
+
+    this.body.collides(game.spacePhysics.CG_wormholes, touchWormholeCallback, this);
 
     this.body.collides(game.spacePhysics.CG_attacks);
     this.wheels[0].body.collides(game.spacePhysics.CG_attacks);

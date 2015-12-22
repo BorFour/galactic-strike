@@ -39,6 +39,34 @@ Stage = function (game, conf)
             s.body.collides(game.spacePhysics.CG_teams[t]);
         }
     }
+
+    this.wormholes = [];
+
+    for (var w in conf.wormholes)
+    {
+        console.log(conf.wormholes[w]);
+
+        var s = new Star(conf.wormholes[w].x, conf.wormholes[w].y, conf.wormholes[w].gravityRadius,
+            conf.wormholes[w].gravityForce, conf.wormholes[w].asset, conf.wormholes[w].collisionRadius, game);
+
+        this.wormholes.push(s);
+        s.body.setCollisionGroup(game.spacePhysics.CG_wormholes);
+        for (var t in GALACTIC_STRIKE.room.teams)
+        {
+            s.body.collides(game.spacePhysics.CG_teams[t], touchWormholeCallback2, this);
+        }
+
+    }
+
+    for (var w in this.wormholes)
+    {
+        this.wormholes[w].nextWormholes = [];
+        for (var w2 in this.wormholes) {
+            if (w === w2) { continue ;}
+            this.wormholes[w].nextWormholes.push(this.wormholes[w2]);
+        }
+    }
+
 };
 
 Stage.prototype.zoomIn = function ()
@@ -81,12 +109,11 @@ Stage.prototype.spawnPositionTeam = function (team)
 }
 
 
-Stage.prototype.spawnPositionRandomPlanet = function ()
+Stage.prototype.spawnPositionPlanet = function (planet)
 {
 
-    var dataGen = new Phaser.RandomDataGenerator(Math.random());
+    //    var dataGen = new Phaser.RandomDataGenerator(Math.random());
     var angle = Math.random() * 360 - 180;
-    var planet = this.planets[Math.floor(Math.random * this.planets.length)];
 
     console.log(
     {

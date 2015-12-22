@@ -99,6 +99,7 @@ load_assets = function ()
     game.load.image("giant_moon", "../assets/planets/giantmoon.png");
     game.load.image("wormhole_1", "../assets/planets/wormhole_1.png");
     game.load.image("wormhole_2", "../assets/planets/wormhole_2.png");
+    game.load.spritesheet("wormhole", "../assets/planets/wormhole_spritesheet1.png", 139, 140);
 
     //BUTTONS
     ///////////////////////

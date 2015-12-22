@@ -46,6 +46,17 @@ function touchWormholeCallback2(body1, body2, fixture1, fixture2, begin)
     body2.sprite.wheels[1].body.x = nextPosition.x;
     body2.sprite.wheels[0].body.y = nextPosition.y;
     body2.sprite.wheels[1].body.y = nextPosition.y;
+    for (var s in body2.sprite.spikeballs)
+    {
+        if(body2.sprite.spikeballs[s].constraint)
+        {
+            if(body2.sprite.spikeballs[s].body)
+            {
+                body2.sprite.spikeballs[s].body.x = nextPosition.x;
+                body2.sprite.spikeballs[s].body.y = nextPosition.y;
+            }
+        }
+    }
 
     game.time.events.add(body2.sprite.wormholeCooldownTime, function () {
         body2.sprite.wormholeCooldown = true;

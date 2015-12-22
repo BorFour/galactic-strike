@@ -114,7 +114,7 @@ var stages = {
         ],
         wormholes : [
             {
-                asset: 'wormhole_1',
+                asset: 'wormhole',
                 x: 3300,
                 y: 1000,
                 gravityRadius: 0,
@@ -122,7 +122,7 @@ var stages = {
                 collisionRadius: 45
             },
             {
-                asset: 'wormhole_1',
+                asset: 'wormhole',
                 x: 2700,
                 y: 1000,
                 gravityRadius: 0,
@@ -130,7 +130,7 @@ var stages = {
                 collisionRadius: 45
             },
             {
-                asset: 'wormhole_1',
+                asset: 'wormhole',
                 x: 2000,
                 y: 1000,
                 gravityRadius: 0,
@@ -138,7 +138,7 @@ var stages = {
                 collisionRadius: 45
             },
             {
-                asset: 'wormhole_1',
+                asset: 'wormhole',
                 x: 4000,
                 y: 1000,
                 gravityRadius: 0,
@@ -172,7 +172,7 @@ var stages = {
         ],
         wormholes : [
             {
-                asset: 'wormhole_1',
+                asset: 'wormhole',
                 x: 1500,
                 y: 2200,
                 gravityRadius: 0,
@@ -180,9 +180,24 @@ var stages = {
                 collisionRadius: 45
             },
             {
-                asset: 'wormhole_1',
+                asset: 'wormhole',
                 x: 1500,
                 y: 800,
+                gravityRadius: 0,
+                gravityForce: 850,
+            },
+            {
+                asset: 'wormhole',
+                x: 2200,
+                y: 1500,
+                gravityRadius: 0,
+                gravityForce: 850,
+                collisionRadius: 45
+            },
+            {
+                asset: 'wormhole',
+                x: 800,
+                y: 1500,
                 gravityRadius: 0,
                 gravityForce: 850,
                 collisionRadius: 45

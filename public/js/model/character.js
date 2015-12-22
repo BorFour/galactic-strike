@@ -30,6 +30,7 @@ function Character(x, y, angle, game, player, asset)
     this.body.setCollisionGroup(game.spacePhysics.CG_teams[this.player.team.color - 1]);
     this.body.collideWorldBounds = true;
 
+
     //Attributes
 
     this.jumpForce = 75;
@@ -37,7 +38,9 @@ function Character(x, y, angle, game, player, asset)
     this.items = [];
     this.bullets = [];
     this.spikeballs = [];
-    this.mines = 5;
+    this.mines = [];
+    this.numberOfMines = 5;
+    this.body.mass = 1
 
     // States
     this.RIGHT = 1;
@@ -57,7 +60,7 @@ function Character(x, y, angle, game, player, asset)
     // Cooldown times
     this.jumpCooldownTime = 350;
     this.attack0CooldownTime = 700;
-    this.attack1CooldownTime = 330;
+    this.attack1CooldownTime = 450;
     this.attack2CooldownTime = 1500;
     this.attack3CooldownTime = 500;
     this.minesCooldownTime = 7000;
@@ -270,6 +273,14 @@ Character.prototype.die = function ()
             if (this.spikeballs[a].constraint) game.physics.p2.removeConstraint(this.spikeballs[a].constraint);
         }
     }
+
+    for (var m in this.mines)
+    {
+        if (this.mines[m])
+        {
+            this.mines[m].die();
+        }
+    }
     //    if (this.spikeball) this.spikeball.die();
     //this.body.destroy();
 
@@ -329,7 +340,15 @@ Character.prototype.simpleDie = function ()
         if (this.spikeballs[a])
         {
             this.spikeballs[a].die();
-            if (this.spikeballs[a].contraint) game.physics.p2.removeConstraint(this.spikeballs[a].contraint);
+            if (this.spikeballs[a].constraint) game.physics.p2.removeConstraint(this.spikeballs[a].constraint);
+        }
+    }
+
+    for (var m in this.mines)
+    {
+        if (this.mines[m])
+        {
+            this.mines[m].die();
         }
     }
     //    if (this.spikeball) this.spikeball.die();

@@ -46,12 +46,12 @@ Character.prototype.jump = function ()
 Character.prototype.attack0 = function ()
 {
 
-    if (this.minesCooldown && this.alive && this.mines > 0)
+    if (this.minesCooldown && this.alive && this.numberOfMines > 0)
     {
 
 //        this.attackSound.play();
         this.minesCooldown = false;
-        this.mines--;
+        this.numberOfMines--;
         var mine = new Item(game, this.body.x , this.body.y , items[(this.player.team.color == 1 ? 'red_mine' : 'blue_mine')]);
         mine.owner = this;
         mine.damage = 15;
@@ -71,6 +71,7 @@ Character.prototype.attack0 = function ()
             }
         }
 
+        this.mines.push(mine);
         // After this.attackCooldownTime, the spikeball is destroyed and the attack cooldown is restored
         game.time.events.add(this.minesCooldownTime, function ()
         {
@@ -115,6 +116,7 @@ Character.prototype.attack1 = function ()
         this.spikeballs[1].constraint = game.physics.p2.createLockConstraint(this.spikeballs[1], this, [this.orientation*100, -275],-50);
 
         this.spikeballs[1].body.thrust(9000);
+
         this.spikeballs[1].body.collides(game.spacePhysics.CG_planets);
 
         for (var t in GALACTIC_STRIKE.room.teams)
@@ -124,6 +126,8 @@ Character.prototype.attack1 = function ()
                 this.spikeballs[1].body.collides(game.spacePhysics.CG_teams[t], touchSpikeballEnemy, this);
             }
         }
+
+        this.orientation == this.RIGHT ? this.body.rotateLeft(20000) : this.body.rotateRight(20000);
 
 
         // After this.attack2CooldownTime, the spikeball is destroyed and the attack cooldown is restored

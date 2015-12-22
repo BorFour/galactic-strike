@@ -59,7 +59,7 @@ function touchWormholeCallback2(body1, body2, fixture1, fixture2, begin)
     }
 
     game.time.events.add(body2.sprite.wormholeCooldownTime, function () {
-        body2.sprite.wormholeCooldown = true;
+        if (body2 && body2.sprite) body2.sprite.wormholeCooldown = true;
     }, this);
 
 }
@@ -149,10 +149,11 @@ function touchMineEnemy(body1, body2, fixture1, fixture2, begin)
             socket.emit('hit', output);
             console.log('@Client ->      \t| hit');
             console.log(output);
-        }
 
-        //        if(body1.sprite.contraint)  game.physics.p2.removeConstraint(body1.sprite.contraint);
+        }
         body1.sprite.destroy();
+        //        if(body1.sprite.contraint)  game.physics.p2.removeConstraint(body1.sprite.contraint);
+
         // Explosion animation
 
     }

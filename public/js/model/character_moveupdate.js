@@ -151,15 +151,15 @@ Character.prototype.moveSpace = function (direction)
         this.body.thrust(500);
         if (this.orientation === this.LEFT) this.animations.play('jumpL');
         if (this.orientation === this.RIGHT) this.animations.play('jumpR');
-        this.body.angularDamping = 0.9;
+        this.body.angularDamping = 0.95;
         this.body.damping = 0.3;
         this.jumpAnimation = true;
         break;
     case 'down':
-//        this.body.reverse(300);
+        this.body.reverse(300);
         if (this.orientation === this.LEFT) this.animations.play('jumpL');
         if (this.orientation === this.RIGHT) this.animations.play('jumpR');
-        this.body.angularVelocity = 0;
+//        this.body.angularVelocity = 0;
         this.body.angularDamping = 0.7;
         this.body.damping = 0.73;
         this.jumpAnimation = true;

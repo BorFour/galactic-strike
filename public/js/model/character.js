@@ -267,7 +267,7 @@ Character.prototype.die = function ()
         if (this.spikeballs[a])
         {
             this.spikeballs[a].die();
-            if (this.spikeballs[a].contraint) game.physics.p2.removeConstraint(this.spikeballs[a].contraint);
+            if (this.spikeballs[a].constraint) game.physics.p2.removeConstraint(this.spikeballs[a].constraint);
         }
     }
     //    if (this.spikeball) this.spikeball.die();

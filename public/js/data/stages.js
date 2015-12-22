@@ -111,6 +111,40 @@ var stages = {
                 gravityForce: 1200,
                 collisionRadius: 164
             }
+        ],
+        wormholes : [
+            {
+                asset: 'wormhole_1',
+                x: 3300,
+                y: 1000,
+                gravityRadius: 0,
+                gravityForce: 850,
+                collisionRadius: 45
+            },
+            {
+                asset: 'wormhole_1',
+                x: 2700,
+                y: 1000,
+                gravityRadius: 0,
+                gravityForce: 850,
+                collisionRadius: 45
+            },
+            {
+                asset: 'wormhole_1',
+                x: 2000,
+                y: 1000,
+                gravityRadius: 0,
+                gravityForce: 850,
+                collisionRadius: 45
+            },
+            {
+                asset: 'wormhole_1',
+                x: 4000,
+                y: 1000,
+                gravityRadius: 0,
+                gravityForce: 850,
+                collisionRadius: 45
+            }
         ]
     },
     'map3':
@@ -134,6 +168,24 @@ var stages = {
                 gravityRadius: 1300,
                 gravityForce: 250,
                 collisionRadius: 532
+            }
+        ],
+        wormholes : [
+            {
+                asset: 'wormhole_1',
+                x: 1500,
+                y: 2200,
+                gravityRadius: 0,
+                gravityForce: 850,
+                collisionRadius: 45
+            },
+            {
+                asset: 'wormhole_1',
+                x: 1500,
+                y: 800,
+                gravityRadius: 0,
+                gravityForce: 850,
+                collisionRadius: 45
             }
         ]
     }

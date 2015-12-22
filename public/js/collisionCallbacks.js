@@ -105,7 +105,7 @@ function touchSpikeballEnemy(body1, body2, fixture1, fixture2, begin)
             console.log(output);
         }
 
-        if (body1.sprite.contraint) game.physics.p2.removeConstraint(body1.sprite.contraint);
+        if (body1.sprite.constraint) game.physics.p2.removeConstraint(body1.sprite.constraint);
         body1.destroy();
 
     }

@@ -60,12 +60,18 @@ var items = {
     'hammer':
     {
         asset: 'hammer',
-        use: null
+        use: null,
+        scale : 1.3
     },
     'spaceAttack1':
     {
         asset: 'spaceAttack1',
         use: null,
         scale: 0.5
+    },
+    'punch':
+    {
+        asset: 'punch',
+        use: null,
     }
 }

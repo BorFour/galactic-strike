@@ -82,6 +82,7 @@ load_assets = function ()
     game.load.image("stick", "../assets/stick.gif");
     game.load.image("hammer", "../assets/attacks/hammer.png");
     game.load.image("spaceAttack1", "../assets/attacks/space_attack.png");
+    game.load.image("punch", "../assets/attacks/punchglove.png");
 
     //PLAYERS
     ///////////////////////

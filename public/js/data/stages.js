@@ -32,7 +32,7 @@ var stages = {
         ],
         wormholes : [
             {
-                asset: 'wormhole_1',
+                asset: 'wormhole',
                 x: 3200,
                 y: 2200,
                 gravityRadius: 0,
@@ -40,7 +40,7 @@ var stages = {
                 collisionRadius: 45
             },
             {
-                asset: 'wormhole_1',
+                asset: 'wormhole',
                 x: 1200,
                 y: 2200,
                 gravityRadius: 0,

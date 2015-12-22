@@ -55,6 +55,11 @@ Stage = function (game, conf)
         {
             s.body.collides(game.spacePhysics.CG_teams[t], touchWormholeCallback2, this);
         }
+    //this.wormholes[w] = game.add.sprite(139, 140, 'wormhole');
+    // Add an animation
+    this.wormholes[w].animations.add('rotate', [0,1,2,3,4,5]);
+    //Plays the animation at a constant rate of 20 frames per second and it loops because the last parameter is true
+    this.wormholes[w].animations.play('rotate', 20, true);
 
     }
 

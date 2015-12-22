@@ -25,7 +25,7 @@ play_songs = function ()
     GALACTIC_STRIKE.redTeamAnthem = game.add.audio('sovietAnthem', 0.80, true);
     GALACTIC_STRIKE.blueTeamAnthem = game.add.audio('starsAndStripes', 0.80, true);
     GALACTIC_STRIKE.currentSong = GALACTIC_STRIKE.songs[Math.floor(Math.random() * GALACTIC_STRIKE.songs.length)];
-    GALACTIC_STRIKE.currentSong.play();
+//    GALACTIC_STRIKE.currentSong.play();
 
     game.sound.volume = 0.2;
     game.sound.mute = true;
@@ -110,6 +110,8 @@ load_assets = function ()
     game.load.image("changeMap", "../assets/buttons/change_map.png");
     game.load.image("keyboard", "../assets/buttons/keyboard.png");
     game.load.image("gamepad", "../assets/buttons/gamepad.png");
+    game.load.image("mute", "../assets/buttons/mute.png");
+    game.load.image("unmute", "../assets/buttons/unmute.png");
 
     //PHYSICS
     ///////////////////////

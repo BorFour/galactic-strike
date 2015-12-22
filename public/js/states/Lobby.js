@@ -15,6 +15,7 @@ GALACTIC_STRIKE.Lobby.prototype = {
         var textStage;
         var buttonStage;
         var buttonController;
+        var buttonSound;
     },
     create: function ()
     {
@@ -50,7 +51,7 @@ GALACTIC_STRIKE.Lobby.prototype = {
         GALACTIC_STRIKE.controller = 'keyboard';
 
         buttonController = game.add.button(game.world.centerX + 550, game.world.centerY - 350, 'keyboard', this.controllerCallback, this, 0, 0, 0, 0);
-
+        buttonSound = game.add.button(game.world.centerX + 550, game.world.centerY - 300, (game.sound.mute ? 'mute' : 'unmute'), this.soundCallback, this, 0, 0, 0, 0);
 
         // Only the lobby's host can start the game
 
@@ -192,19 +193,34 @@ GALACTIC_STRIKE.Lobby.prototype = {
         });
 
     },
-    controllerCallback :  function()
-   {
-    if(GALACTIC_STRIKE.controller === 'keyboard')
+    controllerCallback: function ()
+    {
+        if (GALACTIC_STRIKE.controller === 'keyboard')
         {
             GALACTIC_STRIKE.controller = 'gamepad';
             buttonController.destroy();
             buttonController = game.add.button(game.world.centerX + 550, game.world.centerY - 350, 'gamepad', this.controllerCallback, this, 0, 0, 0, 0);
         }
-    else
+        else
         {
             GALACTIC_STRIKE.controller = 'keyboard';
             buttonController.destroy();
             buttonController = game.add.button(game.world.centerX + 550, game.world.centerY - 350, 'keyboard', this.controllerCallback, this, 0, 0, 0, 0);
+        }
+    },
+    soundCallback: function ()
+    {
+        if (game.sound.mute)
+        {
+            game.sound.mute = false;
+            buttonSound.destroy();
+            buttonSound = game.add.button(game.world.centerX + 550, game.world.centerY - 300, 'unmute', this.soundCallback, this, 0, 0, 0, 0);
+        }
+        else
+        {
+            game.sound.mute = true;
+            buttonSound.destroy();
+            buttonSound = game.add.button(game.world.centerX + 550, game.world.centerY - 300, 'mute', this.soundCallback, this, 0, 0, 0, 0);
         }
     }
 

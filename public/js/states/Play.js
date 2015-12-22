@@ -123,7 +123,7 @@ GALACTIC_STRIKE.Play.prototype = {
 
         GALACTIC_STRIKE.hud = new HUD(game);
         GALACTIC_STRIKE.room.roundReady = true;
-
+        GALACTIC_STRIKE.currentSong.play();
     },
     update: function ()
     {

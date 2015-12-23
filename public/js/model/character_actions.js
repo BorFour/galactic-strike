@@ -226,7 +226,7 @@ Character.prototype.attack3 = function ()
 
         this.attackSound.play();
         this.attackCooldown = false;
-        this.spikeballs[3] = new Item(game, this.body.x + Math.sin(this.body.rotation) * 80, this.body.y - Math.cos(this.body.rotation) * 80, items['spaceAttack1']);
+        this.spikeballs[3] = new Item(game, this.body.x + Math.sin(this.body.rotation) * 40, this.body.y - Math.cos(this.body.rotation) * 40, items['spaceAttack1']);
         this.spikeballs[3].owner = this;
         this.spikeballs[3].damage = this.damageSpaceAttack;
         this.spikeballs[3].body.rotation = this.body.rotation;

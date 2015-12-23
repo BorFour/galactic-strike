@@ -94,6 +94,12 @@ GALACTIC_STRIKE.Play.prototype = {
 
         spacePhysicsTimer();
         updateOnlineTimer();
+        if (GALACTIC_STRIKE.player.id == GALACTIC_STRIKE.room.host)
+        {
+            console.log("I am host");
+//            updateStageOnlineTimer();
+//            GALACTIC_STRIKE.room.map.createItems();
+        }
         GALACTIC_STRIKE.createGameReady = true;
 
         for (var c in GALACTIC_STRIKE.charactersBuffer)
@@ -143,37 +149,37 @@ GALACTIC_STRIKE.Play.prototype = {
 
         if (GALACTIC_STRIKE.player.character)
         {
-//            var point = new Phaser.Point(GALACTIC_STRIKE.player.character.x, GALACTIC_STRIKE.player.character.y);
-//            game.debug.geom(point, 'rgba(255,255,255,1)');
+            //            var point = new Phaser.Point(GALACTIC_STRIKE.player.character.x, GALACTIC_STRIKE.player.character.y);
+            //            game.debug.geom(point, 'rgba(255,255,255,1)');
 
-//            for (var i = 0; i < GALACTIC_STRIKE.room.map.planets.length; i++)
-//            {
-////                var point = new Phaser.Point(GALACTIC_STRIKE.room.map.planets[i].x, GALACTIC_STRIKE.room.map.planets[i].y);
-////                game.debug.geom(point, 'rgba(255,0,255,1)');
-//
-//            }
-                var j = 1;
-                game.debug.text('Grounded: ' + GALACTIC_STRIKE.player.character.isGrounded(), 32, offsetDebug - 32 * j);
+            //            for (var i = 0; i < GALACTIC_STRIKE.room.map.planets.length; i++)
+            //            {
+            ////                var point = new Phaser.Point(GALACTIC_STRIKE.room.map.planets[i].x, GALACTIC_STRIKE.room.map.planets[i].y);
+            ////                game.debug.geom(point, 'rgba(255,0,255,1)');
+            //
+            //            }
+            var j = 1;
+            game.debug.text('Grounded: ' + GALACTIC_STRIKE.player.character.isGrounded(), 32, offsetDebug - 32 * j);
+            j++;
+            game.debug.text('Sprite : ' + GALACTIC_STRIKE.player.character.grounded +
+                ', wheels[0] : ' + GALACTIC_STRIKE.player.character.wheels[0].grounded +
+                ', wheels[1] : ' + GALACTIC_STRIKE.player.character.wheels[1].grounded, 32, offsetDebug - 32 * j);
+            j++;
+            game.debug.text('In atmosphere: ' + GALACTIC_STRIKE.player.character.inAtmosphere(), 32, offsetDebug - 32 * j);
+            j++;
+            game.debug.text('Atmosphere: ' + GALACTIC_STRIKE.player.character.atmosphere, 32, offsetDebug - 32 * j);
+            j++;
+            var p = GALACTIC_STRIKE.player.character.atmosphere[0];
+            if (p)
+            {
+                var c = GALACTIC_STRIKE.player.character;
+                game.debug.text('Distance: ' + Phaser.Math.distance(c.x, c.y, p.x, p.y), 32, offsetDebug - 32 * j);
                 j++;
-                game.debug.text('Sprite : ' + GALACTIC_STRIKE.player.character.grounded +
-                    ', wheels[0] : ' + GALACTIC_STRIKE.player.character.wheels[0].grounded +
-                    ', wheels[1] : ' + GALACTIC_STRIKE.player.character.wheels[1].grounded, 32, offsetDebug - 32 * j);
+                game.debug.text('Gravity Radius: ' + p.gravityRadius + ' GR + CR: ' + ((p.collisionRadius + p.gravityRadius) / 2), 32, offsetDebug - 32 * j);
                 j++;
-                game.debug.text('In atmosphere: ' + GALACTIC_STRIKE.player.character.inAtmosphere(), 32, offsetDebug - 32 * j);
+                game.debug.text('Width: ' + p.width + ' collisioRadius: ' + p.collisionRadius, 32, offsetDebug - 32 * j);
                 j++;
-                game.debug.text('Atmosphere: ' + GALACTIC_STRIKE.player.character.atmosphere, 32, offsetDebug - 32 * j);
-                j++;
-                var p = GALACTIC_STRIKE.player.character.atmosphere[0];
-                if (p)
-                {
-                    var c = GALACTIC_STRIKE.player.character;
-                    game.debug.text('Distance: ' + Phaser.Math.distance(c.x, c.y, p.x, p.y), 32, offsetDebug - 32 * j);
-                    j++;
-                    game.debug.text('Gravity Radius: ' + p.gravityRadius + ' GR + CR: '  + ((p.collisionRadius + p.gravityRadius)/2), 32, offsetDebug - 32 * j);
-                    j++;
-                    game.debug.text('Width: ' + p.width + ' collisioRadius: ' + p.collisionRadius, 32, offsetDebug - 32 * j);
-                    j++;
-                }
+            }
 
 
 
@@ -224,6 +230,13 @@ function updateOnlineTimer()
         GALACTIC_STRIKE.player.character.updateOnline();
     }
     game.time.events.add(8 * (Object.keys(GALACTIC_STRIKE.room.players).length), updateOnlineTimer, this);
+
+}
+
+function updateStageOnlineTimer()
+{
+
+    game.time.events.add(8 * (Object.keys(GALACTIC_STRIKE.room.players).length), updateStageOnlineTimer, this);
 
 }
 

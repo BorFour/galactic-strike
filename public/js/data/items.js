@@ -74,5 +74,15 @@ var items = {
         asset: 'punch',
         use: null,
         scale : 1.2
+    },
+    'heart':
+    {
+        asset: 'heart',
+        use: null
+    },
+    'star':
+    {
+        asset: 'star',
+        use: null
     }
 }

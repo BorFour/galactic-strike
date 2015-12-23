@@ -47,6 +47,10 @@ var stages = {
                 gravityForce: 850,
                 collisionRadius: 45
             }
+        ],
+        items : [
+            'heart',
+            'star'
         ]
     },
     'map2':
@@ -145,6 +149,10 @@ var stages = {
                 gravityForce: 850,
                 collisionRadius: 45
             }
+        ],
+        items : [
+            'heart',
+            'star'
         ]
     },
     'map3':
@@ -203,6 +211,10 @@ var stages = {
                 gravityForce: 850,
                 collisionRadius: 25
             }
+        ],
+        items : [
+            'heart',
+            'star'
         ]
     }
 }

@@ -15,7 +15,7 @@ Stage = function (game, conf)
     this.width = conf.width;
     this.height = conf.height;
     this.zoomedOut = false;
-
+    this.itemRate = 7000;  //ms
     //    game.world.setBounds(0, 0, conf.width, conf.height);
 
     //SPACE BACKGROUND
@@ -70,6 +70,15 @@ Stage = function (game, conf)
             if (w === w2) { continue ;}
             this.wormholes[w].nextWormholes.push(this.wormholes[w2]);
         }
+    }
+
+
+    this.itemsAvailable = [];
+    this.items = [];
+
+    for (var i in conf.items)
+    {
+        this.itemsAvailable.push(conf.items[i]);
     }
 
 };
@@ -136,7 +145,7 @@ Stage.prototype.spawnPositionPlanet = function (planet)
 
 }
 
-Stage.prototype.createObjects = function ()
+Stage.prototype.createItems = function ()
 {
     //        var elementoPrueba = new Element(game, game.world.randomX, game.world.randomY, 'deathstar');
     //        game.physics.box2d.enable(elementoPrueba);
@@ -148,5 +157,15 @@ Stage.prototype.createObjects = function ()
     //        var objetoPrueba = new Item(game, game.world.randomX, game.world.randomY, items['potion']);
     //        game.physics.box2d.enable(objetoPrueba);
     //        game.spacePhysics.addDynamic(objetoPrueba);
+
+    var time = this.itemRate * Math.random();
+    var pos = this.spawnPositionPlanet(this.planets[Math.floor(this.planets.length * Math.random())]);
+    var item = new Item(game, pos.x, pos.y, items[this.itemsAvailable[Math.floor(this.itemsAvailable.length * Math.random())]]);
+    game.physics.p2.enable(item);
+    item.body.rotation = pos.angle;
+    this.items.push(item);
+
+
+    game.time.events.add(time, this.createItems, this);
 
 }

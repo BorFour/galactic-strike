@@ -61,12 +61,20 @@ function Character(x, y, angle, game, player, asset)
     this.jumpCooldownTime = 350;
     this.attack0CooldownTime = 700;
     this.attack1CooldownTime = 450;
-    this.attack2CooldownTime = 1500;
+    this.attack2CooldownTime = 1200;
     this.attack3CooldownTime = 500;
     this.minesCooldownTime = 7000;
     this.wormholeCooldownTime = 1500;
     this.fireCooldownTime = 250;
     this.hitImmuneTime = 550; //After being attacked, the character cannot be hurted for this time
+
+
+    // Damages
+
+    this.damageMines = 15;
+    this.damageAttack1 = 17.5;
+    this.damageAttack2 = 25;
+    this.damageSpaceAttack = 12.5;
 
 
     // Sounds

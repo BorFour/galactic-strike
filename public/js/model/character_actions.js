@@ -40,7 +40,7 @@ Character.prototype.jump = function ()
 }
 
 /**
- * Performs attack0
+ * Performs attack0. MINES
  */
 
 Character.prototype.attack0 = function ()
@@ -54,7 +54,7 @@ Character.prototype.attack0 = function ()
         this.numberOfMines--;
         var mine = new Item(game, this.body.x , this.body.y , items[(this.player.team.color == 1 ? 'red_mine' : 'blue_mine')]);
         mine.owner = this;
-        mine.damage = 15;
+        mine.damage = this.damageMines;
         mine.body.setCollisionGroup(game.spacePhysics.CG_attacks);
         mine.body.static = true;
         // bodyA, bodyB, maxForce, maxTorque, correctionFactor, offsetX, offsetY, offsetAngle
@@ -95,7 +95,7 @@ Character.prototype.attack0 = function ()
 }
 
 /**
- * Performs attack1
+ * Performs attack1. PUNCH
  */
 
 Character.prototype.attack1 = function ()
@@ -108,7 +108,7 @@ Character.prototype.attack1 = function ()
         this.attackCooldown = false;
         this.spikeballs[1] = new Item(game, this.x + Math.cos(this.body.rotation) * 60 * this.orientation, this.y + Math.sin(this.body.rotation) * 60 * this.orientation, items[(this.player.team.color == 1 ? 'punch' : 'punch')]);
         this.spikeballs[1].owner = this;
-        this.spikeballs[1].damage = 15;
+        this.spikeballs[1].damage = this.damageAttack1;
         this.spikeballs[1].anchor.set(0.5);
 
         this.spikeballs[1].body.rotation = this.rotation + this.orientation*Math.PI/2;
@@ -154,7 +154,7 @@ Character.prototype.attack1 = function ()
 }
 
 /**
- * Performs attack2
+ * Performs attack2. HAMMER
  */
 
 Character.prototype.attack2 = function ()
@@ -173,7 +173,7 @@ Character.prototype.attack2 = function ()
         this.spikeballs[2].body.velocity.x = this.body.velocity.x;
         this.spikeballs[2].body.velocity.y = this.body.velocity.y;
         this.spikeballs[2].owner = this;
-        this.spikeballs[2].damage = 25;
+        this.spikeballs[2].damage = this.damageAttack2;
 //        this.attackJoint = game.physics.box2d.motorJoint(this, this.spikeball, 80, 50, 0.25, this.orientation * 120, 0, 4.5);
         this.spikeballs[2].body.thrust(32000);
         this.spikeballs[2].body.setCollisionGroup(game.spacePhysics.CG_attacks);
@@ -215,7 +215,7 @@ Character.prototype.attack2 = function ()
 }
 
 /**
- * Performs attack3
+ * Performs attack3. SONIC WAVE
  */
 
 Character.prototype.attack3 = function ()
@@ -228,7 +228,7 @@ Character.prototype.attack3 = function ()
         this.attackCooldown = false;
         this.spikeballs[3] = new Item(game, this.body.x + Math.sin(this.body.rotation) * 80, this.body.y - Math.cos(this.body.rotation) * 80, items['spaceAttack1']);
         this.spikeballs[3].owner = this;
-        this.spikeballs[3].damage = 15;
+        this.spikeballs[3].damage = this.damageSpaceAttack;
         this.spikeballs[3].body.rotation = this.body.rotation;
         this.spikeballs[3].body.collideWorldBounds = false;
 

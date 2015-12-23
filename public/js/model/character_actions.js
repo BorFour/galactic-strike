@@ -227,11 +227,17 @@ Character.prototype.attack3 = function ()
         this.attackSound.play();
         this.attackCooldown = false;
         this.spikeballs[3] = new Item(game, this.body.x + Math.sin(this.body.rotation) * 40, this.body.y - Math.cos(this.body.rotation) * 40, items['spaceAttack1']);
+
+         //  This adjusts the collision body size.
+        //  sprite.body.setRectangle(width, height, offsetX, offsetY)
+        this.spikeballs[3].body.setRectangle(130, 30, 0, 10);
+
+
+
         this.spikeballs[3].owner = this;
         this.spikeballs[3].damage = this.damageSpaceAttack;
         this.spikeballs[3].body.rotation = this.body.rotation;
         this.spikeballs[3].body.collideWorldBounds = false;
-
         this.spikeballs[3].body.setCollisionGroup(game.spacePhysics.CG_attacks);
         this.spikeballs[3].body.collides(game.spacePhysics.CG_planets);
         // bodyA, bodyB, maxForce, maxTorque, correctionFactor, offsetX, offsetY, offsetAngle

@@ -36,8 +36,10 @@ Stage = function (game, conf)
         s.body.setCollisionGroup(game.spacePhysics.CG_planets);
         for (var t in GALACTIC_STRIKE.room.teams)
         {
-            s.body.collides([game.spacePhysics.CG_teams[t], game.spacePhysics.CG_attacks]);
+            s.body.collides(game.spacePhysics.CG_teams[t]);
         }
+                // SpaceAttack collides with planet and it's destroyed
+      s.body.collides(game.spacePhysics.CG_attacks, touchPlanetSpaceAttack, this);
     }
 
     this.wormholes = [];

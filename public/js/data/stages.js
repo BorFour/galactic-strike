@@ -174,7 +174,7 @@ var stages = {
             {
                 asset: 'wormhole',
                 x: 1500,
-                y: 2200,
+                y: 2300,
                 gravityRadius: 200,
                 gravityForce: 850,
                 collisionRadius: 25
@@ -182,14 +182,14 @@ var stages = {
             {
                 asset: 'wormhole',
                 x: 1500,
-                y: 800,
+                y: 700,
                 gravityRadius: 200,
                 gravityForce: 850,
                 collisionRadius: 25
             },
             {
                 asset: 'wormhole',
-                x: 2200,
+                x: 2300,
                 y: 1500,
                 gravityRadius: 200,
                 gravityForce: 850,
@@ -197,7 +197,7 @@ var stages = {
             },
             {
                 asset: 'wormhole',
-                x: 800,
+                x: 700,
                 y: 1500,
                 gravityRadius: 200,
                 gravityForce: 850,

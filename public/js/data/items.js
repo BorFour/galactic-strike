@@ -73,5 +73,6 @@ var items = {
     {
         asset: 'punch',
         use: null,
+        scale : 1.2
     }
 }

@@ -32,6 +32,7 @@ function SpacePhysics(game)
 
     this.contactMaterialSpriteWorld = game.physics.p2.createContactMaterial(this.spriteMaterial, this.worldMaterial);
     this.contactMaterialWheelPlanet = game.physics.p2.createContactMaterial(this.wheelMaterial, this.planetMaterial);
+    this.contactMaterialSpritePlanet = game.physics.p2.createContactMaterial(this.spriteMaterial, this.planetMaterial);
 
     // Contact: Sprite - World Bounds
     this.contactMaterialSpriteWorld.friction = 0.3;     // Friction to use in the contact of these two materials.
@@ -51,6 +52,8 @@ function SpacePhysics(game)
     //this.contactMaterialWheelPlanet.frictionRelaxation = 1;
     //this.contactMaterialWheelPlanet.surfaceVelocity = 3;
 
+// Contact: Sprite - Planets
+    this.contactMaterialSpritePlanet.friction = 20;
 
     this.CG_planets = game.physics.p2.createCollisionGroup();
     this.CG_teams = {};

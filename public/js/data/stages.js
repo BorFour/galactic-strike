@@ -157,16 +157,16 @@ var stages = {
                 asset: 'giantplanet',
                 x: 1500,
                 y: 1500,
-                gravityRadius: 1114,
-                gravityForce: 600,
+                gravityRadius: 650,
+                gravityForce: 700,
                 collisionRadius: 532
             },
             {
                 asset: 'giantplanet',
                 x: 1500,
                 y: 1500,
-                gravityRadius: 1300,
-                gravityForce: 250,
+                gravityRadius: 1400,
+                gravityForce: 550,
                 collisionRadius: 532
             }
         ],

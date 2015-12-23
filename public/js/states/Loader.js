@@ -231,12 +231,12 @@ GALACTIC_STRIKE.Loader.prototype = {
             game.add.tween(nameLabel[i]).to(
             {
                 y: game.world.height / 3
-            }, 3000).easing(Phaser.Easing.Bounce.Out).start();
+            }, 2500).easing(Phaser.Easing.Bounce.Out).start();
             //game.add.tween(nameLabel).to({angle: -5}, 500).to({angle: 5}, 300).loop().start();
             game.add.tween(nameLabel[i]).to(
             {
                 angle: 360
-            }, 1300, Phaser.Easing.Linear.None, true, 0, true);
+            }, 850, Phaser.Easing.Linear.None, true, 0, true);
         }
         // Explain how to start the game
         var startLabel = game.add.text(game.world.centerX, game.world.height - 100,

@@ -222,16 +222,6 @@ GALACTIC_STRIKE.Loader.prototype = {
 
         // Add GALACTIC STRIKE title as two images.
         var nameLabel = [];
-//        nameLabel.push(game.add.text(game.world.centerX - 300, game.world.height, 'G A L A C T I C  ',
-//        {
-//            font: '120px Impact',
-//            fill: '#ffffff'
-//        }));
-//        nameLabel.push(game.add.text(game.world.centerX + 300, game.world.height, ' S T R I K E !',
-//        {
-//            font: '120px Impact',
-//            fill: '#ffffff'
-//        }));
         nameLabel.push(game.add.sprite(game.world.centerX - 300, game.world.height, 'galactic'));
         nameLabel.push(game.add.sprite(game.world.centerX + 300, game.world.height, 'strike'));
 

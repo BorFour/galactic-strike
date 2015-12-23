@@ -124,6 +124,8 @@ load_assets = function ()
     game.load.image('blueTeam', '../assets/lobby/blue_team.jpg');
     game.load.image('star', '../assets/estrella.png');
     game.load.image('textBox', '../assets/textbox.gif');
+    game.load.image('galactic', '../assets/galactic.png');
+    game.load.image('strike', '../assets/strike.png');
 
 }
 
@@ -217,17 +219,21 @@ GALACTIC_STRIKE.Loader.prototype = {
 
         // TWEEN GALACTIC STRIKE + MENU OPTIONS
         /////////////////////
+
+        // Add GALACTIC STRIKE title as two images.
         var nameLabel = [];
-        nameLabel.push(game.add.text(game.world.centerX - 300, game.world.height, 'G A L A C T I C  ',
-        {
-            font: '120px Impact',
-            fill: '#ffffff'
-        }));
-        nameLabel.push(game.add.text(game.world.centerX + 300, game.world.height, ' S T R I K E !',
-        {
-            font: '120px Impact',
-            fill: '#ffffff'
-        }));
+//        nameLabel.push(game.add.text(game.world.centerX - 300, game.world.height, 'G A L A C T I C  ',
+//        {
+//            font: '120px Impact',
+//            fill: '#ffffff'
+//        }));
+//        nameLabel.push(game.add.text(game.world.centerX + 300, game.world.height, ' S T R I K E !',
+//        {
+//            font: '120px Impact',
+//            fill: '#ffffff'
+//        }));
+        nameLabel.push(game.add.sprite(game.world.centerX - 300, game.world.height, 'galactic'));
+        nameLabel.push(game.add.sprite(game.world.centerX + 300, game.world.height, 'strike'));
 
         for (var i in nameLabel)
         {

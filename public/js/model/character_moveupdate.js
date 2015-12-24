@@ -148,7 +148,7 @@ Character.prototype.moveSpace = function (direction)
         this.body.damping = 0.3;
         break;
     case 'up':
-        this.body.thrust(500);
+        this.body.thrust(this.moveSpaceThrust);
         if (this.orientation === this.LEFT) this.animations.play('jumpL');
         if (this.orientation === this.RIGHT) this.animations.play('jumpR');
 //        this.body.angularDamping = 1;

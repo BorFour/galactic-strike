@@ -46,11 +46,23 @@ var stages = {
                 gravityRadius: 0,
                 gravityForce: 850,
                 collisionRadius: 45
+            },
+            {
+                asset: 'wormhole',
+                x: 200,
+                y: 200,
+                gravityRadius: 0,
+                gravityForce: 850,
+                collisionRadius: 45
+            },
+            {
+                asset: 'wormhole',
+                x: 4200,
+                y: 4200,
+                gravityRadius: 0,
+                gravityForce: 850,
+                collisionRadius: 45
             }
-        ],
-        items : [
-            'heart',
-            'star'
         ]
     },
     'map2':

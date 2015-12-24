@@ -1,5 +1,5 @@
-
-clientSetupItems = function () {
+clientSetupItems = function ()
+{
 
 
     socket.on('createItem', function (input)
@@ -30,9 +30,14 @@ clientSetupItems = function () {
 
         console.log('@Client <-      \t| pickUpItem');
 
-        GALACTIC_STRIKE.room.gameMode.items[GALACTIC_STRIKE.room.stage.items[input.index].key].pickUp(GALACTIC_STRIKE.room.stage.items[input.index],
-                                                                                                GALACTIC_STRIKE.room.players[input.id].character,
-                                                                                                GALACTIC_STRIKE.room.stage);
+        var item = GALACTIC_STRIKE.room.stage.items[input.index];
+        var character = GALACTIC_STRIKE.room.players[input.id].character;
+
+        if (item && item.alive && character && character.alive)
+        {
+            GALACTIC_STRIKE.room.gameMode.items[GALACTIC_STRIKE.room.stage.items[input.index].key].pickUp(item, character, GALACTIC_STRIKE.room.stage);
+        }
+
 
     });
 

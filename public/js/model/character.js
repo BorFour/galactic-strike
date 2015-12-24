@@ -232,7 +232,13 @@ function Character(x, y, angle, game, player, asset)
     this.animations.add('jumpL', [4]);
     this.animations.add('jumpR', [5]);
 
+   // var bloodAnimation = new Animation(game, this, 'bloodEffect', "blood", [0,1,2,3], 20, false, false);
+   // var bloodEffect = game.add.sprite(300, 200, 'blood');
 
+    this.bloodEffect = this.addChild(game.make.sprite(0, 0, 'blood'));
+    this.bloodEffect.anchor.set(0.5);
+    this.bloodEffect.animations.add('bleeding', [0,1,2,3,4,5]);
+    //this.bloodEffect.animations.stop();
     //Display player name
 
     var text = game.add.text(0, -56, player.nickname,

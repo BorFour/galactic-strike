@@ -99,8 +99,8 @@ load_assets = function ()
     game.load.image("planet_red", "../assets/planets/planet_red.png");
     game.load.image("giantplanet", "../assets/planets/giantplanet.png");
     game.load.image("giant_moon", "../assets/planets/giantmoon.png");
-    game.load.image("wormhole_1", "../assets/planets/wormhole_1.png");
-    game.load.image("wormhole_2", "../assets/planets/wormhole_2.png");
+    //game.load.image("wormhole_1", "../assets/planets/wormhole_1.png");
+    //game.load.image("wormhole_2", "../assets/planets/wormhole_2.png");
     game.load.spritesheet("wormhole", "../assets/planets/wormhole_spritesheet1.png", 139, 140);
 
     //BUTTONS
@@ -127,6 +127,7 @@ load_assets = function ()
     game.load.image('textBox', '../assets/textbox.gif');
     game.load.image('galactic', '../assets/galactic.png');
     game.load.image('strike', '../assets/strike.png');
+    game.load.spritesheet("blood", "../assets/effects/blood_spritesheet.png",98,95);
 
 }
 

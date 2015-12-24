@@ -20,7 +20,7 @@ function touchWormholeCallback(body1, body2, fixture1, fixture2, begin)
     console.log("Wormhole callback");
     var nextWormhole = body2.sprite.nextWormholes[Math.floor(Math.random() * body2.sprite.nextWormholes.length)];
 
-    var nextPosition = GALACTIC_STRIKE.room.map.spawnPositionPlanet(nextWormhole);
+    var nextPosition = GALACTIC_STRIKE.room.stage.spawnPositionPlanet(nextWormhole);
 
     body1.sprite.x = nextPosition.x;
     body1.sprite.y = nextPosition.y;
@@ -37,8 +37,9 @@ function touchWormholeCallback2(body1, body2, fixture1, fixture2, begin)
     console.log("Wormhole callback");
     var nextWormhole = body1.sprite.nextWormholes[Math.floor(Math.random() * body1.sprite.nextWormholes.length)];
 
-    var nextPosition = GALACTIC_STRIKE.room.map.spawnPositionPlanet(nextWormhole);
+    var nextPosition = GALACTIC_STRIKE.room.stage.spawnPositionPlanet(nextWormhole);
 
+    body1.sprite.sound.play();
     body2.x = nextPosition.x;
     body2.y = nextPosition.y;
     body2.rotation = nextPosition.angle;

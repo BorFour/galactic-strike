@@ -71,9 +71,9 @@ GALACTIC_STRIKE.Play.prototype = {
         this.stage.disableVisibilityChange = true;
 
         console.log(GALACTIC_STRIKE.room.currentStageName);
-        GALACTIC_STRIKE.room.map = new Stage(game, stages[GALACTIC_STRIKE.room.currentStageName]);
+        GALACTIC_STRIKE.room.stage = new Stage(game, stages[GALACTIC_STRIKE.room.currentStageName]);
 
-        var spawnPosition = GALACTIC_STRIKE.room.map.spawnPositionTeam(GALACTIC_STRIKE.player.team.color - 1);
+        var spawnPosition = GALACTIC_STRIKE.room.stage.spawnPositionTeam(GALACTIC_STRIKE.player.team.color - 1);
 
         var data = {
             id: GALACTIC_STRIKE.player.id,
@@ -98,7 +98,7 @@ GALACTIC_STRIKE.Play.prototype = {
         {
             console.log("I am host");
 //            updateStageOnlineTimer();
-//            GALACTIC_STRIKE.room.map.createItems();
+//            GALACTIC_STRIKE.room.stage.createItems();
         }
         GALACTIC_STRIKE.createGameReady = true;
 
@@ -152,9 +152,9 @@ GALACTIC_STRIKE.Play.prototype = {
             //            var point = new Phaser.Point(GALACTIC_STRIKE.player.character.x, GALACTIC_STRIKE.player.character.y);
             //            game.debug.geom(point, 'rgba(255,255,255,1)');
 
-            //            for (var i = 0; i < GALACTIC_STRIKE.room.map.planets.length; i++)
+            //            for (var i = 0; i < GALACTIC_STRIKE.room.stage.planets.length; i++)
             //            {
-            ////                var point = new Phaser.Point(GALACTIC_STRIKE.room.map.planets[i].x, GALACTIC_STRIKE.room.map.planets[i].y);
+            ////                var point = new Phaser.Point(GALACTIC_STRIKE.room.stage.planets[i].x, GALACTIC_STRIKE.room.stage.planets[i].y);
             ////                game.debug.geom(point, 'rgba(255,0,255,1)');
             //
             //            }
@@ -245,7 +245,7 @@ function zoomInGame()
     if (GALACTIC_STRIKE.zoomed)
     {
         GALACTIC_STRIKE.zoomed = false;
-        GALACTIC_STRIKE.room.map.zoomIn();
+        GALACTIC_STRIKE.room.stage.zoomIn();
         game.world.scale.set(1);
         GALACTIC_STRIKE.hud.scaleSet(1);
     }
@@ -256,7 +256,7 @@ function zoomOutGame()
     if (!GALACTIC_STRIKE.zoomed)
     {
         GALACTIC_STRIKE.zoomed = true;
-        GALACTIC_STRIKE.room.map.zoomOut();
+        GALACTIC_STRIKE.room.stage.zoomOut();
         game.world.scale.set(0.5);
         GALACTIC_STRIKE.hud.scaleSet(2);
     }

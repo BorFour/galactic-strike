@@ -52,6 +52,7 @@ Stage = function (game, conf)
             conf.wormholes[w].gravityForce, conf.wormholes[w].asset, conf.wormholes[w].collisionRadius, game);
 
         this.wormholes.push(s);
+        s.sound = game.add.audio('wormholeSound', 0.8, false);
         s.body.setCollisionGroup(game.spacePhysics.CG_wormholes);
         for (var t in GALACTIC_STRIKE.room.teams)
         {

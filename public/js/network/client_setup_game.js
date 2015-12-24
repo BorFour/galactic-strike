@@ -93,7 +93,7 @@ clientSetupGame = function ()
 
         // This client gets a position from the stage to spawn.
 
-        var spawnPosition = GALACTIC_STRIKE.room.map.spawnPositionTeam(GALACTIC_STRIKE.player.team.color - 1);
+        var spawnPosition = GALACTIC_STRIKE.room.stage.spawnPositionTeam(GALACTIC_STRIKE.player.team.color - 1);
 
         // And sends it to the server, so the other clients know where to spawn this player's character.
 
@@ -308,10 +308,10 @@ clientSetupGame = function ()
 
             console.log("Hit in update handler");
             console.log(input);
-                                                        GALACTIC_STRIKE.room.characters[input.target].bloodEffect.animations.play('bleeding',15,false);
             // The hit's damage is applied to the character's health
             GALACTIC_STRIKE.room.characters[input.target].health -= input.damage;
             GALACTIC_STRIKE.room.characters[input.target].hitSound.play();
+
             // When the character's health drops below zero, the character dies.
             if (GALACTIC_STRIKE.room.characters[input.target].health <= 0)
             {

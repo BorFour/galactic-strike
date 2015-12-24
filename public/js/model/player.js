@@ -227,12 +227,12 @@ Player.prototype.characterSetup = function ()
 
     this.characterAttacksSetup();
 
-    //    for (var i = 0; i < GALACTIC_STRIKE.room.map.planets.length; i++)
+    //    for (var i = 0; i < GALACTIC_STRIKE.room.stage.planets.length; i++)
     //    {
     //                myCharacter.body.setBodyContactCallback(planets[i], touchPlanetCallback, this);
-    //        this.character.body.collides(GALACTIC_STRIKE.room.map.planets[i], touchPlanetCallback, this);
-    //        this.character.wheels[0].body.collides(GALACTIC_STRIKE.room.map.planets[i], touchPlanetCallback, this);
-    //        this.character.wheels[1].body.collides(GALACTIC_STRIKE.room.map.planets[i], touchPlanetCallback, this);
+    //        this.character.body.collides(GALACTIC_STRIKE.room.stage.planets[i], touchPlanetCallback, this);
+    //        this.character.wheels[0].body.collides(GALACTIC_STRIKE.room.stage.planets[i], touchPlanetCallback, this);
+    //        this.character.wheels[1].body.collides(GALACTIC_STRIKE.room.stage.planets[i], touchPlanetCallback, this);
 
     //    }
 

@@ -171,3 +171,40 @@ Stage.prototype.createItems = function ()
     game.time.events.add(time, this.createItems, this);
 
 }
+
+
+Stage.prototype.addItem = function (index, key, pos)
+{
+
+    var item = new Item(game, pos.x, pos.y, items[key]);
+    game.physics.p2.enable(item);
+    item.key = key;
+    item.body.rotation = pos.angle;
+    this.items[index] = item;
+
+}
+
+Stage.prototype.updateItem = function (index, pos)
+{
+
+    for (var val in pos)
+    {
+        this.items[index][val] = pos[val];
+    }
+
+}
+
+
+Stage.prototype.pickUpItem = function (index, character)
+{
+
+    this.room.gameMode.items[this.stage.items[index].key].pickUp(character);
+
+}
+
+Stage.prototype.deleteItem = function (index)
+{
+
+    this.items[index].kill;
+
+}

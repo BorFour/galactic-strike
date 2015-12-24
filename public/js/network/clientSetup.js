@@ -88,5 +88,6 @@ function clientSetup()
     clientSetupMenu();
     clientSetupRoom();
     clientSetupGame();
+    clientSetupItems();
 
 }

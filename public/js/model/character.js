@@ -42,6 +42,11 @@ function Character(x, y, angle, game, player, asset)
     this.numberOfMines = 5;
     this.body.mass = 1
 
+
+    // Move
+
+    this.moveSpaceThrust = 500;
+
     // States
     this.RIGHT = 1;
     this.LEFT = -1;

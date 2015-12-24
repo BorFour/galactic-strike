@@ -7,6 +7,24 @@ var gameModes = {
     'deathmatch':
     {
         name: 'deathmatch',
+        items:
+        {
+            'heart':
+            {
+                pickUp: function (character)
+                {
+                    character.health = Math.min(character.health + 5, 100);
+                }
+            },
+
+            'star':
+            {
+                pickUp: function (character)
+                {
+                    character.moveSpaceThrust += 100;
+                }
+            }
+        },
         init: function ()
         {
 

@@ -97,8 +97,8 @@ GALACTIC_STRIKE.Play.prototype = {
         if (GALACTIC_STRIKE.player.id == GALACTIC_STRIKE.room.host)
         {
             console.log("I am host");
-//            updateStageOnlineTimer();
-//            GALACTIC_STRIKE.room.stage.createItems();
+            GALACTIC_STRIKE.room.gameMode.createItems();
+            updateStageOnlineTimer();
         }
         GALACTIC_STRIKE.createGameReady = true;
 
@@ -236,7 +236,10 @@ function updateOnlineTimer()
 function updateStageOnlineTimer()
 {
 
-    game.time.events.add(8 * (Object.keys(GALACTIC_STRIKE.room.players).length), updateStageOnlineTimer, this);
+    var items = GALACTIC_STRIKE.room.stage.itemsData();
+    var output = {items : items};
+    socket.emit('updateStage', output);
+    game.time.events.add(30 * (Object.keys(GALACTIC_STRIKE.room.players).length), updateStageOnlineTimer, this);
 
 }
 

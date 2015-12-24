@@ -206,6 +206,8 @@ function Character(x, y, angle, game, player, asset)
     this.wheels[0].body.collides(game.spacePhysics.CG_attacks);
     this.wheels[1].body.collides(game.spacePhysics.CG_attacks);
 
+    this.body.collides(game.spacePhysics.CG_stageItems);
+
 
     for (var t in game.spacePhysics.CG_teams)
     {

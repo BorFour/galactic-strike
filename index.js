@@ -369,6 +369,35 @@ io.on('connection', function (socket) {
     });
 
 
+    //////////
+    // ITEMS
+    //
+
+
+    socket.on('createItem', function (input) {
+
+        socket.broadcast.to('Room1').emit('createItem', input);
+
+    });
+
+    socket.on('updateStage', function (input) {
+
+        socket.broadcast.to('Room1').emit('updateStage', input);
+
+    });
+
+    socket.on('pickUpItem', function (input) {
+
+        io.to('Room1').emit('pickUpItem', input);
+
+    });
+
+
+    //////////
+    // DISCONNECT
+    //
+
+
     socket.on('disconnect', function () {
 
         var output = {};

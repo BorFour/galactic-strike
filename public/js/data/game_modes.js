@@ -11,19 +11,35 @@ var gameModes = {
         {
             'heart':
             {
-                pickUp: function (character)
+                pickUp: function (item, character, stage)
                 {
-                    character.health = Math.min(character.health + 5, 100);
+//                    character.health = Math.min(character.health + 5, 100);
+                    character.health += 5;
+                    stage.deleteItem(item.index);
                 }
             },
 
             'star':
             {
-                pickUp: function (character)
+                pickUp: function (item, character, stage)
                 {
                     character.moveSpaceThrust += 100;
+                    stage.deleteItem(item.index);
                 }
             }
+        },
+        itemRate : 12000,
+        createItems : function ()
+        {
+
+            var time = this.itemRate * Math.random();
+            var index = this.room.stage.items.length;
+            var key = Object.keys(this.items)[Math.floor(Math.random() * Object.keys(this.items).length)];
+            var pos = this.room.stage.spawnPositionPlanet(this.room.stage.planets[Math.floor(this.room.stage.planets.length * Math.random())]);
+            this.room.stage.addItem(index, key, pos);
+            socket.emit('createItem', {index : index, key : key, pos : pos});
+            game.time.events.add(time, this.createItems, this);
+
         },
         init: function ()
         {

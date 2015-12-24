@@ -14,6 +14,19 @@ function untouchPlanetCallback(target)
 
 }
 
+
+function touchItemCallback(body1, body2, fixture1, fixture2, begin)
+{
+
+    console.log('@Client ->      \t| pickUpItem');
+    socket.emit('pickUpItem', {
+        id : body2.sprite.player.id,
+        index : body1.sprite.index
+    });
+
+}
+
+
 function touchWormholeCallback(body1, body2, fixture1, fixture2, begin)
 {
 

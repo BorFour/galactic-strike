@@ -12,12 +12,15 @@ clientSetupItems = function () {
 
     });
 
-    socket.on('updateItem', function (input)
+    socket.on('updateStage', function (input)
     {
 
-        console.log('@Client <-      \t| updateItem');
+        console.log('@Client <-      \t| updateStage');
 
-        GALACTIC_STRIKE.room.stage.updateItem(input.index, input.pos);
+        for (var i in input.items)
+        {
+            GALACTIC_STRIKE.room.stage.updateItem(input.items[i].index, input.items[i].pos);
+        }
 
 
     });
@@ -25,9 +28,11 @@ clientSetupItems = function () {
     socket.on('pickUpItem', function (input)
     {
 
-        console.log('@Client <-      \t| updateItem');
+        console.log('@Client <-      \t| pickUpItem');
 
-        GALACTIC_STRIKE.room.stage.pickUpItem(input.index, GALACTIC_STRIKE.room.players[input.id].character);
+        GALACTIC_STRIKE.room.gameMode.items[GALACTIC_STRIKE.room.stage.items[input.index].key].pickUp(GALACTIC_STRIKE.room.stage.items[input.index],
+                                                                                                GALACTIC_STRIKE.room.players[input.id].character,
+                                                                                                GALACTIC_STRIKE.room.stage);
 
     });
 

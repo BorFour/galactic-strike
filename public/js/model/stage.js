@@ -38,8 +38,8 @@ Stage = function (game, conf)
         {
             s.body.collides(game.spacePhysics.CG_teams[t]);
         }
-                // SpaceAttack collides with planet and it's destroyed
-      s.body.collides(game.spacePhysics.CG_attacks, touchPlanetSpaceAttack, this);
+
+        s.body.collides(game.spacePhysics.CG_attacks);
     }
 
     this.wormholes = [];

@@ -290,7 +290,7 @@ function attack3Callback()
 // Destroys the attack when it touch a planet.
 // Don't understand why this function is called twice
 function touchPlanetSpaceAttack(body1, body2, fixture1, fixture2, begin){
-    if(body2.sprite != null){
-        body2.sprite.destroy();
+    if(body1.sprite != null){
+        body1.sprite.destroy();
     }
 }

@@ -239,7 +239,7 @@ Character.prototype.attack3 = function ()
         this.spikeballs[3].body.rotation = this.body.rotation;
         this.spikeballs[3].body.collideWorldBounds = false;
         this.spikeballs[3].body.setCollisionGroup(game.spacePhysics.CG_attacks);
-        this.spikeballs[3].body.collides(game.spacePhysics.CG_planets);
+        this.spikeballs[3].body.collides(game.spacePhysics.CG_planets, touchPlanetSpaceAttack, this);
         // bodyA, bodyB, maxForce, maxTorque, correctionFactor, offsetX, offsetY, offsetAngle
         this.spikeballs[3].body.thrust(100000);
 
@@ -251,6 +251,8 @@ Character.prototype.attack3 = function ()
                 this.spikeballs[3].body.collides(game.spacePhysics.CG_teams[t], touchSpikeballEnemy, this);
 //            }
         }
+        // SpaceAttack collides with planet and it's destroyed
+        //this.spikeballs[3].body.collides(game.spacePhysics.CG_planets, touchPlanetSpaceAttack, this);
 
         game.time.events.add(this.attack3CooldownTime, function ()
         {

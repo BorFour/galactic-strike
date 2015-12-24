@@ -259,21 +259,21 @@ Player.prototype.characterAttacksSetup = function ()
     }
     else
     {
-        this.attack0Key = game.input.keyboard.addKey(Phaser.Keyboard.UP);
+        this.attack0Key = game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
         this.attack0Key.onDown.add(attack0Callback, this);
-        game.input.keyboard.removeKeyCapture(Phaser.Keyboard.UP);
-
-        this.attack1Key = game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
-        this.attack1Key.onDown.add(attack1Callback, this);
         game.input.keyboard.removeKeyCapture(Phaser.Keyboard.DOWN);
+
+        this.attack1Key = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
+        this.attack1Key.onDown.add(attack1Callback, this);
+        game.input.keyboard.removeKeyCapture(Phaser.Keyboard.RIGHT);
 
         this.attack2Key = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
         this.attack2Key.onDown.add(attack2Callback, this);
         game.input.keyboard.removeKeyCapture(Phaser.Keyboard.LEFT);
 
-        this.attack3Key = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
+        this.attack3Key = game.input.keyboard.addKey(Phaser.Keyboard.UP);
         this.attack3Key.onDown.add(attack3Callback, this);
-        game.input.keyboard.removeKeyCapture(Phaser.Keyboard.RIGHT);
+        game.input.keyboard.removeKeyCapture(Phaser.Keyboard.UP);
     }
 
 }

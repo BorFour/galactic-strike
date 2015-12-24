@@ -28,13 +28,11 @@ GALACTIC_STRIKE.MainMenu.prototype = {
         buttonEnter.anchor.set(0.5);
 
         var controlsText =
-            'Controls in atmosphere : move with [A D]\n' +
-            'Controls in space : rotate with [A D]\n' +
-            'Controls while dead : move camera with [W A S D]\n' +
-            'Jump with : [Spacebar] (Hold to use jetpack)\n' +
-            'Thrust with : [SPACEBAR / W] and reverse with [S]\n' +
-            'Attack with : [Arrow Keys]\n' +
-            'Mute: [M]\n';
+            'Controls in planet : move [A D] + stop [S] + turbo [SHIFT] + jump [SPACEBAR] (Hold to use jetpack)\n' +
+            'Controls in space : rotate [A D] + thrust [SPACEBAR / W] + reverse [S]\n' +
+            'Attacks : [Arrow Keys]\n' +
+            'Controls while dead : move camera [W A S D]\n' +
+            'Mute : on/off [M] + up [K] + down [J]\n';
 
 
         var textBox = game.add.text(game.world.centerX, 330, controlsText,

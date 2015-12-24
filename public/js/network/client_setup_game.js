@@ -308,10 +308,10 @@ clientSetupGame = function ()
 
             console.log("Hit in update handler");
             console.log(input);
+                                                        GALACTIC_STRIKE.room.characters[input.target].bloodEffect.animations.play('bleeding',15,false);
             // The hit's damage is applied to the character's health
             GALACTIC_STRIKE.room.characters[input.target].health -= input.damage;
             GALACTIC_STRIKE.room.characters[input.target].hitSound.play();
-
             // When the character's health drops below zero, the character dies.
             if (GALACTIC_STRIKE.room.characters[input.target].health <= 0)
             {

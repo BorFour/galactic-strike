@@ -19,9 +19,9 @@ Stage = function (game, conf)
     //    game.world.setBounds(0, 0, conf.width, conf.height);
 
     //SPACE BACKGROUND
-    //    var starfield = game.add.sprite(0, 0, conf.backgroundImage);
-    //    starfield.height = game.world.height;
-    //    starfield.width = game.world.width;
+        var starfield = game.add.sprite(0, 0, conf.backgroundImage);
+        starfield.height = game.world.height;
+        starfield.width = game.world.width;
     //game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
 
     this.planets = [];

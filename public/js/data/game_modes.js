@@ -23,7 +23,8 @@ var gameModes = {
             {
                 pickUp: function (item, character, stage)
                 {
-                    character.moveSpaceThrust += 100;
+                    character.moveSpaceThrust += 150;
+                    character.jumpForce += 50;
                     stage.deleteItem(item.index);
                 }
             }

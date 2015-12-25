@@ -108,6 +108,63 @@ Stage.prototype.inWorld = function (element)
 }
 
 
+
+Stage.prototype.spawnPosition = function (mode, arg)
+{
+
+    var angle = Math.random() * 360 - 180;
+    var result = {};
+    var arg = arg || null;
+
+    switch (mode)
+    {
+    case 'planet':
+
+        var planet;
+
+        if (!arg)
+        {
+            throw new Error("Mode 'planet' needs an argument");
+        }
+        else if (typeof arg == 'Star')
+        {
+            planet = arg;
+        }
+        else if (arg == 'any')
+        {
+            planet = this.planets[Math.floor(this.planets.length * Math.random())];
+        }
+
+        result.x = planet.x + planet.collisionRadius * Math.sin(angle);
+        result.y = planet.y + planet.collisionRadius * Math.cos(angle);
+        result.angle = angle;
+        break;
+
+    case 'team':
+
+        if (!arg || isNaN(arg))
+        {
+            throw new Error("Mode 'team' needs a numeric argument");
+        }
+        result.x = this.planets[arg].x + (this.planets[arg].collisionRadius + 50) * Math.sin(angle);
+        result.y = this.planets[arg].y + (this.planets[arg].collisionRadius + 50) * Math.cos(angle);
+        result.angle = angle;
+
+        break;
+
+    case 'space':
+
+
+        break;
+
+    default:
+
+    }
+
+    return result;
+
+}
+
 Stage.prototype.spawnPositionTeam = function (team)
 {
 
@@ -189,7 +246,7 @@ Stage.prototype.addItem = function (index, key, pos)
     this.items[index] = item;
 
     item.body.setCollisionGroup(game.spacePhysics.CG_stageItems);
-    for(var t in game.spacePhysics.CG_teams)
+    for (var t in game.spacePhysics.CG_teams)
     {
         item.body.collides(game.spacePhysics.CG_teams[t], touchItemCallback, this);
     }
@@ -227,8 +284,7 @@ Stage.prototype.itemsData = function ()
 }
 
 
-Stage.prototype.pickUpItem = function (index, character)
-{
+Stage.prototype.pickUpItem = function (index, character) {
 
 
 

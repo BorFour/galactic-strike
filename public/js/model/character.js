@@ -208,6 +208,10 @@ function Character(x, y, angle, game, player, asset)
     this.wheels[0].body.collides(game.spacePhysics.CG_planets, touchPlanetCallback, this);
     this.wheels[1].body.collides(game.spacePhysics.CG_planets, touchPlanetCallback, this);
 
+    this.body.collides(game.spacePhysics.CG_suns, touchSunCallback, this);
+    this.wheels[0].body.collides(game.spacePhysics.CG_suns, touchSunCallback, this);
+    this.wheels[1].body.collides(game.spacePhysics.CG_suns, touchSunCallback, this);
+
     this.body.collides(game.spacePhysics.CG_wormholes, touchWormholeCallback, this);
 
     this.body.collides(game.spacePhysics.CG_attacks);
@@ -386,6 +390,42 @@ Character.prototype.simpleDie = function ()
     this.destroy();
 
 
+}
+
+
+Character.prototype.hurt = function (damage)
+{
+    this.bloodEffect.animations.play('bleeding',15,false);
+    this.health -= damage;
+    this.hitSound.play();
+
+    // When the character's health drops below zero, the character dies.
+    if (this.health <= 0)
+    {
+        delete GALACTIC_STRIKE.room.characters[this.player.id];
+        delete GALACTIC_STRIKE.room.players[this.player.id].character;
+
+        if (this.player.id == GALACTIC_STRIKE.player.id)
+        {
+            game.camera.follow(null);
+            game.camera.reset();
+            zoomOutGame();
+        }
+
+        this.die();
+        GALACTIC_STRIKE.room.gameMode.update();
+
+
+    }
+    else
+    {
+        // This character is damage immune for a short period of time
+        this.hitImmune = true;
+        game.time.events.add(this.hitImmuneTime, function ()
+        {
+            if (this) { this.hitImmune = false; }
+        }, this);
+    }
 }
 
 /**

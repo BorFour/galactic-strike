@@ -19,7 +19,7 @@ clientSetupGame = function ()
 
         console.log('@Client <-      \t| beginMatch');
 
-        GALACTIC_STRIKE.player.controller = new Controller (GALACTIC_STRIKE.controller === 'keyboard' ? 0 : 1);
+        GALACTIC_STRIKE.player.controller = new Controller(GALACTIC_STRIKE.controller === 'keyboard' ? 0 : 1);
         game.state.start('Play');
         GALACTIC_STRIKE.charactersBuffer = {};
         console.log(input.stage)
@@ -292,7 +292,6 @@ clientSetupGame = function ()
      * @event 'hit'
      */
 
-    // DEPRECATED
 
     socket.on('hit', function (input)
     {
@@ -309,37 +308,7 @@ clientSetupGame = function ()
             console.log("Hit in update handler");
             console.log(input);
             // The hit's damage is applied to the character's health
-            GALACTIC_STRIKE.room.characters[input.target].bloodEffect.animations.play('bleeding',15,false);
-            GALACTIC_STRIKE.room.characters[input.target].health -= input.damage;
-            GALACTIC_STRIKE.room.characters[input.target].hitSound.play();
-
-            // When the character's health drops below zero, the character dies.
-            if (GALACTIC_STRIKE.room.characters[input.target].health <= 0)
-            {
-                GALACTIC_STRIKE.room.characters[input.target].die();
-                delete GALACTIC_STRIKE.room.characters[input.target];
-                delete GALACTIC_STRIKE.room.players[input.target].character;
-
-                if (input.target == GALACTIC_STRIKE.player.id)
-                {
-                    game.camera.follow(null);
-                    game.camera.reset();
-                    zoomOutGame();
-                }
-
-//                if (!GALACTIC_STRIKE.room.gameOver)
-                    GALACTIC_STRIKE.room.gameMode.update();
-
-            }
-            else
-            {
-                // This character is damage immune for a short period of time
-                GALACTIC_STRIKE.room.characters[input.target].hitImmune = true;
-                game.time.events.add(GALACTIC_STRIKE.room.characters[input.target].hitImmuneTime, function ()
-                {
-                    if(GALACTIC_STRIKE.room.characters[input.target]) { GALACTIC_STRIKE.room.characters[input.target].hitImmune = false; }
-                }, this);
-            }
+            GALACTIC_STRIKE.room.characters[input.target].hurt(input.damage);
         }
 
     });

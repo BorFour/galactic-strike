@@ -20,7 +20,10 @@ var stages = {
                 gravityRadius: 900,
                 gravityForce: 850,
                 collisionRadius: 375
-            },
+            }
+
+        ],
+        suns: [
             {
                 asset: 'sun',
                 x: 2200,
@@ -30,7 +33,7 @@ var stages = {
                 collisionRadius: 164
             }
         ],
-        wormholes : [
+        wormholes: [
             {
                 asset: 'wormhole',
                 x: 3200,
@@ -118,7 +121,9 @@ var stages = {
                 gravityRadius: 400,
                 gravityForce: 500,
                 //collisionRadius : 375
-            },
+            }
+        ],
+        suns: [
             {
                 asset: 'sun',
                 x: 3000,
@@ -128,7 +133,7 @@ var stages = {
                 collisionRadius: 164
             }
         ],
-        wormholes : [
+        wormholes: [
             {
                 asset: 'wormhole',
                 x: 3300,
@@ -162,7 +167,7 @@ var stages = {
                 collisionRadius: 45
             }
         ],
-        items : [
+        items: [
             'heart',
             'star'
         ]
@@ -190,7 +195,10 @@ var stages = {
                 collisionRadius: 532
             }
         ],
-        wormholes : [
+        suns: [
+
+        ],
+        wormholes: [
             {
                 asset: 'wormhole',
                 x: 1500,
@@ -224,7 +232,7 @@ var stages = {
                 collisionRadius: 25
             }
         ],
-        items : [
+        items: [
             'heart',
             'star'
         ]

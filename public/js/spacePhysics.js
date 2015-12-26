@@ -55,13 +55,14 @@ function SpacePhysics(game)
 // Contact: Sprite - Planets
     this.contactMaterialSpritePlanet.friction = 20;
 
-    this.CG_planets = game.physics.p2.createCollisionGroup();
+
     this.CG_teams = {};
     for (var t in GALACTIC_STRIKE.room.teams) {
         console.log(t);
         this.CG_teams[t] = game.physics.p2.createCollisionGroup();
     }
 //    this.CG_characters = game.physics.p2.createCollisionGroup();
+    this.CG_planets = game.physics.p2.createCollisionGroup();
     this.CG_suns = game.physics.p2.createCollisionGroup();
     this.CG_attacks = game.physics.p2.createCollisionGroup();
     this.CG_wormholes = game.physics.p2.createCollisionGroup();

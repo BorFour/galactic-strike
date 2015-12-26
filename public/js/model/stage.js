@@ -1,28 +1,18 @@
 Stage = function (game, conf)
 {
 
-    // Stage viene en un .JSON
-    // Aquí, en el constructor, se lee el fichero y se guardan individualmente las variables
-
-    //this.name = conf['name'];
-    //this.planets = conf['planets'];
-
-    //    game.spacePhysics.addDynamic(this);
-
-    //GREEN BACKGROUND
-    //game.stage.backgroundColor = "#122112";
-
     this.width = conf.width;
     this.height = conf.height;
     this.zoomedOut = false;
     this.itemRate = 7000; //ms
     //    game.world.setBounds(0, 0, conf.width, conf.height);
 
-    //SPACE BACKGROUND
-        var starfield = game.add.sprite(0, 0, conf.backgroundImage);
-        starfield.height = game.world.height;
-        starfield.width = game.world.width;
-    //game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
+    var starfield = game.add.sprite(0, 0, conf.backgroundImage);
+    starfield.height = game.world.height;
+    starfield.width = game.world.width;
+
+
+
 
     this.planets = [];
 
@@ -41,6 +31,30 @@ Stage = function (game, conf)
 
         s.body.collides(game.spacePhysics.CG_attacks);
     }
+
+
+
+    this.suns = [];
+
+    for (var p in conf.suns)
+    {
+        console.log(conf.suns[p]);
+        var damage = conf.suns[p].damage || 5;
+        var s = new Star(conf.suns[p].x, conf.suns[p].y, conf.suns[p].gravityRadius,
+            conf.suns[p].gravityForce, conf.suns[p].asset, conf.suns[p].collisionRadius, game);
+
+        this.suns.push(s);
+        s.body.setCollisionGroup(game.spacePhysics.CG_suns);
+        for (var t in GALACTIC_STRIKE.room.teams)
+        {
+            s.body.collides(game.spacePhysics.CG_teams[t]);
+        }
+
+        s.body.collides(game.spacePhysics.CG_attacks);
+        s.damage = damage;
+    }
+
+
 
     this.wormholes = [];
 

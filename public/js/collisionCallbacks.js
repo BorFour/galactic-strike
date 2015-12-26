@@ -14,14 +14,27 @@ function untouchPlanetCallback(target)
 
 }
 
+function touchSunCallback(body1, body2, fixture1, fixture2, begin)
+{
+
+
+    var angle = Phaser.Math.angleBetween(body1.mainSprite.x, body1.mainSprite.y, body2.sprite.x, body2.sprite.y);
+    // add gravity force to the crate in the direction of planet center
+    body1.mainSprite.body.applyImpulse([100 * Math.cos(angle),
+                         100 * Math.sin(angle)], 0, 0);
+    body1.mainSprite.hurt(body2.sprite.damage);
+}
+
+
 
 function touchItemCallback(body1, body2, fixture1, fixture2, begin)
 {
 
     console.log('@Client ->      \t| pickUpItem');
-    socket.emit('pickUpItem', {
-        id : body2.sprite.player.id,
-        index : body1.sprite.index
+    socket.emit('pickUpItem',
+    {
+        id: body2.sprite.player.id,
+        index: body1.sprite.index
     });
 
 }
@@ -44,7 +57,10 @@ function touchWormholeCallback(body1, body2, fixture1, fixture2, begin)
 
 function touchWormholeCallback2(body1, body2, fixture1, fixture2, begin)
 {
-    if (!body2.sprite.wormholeCooldown) { return; }
+    if (!body2.sprite.wormholeCooldown)
+    {
+        return;
+    }
 
     body2.sprite.wormholeCooldown = false;
     console.log("Wormhole callback");
@@ -62,9 +78,9 @@ function touchWormholeCallback2(body1, body2, fixture1, fixture2, begin)
     body2.sprite.wheels[1].body.y = nextPosition.y;
     for (var s in body2.sprite.spikeballs)
     {
-        if(body2.sprite.spikeballs[s].constraint)
+        if (body2.sprite.spikeballs[s].constraint)
         {
-            if(body2.sprite.spikeballs[s].body)
+            if (body2.sprite.spikeballs[s].body)
             {
                 body2.sprite.spikeballs[s].body.x = nextPosition.x;
                 body2.sprite.spikeballs[s].body.y = nextPosition.y;
@@ -72,7 +88,8 @@ function touchWormholeCallback2(body1, body2, fixture1, fixture2, begin)
         }
     }
 
-    game.time.events.add(body2.sprite.wormholeCooldownTime, function () {
+    game.time.events.add(body2.sprite.wormholeCooldownTime, function ()
+    {
         if (body2 && body2.sprite) body2.sprite.wormholeCooldown = true;
     }, this);
 
@@ -340,8 +357,10 @@ function attack3Callback()
 
 // Destroys the attack when it touch a planet.
 // Don't understand why this function is called twice
-function touchPlanetSpaceAttack(body1, body2, fixture1, fixture2, begin){
-    if(body1.sprite != null){
+function touchPlanetSpaceAttack(body1, body2, fixture1, fixture2, begin)
+{
+    if (body1.sprite != null)
+    {
         body1.sprite.destroy();
     }
 }

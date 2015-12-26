@@ -36,6 +36,11 @@ function HUD(game)
     this.turbos.anchor.set(0.5);
     this.turbos.fixedToCamera = true;
 
+    this.turboActivated = game.add.text(game.camera.x + game.camera.width / 2 + 550, game.camera.y + game.camera.height / 2 + 380, "Turbos", style4);
+    this.turboActivated.anchor.set(0.5);
+    this.turboActivated.fixedToCamera = true;
+
+
 };
 
 HUD.prototype.updateText = function ()
@@ -74,6 +79,7 @@ HUD.prototype.updateText = function ()
     if (GALACTIC_STRIKE.player.character)
     {
         this.turbos.text = "Turbos : " + GALACTIC_STRIKE.player.character.turbos;
+        this.turboActivated.text = " Activated : " + GALACTIC_STRIKE.player.character.turboActivated;
     }
 
     if (GALACTIC_STRIKE.player.controller.mode === 2)
@@ -94,5 +100,6 @@ HUD.prototype.scaleSet = function (val)
     this.teamRed.scale.set(val);
     this.teamBlue.scale.set(val);
     this.turbos.scale.set(val);
+    this.turboActivated.scale.set(val);
 
 }

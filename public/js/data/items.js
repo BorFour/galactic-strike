@@ -63,7 +63,7 @@ var items = {
     {
         asset: 'hammer',
         use: null,
-        scale : 1.3
+        scale : 1.6
     },
     'spaceAttack1':
     {

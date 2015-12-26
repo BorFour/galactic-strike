@@ -175,7 +175,7 @@ Character.prototype.attack2 = function ()
         this.spikeballs[2].owner = this;
         this.spikeballs[2].damage = this.damageAttack2;
 //        this.attackJoint = game.physics.box2d.motorJoint(this, this.spikeball, 80, 50, 0.25, this.orientation * 120, 0, 4.5);
-        this.spikeballs[2].body.thrust(32000);
+        this.spikeballs[2].body.thrust(37000);
         this.spikeballs[2].body.setCollisionGroup(game.spacePhysics.CG_attacks);
         this.spikeballs[2].body.collides(game.spacePhysics.CG_planets);
 

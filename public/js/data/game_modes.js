@@ -13,9 +13,11 @@ var gameModes = {
             {
                 pickUp: function (item, character, stage)
                 {
-                    character.health = Math.min(character.health + 15, 100);
-//                    character.health += 15;
-                    stage.deleteItem(item.index);
+                    if(character.health < 100){
+                        character.health = Math.min(character.health + 15, 100);
+    //                    character.health += 15;
+                        stage.deleteItem(item.index);
+                    }
                 }
             },
 

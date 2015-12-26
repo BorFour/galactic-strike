@@ -17,7 +17,10 @@ function untouchPlanetCallback(target)
 function touchSunCallback(body1, body2, fixture1, fixture2, begin)
 {
 
-
+    if (body1.mainSprite.hitImmune)
+    {
+        return;
+    }
     var angle = Phaser.Math.angleBetween(body1.mainSprite.x, body1.mainSprite.y, body2.sprite.x, body2.sprite.y);
     // add gravity force to the crate in the direction of planet center
     body1.mainSprite.body.applyImpulse([100 * Math.cos(angle),

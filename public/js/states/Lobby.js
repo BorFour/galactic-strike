@@ -201,6 +201,12 @@ GALACTIC_STRIKE.Lobby.prototype = {
             buttonController.destroy();
             buttonController = game.add.button(game.world.centerX + 550, game.world.centerY - 350, 'gamepad', this.controllerCallback, this, 0, 0, 0, 0);
         }
+        else if(GALACTIC_STRIKE.controller === 'gamepad')
+        {
+            GALACTIC_STRIKE.controller = 'virtual';
+            buttonController.destroy();
+            buttonController = game.add.button(game.world.centerX + 550, game.world.centerY - 350, 'virtual', this.controllerCallback, this, 0, 0, 0, 0);
+        }
         else
         {
             GALACTIC_STRIKE.controller = 'keyboard';

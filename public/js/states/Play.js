@@ -5,6 +5,19 @@ GALACTIC_STRIKE.Play.prototype = {
     create: function ()
     {
 
+        switch (GALACTIC_STRIKE.controller)
+        {
+        case 'keyboard':
+            GALACTIC_STRIKE.player.controller = new Controller(0);
+            break;
+        case 'gamepad':
+            GALACTIC_STRIKE.player.controller = new Controller(1);
+            break;
+        case 'virtual':
+            GALACTIC_STRIKE.player.controller = new Controller(2);
+            break;
+        }
+
         // Setup of the volume keys
         var muteKey = game.input.keyboard.addKey(Phaser.Keyboard.M);
         muteKey.onDown.add(function ()
@@ -237,7 +250,9 @@ function updateStageOnlineTimer()
 {
 
     var items = GALACTIC_STRIKE.room.stage.itemsData();
-    var output = {items : items};
+    var output = {
+        items: items
+    };
     socket.emit('updateStage', output);
     game.time.events.add(30 * (Object.keys(GALACTIC_STRIKE.room.players).length), updateStageOnlineTimer, this);
 

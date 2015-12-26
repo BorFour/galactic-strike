@@ -39,7 +39,7 @@ Stage = function (game, conf)
     for (var p in conf.suns)
     {
         console.log(conf.suns[p]);
-        var damage = conf.suns[p].damage || 5;
+        var damage = conf.suns[p].damage || 10;
         var s = new Star(conf.suns[p].x, conf.suns[p].y, conf.suns[p].gravityRadius,
             conf.suns[p].gravityForce, conf.suns[p].asset, conf.suns[p].collisionRadius, game);
 

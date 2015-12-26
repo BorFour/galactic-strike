@@ -19,7 +19,12 @@ clientSetupGame = function ()
 
         console.log('@Client <-      \t| beginMatch');
 
-        GALACTIC_STRIKE.player.controller = new Controller(GALACTIC_STRIKE.controller === 'keyboard' ? 0 : 1);
+        GALACTIC_STRIKE.player.controller = new Controller(
+
+            GALACTIC_STRIKE.controller === 'virtual' ? 2 :
+            (GALACTIC_STRIKE.controller === 'gamepad' ? 1 : 0)
+
+        );
         game.state.start('Play');
         GALACTIC_STRIKE.charactersBuffer = {};
         console.log(input.stage)

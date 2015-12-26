@@ -25,7 +25,7 @@ play_songs = function ()
     GALACTIC_STRIKE.redTeamAnthem = game.add.audio('sovietAnthem', 0.80, true);
     GALACTIC_STRIKE.blueTeamAnthem = game.add.audio('starsAndStripes', 0.80, true);
     GALACTIC_STRIKE.currentSong = GALACTIC_STRIKE.songs[Math.floor(Math.random() * GALACTIC_STRIKE.songs.length)];
-//    GALACTIC_STRIKE.currentSong.play();
+    //    GALACTIC_STRIKE.currentSong.play();
 
     game.sound.volume = 0.2;
     game.sound.mute = true;
@@ -113,8 +113,20 @@ load_assets = function ()
     game.load.image("changeMap", "../assets/buttons/change_map.png");
     game.load.image("keyboard", "../assets/buttons/keyboard.png");
     game.load.image("gamepad", "../assets/buttons/gamepad.png");
+    game.load.image("virtual", "../assets/buttons/touch.png");
     game.load.image("mute", "../assets/buttons/mute.png");
     game.load.image("unmute", "../assets/buttons/unmute.png");
+
+    // VIRTUAL CONTROLLER
+    //////////////////////
+    // https://lh3.ggpht.com/vR3xHux2zmbQMB3QZI4B8eJIWGApmh6Qx5SvWj3LDGnCB5lpOD_-5VDD1QHbzKcTaF0=h900
+
+    game.load.spritesheet('buttonvertical', '../assets/buttons/button-vertical_white.png',64,64);
+    game.load.spritesheet('buttonhorizontal', '../assets/buttons/button-horizontal_white.png',96,64);
+    game.load.spritesheet('buttondiagonal', '../assets/buttons/button-diagonal.png',64,64);
+    game.load.spritesheet('buttonjump', '../assets/buttons/button-round-a_white.png',96,96);
+    game.load.spritesheet('buttonfire', '../assets/buttons/button-round-b_white.png',96,96);
+
 
     //PHYSICS
     ///////////////////////
@@ -129,7 +141,7 @@ load_assets = function ()
     game.load.image('textBox', '../assets/textbox.gif');
     game.load.image('galactic', '../assets/galactic.png');
     game.load.image('strike', '../assets/strike.png');
-    game.load.spritesheet("blood", "../assets/effects/blood_spritesheet.png",98,95);
+    game.load.spritesheet("blood", "../assets/effects/blood_spritesheet.png", 98, 95);
 
 }
 
@@ -259,6 +271,10 @@ GALACTIC_STRIKE.Loader.prototype = {
         game.input.addPointer();
 
         //        game.input.onDown.add(go_fullscreen, this);
+        if (game.device.android || game.device.iOS)
+        {
+            game.input.onDown.add(gofull, this);
+        }
 
 
     },

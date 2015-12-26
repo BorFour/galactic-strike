@@ -76,6 +76,10 @@ HUD.prototype.updateText = function ()
         this.turbos.text = "Turbos : " + GALACTIC_STRIKE.player.character.turbos;
     }
 
+    if (GALACTIC_STRIKE.player.controller.mode === 2)
+    {
+        GALACTIC_STRIKE.player.controller = new Controller(2);
+    }
 
 }
 

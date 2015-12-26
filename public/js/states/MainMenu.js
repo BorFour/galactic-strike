@@ -29,7 +29,7 @@ GALACTIC_STRIKE.MainMenu.prototype = {
 
         var controlsText =
             'Controls in planet : move [A D] + stop [S] + turbo [SHIFT] + jump [SPACEBAR] (Hold to use jetpack)\n' +
-            'Controls in space : rotate [A D] + thrust [SPACEBAR / W] + reverse [S]\n' +
+            'Controls in space : rotate [A D] + thrust [SPACEBAR / W] + turbo [SHIFT] + reverse [S]\n' +
             'Attacks : [Arrow Keys]\n' +
             'Controls while dead : move camera [W A S D]\n' +
             'Mute : on/off [M] + up [K] + down [J]\n';

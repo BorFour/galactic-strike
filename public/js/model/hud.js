@@ -18,6 +18,11 @@ function HUD(game)
         fill: "#44f",
     };
 
+   var style4 = {
+        font: "bold 26px Arial",
+        fill: "#fff",
+    };
+
     this.score = game.add.text(game.camera.x + game.camera.width / 2, game.camera.y + game.camera.height / 2 - 350, "Esto es la puntuación", style);
     this.score.anchor.set(0.5);
     this.score.fixedToCamera = true;
@@ -27,6 +32,9 @@ function HUD(game)
     this.teamBlue = game.add.text(game.camera.x + game.camera.width / 2 + 500, game.camera.y + game.camera.height / 2 - 350, "Esto es el equipo azul", style3);
     this.teamBlue.anchor.set(0.5);
     this.teamBlue.fixedToCamera = true;
+    this.turbos = game.add.text(game.camera.x + game.camera.width / 2 + 550, game.camera.y + game.camera.height / 2 + 350, "Turbos", style4);
+    this.turbos.anchor.set(0.5);
+    this.turbos.fixedToCamera = true;
 
 };
 
@@ -63,6 +71,12 @@ HUD.prototype.updateText = function ()
     this.teamBlue.text = text;
 
 
+    if (GALACTIC_STRIKE.player.character)
+    {
+        this.turbos.text = "Turbos : " + GALACTIC_STRIKE.player.character.turbos;
+    }
+
+
 }
 
 /**
@@ -75,5 +89,6 @@ HUD.prototype.scaleSet = function (val)
     this.score.scale.set(val);
     this.teamRed.scale.set(val);
     this.teamBlue.scale.set(val);
+    this.turbos.scale.set(val);
 
 }

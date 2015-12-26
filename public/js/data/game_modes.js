@@ -13,8 +13,8 @@ var gameModes = {
             {
                 pickUp: function (item, character, stage)
                 {
-//                    character.health = Math.min(character.health + 5, 100);
-                    character.health += 5;
+                    character.health = Math.min(character.health + 15, 100);
+//                    character.health += 15;
                     stage.deleteItem(item.index);
                 }
             },
@@ -23,13 +23,13 @@ var gameModes = {
             {
                 pickUp: function (item, character, stage)
                 {
-                    character.moveSpaceThrust += 150;
-                    character.jumpForce += 5;
+                    character.turbos++;
+//                    character.jumpForce += 5;
                     stage.deleteItem(item.index);
                 }
             }
         },
-        itemRate : 12000,
+        itemRate : 20000,
         createItems : function ()
         {
 

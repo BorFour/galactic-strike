@@ -148,7 +148,17 @@ Character.prototype.moveSpace = function (direction)
         this.body.damping = 0.3;
         break;
     case 'up':
-        this.body.thrust(this.moveSpaceThrust);
+        if (this.turbos > 0 && !this.turboActivated && this.boost)
+        {
+            this.turboSound.play();
+            this.turboActivated = true;
+            this.turbos--;
+            this.turboTimeLeft = game.time.events.add(this.turboDuration, function(){
+                this.turboActivated = false;
+                this.turboTimeLeft = null;
+            }, this);
+        }
+        this.body.thrust(this.turboActivated ? this.turboMultiplier * this.moveSpaceThrust : this.moveSpaceThrust);
         if (this.orientation === this.LEFT) this.animations.play('jumpL');
         if (this.orientation === this.RIGHT) this.animations.play('jumpR');
 //        this.body.angularDamping = 1;
@@ -157,7 +167,7 @@ Character.prototype.moveSpace = function (direction)
         this.jumpAnimation = true;
         break;
     case 'down':
-        this.body.reverse(300);
+        this.body.reverse(this.turboActivated ? this.turboMultiplier * 300 : 300);
         if (this.orientation === this.LEFT) this.animations.play('jumpL');
         if (this.orientation === this.RIGHT) this.animations.play('jumpR');
 //        this.body.angularVelocity = 0;

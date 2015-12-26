@@ -40,12 +40,14 @@ var items = {
     'red_mine':
     {
         asset: 'red_mine',
-        use: null
+        use: null,
+        scale : 1.7
     },
     'blue_mine':
     {
         asset: 'blue_mine',
-        use: null
+        use: null,
+        scale : 1.7
     },
     'misil':
     {

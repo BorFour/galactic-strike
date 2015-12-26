@@ -61,6 +61,7 @@ load_assets = function ()
     game.load.audio('hitSound', '../assets/sound/pingas_hit.mp3');
     game.load.audio('jetpackSound', '../assets/sound/pingas_jetpack.mp3');
     game.load.audio('wormholeSound', '../assets/sound/pingas_wormhole.mp3');
+    game.load.audio('turboSound', '../assets/sound/pingas_turbo.mp3');
 
     //BACKGROUNDS
     ///////////////////////

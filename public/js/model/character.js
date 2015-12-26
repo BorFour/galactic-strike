@@ -39,8 +39,10 @@ function Character(x, y, angle, game, player, asset)
     this.bullets = [];
     this.spikeballs = [];
     this.mines = [];
-    this.numberOfMines = 5;
+    this.numberOfMines = 3;
+    this.turbos = 0;
     this.body.mass = 1
+
 
 
     // Move
@@ -61,26 +63,31 @@ function Character(x, y, angle, game, player, asset)
     this.minesCooldown = true;
     this.fireCooldown = true;
     this.wormholeCooldown = true;
+    this.usingTurbo = false;
 
     // Cooldown times
     this.jumpCooldownTime = 350;
     this.attack0CooldownTime = 700;
     this.attack1CooldownTime = 450;
     this.attack2CooldownTime = 1200;
-    this.attack3CooldownTime = 500;
+    this.attack3CooldownTime = 750;
     this.minesCooldownTime = 7000;
     this.wormholeCooldownTime = 1500;
     this.fireCooldownTime = 250;
+    this.turboDuration = 3000;
     this.hitImmuneTime = 550; //After being attacked, the character cannot be hurted for this time
 
 
     // Damages
 
-    this.damageMines = 15;
+    this.damageAttack0 = 25;
     this.damageAttack1 = 17.5;
     this.damageAttack2 = 25;
-    this.damageSpaceAttack = 12.5;
+    this.damageAttack3 = 10;
 
+    // Multipliers
+
+    this.turboMultiplier = 5;
 
     // Sounds
 
@@ -88,6 +95,7 @@ function Character(x, y, angle, game, player, asset)
     this.dieSound = game.add.audio('dieSound', 0.7, false);
     this.hitSound = game.add.audio('hitSound', 0.8, false);
     this.jetpackSound = game.add.audio('jetpackSound', 0.5, false);
+    this.turboSound = game.add.audio('turboSound', 0.6, false);
 
     var PTM = 50;
     var driveJoints = [];

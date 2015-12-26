@@ -54,7 +54,7 @@ Character.prototype.attack0 = function ()
         this.numberOfMines--;
         var mine = new Item(game, this.body.x , this.body.y , items[(this.player.team.color == 1 ? 'red_mine' : 'blue_mine')]);
         mine.owner = this;
-        mine.damage = this.damageMines;
+        mine.damage = this.damageAttack0;
         mine.body.setCollisionGroup(game.spacePhysics.CG_attacks);
         mine.body.static = true;
         // bodyA, bodyB, maxForce, maxTorque, correctionFactor, offsetX, offsetY, offsetAngle
@@ -235,7 +235,7 @@ Character.prototype.attack3 = function ()
 
 
         this.spikeballs[3].owner = this;
-        this.spikeballs[3].damage = this.damageSpaceAttack;
+        this.spikeballs[3].damage = this.damageAttack3;
         this.spikeballs[3].body.rotation = this.body.rotation;
         this.spikeballs[3].body.collideWorldBounds = false;
         this.spikeballs[3].body.setCollisionGroup(game.spacePhysics.CG_attacks);

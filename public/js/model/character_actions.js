@@ -169,6 +169,8 @@ Character.prototype.attack2 = function ()
 //        this.spikeballcontraint2 = game.physics.p2.createDistanceConstraint(this, this.spikeballs[2], 80);
         this.spikeballs[2].constraint = game.physics.p2.createDistanceConstraint(this, this.spikeballs[2], 80);
 
+
+        this.spikeballs[2].anchor.set(1);
         this.spikeballs[2].body.rotation = this.rotation + this.orientation*Math.PI/2;
         this.spikeballs[2].body.velocity.x = this.body.velocity.x;
         this.spikeballs[2].body.velocity.y = this.body.velocity.y;

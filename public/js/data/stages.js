@@ -54,7 +54,7 @@ var stages = {
                 asset: 'wormhole',
                 x: 200,
                 y: 200,
-                gravityRadius: 0,
+                gravityRadius: 300,
                 gravityForce: 850,
                 collisionRadius: 45
             },
@@ -62,7 +62,7 @@ var stages = {
                 asset: 'wormhole',
                 x: 4200,
                 y: 4200,
-                gravityRadius: 0,
+                gravityRadius: 300,
                 gravityForce: 850,
                 collisionRadius: 45
             }

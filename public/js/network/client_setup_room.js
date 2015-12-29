@@ -98,7 +98,7 @@ clientSetupRoom = function ()
             {
                 id: input.id
             });
-            window.close();
+            location.reload();
         }
 
     });

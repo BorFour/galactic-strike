@@ -13,11 +13,11 @@ var gameModes = {
             {
                 pickUp: function (item, character, stage)
                 {
-                    if(character.health < 100){
-                        character.health = Math.min(character.health + 15, 100);
-    //                    character.health += 15;
-                        stage.deleteItem(item.index);
-                    }
+                    //                    if(character.health < 100){
+                    character.health = Math.min(character.health + 15, 100);
+                    //                    character.health += 15;
+                    stage.deleteItem(item.index);
+                    //                    }
                 }
             },
 
@@ -26,13 +26,13 @@ var gameModes = {
                 pickUp: function (item, character, stage)
                 {
                     character.turbos++;
-//                    character.jumpForce += 5;
+                    //                    character.jumpForce += 5;
                     stage.deleteItem(item.index);
                 }
             }
         },
-        itemRate : 20000,
-        createItems : function ()
+        itemRate: 20000,
+        createItems: function ()
         {
 
             var time = this.itemRate * Math.random();
@@ -40,7 +40,12 @@ var gameModes = {
             var key = Object.keys(this.items)[Math.floor(Math.random() * Object.keys(this.items).length)];
             var pos = this.room.stage.spawnPositionPlanet(this.room.stage.planets[Math.floor(this.room.stage.planets.length * Math.random())]);
             this.room.stage.addItem(index, key, pos);
-            socket.emit('createItem', {index : index, key : key, pos : pos});
+            socket.emit('createItem',
+            {
+                index: index,
+                key: key,
+                pos: pos
+            });
             game.time.events.add(time, this.createItems, this);
 
         },

@@ -158,7 +158,7 @@ Stage.prototype.spawnPosition = function (mode, arg)
 
         if (!arg || isNaN(arg))
         {
-            throw new Error("Mode 'team' needs a numeric argument");
+            throw new Error("Mode 'team' requires a numeric argument");
         }
         result.x = this.planets[arg].x + (this.planets[arg].collisionRadius + 50) * Math.sin(angle);
         result.y = this.planets[arg].y + (this.planets[arg].collisionRadius + 50) * Math.cos(angle);

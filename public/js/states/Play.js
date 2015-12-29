@@ -197,7 +197,6 @@ GALACTIC_STRIKE.Play.prototype = {
 
 
 
-            //            game.debug.box2dWorld();
             //            game.debug.cameraInfo(game.camera, 300, 32);
 
 //        }

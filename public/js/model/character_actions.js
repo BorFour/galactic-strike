@@ -113,7 +113,7 @@ Character.prototype.attack1 = function ()
 
         this.spikeballs[1].body.rotation = this.rotation + this.orientation*Math.PI/2;
         this.spikeballs[1].body.setCollisionGroup(game.spacePhysics.CG_attacks);
-        //this.spikeballs[1].constraint = game.physics.p2.createLockConstraint(this.spikeballs[1], this, [this.orientation*100, -275],-50);
+        this.spikeballs[1].constraint = game.physics.p2.createLockConstraint(this.spikeballs[1], this, [this.orientation*100, -275],-50);
 
         this.spikeballs[1].body.thrust(9000);
 

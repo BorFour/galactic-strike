@@ -138,6 +138,7 @@ function Character(x, y, angle, game, player, asset)
 
 
     this.constraint = game.physics.p2.createPrismaticConstraint(this, this.wheels[0], false, [30, 0], [0, 0], [0, 1]);
+    this.constraint_1 = game.physics.p2.createPrismaticConstraint(this, this.wheels[1], false, [-30, 0], [0, 0], [0, 1]);
 
     // Set limits left wheel
     this.constraint_1.lowerLimitEnabled = this.constraint_1.upperLimitEnabled = true;
@@ -148,7 +149,6 @@ function Character(x, y, angle, game, player, asset)
     this.constraint.lowerLimitEnabled = this.constraint.upperLimitEnabled = true;
     this.constraint.upperLimit = -0.7;
     this.constraint.lowerLimit = -1;
-    this.constraint_1 = game.physics.p2.createPrismaticConstraint(this, this.wheels[1], false, [-30, 0], [0, 0], [0, 1]);
 
     // Collisions
     this.wheels[0].body.setCollisionGroup(game.spacePhysics.CG_teams[this.player.team.color - 1]);

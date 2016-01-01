@@ -47,7 +47,8 @@ clientSetupGame = function ()
             // Uses the red character asset if the player is the red team, blue in other case.
             var asset = (GALACTIC_STRIKE.room.players[input.id].team === GALACTIC_STRIKE.room.teams[0] ? 'playerRed' : 'playerBlue');
             // Creates the character according to the information received in input.
-            GALACTIC_STRIKE.room.characters[input.id] = new Character(input.x, input.y, input.angle, game, GALACTIC_STRIKE.room.players[input.id], characters['robotnik']);
+            console.log(GALACTIC_STRIKE.room.players[input.id].characterKey)
+            GALACTIC_STRIKE.room.characters[input.id] = new Character(input.x, input.y, input.angle, game, GALACTIC_STRIKE.room.players[input.id], characters[GALACTIC_STRIKE.room.players[input.id].characterKey ? GALACTIC_STRIKE.room.players[input.id].characterKey : 'robotnik']);
             // Assigns the character to its player
             GALACTIC_STRIKE.room.players[input.id].character = GALACTIC_STRIKE.room.characters[input.id];
 
@@ -154,7 +155,7 @@ clientSetupGame = function ()
             // Uses the red character asset if the player is the red team, blue in other case.
             var asset = (GALACTIC_STRIKE.room.players[input.id].team === GALACTIC_STRIKE.room.teams[0] ? 'playerRed' : 'playerBlue');
             // Creates the character according to the information received in input.
-            GALACTIC_STRIKE.room.characters[input.id] = new Character(input.x, input.y, input.angle, game, GALACTIC_STRIKE.room.players[input.id], characters['robotnik']);
+            GALACTIC_STRIKE.room.characters[input.id] = new Character(input.x, input.y, input.angle, game, GALACTIC_STRIKE.room.players[input.id], characters[GALACTIC_STRIKE.room.players[input.id].characterKey]);
             // Assigns the character to its player
             GALACTIC_STRIKE.room.players[input.id].character = GALACTIC_STRIKE.room.characters[input.id];
 

@@ -119,7 +119,7 @@ GALACTIC_STRIKE.Play.prototype = {
         {
             var input = GALACTIC_STRIKE.charactersBuffer[c];
             var asset = (GALACTIC_STRIKE.room.players[input.id].team === GALACTIC_STRIKE.room.teams[0] ? 'playerRed' : 'playerBlue');
-            GALACTIC_STRIKE.room.characters[input.id] = new Character(input.x, input.y, input.angle, game, GALACTIC_STRIKE.room.players[input.id], characters['robotnik']);
+            GALACTIC_STRIKE.room.characters[input.id] = new Character(input.x, input.y, input.angle, game, GALACTIC_STRIKE.room.players[input.id], characters[GALACTIC_STRIKE.room.players[input.id].characterKey]);
             GALACTIC_STRIKE.room.players[input.id].character = GALACTIC_STRIKE.room.characters[input.id];
 
             if (input.id === GALACTIC_STRIKE.player.id)

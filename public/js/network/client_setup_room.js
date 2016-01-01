@@ -46,6 +46,8 @@ clientSetupRoom = function ()
                     GALACTIC_STRIKE.room.addPlayer(k, new Player(input.players[k].name)).joinTeam(
                         (input.players[k].team === -1 ? GALACTIC_STRIKE.room.unasigned : GALACTIC_STRIKE.room.teams[input.players[k].team]));
                 }
+
+                GALACTIC_STRIKE.room.players[k].characterKey = input.players[k].key;
             }
 
             GALACTIC_STRIKE.room.currentStage = input.stage;

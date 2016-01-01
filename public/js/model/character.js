@@ -193,8 +193,8 @@ function Character(x, y, angle, game, player, conf)
     // Spritesheet animations
     this.animations.add('left', [0]);
     this.animations.add('right', [1]);
-    this.animations.add('jumpL', [4]);
-    this.animations.add('jumpR', [5]);
+    this.animations.add('jumpL', [2]);
+    this.animations.add('jumpR', [3]);
 
     // Blood effect when damaging
     this.bloodEffect = this.addChild(game.make.sprite(0, 0, 'blood'));

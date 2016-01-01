@@ -231,17 +231,13 @@ io.on('connection', function (socket)
 
         console.log('@Server <-      \t| changeCharacter');
 
-        if (input.id !== room.host)
-        {
-
-        }
-        else if (room.state !== 'lobby')
+        if (room.state !== 'lobby')
         {
 
         }
         else
         {
-            room.players[input.id].character = input.key;
+            room.players[input.id].key = input.key;
             io.to('Room1').emit('changeCharacter', output);
             console.log('@Server ->      \t| changeCharacter');
         }

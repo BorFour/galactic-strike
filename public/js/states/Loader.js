@@ -99,14 +99,52 @@ load_assets = function ()
     // KIRBY
     ///////////////////////
     game.load.image("kirby_portrait", "../assets/characters/kirby/kirby_portrait.png");
+    game.load.spritesheet("kirby_spritesheet_red", "../assets/characters/kirby/kirby_red_turbo.png", 48, 97);
+    //rueda: 26_23  | robotnik: 49_43
+    game.load.spritesheet("kirby_spritesheet_blue", "../assets/characters/kirby/kirby_blue_turbo.png", 48, 97);
+    //rueda: 26_23  | robotnik: 49_43
+    game.load.image("kirby_wheel_red", "../assets/characters/kirby/wheel_red.png");
+    game.load.image("kirby_wheel_blue", "../assets/characters/kirby/wheel_blue.png");
+    game.load.audio("kirby_sound_attack", '../assets/sound/pingas.mp3');
+    game.load.audio("kirby_sound_die", '../assets/sound/pingas_death.mp3');
+    game.load.audio("kirby_sound_hit", '../assets/sound/pingas_hit.mp3');
+    game.load.audio("kirby_sound_jetpack", '../assets/sound/pingas_jetpack.mp3');
+    game.load.audio("kirby_sound_wormhole", '../assets/sound/pingas_wormhole.mp3');
+    game.load.audio("kirby_sound_turbo", '../assets/sound/pingas_turbo.mp3');
+
 
     // ALIEN
     ///////////////////////
     game.load.image("alien_portrait", "../assets/characters/alien/alien_portrait.jpg");
+    game.load.spritesheet("alien_spritesheet_red", "../assets/characters/alien/alien_red_turbo.png", 48, 97);
+    //rueda: 26_23  | robotnik: 49_43
+    game.load.spritesheet("alien_spritesheet_blue", "../assets/characters/alien/alien_blue_turbo.png", 48, 97);
+    //rueda: 26_23  | robotnik: 49_43
+    game.load.image("alien_wheel_red", "../assets/characters/kirby/wheel_red.png");
+    game.load.image("alien_wheel_blue", "../assets/characters/kirby/wheel_blue.png");
+    game.load.audio("alien_sound_attack", '../assets/sound/pingas.mp3');
+    game.load.audio("alien_sound_die", '../assets/sound/pingas_death.mp3');
+    game.load.audio("alien_sound_hit", '../assets/sound/pingas_hit.mp3');
+    game.load.audio("alien_sound_jetpack", '../assets/sound/pingas_jetpack.mp3');
+    game.load.audio("alien_sound_wormhole", '../assets/sound/pingas_wormhole.mp3');
+    game.load.audio("alien_sound_turbo", '../assets/sound/pingas_turbo.mp3');
 
     // TRUNKS
     ///////////////////////
     game.load.image("trunks_portrait", "../assets/characters/trunks/trunks_portrait.jpg");
+    game.load.spritesheet("trunks_spritesheet_red", "../assets/characters/trunks/trunks_red_turbo.png", 48, 97);
+    //rueda: 26_23  | robotnik: 49_43
+    game.load.spritesheet("trunks_spritesheet_blue", "../assets/characters/trunks/trunks_blue_turbo.png", 48, 97);
+    //rueda: 26_23  | robotnik: 49_43
+    game.load.image("trunks_wheel_red", "../assets/characters/trunks/wheel_red.png");
+    game.load.image("trunks_wheel_blue", "../assets/characters/trunks/wheel_blue.png");
+    game.load.audio("trunks_sound_attack", '../assets/sound/pingas.mp3');
+    game.load.audio("trunks_sound_die", '../assets/sound/pingas_death.mp3');
+    game.load.audio("trunks_sound_hit", '../assets/sound/pingas_hit.mp3');
+    game.load.audio("trunks_sound_jetpack", '../assets/sound/pingas_jetpack.mp3');
+    game.load.audio("trunks_sound_wormhole", '../assets/sound/pingas_wormhole.mp3');
+    game.load.audio("trunks_sound_turbo", '../assets/sound/pingas_turbo.mp3');
+
 
 
 

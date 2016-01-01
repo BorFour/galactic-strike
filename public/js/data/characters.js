@@ -40,6 +40,15 @@ var characters = {
         {
             red: 'kirby_wheel_red',
             blue: 'kirby_wheel_blue',
+        },
+        sounds :
+        {
+            attack: 'kirby_sound_attack',
+            die: 'kirby_sound_die',
+            hit: 'kirby_sound_hit',
+            jetpack: 'kirby_sound_jetpack',
+            wormhole: 'kirby_sound_wormhole',
+            turbo : 'kirby_sound_turbo'
         }
 
     },
@@ -55,6 +64,15 @@ var characters = {
         {
             red: 'alien_wheel_red',
             blue: 'alien_wheel_blue',
+        },
+        sounds :
+        {
+            attack: 'alien_sound_attack',
+            die: 'alien_sound_die',
+            hit: 'alien_sound_hit',
+            jetpack: 'alien_sound_jetpack',
+            wormhole: 'alien_sound_wormhole',
+            turbo : 'alien_sound_turbo'
         }
 
     },
@@ -70,6 +88,15 @@ var characters = {
         {
             red: 'trunks_wheel_red',
             blue: 'trunks_wheel_blue',
+        },
+        sounds :
+        {
+            attack: 'trunks_sound_attack',
+            die: 'trunks_sound_die',
+            hit: 'trunks_sound_hit',
+            jetpack: 'trunks_sound_jetpack',
+            wormhole: 'trunks_sound_wormhole',
+            turbo : 'trunks_sound_turbo'
         }
     }
 }

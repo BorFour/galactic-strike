@@ -105,12 +105,12 @@ load_assets = function ()
     //rueda: 26_23  | robotnik: 49_43
     game.load.image("kirby_wheel_red", "../assets/characters/kirby/wheel_red.png");
     game.load.image("kirby_wheel_blue", "../assets/characters/kirby/wheel_blue.png");
-    game.load.audio("kirby_sound_attack", '../assets/sound/pingas.mp3');
-    game.load.audio("kirby_sound_die", '../assets/sound/pingas_death.mp3');
-    game.load.audio("kirby_sound_hit", '../assets/sound/pingas_hit.mp3');
-    game.load.audio("kirby_sound_jetpack", '../assets/sound/pingas_jetpack.mp3');
-    game.load.audio("kirby_sound_wormhole", '../assets/sound/pingas_wormhole.mp3');
-    game.load.audio("kirby_sound_turbo", '../assets/sound/pingas_turbo.mp3');
+    game.load.audio("kirby_sound_attack", '../assets/characters/kirby/kirby_sound_attack.mp3');
+    game.load.audio("kirby_sound_die", '../assets/characters/kirby/kirby_sound_die.mp3');
+    game.load.audio("kirby_sound_hit", '../assets/characters/kirby/kirby_sound_hit.mp3');
+    game.load.audio("kirby_sound_jetpack", '../assets/characters/kirby/kirby_sound_jetpack.mp3');
+    game.load.audio("kirby_sound_wormhole", '../assets/characters/kirby/kirby_sound_wormhole.mp3');
+    game.load.audio("kirby_sound_turbo", '../assets/characters/kirby/kirby_sound_turbo.mp3');
 
 
     // ALIEN

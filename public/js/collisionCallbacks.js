@@ -71,7 +71,7 @@ function touchWormholeCallback2(body1, body2, fixture1, fixture2, begin)
 
     var nextPosition = GALACTIC_STRIKE.room.stage.spawnPositionPlanet(nextWormhole);
 
-    body1.sprite.sound.play();
+    body2.mainSprite.wormholeSound.play();
     body2.x = nextPosition.x;
     body2.y = nextPosition.y;
     body2.rotation = nextPosition.angle;

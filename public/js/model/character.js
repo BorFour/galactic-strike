@@ -2,9 +2,10 @@
 Character.prototype = Object.create(Element.prototype);
 Character.prototype.constructor = Element;
 
-function Character(x, y, angle, game, player, asset)
+function Character(x, y, angle, game, player, conf)
 {
-    Element.call(this, game, x, y, asset);
+
+    Element.call(this, game, x, y, player.team.color == 1 ? conf.spritesheet.red : conf.spritesheet.blue);
 
     this.rotation = angle;
     this.player = player;
@@ -79,11 +80,12 @@ function Character(x, y, angle, game, player, asset)
     this.turboMultiplier = 5;
 
     // Sounds
-    this.attackSound = game.add.audio('pingas', 0.6, false);
-    this.dieSound = game.add.audio('dieSound', 0.7, false);
-    this.hitSound = game.add.audio('hitSound', 0.8, false);
-    this.jetpackSound = game.add.audio('jetpackSound', 0.5, false);
-    this.turboSound = game.add.audio('turboSound', 0.6, false);
+    this.attackSound = game.add.audio(conf.sounds.attack, 0.6, false);
+    this.dieSound = game.add.audio(conf.sounds.die, 0.7, false);
+    this.hitSound = game.add.audio(conf.sounds.hit, 0.8, false);
+    this.jetpackSound = game.add.audio(conf.sounds.jetpack, 0.5, false);
+    this.wormholeSound = game.add.audio(conf.sounds.wormhole, 0.5, false);
+    this.turboSound = game.add.audio(conf.sounds.turbo, 0.6, false);
 
     var PTM = 50;
     var driveJoints = [];
@@ -104,13 +106,13 @@ function Character(x, y, angle, game, player, asset)
     this.body.angularDamping = 0.15;
     this.body.linearDamping = 0.3;
 
-    if (asset === 'playerRed')
+    if (player.team.color == 1)
     {
-        this.wheel = 'wheel_red';
+        this.wheel = conf.wheel.red;
     }
     else
     {
-        this.wheel = 'wheel_blue';
+        this.wheel = conf.wheel.blue;
     }
 
     this.wheels[0] = new Phaser.Sprite(game, this.x + -0.22 * PTM, this.y + 0.3 * -PTM, this.wheel);
@@ -226,7 +228,7 @@ Character.prototype.die = function ()
     if (!this.alive) return;
 
     this.dieSound.play();
-    //      PARTICLES COMMITED BECAUSE OF A BUG
+    //      PARTICLES COMMENTED BECAUSE OF A BUG
     //    var emitter = game.add.emitter(0, 0, 100);
     //    emitter.makeParticles('pokeball');
     //    emitter.x = this.x;//    emitter.y = this.y;

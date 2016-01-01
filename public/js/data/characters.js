@@ -1,33 +1,75 @@
+
+/**
+ * Characters stores an object for every character available in the game.
+ * Each object must have the keys of the assets in cache that should be already loaded
+ */
+
 var characters = {
-    'character1':
+    'robotnik':
     {
-        hp: 100,
-        speed: 30,
-        height: 34,
-        width: 20,
-        weight: 60,
-        habilidad1:
-        {
-            damage: 23,
-            etc: '...'
-        },
-        habilidad2:
-        {
-            damage: 180,
-            etc: '...'
-        },
-        portrait: 'assets/portraits/personaje1.png',
+        portrait: 'robotnik_portrait',
         spritesheet:
         {
-            red: 'assets/spritesheets/personaje1_red.png',
-            blue: 'assets/spritesheets/personaje1_blue.png',
-            yellow: 'assets/spritesheets/personaje1_yellow.png',
-            green: 'assets/spritesheets/personaje1_green.png'
+            red: 'robotnik_spritesheet_red',
+            blue: 'robotnik_spritesheet_blue',
+        },
+        wheel:
+        {
+            red: 'robotnik_wheel_red',
+            blue: 'robotnik_wheel_blue',
+        },
+        sounds :
+        {
+            attack: 'robotnik_sound_attack',
+            die: 'robotnik_sound_die',
+            hit: 'robotnik_sound_hit',
+            jetpack: 'robotnik_sound_jetpack',
+            wormhole: 'robotnik_sound_wormhole',
+            turbo : 'robotnik_sound_turbo'
+        }
+    },
+    'kirby':
+    {
+        portrait: 'kirby_portrait',
+        spritesheet:
+        {
+            red: 'kirby_spritesheet_red',
+            blue: 'kirby_spritesheet_blue',
+        },
+        wheel:
+        {
+            red: 'kirby_wheel_red',
+            blue: 'kirby_wheel_blue',
         }
 
     },
-    'character2':
+    'alien':
     {
+        portrait: 'alien_portrait',
+        spritesheet:
+        {
+            red: 'alien_spritesheet_red',
+            blue: 'alien_spritesheet_blue',
+        },
+        wheel:
+        {
+            red: 'alien_wheel_red',
+            blue: 'alien_wheel_blue',
+        }
 
+    },
+    'trunks':
+    {
+        portrait: 'trunks_portrait',
+        spritesheet:
+        {
+            red: 'trunks_spritesheet_red',
+            blue: 'trunks_spritesheet_blue',
+        },
+        wheel:
+        {
+            red: 'trunks_wheel_red',
+            blue: 'trunks_wheel_blue',
+        }
     }
 }

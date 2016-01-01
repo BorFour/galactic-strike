@@ -1,5 +1,6 @@
-require('pmx').init({
-  http : true
+require('pmx').init(
+{
+    http: true
 });
 var express = require('express');
 var app = express();
@@ -19,17 +20,21 @@ app.use(express.static(__dirname + '/public'));
 var currId = 0;
 var players = [];
 var nPlayers = 0;
-var room = {state : 'empty'};
+var room = {
+    state: 'empty'
+};
 var MAXPLAYERSROOM = 8;
 var timestamp = Date.now();
 
-io.on('connection', function (socket) {
+io.on('connection', function (socket)
+{
 
-    socket.on('login', function (input) {
+    socket.on('login', function (input)
+    {
 
         var output = {
-            id : currId,
-            timestamp : timestamp
+            id: currId,
+            timestamp: timestamp
         };
         console.log('@Server <-      \t| login');
         socket.join('General');
@@ -40,30 +45,33 @@ io.on('connection', function (socket) {
         nPlayers++;
 
 
-//        socket.emit('IDPlayers', output);
+        //        socket.emit('IDPlayers', output);
         socket.emit('ID', output);
         console.log('@Server ->      \t| IDPlayer');
         console.log('@Server log     \t| nPlayers = ' + nPlayers);
 
     });
 
-    socket.on('update', function (input) {
+    socket.on('update', function (input)
+    {
 
-    //        console.log('@Server received | update');
+        //        console.log('@Server received | update');
         players[socket.game_id] = input;
         input.id = socket.game_id;
         socket.broadcast.to('Room1').emit('update', input);
-    //        console.log('@Server sent | update');
+        //        console.log('@Server sent | update');
 
     });
 
-    socket.on('attack', function (input) {
+    socket.on('attack', function (input)
+    {
 
         socket.broadcast.to('Room1').emit('attack', input);
 
     });
 
-    socket.on('hit', function (input) {
+    socket.on('hit', function (input)
+    {
 
         console.log('@Server <-      \t| hit');
         console.log(input);
@@ -75,27 +83,27 @@ io.on('connection', function (socket) {
     // ROOM
     //
 
-    socket.on('createRoom', function (input) {
+    socket.on('createRoom', function (input)
+    {
 
         var output = {};
         output.id = input.id;
 
-         console.log('@Server <-      \t| createRoom');
+        console.log('@Server <-      \t| createRoom');
 
         if (input.timestamp !== timestamp)
         {
             socket.emit('obsoletClient', output);
             console.log('@Server ->      \t| obsoletClient');
         }
-        else if(room.state === 'empty')
+        else if (room.state === 'empty')
         {
             socket.join('Room1');
             room.state = 'lobby';
             room.players = {};
-            room.players[input.id] =
-            {
-                name : input.name,
-                team : -1
+            room.players[input.id] = {
+                name: input.name,
+                team: -1
             };
             room.host = input.id;
             room.currentStage = 0;
@@ -107,7 +115,8 @@ io.on('connection', function (socket) {
     });
 
 
-   socket.on('lobbyMessage', function (input) {
+    socket.on('lobbyMessage', function (input)
+    {
 
         console.log('@Server <-      \t| lobbyMessage');
         console.log(input);
@@ -115,7 +124,8 @@ io.on('connection', function (socket) {
 
     });
 
-    socket.on('joinRoom', function (input) {
+    socket.on('joinRoom', function (input)
+    {
 
         var output = {};
         output.id = input.id;
@@ -135,26 +145,27 @@ io.on('connection', function (socket) {
             socket.emit('roomIngame');
             return;
         }
-        else if(room.state === 'lobby')
+        else if (room.state === 'lobby')
         {
             socket.room = 'Room1';
             socket.join('Room1');
-    //            console.log(socket.rooms);
-            room.players[input.id] =
-            {
-                name : input.name,
-                team : -1
+            //            console.log(socket.rooms);
+            room.players[input.id] = {
+                name: input.name,
+                team: -1,
+                character: ''
             };
             output.players = room.players;
             io.to('Room1').emit('joinRoom', output);
             console.log('@Server ->      \t| joinRoom');
 
         }
-    //           socket.emit('userJoinedRoom', output);
+        //           socket.emit('userJoinedRoom', output);
 
     });
 
-    socket.on('changeTeam', function (input) {
+    socket.on('changeTeam', function (input)
+    {
 
         var output = {};
         output.id = input.id;
@@ -162,17 +173,18 @@ io.on('connection', function (socket) {
 
         var playersInTeam = 0;
 
-        for (var p in room.players){
-            if(room.players[p].team === input.team) playersInTeam++;
+        for (var p in room.players)
+        {
+            if (room.players[p].team === input.team) playersInTeam++;
         }
 
         if (playersInTeam >= 4) return;
 
         room.players[input.id].team = input.team;
 
-         console.log('@Server <-      \t| changeTeam');
+        console.log('@Server <-      \t| changeTeam');
 
-        if(room.state === 'lobby')
+        if (room.state === 'lobby')
         {
             io.to('Room1').emit('changeTeam', output);
             console.log('@Server ->      \t| changeTeam');
@@ -181,7 +193,8 @@ io.on('connection', function (socket) {
 
     });
 
-    socket.on('changeStage', function (input) {
+    socket.on('changeStage', function (input)
+    {
 
 
         var output = {};
@@ -190,11 +203,11 @@ io.on('connection', function (socket) {
 
         console.log('@Server <-      \t| changeStage');
 
-        if(input.id !== room.host)
+        if (input.id !== room.host)
         {
 
         }
-        else if  (room.state !== 'lobby')
+        else if (room.state !== 'lobby')
         {
 
         }
@@ -208,29 +221,61 @@ io.on('connection', function (socket) {
 
     });
 
-    socket.on('kickPlayer', function (input) {
+    socket.on('changeCharacter', function (input)
+    {
+
+
+        var output = {};
+        output.id = input.id;
+        output.key = input.key;
+
+        console.log('@Server <-      \t| changeCharacter');
+
+        if (input.id !== room.host)
+        {
+
+        }
+        else if (room.state !== 'lobby')
+        {
+
+        }
+        else
+        {
+            room.players[input.id].character = input.key;
+            io.to('Room1').emit('changeCharacter', output);
+            console.log('@Server ->      \t| changeCharacter');
+        }
+
+
+    });
+
+    socket.on('kickPlayer', function (input)
+    {
 
         var output = {};
         output.id = input.id;
         console.log('@Server <-      \t| kickPlayer');
 
-//        socket.leave('Room1');
+        //        socket.leave('Room1');
         delete room.players[input.id];
         io.to('Room1').emit('kickPlayer', output);
         console.log('@Server ->      \t| kickPlayer');
 
     });
 
-    socket.on('kickedPlayer',function (input) {
+    socket.on('kickedPlayer', function (input)
+    {
 
         console.log('@Server <-      \t| kickedPlayer');
-        io.to('Room1').emit('kickedPlayer', {});
+        io.to('Room1').emit('kickedPlayer',
+        {});
         socket.leave('Room1');
         console.log('@Server ->      \t| kickedPlayer');
 
     });
 
-    socket.on('leaveRoom', function (input) {
+    socket.on('leaveRoom', function (input)
+    {
 
         var output = {};
         output.id = input.id;
@@ -248,18 +293,19 @@ io.on('connection', function (socket) {
     // GAME
     //
 
-    socket.on('joinGame', function (input) {
+    socket.on('joinGame', function (input)
+    {
 
         var output = {};
         output.id = input.id;
         output.x = input.x;
         output.y = input.y;
         output.angle = input.angle;
-    //        output.name = room.players[input.id];
+        //        output.name = room.players[input.id];
 
         console.log('@Server <-      \t| joinGame');
 
-        if(room.state === 'ingame')
+        if (room.state === 'ingame')
         {
             io.to('Room1').emit('userJoinedGame', output);
             console.log('@Server ->      \t| joinGame');
@@ -268,7 +314,8 @@ io.on('connection', function (socket) {
 
     });
 
-    socket.on('leaveGame', function (input) {
+    socket.on('leaveGame', function (input)
+    {
 
         var output = {};
         output.id = socket.game_id;
@@ -283,9 +330,9 @@ io.on('connection', function (socket) {
         delete room.players[socket.game_id];
 
         var playersRoom = 0;
-        for (var pr in room.players) playersRoom ++;
+        for (var pr in room.players) playersRoom++;
 
-        if(playersRoom === 0)
+        if (playersRoom === 0)
         {
             console.log('@Server log     \t| empty room');
             room.state = 'empty';
@@ -298,7 +345,8 @@ io.on('connection', function (socket) {
 
     });
 
-    socket.on('beginMatch', function (input) {
+    socket.on('beginMatch', function (input)
+    {
 
         var output = {};
         output.id = input.id;
@@ -306,11 +354,11 @@ io.on('connection', function (socket) {
 
         console.log('@Server <-      \t| beginMatch');
 
-        if(input.id !== room.host)
+        if (input.id !== room.host)
         {
 
         }
-        else if  (room.state !== 'lobby')
+        else if (room.state !== 'lobby')
         {
 
         }
@@ -323,18 +371,19 @@ io.on('connection', function (socket) {
 
     });
 
-    socket.on('finishRound', function (input) {
+    socket.on('finishRound', function (input)
+    {
 
         var output = {};
         output.id = input.id;
 
         console.log('@Server <-      \t| finishRound');
 
-        if(input.id !== room.host)
+        if (input.id !== room.host)
         {
 
         }
-        else if  (room.state !== 'ingame')
+        else if (room.state !== 'ingame')
         {
 
         }
@@ -346,7 +395,8 @@ io.on('connection', function (socket) {
 
     });
 
-    socket.on('respawn', function (input) {
+    socket.on('respawn', function (input)
+    {
 
         var output = {};
         output.id = input.id;
@@ -374,19 +424,22 @@ io.on('connection', function (socket) {
     //
 
 
-    socket.on('createItem', function (input) {
+    socket.on('createItem', function (input)
+    {
 
         socket.broadcast.to('Room1').emit('createItem', input);
 
     });
 
-    socket.on('updateStage', function (input) {
+    socket.on('updateStage', function (input)
+    {
 
         socket.broadcast.to('Room1').emit('updateStage', input);
 
     });
 
-    socket.on('pickUpItem', function (input) {
+    socket.on('pickUpItem', function (input)
+    {
 
         io.to('Room1').emit('pickUpItem', input);
 
@@ -398,27 +451,31 @@ io.on('connection', function (socket) {
     //
 
 
-    socket.on('disconnect', function () {
+    socket.on('disconnect', function ()
+    {
 
         var output = {};
 
         console.log('@Server <-      \t| disconnect');
         console.log('@Server log     \t| user ' + socket.game_id + ' left')
 
-        if(isNaN(socket.game_id)) return;
+        if (isNaN(socket.game_id)) return;
 
         output.id = socket.game_id;
         socket.broadcast.emit('userLeft', output);
 
         delete players[socket.game_id];
-        if(room.players && room.players[socket.game_id]) delete room.players[socket.game_id];
+        if (room.players && room.players[socket.game_id]) delete room.players[socket.game_id];
 
         var playersRoom = 0;
-        for (var pr in room.players) playersRoom ++;
-        if(playersRoom === 0) {
+        for (var pr in room.players) playersRoom++;
+        if (playersRoom === 0)
+        {
             console.log('@Server log     \t| empty room');
             room.state = 'empty';
-        } else{
+        }
+        else
+        {
             console.log(room.players);
         }
         nPlayers--;
@@ -427,14 +484,15 @@ io.on('connection', function (socket) {
 
     });
 
-    });
+});
 
 
 var puerto = 8080;
 //var ip = '150.244.67.21';
 
-http.listen(puerto, function(){
-  console.log('listening on ' + puerto);
+http.listen(puerto, function ()
+{
+    console.log('listening on ' + puerto);
 });
 
 // Cloud 9
@@ -445,4 +503,3 @@ http.listen(process.env.PORT, process.env.IP, function(){
 
 LINK:   https://galacticstrikesocketio-borfour-1.c9users.io/
 */
-

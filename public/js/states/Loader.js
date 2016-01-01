@@ -54,14 +54,7 @@ load_assets = function ()
     //    game.load.audio('witch', '../assets/sound/songs/witch_doctor.mp3');
     //    game.load.audio('dedede', '../assets/sound/king_dedede.mp3');
 
-    //GAME SOUND
-    ///////////////////////
-    game.load.audio('pingas', '../assets/sound/pingas.mp3');
-    game.load.audio('dieSound', '../assets/sound/pingas_death.mp3');
-    game.load.audio('hitSound', '../assets/sound/pingas_hit.mp3');
-    game.load.audio('jetpackSound', '../assets/sound/pingas_jetpack.mp3');
-    game.load.audio('wormholeSound', '../assets/sound/pingas_wormhole.mp3');
-    game.load.audio('turboSound', '../assets/sound/pingas_turbo.mp3');
+
 
     //BACKGROUNDS
     ///////////////////////
@@ -87,12 +80,35 @@ load_assets = function ()
     game.load.image("punch", "../assets/attacks/punchglove.png");
     game.load.image("heart", "../assets/heart.png");
 
-    //PLAYERS
+    // ROBOTNIK
     ///////////////////////
-    game.load.spritesheet("playerRed", "../assets/spritesIndividuales/robotnik/robotnik_red_turbo.png", 48, 97); //rueda: 26_23  | robotnik: 49_43
-    game.load.spritesheet("playerBlue", "../assets/spritesIndividuales/robotnik/robotnik_blue_turbo.png", 48, 97); //rueda: 26_23  | robotnik: 49_43
-    game.load.image("wheel_red", "../assets/spritesIndividuales/robotnik/wheel_red.png");
-    game.load.image("wheel_blue", "../assets/spritesIndividuales/robotnik/wheel_blue.png");
+    game.load.image("robotnik_portrait", "../assets/characters/robotnik/robotnik_portrait.jpg");
+    game.load.spritesheet("robotnik_spritesheet_red", "../assets/characters/robotnik/robotnik_red_turbo.png", 48, 97);
+    //rueda: 26_23  | robotnik: 49_43
+    game.load.spritesheet("robotnik_spritesheet_blue", "../assets/characters/robotnik/robotnik_blue_turbo.png", 48, 97);
+    //rueda: 26_23  | robotnik: 49_43
+    game.load.image("robotnik_wheel_red", "../assets/characters/robotnik/wheel_red.png");
+    game.load.image("robotnik_wheel_blue", "../assets/characters/robotnik/wheel_blue.png");
+    game.load.audio("robotnik_sound_attack", '../assets/sound/pingas.mp3');
+    game.load.audio("robotnik_sound_die", '../assets/sound/pingas_death.mp3');
+    game.load.audio("robotnik_sound_hit", '../assets/sound/pingas_hit.mp3');
+    game.load.audio("robotnik_sound_jetpack", '../assets/sound/pingas_jetpack.mp3');
+    game.load.audio("robotnik_sound_wormhole", '../assets/sound/pingas_wormhole.mp3');
+    game.load.audio("robotnik_sound_turbo", '../assets/sound/pingas_turbo.mp3');
+
+    // KIRBY
+    ///////////////////////
+    game.load.image("kirby_portrait", "../assets/characters/kirby/kirby_portrait.png");
+
+    // ALIEN
+    ///////////////////////
+    game.load.image("alien_portrait", "../assets/characters/alien/alien_portrait.jpg");
+
+    // TRUNKS
+    ///////////////////////
+    game.load.image("trunks_portrait", "../assets/characters/trunks/trunks_portrait.jpg");
+
+
 
     //PLANETS
     ///////////////////////

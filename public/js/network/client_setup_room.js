@@ -82,6 +82,23 @@ clientSetupRoom = function ()
 
     });
 
+    socket.on('changeCharacter', function (input)
+    {
+
+        console.log('@Client <-      \t| changeCharacter');
+        console.log(input)
+//        var prev = GALACTIC_STRIKE.room.players[input.id].characterKey;
+        GALACTIC_STRIKE.room.players[input.id].characterKey = input.key;
+
+        if(GALACTIC_STRIKE.player.id == input.id)
+        {
+            GALACTIC_STRIKE.room.textCharacter.text = input.key;
+        }
+//        textStage.text = Object.keys(stages)[GALACTIC_STRIKE.room.currentStage];
+
+    });
+
+
 
 
     socket.on('kickPlayer', function (input)

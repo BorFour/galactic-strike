@@ -72,7 +72,7 @@ clientSetupMenu = function ()
     socket.on('obsoletClient', function (input)
     {
 
-        window.close();
+        location.reload();
 
     });
 

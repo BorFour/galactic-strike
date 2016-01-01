@@ -84,9 +84,7 @@ load_assets = function ()
     ///////////////////////
     game.load.image("robotnik_portrait", "../assets/characters/robotnik/robotnik_portrait.jpg");
     game.load.spritesheet("robotnik_spritesheet_red", "../assets/characters/robotnik/robotnik_red_turbo.png", 48, 97);
-    //rueda: 26_23  | robotnik: 49_43
     game.load.spritesheet("robotnik_spritesheet_blue", "../assets/characters/robotnik/robotnik_blue_turbo.png", 48, 97);
-    //rueda: 26_23  | robotnik: 49_43
     game.load.image("robotnik_wheel_red", "../assets/characters/robotnik/wheel_red.png");
     game.load.image("robotnik_wheel_blue", "../assets/characters/robotnik/wheel_blue.png");
     game.load.audio("robotnik_sound_attack", '../assets/sound/pingas.mp3');
@@ -100,9 +98,7 @@ load_assets = function ()
     ///////////////////////
     game.load.image("kirby_portrait", "../assets/characters/kirby/kirby_portrait.png");
     game.load.spritesheet("kirby_spritesheet_red", "../assets/characters/kirby/kirby_red_turbo.png", 48, 97);
-    //rueda: 26_23  | robotnik: 49_43
     game.load.spritesheet("kirby_spritesheet_blue", "../assets/characters/kirby/kirby_blue_turbo.png", 48, 97);
-    //rueda: 26_23  | robotnik: 49_43
     game.load.image("kirby_wheel_red", "../assets/characters/kirby/wheel_red.png");
     game.load.image("kirby_wheel_blue", "../assets/characters/kirby/wheel_blue.png");
     game.load.audio("kirby_sound_attack", '../assets/sound/pingas.mp3');
@@ -117,9 +113,7 @@ load_assets = function ()
     ///////////////////////
     game.load.image("alien_portrait", "../assets/characters/alien/alien_portrait.jpg");
     game.load.spritesheet("alien_spritesheet_red", "../assets/characters/alien/alien_red_turbo.png", 48, 97);
-    //rueda: 26_23  | robotnik: 49_43
     game.load.spritesheet("alien_spritesheet_blue", "../assets/characters/alien/alien_blue_turbo.png", 48, 97);
-    //rueda: 26_23  | robotnik: 49_43
     game.load.image("alien_wheel_red", "../assets/characters/kirby/wheel_red.png");
     game.load.image("alien_wheel_blue", "../assets/characters/kirby/wheel_blue.png");
     game.load.audio("alien_sound_attack", '../assets/sound/pingas.mp3');
@@ -133,9 +127,7 @@ load_assets = function ()
     ///////////////////////
     game.load.image("trunks_portrait", "../assets/characters/trunks/trunks_portrait.jpg");
     game.load.spritesheet("trunks_spritesheet_red", "../assets/characters/trunks/trunks_red_turbo.png", 48, 97);
-    //rueda: 26_23  | robotnik: 49_43
     game.load.spritesheet("trunks_spritesheet_blue", "../assets/characters/trunks/trunks_blue_turbo.png", 48, 97);
-    //rueda: 26_23  | robotnik: 49_43
     game.load.image("trunks_wheel_red", "../assets/characters/trunks/wheel_red.png");
     game.load.image("trunks_wheel_blue", "../assets/characters/trunks/wheel_blue.png");
     game.load.audio("trunks_sound_attack", '../assets/sound/pingas.mp3');
@@ -155,8 +147,6 @@ load_assets = function ()
     game.load.image("planet_red", "../assets/planets/planet_red.png");
     game.load.image("giantplanet", "../assets/planets/giantplanet.png");
     game.load.image("giant_moon", "../assets/planets/giantmoon.png");
-    //game.load.image("wormhole_1", "../assets/planets/wormhole_1.png");
-    //game.load.image("wormhole_2", "../assets/planets/wormhole_2.png");
     game.load.spritesheet("wormhole", "../assets/planets/wormhole_spritesheet1.png", 139, 140);
 
     //BUTTONS
@@ -246,9 +236,6 @@ GALACTIC_STRIKE.Loader.prototype = {
     {
 
 
-        //        game.input.keyboard.removeKeyCapture(Phaser.Keyboard.M);
-
-
         var currentLocation = window.location.search;
         var formName = currentLocation.replace("?name=", "");
         GALACTIC_STRIKE.player = new Player(formName ? decodeURIComponent(formName).substring(0, GALACTIC_STRIKE.maxCharactersName) : "Default");
@@ -258,8 +245,7 @@ GALACTIC_STRIKE.Loader.prototype = {
 
         server_connection();
 
-        // FONDO DE ESTRELLAS
-        /////////////////////
+        // Star background
         starfield = game.add.sprite(0, 0, 'starBackground');
         starfield.height = game.world.height;
         starfield.width = game.world.width;
@@ -287,9 +273,7 @@ GALACTIC_STRIKE.Loader.prototype = {
             stars.push(star);
         }
 
-        // TWEEN GALACTIC STRIKE + MENU OPTIONS
-        /////////////////////
-
+        // Tween GALACTIC STRIKE + Menu options
         // Add GALACTIC STRIKE title as two images.
         var nameLabel = [];
         nameLabel.push(game.add.sprite(game.world.centerX - 300, game.world.height, 'galactic'));
@@ -324,7 +308,6 @@ GALACTIC_STRIKE.Loader.prototype = {
         game.input.onTap.add(this.startGame, this);
         game.input.addPointer();
 
-        //        game.input.onDown.add(go_fullscreen, this);
         if (game.device.android || game.device.iOS)
         {
             game.input.onDown.add(gofull, this);

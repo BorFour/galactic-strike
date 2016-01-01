@@ -104,6 +104,7 @@ Character.prototype.attack1 = function ()
         this.spikeballs[1].body.setCollisionGroup(game.spacePhysics.CG_attacks);
         this.spikeballs[1].constraint = game.physics.p2.createLockConstraint(this.spikeballs[1], this, [this.orientation * 100, -275], -50);
 
+        this.orientation == this.LEFT ? this.body.rotateLeft(15000) : this.body.rotateRight(15000);
         this.spikeballs[1].body.thrust(9000);
 
         this.spikeballs[1].body.collides(game.spacePhysics.CG_planets);
@@ -116,7 +117,6 @@ Character.prototype.attack1 = function ()
             }
         }
 
-        this.orientation == this.RIGHT ? this.body.rotateLeft(20000) : this.body.rotateRight(20000);
 
 
         // After this.attack2CooldownTime, the spikeball is destroyed and the attack cooldown is restored

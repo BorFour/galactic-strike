@@ -40,7 +40,7 @@ function Character(x, y, angle, game, player, conf)
 
     // Velocity in space
     this.moveSpaceThrust = 500;
-    this.moveInOrbitJetpack = 1270;
+    this.moveInOrbitJetpack = 1470;
 
     // States
     this.RIGHT = 1;

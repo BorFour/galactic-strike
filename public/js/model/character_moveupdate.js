@@ -114,7 +114,7 @@ Character.prototype.moveInOrbit = function (direction)
                 this.turboTimeLeft = null;
             }, this);
         }
-        this.body.thrust(this.moveInOrbitJetpack ? this.turboMultiplier * this.moveInOrbitJetpack : this.moveInOrbitJetpack);
+        this.body.thrust(this.turboActivated ? this.turboMultiplier * this.moveInOrbitJetpack : this.moveInOrbitJetpack);
 //        this.body.thrust(this.moveInOrbitJetpack);
         if (this.orientation === this.LEFT) this.animations.play('jumpL');
         if (this.orientation === this.RIGHT) this.animations.play('jumpR');

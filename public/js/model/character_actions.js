@@ -108,7 +108,7 @@ Character.prototype.attack1 = function ()
         this.orientation == this.LEFT ? this.body.rotateLeft(15000) : this.body.rotateRight(15000);
         this.spikeballs[1].body.thrust(9000);
 
-        this.spikeballs[1].body.collides(game.spacePhysics.CG_planets, touchPlanetPunch, this);
+//        this.spikeballs[1].body.collides(game.spacePhysics.CG_planets, touchPlanetPunch, this);
 
         for (var t in GALACTIC_STRIKE.room.teams)
         {

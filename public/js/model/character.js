@@ -72,7 +72,7 @@ function Character(x, y, angle, game, player, conf)
 
     // Damages
     this.damageAttack0 = 25;
-    this.damageAttack1 = 17.5;
+    this.damageAttack1 = 20;
     this.damageAttack2 = 25;
     this.damageAttack3 = 10;
 

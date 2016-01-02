@@ -104,7 +104,18 @@ Character.prototype.moveInOrbit = function (direction)
         this.orientation = this.RIGHT;
         break;
     case 'jetpack':
-        this.body.thrust(1270);
+        if (this.turbos > 0 && !this.turboActivated && this.boost)
+        {
+            this.turboSound.play();
+            this.turboActivated = true;
+            this.turbos--;
+            this.turboTimeLeft = game.time.events.add(this.turboDuration, function(){
+                this.turboActivated = false;
+                this.turboTimeLeft = null;
+            }, this);
+        }
+        this.body.thrust(this.moveInOrbitJetpack ? this.turboMultiplier * this.moveInOrbitJetpack : this.moveInOrbitJetpack);
+//        this.body.thrust(this.moveInOrbitJetpack);
         if (this.orientation === this.LEFT) this.animations.play('jumpL');
         if (this.orientation === this.RIGHT) this.animations.play('jumpR');
         this.jumpAnimation = true;

@@ -16,7 +16,7 @@ function Character(x, y, angle, game, player, conf)
     game.physics.p2.updateBoundsCollisionGroup(); //UPDATE COLLISION BOUND FOR GROUPS
 
     console.log(game.spacePhysics.CG_teams[this.player.team.color - 1]);
-    this.game.spacePhysics.addDynamic(this);
+    if (player == GALACTIC_STRIKE.player) this.game.spacePhysics.addDynamic(this);
     this.game.physics.p2.enable([this], this.debug);
     this.body.clearShapes();
     this.anchor.setTo(0.5, 0.35);

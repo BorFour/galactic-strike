@@ -17,6 +17,8 @@ begin_game = function ()
     game.state.add('MainMenu', GALACTIC_STRIKE.MainMenu);
     game.state.add('Lobby', GALACTIC_STRIKE.Lobby);
     game.state.add('Play', GALACTIC_STRIKE.Play);
+    game.state.add('Tutorial', GALACTIC_STRIKE.Tutorial);
+
     //	Now start the Boot state.
     game.state.start('Boot');
 

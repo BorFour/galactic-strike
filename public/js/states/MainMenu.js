@@ -12,6 +12,7 @@ GALACTIC_STRIKE.MainMenu.prototype = {
 
         var buttonEnter;
         var buttonCreate;
+        var buttonTutorial;
 
     },
     create: function ()
@@ -22,9 +23,11 @@ GALACTIC_STRIKE.MainMenu.prototype = {
         // Initialization of the buttons of the menu
 
         buttonEnter = game.add.button(game.world.centerX - 200, 550, 'buttonEnter', this.joinRoom, this, 0, 0, 0, 0);
+        buttonTutorial = game.add.button(game.world.centerX, 550, 'buttonTutorial', this.startTutorial, this, 0, 0, 0, 0);
         buttonCreate = game.add.button(game.world.centerX + 200, 550, 'buttonCreate', this.createRoom, this, 0, 0, 0, 0);
 
         buttonCreate.anchor.set(0.5);
+        buttonTutorial.anchor.set(0.5);
         buttonEnter.anchor.set(0.5);
 
         var controlsText =
@@ -73,7 +76,6 @@ GALACTIC_STRIKE.MainMenu.prototype = {
     {
 
         // The client emits the 'joinRoom' event
-        // The client emits the 'joinRoom' event
         console.log('@Client ->      \t| joinRoom');
         socket.emit('joinRoom',
         {
@@ -81,6 +83,15 @@ GALACTIC_STRIKE.MainMenu.prototype = {
             name: GALACTIC_STRIKE.player.nickname,
             timestamp: GALACTIC_STRIKE.serverTimestamp
         });
+
+    },
+    startTutorial: function ()
+    {
+
+        GALACTIC_STRIKE.player.controller = new Controller(0);
+        GALACTIC_STRIKE.charactersBuffer = {};
+        game.tutorial = true;
+        game.state.start('Tutorial');
 
     }
 };

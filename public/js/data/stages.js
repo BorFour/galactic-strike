@@ -236,5 +236,37 @@ var stages = {
             'heart',
             'star'
         ]
+    },
+        'tutorial':
+    {
+        width: 3000,
+        height: 3000,
+        backgroundImage: 'background_map2',
+        planets: [
+            {
+                asset: 'planet_blue',
+                x: 1000,
+                y: 1000,
+                gravityRadius: 800,
+                gravityForce: 850,
+                collisionRadius: 375
+            }
+        ],
+        suns: [
+            {
+                asset: 'sun',
+                x: 2000,
+                y: 2000,
+                gravityRadius: 900,
+                gravityForce: 600,
+                collisionRadius: 164
+            }
+        ],
+        wormholes: [
+
+        ],
+        items: [
+
+        ]
     }
 }

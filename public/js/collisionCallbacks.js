@@ -367,3 +367,15 @@ function touchPlanetSpaceAttack(body1, body2, fixture1, fixture2, begin)
         body1.sprite.destroy();
     }
 }
+
+
+
+function touchPlanetPunch(body1, body2, fixture1, fixture2, begin)
+{
+    if (body1.sprite != null)
+    {
+        game.physics.p2.removeConstraint(body1.sprite.constraint);
+        body1.sprite.destroy();
+    }
+}
+

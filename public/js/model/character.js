@@ -16,7 +16,7 @@ function Character(x, y, angle, game, player, conf)
     game.physics.p2.updateBoundsCollisionGroup(); //UPDATE COLLISION BOUND FOR GROUPS
 
     console.log(game.spacePhysics.CG_teams[this.player.team.color - 1]);
-    this.game.spacePhysics.addDynamic(this);
+    if (player == GALACTIC_STRIKE.player) this.game.spacePhysics.addDynamic(this);
     this.game.physics.p2.enable([this], this.debug);
     this.body.clearShapes();
     this.anchor.setTo(0.5, 0.35);
@@ -40,6 +40,7 @@ function Character(x, y, angle, game, player, conf)
 
     // Velocity in space
     this.moveSpaceThrust = 500;
+    this.moveInOrbitJetpack = 1470;
 
     // States
     this.RIGHT = 1;
@@ -72,7 +73,7 @@ function Character(x, y, angle, game, player, conf)
 
     // Damages
     this.damageAttack0 = 25;
-    this.damageAttack1 = 17.5;
+    this.damageAttack1 = 20;
     this.damageAttack2 = 25;
     this.damageAttack3 = 10;
 

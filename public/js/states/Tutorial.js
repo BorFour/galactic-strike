@@ -118,7 +118,7 @@ GALACTIC_STRIKE.Tutorial.prototype = {
         GALACTIC_STRIKE.room.gameMode.init();
         GALACTIC_STRIKE.room.gameOver = false;
 
-        spacePhysicsTimer();
+        spacePhysicsTimerTutorial();
 //        updateOnlineTimer();
 //        if (GALACTIC_STRIKE.player.id == GALACTIC_STRIKE.room.host)
 //        {
@@ -220,7 +220,7 @@ GALACTIC_STRIKE.Tutorial.prototype = {
     }
 }
 
-function spacePhysicsTimer()
+function spacePhysicsTimerTutorial()
 {
 
     game.spacePhysics.update();
@@ -237,22 +237,22 @@ function spacePhysicsTimer()
         }
     }
 */
-    game.time.events.add(80, spacePhysicsTimer, this);
+    game.time.events.add(80, spacePhysicsTimerTutorial, this);
 
 }
 
-function updateOnlineTimer()
+function updateOnlineTimerTutorial()
 {
 
     if (GALACTIC_STRIKE.player.character)
     {
         GALACTIC_STRIKE.player.character.updateOnline();
     }
-    game.time.events.add(8 * (Object.keys(GALACTIC_STRIKE.room.players).length), updateOnlineTimer, this);
+    game.time.events.add(8 * (Object.keys(GALACTIC_STRIKE.room.players).length), updateOnlineTimerTutorial, this);
 
 }
 
-function updateStageOnlineTimer()
+function updateStageOnlineTimerTutorial()
 {
 
     var items = GALACTIC_STRIKE.room.stage.itemsData();
@@ -260,31 +260,10 @@ function updateStageOnlineTimer()
         items: items
     };
     socket.emit('updateStage', output);
-    game.time.events.add(30 * (Object.keys(GALACTIC_STRIKE.room.players).length), updateStageOnlineTimer, this);
+    game.time.events.add(30 * (Object.keys(GALACTIC_STRIKE.room.players).length), updateStageOnlineTimerTutorial, this);
 
 }
 
-function zoomInGame()
-{
-    if (GALACTIC_STRIKE.zoomed)
-    {
-        GALACTIC_STRIKE.zoomed = false;
-        GALACTIC_STRIKE.room.stage.zoomIn();
-        game.world.scale.set(1);
-       // GALACTIC_STRIKE.hud.scaleSet(1);
-    }
-}
-
-function zoomOutGame()
-{
-    if (!GALACTIC_STRIKE.zoomed)
-    {
-        GALACTIC_STRIKE.zoomed = true;
-        GALACTIC_STRIKE.room.stage.zoomOut();
-        game.world.scale.set(0.5);
-        //GALACTIC_STRIKE.hud.scaleSet(2);
-    }
-}
 
 function toRad(value)
 {

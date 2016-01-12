@@ -62,6 +62,7 @@ var gameModes = {
         startRound: function ()
         {
             GALACTIC_STRIKE.room.roundReady = false;
+            this.room.stage.resetItems();
 
             if (GALACTIC_STRIKE.room.host != GALACTIC_STRIKE.player.id)
             {

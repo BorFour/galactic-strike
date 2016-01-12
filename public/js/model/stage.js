@@ -304,6 +304,13 @@ Stage.prototype.pickUpItem = function (index, character) {
 
 }
 
+Stage.prototype.resetItems = function () {
+    for (var i in this.items)
+    {
+        this.items[i].destroy();
+    }
+}
+
 Stage.prototype.deleteItem = function (index)
 {
 

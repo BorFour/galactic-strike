@@ -67,7 +67,7 @@ function Character(x, y, angle, game, player, conf)
     this.minesCooldownTime = 7000;
     this.wormholeCooldownTime = 1500;
     this.fireCooldownTime = 250;
-    this.turboDuration = 3000;
+    this.turboDuration = 1000;
     this.hitImmuneTime = 550; //After being attacked, the character cannot be hurted for this time
 
 

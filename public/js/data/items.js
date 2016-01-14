@@ -71,9 +71,15 @@ var items = {
         use: null,
         scale: 0.5
     },
-    'punch':
+    'punchRed':
     {
-        asset: 'punch',
+        asset: 'punchRed',
+        use: null,
+        scale : 1.2
+    },
+    'punchBlue':
+    {
+        asset: 'punchBlue',
         use: null,
         scale : 1.2
     },

@@ -32,13 +32,21 @@ function HUD(game)
     this.teamBlue = game.add.text(game.camera.x + game.camera.width / 2 + 500, game.camera.y + game.camera.height / 2 - 350, "Esto es el equipo azul", style3);
     this.teamBlue.anchor.set(0.5);
     this.teamBlue.fixedToCamera = true;
+
     this.turbos = game.add.text(game.camera.x + game.camera.width / 2 + 550, game.camera.y + game.camera.height / 2 + 350, "Turbos", style4);
     this.turbos.anchor.set(0.5);
     this.turbos.fixedToCamera = true;
-
     this.turboActivated = game.add.text(game.camera.x + game.camera.width / 2 + 550, game.camera.y + game.camera.height / 2 + 380, "Turbos", style4);
     this.turboActivated.anchor.set(0.5);
     this.turboActivated.fixedToCamera = true;
+
+    this.mines = game.add.text(game.camera.x + game.camera.width / 2 + 250, game.camera.y + game.camera.height / 2 + 350, "Mines", style4);
+    this.mines.anchor.set(0.5);
+    this.mines.fixedToCamera = true;
+    this.minesActivated = game.add.text(game.camera.x + game.camera.width / 2 + 250, game.camera.y + game.camera.height / 2 + 380, "Mines", style4);
+    this.minesActivated.anchor.set(0.5);
+    this.minesActivated.fixedToCamera = true;
+
 
 
 };
@@ -80,6 +88,8 @@ HUD.prototype.updateText = function ()
     {
         this.turbos.text = "Turbos : " + GALACTIC_STRIKE.player.character.turbos;
         this.turboActivated.text = " Activated : " + GALACTIC_STRIKE.player.character.turboActivated;
+        this.mines.text = "Mines : " + GALACTIC_STRIKE.player.character.numberOfMines;
+        this.minesActivated.text = " Available : " + GALACTIC_STRIKE.player.character.minesCooldown;
     }
 
     if (GALACTIC_STRIKE.player.controller.mode === 2)

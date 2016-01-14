@@ -95,7 +95,7 @@ Character.prototype.attack1 = function ()
         this.attackSound.play();
         this.attackCooldown = false;
 
-        this.spikeballs[1] = new Item(game, this.x + Math.cos(this.body.rotation) * 60 * this.orientation, this.y + Math.sin(this.body.rotation) * 60 * this.orientation, items[(this.player.team.color == 1 ? 'punch' : 'punch')]);
+        this.spikeballs[1] = new Item(game, this.x + Math.cos(this.body.rotation) * 60 * this.orientation, this.y + Math.sin(this.body.rotation) * 60 * this.orientation, items[(this.player.team.color == 1 ? 'punchRed' : 'punchBlue')]);
         this.spikeballs[1].owner = this;
         this.spikeballs[1].damage = this.damageAttack1;
         this.spikeballs[1].anchor.set(0.5);

@@ -60,12 +60,13 @@ GALACTIC_STRIKE.Tutorial.prototype = {
         }, this);
 
         game.world.setBounds(0, 0, stages['tutorial'].width, stages['tutorial'].height);
-/////////////////////////////
-        GALACTIC_STRIKE.room = new Room("Default room name", GALACTIC_STRIKE.player.id, 8);
+        /////////////////////////////
+        GALACTIC_STRIKE.room = new Room("Tutorial Room", GALACTIC_STRIKE.player.id, 8);
         GALACTIC_STRIKE.room.addPlayer(GALACTIC_STRIKE.player.id, GALACTIC_STRIKE.player);
         GALACTIC_STRIKE.room.addTeam("Red Team", GALACTIC_STRIKE.redTeamAnthem);
         GALACTIC_STRIKE.player.joinTeam(GALACTIC_STRIKE.room.teams[0]);
         GALACTIC_STRIKE.player.team.color = 1;
+
         if (!game.spacePhysics)
         {
             game.physics.startSystem(Phaser.Physics.P2JS);
@@ -101,47 +102,70 @@ GALACTIC_STRIKE.Tutorial.prototype = {
 
         var spawnPosition = GALACTIC_STRIKE.room.stage.spawnPositionTeam(0); //1=red
 
-//        var data = {
-//            id: GALACTIC_STRIKE.player.id,
-//            x: spawnPosition.x,
-//            y: spawnPosition.y,
-//            angle: toRad(spawnPosition.angle - 180),
-//            velocityX: 0,
-//            velocityY: 0,
-//            orientation: 0
-//        }
-//
-//        socket.emit('joinGame', data);
-//        console.log(data);
+        //        var data = {
+        //            id: GALACTIC_STRIKE.player.id,
+        //            x: spawnPosition.x,
+        //            y: spawnPosition.y,
+        //            angle: toRad(spawnPosition.angle - 180),
+        //            velocityX: 0,
+        //            velocityY: 0,
+        //            orientation: 0
+        //        }
+        //
+        //        socket.emit('joinGame', data);
+        //        console.log(data);
 
-        GALACTIC_STRIKE.room.gameMode = new GameMode(GALACTIC_STRIKE.room, gameModes['deathmatch']);
+        GALACTIC_STRIKE.room.gameMode = new GameMode(GALACTIC_STRIKE.room, gameModes['tutorial']);
         GALACTIC_STRIKE.room.gameMode.init();
         GALACTIC_STRIKE.room.gameOver = false;
 
         spacePhysicsTimerTutorial();
-//        updateOnlineTimer();
-//        if (GALACTIC_STRIKE.player.id == GALACTIC_STRIKE.room.host)
-//        {
-//            console.log("I am host");
-//            GALACTIC_STRIKE.room.gameMode.createItems();
-//            updateStageOnlineTimer();
-//        }
+        //        updateOnlineTimer();
+        //        if (GALACTIC_STRIKE.player.id == GALACTIC_STRIKE.room.host)
+        //        {
+        //            console.log("I am host");
+        //            GALACTIC_STRIKE.room.gameMode.createItems();
+        //            updateStageOnlineTimer();
+        //        }
         GALACTIC_STRIKE.createGameReady = true;
 
-//        for (var c in GALACTIC_STRIKE.charactersBuffer)
-//        {
-            //var input = GALACTIC_STRIKE.charactersBuffer[0];
-            var asset = ('playerRed');
-            GALACTIC_STRIKE.room.characters[GALACTIC_STRIKE.player.id] = new Character(222, 333, GALACTIC_STRIKE.player.angle, game, GALACTIC_STRIKE.player, characters['robotnik']);
-            GALACTIC_STRIKE.room.players[GALACTIC_STRIKE.player.id].character = GALACTIC_STRIKE.room.characters[GALACTIC_STRIKE.player.id];
+        //        for (var c in GALACTIC_STRIKE.charactersBuffer)
+        //        {
+        //var input = GALACTIC_STRIKE.charactersBuffer[0];
+        var asset = ('playerRed');
+        GALACTIC_STRIKE.room.characters[GALACTIC_STRIKE.player.id] = new Character(970, 500, GALACTIC_STRIKE.player.angle, game, GALACTIC_STRIKE.player, characters['robotnik']);
+        GALACTIC_STRIKE.room.players[GALACTIC_STRIKE.player.id].character = GALACTIC_STRIKE.room.characters[GALACTIC_STRIKE.player.id];
+        GALACTIC_STRIKE.player.characterSetup();
 
 
-           // if (input.id === GALACTIC_STRIKE.player.id)
-            //{
-           //     GALACTIC_STRIKE.player.characterSetup();
-            //}
+        var style = {
+            font: "bold 26px Arial",
+            fill: "#fff",
+        };
 
-            //console.log("Clients: " + logMsg);
+        var controlText1 = game.add.text(970, 400, "Move with [WASD]", style);
+        controlText1.anchor.set(0.5);
+        controlText1.fixedToCamera = false;
+
+
+        var controlText2 = game.add.text(970, 400, "Move with [WASD]", style);
+        controlText2.anchor.set(0.5);
+        controlText2.fixedToCamera = false;
+
+        var buttonMenu = game.add.button(1000, 1000, 'buttonTutorial',
+            function () {
+                location.reload();
+            }
+            , this, 0, 0, 0, 0);
+
+        buttonMenu.anchor.set(0.5);
+        buttonMenu.fixedToCamera = false;
+        // if (input.id === GALACTIC_STRIKE.player.id)
+        //{
+        //     GALACTIC_STRIKE.player.characterSetup();
+        //}
+
+        //console.log("Clients: " + logMsg);
 
         GALACTIC_STRIKE.zoomed = false;
 
@@ -151,10 +175,10 @@ GALACTIC_STRIKE.Tutorial.prototype = {
     },
     update: function ()
     {
-            game.camera.focusOn(GALACTIC_STRIKE.player.character);
+        game.camera.focusOn(GALACTIC_STRIKE.player.character);
 
         GALACTIC_STRIKE.player.movePlayer();
-       // GALACTIC_STRIKE.hud.updateText();
+        // GALACTIC_STRIKE.hud.updateText();
 
     },
     render: function ()
@@ -166,46 +190,46 @@ GALACTIC_STRIKE.Tutorial.prototype = {
         i++;
         game.debug.text('Volume (+Up \'K\' , -Down \'J\') :' + game.sound.volume.toPrecision(2) * 100 + '%', 32, offsetDebug + 32 * i);
 
-//
-//        if (GALACTIC_STRIKE.player.character)
-//        {
-//            //            var point = new Phaser.Point(GALACTIC_STRIKE.player.character.x, GALACTIC_STRIKE.player.character.y);
-//            //            game.debug.geom(point, 'rgba(255,255,255,1)');
-//
-//            //            for (var i = 0; i < GALACTIC_STRIKE.room.stage.planets.length; i++)
-//            //            {
-//            ////                var point = new Phaser.Point(GALACTIC_STRIKE.room.stage.planets[i].x, GALACTIC_STRIKE.room.stage.planets[i].y);
-//            ////                game.debug.geom(point, 'rgba(255,0,255,1)');
-//            //
-//            //            }
-//            var j = 1;
-//            game.debug.text('Grounded: ' + GALACTIC_STRIKE.player.character.isGrounded(), 32, offsetDebug - 32 * j);
-//            j++;
-//            game.debug.text('Sprite : ' + GALACTIC_STRIKE.player.character.grounded +
-//                ', wheels[0] : ' + GALACTIC_STRIKE.player.character.wheels[0].grounded +
-//                ', wheels[1] : ' + GALACTIC_STRIKE.player.character.wheels[1].grounded, 32, offsetDebug - 32 * j);
-//            j++;
-//            game.debug.text('In atmosphere: ' + GALACTIC_STRIKE.player.character.inAtmosphere(), 32, offsetDebug - 32 * j);
-//            j++;
-//            game.debug.text('Atmosphere: ' + GALACTIC_STRIKE.player.character.atmosphere, 32, offsetDebug - 32 * j);
-//            j++;
-//            var p = GALACTIC_STRIKE.player.character.atmosphere[0];
-//            if (p)
-//            {
-//                var c = GALACTIC_STRIKE.player.character;
-//                game.debug.text('Distance: ' + Phaser.Math.distance(c.x, c.y, p.x, p.y), 32, offsetDebug - 32 * j);
-//                j++;
-//                game.debug.text('Gravity Radius: ' + p.gravityRadius + ' GR + CR: ' + ((p.collisionRadius + p.gravityRadius) / 2), 32, offsetDebug - 32 * j);
-//                j++;
-//                game.debug.text('Width: ' + p.width + ' collisioRadius: ' + p.collisionRadius, 32, offsetDebug - 32 * j);
-//                j++;
-//            }
+        //
+        //        if (GALACTIC_STRIKE.player.character)
+        //        {
+        //            //            var point = new Phaser.Point(GALACTIC_STRIKE.player.character.x, GALACTIC_STRIKE.player.character.y);
+        //            //            game.debug.geom(point, 'rgba(255,255,255,1)');
+        //
+        //            //            for (var i = 0; i < GALACTIC_STRIKE.room.stage.planets.length; i++)
+        //            //            {
+        //            ////                var point = new Phaser.Point(GALACTIC_STRIKE.room.stage.planets[i].x, GALACTIC_STRIKE.room.stage.planets[i].y);
+        //            ////                game.debug.geom(point, 'rgba(255,0,255,1)');
+        //            //
+        //            //            }
+        //            var j = 1;
+        //            game.debug.text('Grounded: ' + GALACTIC_STRIKE.player.character.isGrounded(), 32, offsetDebug - 32 * j);
+        //            j++;
+        //            game.debug.text('Sprite : ' + GALACTIC_STRIKE.player.character.grounded +
+        //                ', wheels[0] : ' + GALACTIC_STRIKE.player.character.wheels[0].grounded +
+        //                ', wheels[1] : ' + GALACTIC_STRIKE.player.character.wheels[1].grounded, 32, offsetDebug - 32 * j);
+        //            j++;
+        //            game.debug.text('In atmosphere: ' + GALACTIC_STRIKE.player.character.inAtmosphere(), 32, offsetDebug - 32 * j);
+        //            j++;
+        //            game.debug.text('Atmosphere: ' + GALACTIC_STRIKE.player.character.atmosphere, 32, offsetDebug - 32 * j);
+        //            j++;
+        //            var p = GALACTIC_STRIKE.player.character.atmosphere[0];
+        //            if (p)
+        //            {
+        //                var c = GALACTIC_STRIKE.player.character;
+        //                game.debug.text('Distance: ' + Phaser.Math.distance(c.x, c.y, p.x, p.y), 32, offsetDebug - 32 * j);
+        //                j++;
+        //                game.debug.text('Gravity Radius: ' + p.gravityRadius + ' GR + CR: ' + ((p.collisionRadius + p.gravityRadius) / 2), 32, offsetDebug - 32 * j);
+        //                j++;
+        //                game.debug.text('Width: ' + p.width + ' collisioRadius: ' + p.collisionRadius, 32, offsetDebug - 32 * j);
+        //                j++;
+        //            }
 
 
 
-            //            game.debug.cameraInfo(game.camera, 300, 32);
+        //            game.debug.cameraInfo(game.camera, 300, 32);
 
-//        }
+        //        }
     },
     quitGame: function ()
     {

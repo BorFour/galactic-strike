@@ -157,6 +157,42 @@ function touchSpikeballEnemy(body1, body2, fixture1, fixture2, begin)
 }
 
 
+function touchPunchEnemy(body1, body2, fixture1, fixture2, begin)
+{
+    console.log("Punch callback");
+    if (body1.sprite &&
+        body2.sprite &&
+        body1.sprite.owner !== body2.sprite &&
+        !body2.sprite.hitImmune &&
+        body2.sprite.health > 0)
+    {
+        if (body1.sprite.owner.player.team === body2.mainSprite.player.team)
+        {
+            return;
+        }
+        if (body1.sprite.owner === GALACTIC_STRIKE.player.character)
+        {
+            body2.sprite.hitImmune = true;
+            console.log(body2.mainSprite.player);
+
+            var output = {
+                id: GALACTIC_STRIKE.player.id,
+                target: body2.mainSprite.player.id,
+                damage: body1.sprite.damage
+            };
+
+            socket.emit('hit', output);
+            console.log('@Client ->      \t| hit');
+            console.log(output);
+        }
+
+        if (body1.sprite.constraint) game.physics.p2.removeConstraint(body1.sprite.constraint);
+        body1.destroy();
+
+    }
+}
+
+
 function touchHammerEnemy(body1, body2, fixture1, fixture2, begin)
 {
     console.log("Hammer callback");

@@ -9,7 +9,7 @@ var stages = {
                 asset: 'planet_red',
                 x: 3200,
                 y: 3200,
-                gravityRadius: 800,
+                gravityRadius: 900,
                 gravityForce: 850,
                 collisionRadius: 355
             },
@@ -17,7 +17,7 @@ var stages = {
                 asset: 'planet_blue',
                 x: 1200,
                 y: 1200,
-                gravityRadius: 800,
+                gravityRadius: 900,
                 gravityForce: 850,
                 collisionRadius: 375
             }
@@ -78,7 +78,7 @@ var stages = {
                 asset: 'planet_red',
                 x: 1000,
                 y: 1000,
-                gravityRadius: 800,
+                gravityRadius: 900,
                 gravityForce: 850,
                 collisionRadius: 355
             },
@@ -86,7 +86,7 @@ var stages = {
                 asset: 'planet_blue',
                 x: 5000,
                 y: 1000,
-                gravityRadius: 800,
+                gravityRadius: 900,
                 gravityForce: 850,
                 collisionRadius: 375
             },
@@ -247,7 +247,7 @@ var stages = {
                 asset: 'planet_blue',
                 x: 1000,
                 y: 1000,
-                gravityRadius: 800,
+                gravityRadius: 900,
                 gravityForce: 850,
                 collisionRadius: 375
             }

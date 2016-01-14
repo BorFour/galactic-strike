@@ -105,8 +105,11 @@ Character.prototype.attack1 = function ()
         this.spikeballs[1].body.setCollisionGroup(game.spacePhysics.CG_attacks);
         this.spikeballs[1].constraint = game.physics.p2.createLockConstraint(this.spikeballs[1], this, [this.orientation * 100, -275], -50);
 
-//        this.orientation == this.LEFT ? this.body.rotateLeft(15000) : this.body.rotateRight(15000);
-        this.spikeballs[1].body.thrust(9000);
+
+
+        this.spikeballs[1].body.thrust(90000);
+        game.physics.p2.removeConstraint(this.spikeballs[1].constraint);
+                //this.orientation == this.LEFT ? this.body.rotateRight(25000) : this.body.rotateLeft(25000);
 
 //        this.spikeballs[1].body.collides(game.spacePhysics.CG_planets, touchPlanetPunch, this);
 
@@ -125,7 +128,7 @@ Character.prototype.attack1 = function ()
         {
             console.log("Destroying attack");
             if (this.spikeballs[1]) this.spikeballs[1].die();
-            game.physics.p2.removeConstraint(this.spikeballs[1].constraint);
+            //game.physics.p2.removeConstraint(this.spikeballs[1].constraint);
             this.attackCooldown = true;
         }, this)
 

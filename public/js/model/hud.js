@@ -111,5 +111,7 @@ HUD.prototype.scaleSet = function (val)
     this.teamBlue.scale.set(val);
     this.turbos.scale.set(val);
     this.turboActivated.scale.set(val);
+    this.mines.scale.set(val);
+    this.minesActivated.scale.set(val);
 
 }

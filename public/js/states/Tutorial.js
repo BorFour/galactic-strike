@@ -143,14 +143,15 @@ GALACTIC_STRIKE.Tutorial.prototype = {
             fill: "#fff",
         };
 
-        var controlText1 = game.add.text(970, 400, "Move with [WASD]", style);
+        var controlText1 = game.add.text(970, 400, "Move with [A D] and brake with [S]", style);
         controlText1.anchor.set(0.5);
         controlText1.fixedToCamera = false;
 
 
-        var controlText2 = game.add.text(970, 400, "Move with [WASD]", style);
+        var controlText2 = game.add.text(1370, 520, "Hold [SHIFT] to use the turbo", style);
         controlText2.anchor.set(0.5);
         controlText2.fixedToCamera = false;
+        controlText2.angle = 50;
 
         var buttonMenu = game.add.button(1000, 1000, 'buttonTutorial',
             function () {

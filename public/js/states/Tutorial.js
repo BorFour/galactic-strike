@@ -59,13 +59,25 @@ GALACTIC_STRIKE.Tutorial.prototype = {
             }
         }, this);
 
-        game.world.setBounds(0, 0, stages['tutorial'].width, stages['tutorial'].height);
+        game.world.setBounds(0, 0, tutorialStage.width, tutorialStage.height);
         /////////////////////////////
+
+
+        this.enemyPlayer = new Player("YOU CAN'T KILL ME");
+//        GALACTIC_STRIKE.room.players[-1] = enemyPlayer;
+
         GALACTIC_STRIKE.room = new Room("Tutorial Room", GALACTIC_STRIKE.player.id, 8);
         GALACTIC_STRIKE.room.addPlayer(GALACTIC_STRIKE.player.id, GALACTIC_STRIKE.player);
+        GALACTIC_STRIKE.room.addPlayer(-1, this.enemyPlayer);
         GALACTIC_STRIKE.room.addTeam("Red Team", GALACTIC_STRIKE.redTeamAnthem);
+        GALACTIC_STRIKE.room.addTeam("Blue Team", GALACTIC_STRIKE.blueTeamAnthem);
+
         GALACTIC_STRIKE.player.joinTeam(GALACTIC_STRIKE.room.teams[0]);
         GALACTIC_STRIKE.player.team.color = 1;
+
+        this.enemyPlayer.joinTeam(GALACTIC_STRIKE.room.teams[1]);
+        this.enemyPlayer.team.color = 2;
+
 
         if (!game.spacePhysics)
         {
@@ -98,7 +110,7 @@ GALACTIC_STRIKE.Tutorial.prototype = {
 
 
 
-        GALACTIC_STRIKE.room.stage = new Stage(game, stages['tutorial']);
+        GALACTIC_STRIKE.room.stage = new Stage(game, tutorialStage);
 
         var spawnPosition = GALACTIC_STRIKE.room.stage.spawnPositionTeam(0); //1=red
 
@@ -132,10 +144,20 @@ GALACTIC_STRIKE.Tutorial.prototype = {
         //        for (var c in GALACTIC_STRIKE.charactersBuffer)
         //        {
         //var input = GALACTIC_STRIKE.charactersBuffer[0];
-        var asset = ('playerRed');
+//        var asset = ('playerRed');
+
+
         GALACTIC_STRIKE.room.characters[GALACTIC_STRIKE.player.id] = new Character(970, 500, GALACTIC_STRIKE.player.angle, game, GALACTIC_STRIKE.player, characters['robotnik']);
         GALACTIC_STRIKE.room.players[GALACTIC_STRIKE.player.id].character = GALACTIC_STRIKE.room.characters[GALACTIC_STRIKE.player.id];
         GALACTIC_STRIKE.player.characterSetup();
+
+        GALACTIC_STRIKE.room.characters[-1] = new Character(4970, 500, GALACTIC_STRIKE.player.angle, game, this.enemyPlayer, characters['alien']);
+        GALACTIC_STRIKE.room.players[-1].character = GALACTIC_STRIKE.room.characters[-1];
+        this.game.spacePhysics.addDynamic(GALACTIC_STRIKE.room.players[-1].character);
+
+
+        GALACTIC_STRIKE.room.characters[GALACTIC_STRIKE.player.id].addArrow(GALACTIC_STRIKE.room.characters[-1]);
+
 
 
         var style = {
@@ -153,14 +175,18 @@ GALACTIC_STRIKE.Tutorial.prototype = {
         controlText2.fixedToCamera = false;
         controlText2.angle = 50;
 
-        var buttonMenu = game.add.button(1000, 1000, 'buttonTutorial',
+        var buttonMenu = game.add.button(game.camera.width/2, game.camera.height/2 + 350, 'exitButton',
             function () {
                 location.reload();
             }
             , this, 0, 0, 0, 0);
 
         buttonMenu.anchor.set(0.5);
-        buttonMenu.fixedToCamera = false;
+        buttonMenu.scale.set(0.25);
+        buttonMenu.fixedToCamera = true;
+
+
+
         // if (input.id === GALACTIC_STRIKE.player.id)
         //{
         //     GALACTIC_STRIKE.player.characterSetup();
@@ -170,7 +196,7 @@ GALACTIC_STRIKE.Tutorial.prototype = {
 
         GALACTIC_STRIKE.zoomed = false;
 
-        //GALACTIC_STRIKE.hud = new HUD(game);
+        GALACTIC_STRIKE.hud = new HUD(game);
         GALACTIC_STRIKE.room.roundReady = true;
         GALACTIC_STRIKE.currentSong.play();
     },
@@ -179,7 +205,9 @@ GALACTIC_STRIKE.Tutorial.prototype = {
         game.camera.focusOn(GALACTIC_STRIKE.player.character);
 
         GALACTIC_STRIKE.player.movePlayer();
-        // GALACTIC_STRIKE.hud.updateText();
+        GALACTIC_STRIKE.hud.updateText();
+        GALACTIC_STRIKE.player.character.updateArrow();
+        this.enemyPlayer.character.moveGrounded('left');
 
     },
     render: function ()

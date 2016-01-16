@@ -286,3 +286,9 @@ function toRad(value)
     return (value * Math.PI) / 180;
 
 }
+
+function fromRad(value)
+{
+
+    return (value * 180) / Math.PI;
+}

@@ -44,8 +44,10 @@ Player.prototype.movePlayer = function ()
 {
     var moveForce = 0.515;
 
+
     if (!GALACTIC_STRIKE.room.gameOver && (!this.character || !this.character.alive))
     {
+
         if (this.controller.leftDown())
         {
             game.camera.x -= 5;

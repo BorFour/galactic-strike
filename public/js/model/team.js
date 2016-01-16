@@ -59,6 +59,28 @@ Team.prototype.alive = function ()
     return false;
 }
 
+Team.prototype.oneLeft = function ()
+{
+
+    var nPlayers = 0;
+    for (var i in this.players)
+    {
+        nPlayers++;
+    }
+    return nPlayers === 1;
+
+}
+
+Team.prototype.characterAlive = function ()
+{
+
+    for (var i in this.players)
+    {
+        if (this.players.character) return this.players.character;
+    }
+
+}
+
 Team.prototype.toString = function ()
 {
     return this.name;

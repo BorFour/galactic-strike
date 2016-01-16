@@ -74,7 +74,7 @@ function Character(x, y, angle, game, player, conf)
     // Damages
     this.damageAttack0 = 25;
     this.damageAttack1 = 20;
-    this.damageAttack2 = 25;
+    this.damageAttack2 = 30;
     this.damageAttack3 = 10;
 
     // Multipliers
@@ -369,6 +369,29 @@ Character.prototype.inWorldCustom = function ()
         this.x <= game.world.x &&
         this.y <= game.world.y;
 
+}
+
+
+
+Character.prototype.addArrow = function(target)
+{
+    this.arrow = new Element(game, game.camera.width/2, game.camera.height/2 - 150, 'arrow');
+    this.arrow.scale.set(0.35);
+    this.arrow.anchor.set(0.5);
+    this.arrowTarget = target;
+//    this.addChild(this.arrow);
+    this.arrow.fixedToCamera = true;
+    var angle = Phaser.Math.angleBetween(this.x, this.y, target.x, target.y);
+//    console.log("Angle : " + angle);
+    this.arrow.angle = fromRad(angle);
+
+}
+
+
+Character.prototype.updateArrow = function()
+{
+    var angle = Phaser.Math.angleBetween(this.x, this.y, this.arrowTarget.x, this.arrowTarget.y);
+    this.arrow.angle = fromRad(angle);
 }
 
 /**

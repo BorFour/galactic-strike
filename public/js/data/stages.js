@@ -236,37 +236,46 @@ var stages = {
             'heart',
             'star'
         ]
-    },
-        'tutorial':
-    {
-        width: 3000,
-        height: 3000,
-        backgroundImage: 'background_map2',
-        planets: [
-            {
-                asset: 'planet_blue',
-                x: 1000,
-                y: 1000,
-                gravityRadius: 900,
-                gravityForce: 850,
-                collisionRadius: 375
-            }
-        ],
-        suns: [
-            {
-                asset: 'sun',
-                x: 2000,
-                y: 2000,
-                gravityRadius: 900,
-                gravityForce: 600,
-                collisionRadius: 164
-            }
-        ],
-        wormholes: [
-
-        ],
-        items: [
-
-        ]
     }
 }
+
+var tutorialStage = {
+    width: 6000,
+    height: 2000,
+    backgroundImage: 'background_map2',
+    planets: [
+            {
+            asset: 'planet_red',
+            x: 1000,
+            y: 1000,
+            gravityRadius: 900,
+            gravityForce: 850,
+            collisionRadius: 355
+            },
+        {
+            asset: 'planet_blue',
+            x: 5000,
+            y: 1000,
+            gravityRadius: 900,
+            gravityForce: 850,
+            collisionRadius: 375
+            }
+
+    ],
+    suns: [
+        {
+            asset: 'sun',
+            x: 3000,
+            y: 1000,
+            gravityRadius: 900,
+            gravityForce: 600,
+            collisionRadius: 164
+            }
+        ],
+    wormholes: [
+
+        ],
+    items: [
+
+        ]
+};

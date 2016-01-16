@@ -187,7 +187,7 @@ load_assets = function ()
     game.load.image('textBox', '../assets/textbox.gif');
     game.load.image('galactic', '../assets/galactic.png');
     game.load.image('strike', '../assets/strike.png');
-    game.load.image('arrow', '../assets/arrow_green.png');
+    game.load.image('arrow', '../assets/arrow.png');
     game.load.spritesheet("blood", "../assets/effects/blood_spritesheet.png", 98, 95);
 
 }

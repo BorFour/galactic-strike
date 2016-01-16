@@ -376,7 +376,7 @@ Character.prototype.inWorldCustom = function ()
 Character.prototype.addArrow = function(target)
 {
     this.arrow = new Element(game, game.camera.width/2, game.camera.height/2 - 150, 'arrow');
-    this.arrow.scale.set(0.35);
+    this.arrow.scale.set(0.8);
     this.arrow.anchor.set(0.5);
     this.arrowTarget = target;
 //    this.addChild(this.arrow);

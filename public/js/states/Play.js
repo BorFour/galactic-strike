@@ -231,7 +231,7 @@ function spacePhysicsTimer()
         }
     }
 
-    game.time.events.add(80, spacePhysicsTimer, this);
+    game.time.events.add(90, spacePhysicsTimer, this);
 
 }
 

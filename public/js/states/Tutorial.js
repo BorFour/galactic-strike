@@ -290,7 +290,7 @@ function spacePhysicsTimerTutorial()
         }
     }
 */
-    game.time.events.add(80, spacePhysicsTimerTutorial, this);
+    game.time.events.add(100, spacePhysicsTimerTutorial, this);
 
 }
 

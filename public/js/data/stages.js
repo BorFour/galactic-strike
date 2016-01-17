@@ -10,7 +10,7 @@ var stages = {
                 x: 3200,
                 y: 3200,
                 gravityRadius: 900,
-                gravityForce: 850,
+                gravityForce: 900,
                 collisionRadius: 355
             },
             {
@@ -18,7 +18,7 @@ var stages = {
                 x: 1200,
                 y: 1200,
                 gravityRadius: 900,
-                gravityForce: 850,
+                gravityForce: 900,
                 collisionRadius: 375
             }
 
@@ -79,7 +79,7 @@ var stages = {
                 x: 1000,
                 y: 1000,
                 gravityRadius: 900,
-                gravityForce: 850,
+                gravityForce: 900,
                 collisionRadius: 355
             },
             {
@@ -87,7 +87,7 @@ var stages = {
                 x: 5000,
                 y: 1000,
                 gravityRadius: 900,
-                gravityForce: 850,
+                gravityForce: 900,
                 collisionRadius: 375
             },
             {
@@ -183,7 +183,7 @@ var stages = {
                 x: 1500,
                 y: 1500,
                 gravityRadius: 650,
-                gravityForce: 700,
+                gravityForce: 750,
                 collisionRadius: 532
             },
             {
@@ -191,7 +191,7 @@ var stages = {
                 x: 1500,
                 y: 1500,
                 gravityRadius: 1400,
-                gravityForce: 550,
+                gravityForce: 600,
                 collisionRadius: 532
             }
         ],

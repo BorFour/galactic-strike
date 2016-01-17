@@ -152,7 +152,7 @@ var gameModes = {
             return false;
 
         },
-        winScore: 3,
+        winScore: 2,
         showWinnerRound: function (winner)
         {
 

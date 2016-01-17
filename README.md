@@ -10,6 +10,10 @@ Juego 2D de peleas en el espacio on-line hecho en JavaScript y NodeJS, con Phase
 
 La documentación sobre este proyecto se encuentra en el directorio /docs
 
+### Gameplay
+
+https://www.youtube.com/watch?v=mUGNbLDwBIM
+
 # Despliegue
 
 ### ¿Cómo desplegar el servidor?

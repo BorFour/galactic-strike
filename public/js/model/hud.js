@@ -18,7 +18,7 @@ function HUD(game)
         fill: "#44f",
     };
 
-   var style4 = {
+    var style4 = {
         font: "bold 26px Arial",
         fill: "#fff",
     };
@@ -50,31 +50,40 @@ function HUD(game)
 
 
     this.controlsText =
-            'Controls in planet : move [A D] + stop [S] + turbo [SHIFT] + jump [SPACEBAR] (Hold to use jetpack)\n' +
-            'Controls in space : rotate [A D] + thrust [SPACEBAR / W] + turbo [SHIFT] + reverse [S]\n' +
-            'Attacks : [Arrow Keys]\n' +
-            'Controls while dead : move camera [W A S D]\n' +
-            'Mute : on/off [M] + up [K] + down [J]\n';
+        'Controls in planet : move [A D] + stop [S] + turbo [SHIFT] + jump [SPACEBAR] (Hold to use jetpack)\n' +
+        'Controls in space : rotate [A D] + thrust [SPACEBAR / W] + turbo [SHIFT] + reverse [S]\n' +
+        'Attacks : [Arrow Keys]\n' +
+        'Controls while dead : move camera [W A S D]\n' +
+        'Mute : on/off [M] + up [K] + down [J]\n';
 
 
-    this.textBox = game.add.text(game.camera.width/2 , game.camera.height/2 - 30, this.controlsText,
-        {
-            font: '25px Arial',
-            fill: '#ffffff'
-        });
+    this.textBox = game.add.text(game.camera.width / 2, game.camera.height / 2 - 30, this.controlsText,
+    {
+        font: '25px Arial',
+        fill: '#ffffff'
+    });
     this.textBox.anchor.set(0.5);
     this.textBox.fixedToCamera = true;
     this.textBox.alpha = 0.7;
     this.textBox.visible = false;
 
-    this.controls = game.add.text(game.camera.width/2  - this.textBox.width / 2, game.camera.height/2 -  230, 'CONTROLS:',
-        {
-            font: '45px Arial',
-            fill: '#ffffff'
-        });
+    this.controls = game.add.text(game.camera.width / 2 - this.textBox.width / 2, game.camera.height / 2 - 230, 'CONTROLS:',
+    {
+        font: '45px Arial',
+        fill: '#ffffff'
+    });
     this.controls.fixedToCamera = true;
     this.controls.alfa = 0.7;
     this.controls.visible = false;
+
+
+    this.helpButton = game.add.button(game.camera.width / 2, game.camera.height / 2 - 400, 'help', function ()
+    {
+        window.open("user-guide/index.html");
+    }, this, 0, 0, 0, 0);
+    this.helpButton.anchor.set(0.5);
+
+    this.helpButton.fixedToCamera = true;
 
 
 
@@ -142,6 +151,7 @@ HUD.prototype.scaleSet = function (val)
     this.turboActivated.scale.set(val);
     this.mines.scale.set(val);
     this.minesActivated.scale.set(val);
+    this.helpButton.scale.set(val);
 
 }
 
@@ -156,8 +166,3 @@ HUD.prototype.hideHelp = function ()
     this.textBox.visible = false;
     this.controls.visible = false;
 }
-
-
-
-
-

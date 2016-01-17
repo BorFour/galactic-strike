@@ -162,6 +162,7 @@ load_assets = function ()
     game.load.image("virtual", "../assets/buttons/touch.png");
     game.load.image("mute", "../assets/buttons/mute.png");
     game.load.image("unmute", "../assets/buttons/unmute.png");
+    game.load.image("help", "../assets/buttons/help.png");
 
     // VIRTUAL CONTROLLER
     //////////////////////

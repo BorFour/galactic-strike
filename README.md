@@ -1,16 +1,14 @@
 # GALACTIC STRIKE #
 
-Juego 2D de peleas en el espacio on-line hecho en JavaScript y NodeJS, con Phaser, Box2D y Socket.io.
+Juego 2D de peleas en el espacio on-line hecho en JavaScript y NodeJS, con Phaser, Phaser P2 Physics y Socket.io.
 
 #### Version 
 
-Última actualización : 18/12/2015
+Última actualización : 17/01/2016
 
 #### Documentación
 
 La documentación sobre este proyecto se encuentra en el directorio /docs
-
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
 
 # Despliegue
 

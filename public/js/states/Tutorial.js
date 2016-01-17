@@ -59,6 +59,25 @@ GALACTIC_STRIKE.Tutorial.prototype = {
             }
         }, this);
 
+        var helpKey = game.input.keyboard.addKey(Phaser.Keyboard.H);
+        helpKey.onDown.add(function ()
+        {
+            if (!GALACTIC_STRIKE.hud)
+            {
+                return;
+            }
+            if (GALACTIC_STRIKE.hud.showingHelp)
+            {
+                GALACTIC_STRIKE.hud.hideHelp();
+                GALACTIC_STRIKE.hud.showingHelp = false;
+            }
+            else
+            {
+                GALACTIC_STRIKE.hud.showHelp();
+                GALACTIC_STRIKE.hud.showingHelp = true;
+            }
+        }, this);
+
         game.world.setBounds(0, 0, tutorialStage.width, tutorialStage.height);
         /////////////////////////////
 
@@ -165,15 +184,15 @@ GALACTIC_STRIKE.Tutorial.prototype = {
             fill: "#fff",
         };
 
-        var controlText1 = game.add.text(970, 400, "Move with [A D] and brake with [S]", style);
-        controlText1.anchor.set(0.5);
-        controlText1.fixedToCamera = false;
-
-
-        var controlText2 = game.add.text(1370, 520, "Hold [SHIFT] to use the turbo", style);
-        controlText2.anchor.set(0.5);
-        controlText2.fixedToCamera = false;
-        controlText2.angle = 50;
+//        var controlText1 = game.add.text(970, 400, "Move with [A D] and brake with [S]", style);
+//        controlText1.anchor.set(0.5);
+//        controlText1.fixedToCamera = false;
+//
+//
+//        var controlText2 = game.add.text(1370, 520, "Hold [SHIFT] to use the turbo", style);
+//        controlText2.anchor.set(0.5);
+//        controlText2.fixedToCamera = false;
+//        controlText2.angle = 50;
 
         var buttonMenu = game.add.button(game.camera.width/2, game.camera.height/2 + 350, 'exitButton',
             function () {
@@ -215,6 +234,8 @@ GALACTIC_STRIKE.Tutorial.prototype = {
 
         var i = 1;
         var offsetDebug = 750;
+        game.debug.text('Show Help (toggle with \'H\') :' + GALACTIC_STRIKE.hud.showingHelp, 32, offsetDebug + 32 * i);
+        i++;
         game.debug.text('Mute (toggle with \'M\') :' + game.sound.mute, 32, offsetDebug + 32 * i);
         i++;
         game.debug.text('Volume (+Up \'K\' , -Down \'J\') :' + game.sound.volume.toPrecision(2) * 100 + '%', 32, offsetDebug + 32 * i);

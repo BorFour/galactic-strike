@@ -23,6 +23,7 @@ function HUD(game)
         fill: "#fff",
     };
 
+    this.showingHelp = false;
     this.score = game.add.text(game.camera.x + game.camera.width / 2, game.camera.y + game.camera.height / 2 - 350, "Esto es la puntuación", style);
     this.score.anchor.set(0.5);
     this.score.fixedToCamera = true;
@@ -46,6 +47,34 @@ function HUD(game)
     this.minesActivated = game.add.text(game.camera.x + game.camera.width / 2 + 250, game.camera.y + game.camera.height / 2 + 380, "Mines", style4);
     this.minesActivated.anchor.set(0.5);
     this.minesActivated.fixedToCamera = true;
+
+
+    this.controlsText =
+            'Controls in planet : move [A D] + stop [S] + turbo [SHIFT] + jump [SPACEBAR] (Hold to use jetpack)\n' +
+            'Controls in space : rotate [A D] + thrust [SPACEBAR / W] + turbo [SHIFT] + reverse [S]\n' +
+            'Attacks : [Arrow Keys]\n' +
+            'Controls while dead : move camera [W A S D]\n' +
+            'Mute : on/off [M] + up [K] + down [J]\n';
+
+
+    this.textBox = game.add.text(game.camera.width/2 , game.camera.height/2 - 30, this.controlsText,
+        {
+            font: '25px Arial',
+            fill: '#ffffff'
+        });
+    this.textBox.anchor.set(0.5);
+    this.textBox.fixedToCamera = true;
+    this.textBox.alpha = 0.7;
+    this.textBox.visible = false;
+
+    this.controls = game.add.text(game.camera.width/2  - this.textBox.width / 2, game.camera.height/2 -  230, 'CONTROLS:',
+        {
+            font: '45px Arial',
+            fill: '#ffffff'
+        });
+    this.controls.fixedToCamera = true;
+    this.controls.alfa = 0.7;
+    this.controls.visible = false;
 
 
 
@@ -115,3 +144,20 @@ HUD.prototype.scaleSet = function (val)
     this.minesActivated.scale.set(val);
 
 }
+
+HUD.prototype.showHelp = function ()
+{
+    this.textBox.visible = true;
+    this.controls.visible = true;
+}
+
+HUD.prototype.hideHelp = function ()
+{
+    this.textBox.visible = false;
+    this.controls.visible = false;
+}
+
+
+
+
+
